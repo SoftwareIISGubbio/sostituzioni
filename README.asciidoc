@@ -7,14 +7,3 @@
 * oraADisposizioneGattapone: Ora
 * oreAPagamento: elenco di Ora
 * pot: elenco Ora
-
-== Ora
-
-* giorno: int (1=lunedì)
-* orario: int (1=prima ora)
-
-== OraLezione estende Ora
-
-* aula: String
-* classe: String 
-* compresenza: boolean
