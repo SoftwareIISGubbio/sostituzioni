@@ -13,8 +13,8 @@ public class Ora {
 		"11:55-12:45", "12:45-13:35",
 		"14:25-15:20", "15:20-16:15"
 	};
-	int giorno;
-	int orario;
+	public int giorno;
+	public int orario;
 	
 	/**
 	 * 
