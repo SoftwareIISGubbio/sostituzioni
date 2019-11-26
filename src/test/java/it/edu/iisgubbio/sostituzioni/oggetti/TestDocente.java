@@ -24,5 +24,9 @@ public class TestDocente {
 		giammarioli.oreLezione.add( i4Giovedi4 );
 		
 		System.out.println(giammarioli);
+		
+		System.out.println(giammarioli.lavoraNellaClasse("4i"));
+		System.out.println(giammarioli.lavoraNellaClasse("4b"));
+		
 	}
 }

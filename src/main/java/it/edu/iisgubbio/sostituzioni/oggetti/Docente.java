@@ -27,4 +27,15 @@ public class Docente {
 		return risposta;
 	}
 	
+	public boolean lavoraNellaClasse(String nomeClasse) {
+		for (int i = 0 ; i < oreLezione.size(); i++) {
+    		if(oreLezione.get(i).classe.equals(nomeClasse)) {
+    			return true;
+    		}
+    	
+    	
+    	}
+		return false;
+	}
+	
 }
