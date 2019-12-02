@@ -38,4 +38,13 @@ public class Docente {
 		return false;
 	}
 	
+	public boolean lavoraNellOra(Ora ora) {
+		for (int i = 0; i < oreLezione.size(); i++) {
+			if(oreLezione.get(i).giorno == ora.giorno && oreLezione.get(i).orario == ora.orario) {
+				return true;
+			}
+		}
+		return false ;
+	}
+	
 }

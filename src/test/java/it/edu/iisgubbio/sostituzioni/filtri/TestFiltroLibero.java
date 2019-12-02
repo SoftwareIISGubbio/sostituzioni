@@ -11,7 +11,7 @@ public class TestFiltroLibero {
     public static void main(String[] args) {
         ArrayList<Docente> tuttiIDocenti = Elenchi.docenti;
         ArrayList<Docente> docentiLiberi;
-        Ora oraCercata = new Ora(1, 1);
+        Ora oraCercata = new Ora(2, 1);
         
         docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraCercata);
         for(int i=0; i<docentiLiberi.size(); i++) {

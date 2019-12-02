@@ -5,6 +5,9 @@ public class TestDocente {
 		Docente giammarioli;
 		giammarioli = new Docente("Giammarioli Claudio");
 		
+		Docente panfili;
+		panfili = new Docente ("Panfili Edoardo");
+		
 		OraLezione i4Martedi3 = new OraLezione(2, 3);
 		i4Martedi3.classe = "4i";
 		i4Martedi3.aula = "154";
@@ -23,10 +26,19 @@ public class TestDocente {
 		i4Giovedi4.compresenza = true;
 		giammarioli.oreLezione.add( i4Giovedi4 );
 		
+		OraLezione i5Lunedi = new OraLezione(4,1);
+		i5Lunedi.classe = "5i";
+		i5Lunedi.aula = "184";
+		i5Lunedi.compresenza = false;
+		panfili.oreLezione.add(i5Lunedi);
+		
 		System.out.println(giammarioli);
 		
 		System.out.println(giammarioli.lavoraNellaClasse("4i"));
 		System.out.println(giammarioli.lavoraNellaClasse("4b"));
+		System.out.println(giammarioli.lavoraNellOra(i4Giovedi4));
+		System.out.println(giammarioli.lavoraNellOra(i5Lunedi));
+		
 		
 	}
 }
