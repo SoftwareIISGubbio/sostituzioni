@@ -8,6 +8,7 @@ public class OraLezione extends Ora{
 	public String aula;
 	public String classe;
 	public boolean compresenza;
+	public String materia;
 
 	public OraLezione(int giorno, int orario) {
 		super(giorno,orario);
