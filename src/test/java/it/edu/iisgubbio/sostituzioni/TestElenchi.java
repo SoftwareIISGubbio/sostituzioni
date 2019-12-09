@@ -9,8 +9,17 @@ public class TestElenchi {
     public static void main(String[] args) {
         ArrayList<Docente> elencoDocenti = Elenchi.docenti;
         for(int i=0; i<elencoDocenti.size(); i++) {
-            System.out.println(elencoDocenti.get(i));
+            System.out.println(elencoDocenti.get(i).nome);
         }
+
+        String nomiClassi[] = Elenchi.getNomiClassi();
+        for(int i=0; i<nomiClassi.length; i++) {
+            System.out.print(nomiClassi[i]+", ");
+            if(i>0 && i%10==0) {
+                System.out.println("-");
+            }
+        }
+
     }
 
 }
