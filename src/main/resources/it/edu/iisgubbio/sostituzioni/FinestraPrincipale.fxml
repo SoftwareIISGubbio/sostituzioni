@@ -37,13 +37,13 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" onAction="#gestioneClickPulsante" prefHeight="32.0" prefWidth="175.0" style="-fx-background-color: #3B3B3B;" text="Verifica" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+      <Button fx:id="verifica" mnemonicParsing="false" onAction="#gestioneClickPulsante" prefHeight="32.0" prefWidth="175.0" style="-fx-background-color: #3B3B3B;" text="Verifica" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
       <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="22.0" prefWidth="350.0" text="Seleziona Classe" textFill="#3b3b3b" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <MenuButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" style="-fx-background-color: #3B3B3B;" text="Tutti le classi --" textAlignment="CENTER" textFill="#ffe800" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="TOP">
+      <MenuButton fx:id="txtClasse" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" style="-fx-background-color: #3B3B3B;" text="Tutti le classi --" textAlignment="CENTER" textFill="#ffe800" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="TOP">
         <items>
           <MenuItem mnemonicParsing="false" text="1(AFM)" />
             <MenuItem mnemonicParsing="false" text="1 T" />
@@ -118,7 +118,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <MenuButton fx:id="item1" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#gestioneClickPulsante" popupSide="TOP" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #3B3B3B;" text="Tutte le ore --" textAlignment="CENTER" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <MenuButton fx:id="txtOra" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#gestioneClickPulsante" popupSide="TOP" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #3B3B3B;" text="Tutte le ore --" textAlignment="CENTER" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
         <items>
           <MenuItem fx:id="item1" mnemonicParsing="false" onAction="#gestioneClickPulsante" text="1^" />
             <MenuItem mnemonicParsing="false" text="2^" />

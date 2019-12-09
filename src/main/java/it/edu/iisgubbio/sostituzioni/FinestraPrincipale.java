@@ -9,33 +9,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class FinestraPrincipale extends Application {
 
-	@FXML DatePicker  data;
-	@FXML MenuButton  txtora;
-	@FXML MenuButton  txtclasse;
-	@FXML Button info;
+	@FXML DatePicker data;
+	@FXML MenuButton txtOra;
+	@FXML MenuButton txtClasse;
+	@FXML Button verifica;
 	
-	@FXML MenuItem item1;
-	@FXML MenuItem item2;
-	@FXML MenuItem item3;
-	@FXML MenuItem item4;
-	@FXML MenuItem item5;
-	@FXML MenuItem item6;
-	@FXML MenuItem item7;
-	@FXML MenuItem item8;
 
 	public void start(Stage x) {
 
 		Scene scena = null;
 		try {
-			scena = new Scene(FXMLLoader.load(FinestraPrincipale.class.getResource("IISGUBBIO.fxml")));
+			scena = new Scene(FXMLLoader.load(FinestraPrincipale.class.getResource("FinestraPrincipale.fxml")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,10 +36,15 @@ public class FinestraPrincipale extends Application {
 		launch(args);
 	}
 	
+    @FXML
+    void initialize() {
+        System.out.println("questo metodo serve per inizializzare gli elementi dell'interfaccia");
+    }
+	
 	@FXML
 	private void gestioneClickPulsante(ActionEvent e){
 		System.out.println(data.getValue());
-		System.out.println(txtora.getItems());
+		System.out.println(txtOra.getItems());
 
 	}
 	
