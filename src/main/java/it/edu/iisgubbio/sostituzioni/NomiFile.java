@@ -5,9 +5,9 @@ import java.net.URL;
 
 public class NomiFile {
     
-    private static final String NOME_FILE_ORARIO = "orario.xlsx";
+    private static final String NOME_FILE_ORARIO = "fileDatiDocenti.xlsx";
     private static final String NOME_FILE_GIORNALE = "giornaleSostituzioni.csv";
-    private static final String NOME_FILE_XML = "Orario_19_20_definitivo_3_stampa_teachers.xml";
+    private static final String NOME_FILE_XML = "fet_stampa_teachers.xml";
     
     public static File fileOrario;
     public static File fileGiornale;
@@ -27,22 +27,18 @@ public class NomiFile {
                 scrivania = "C:\\Users\\"+System.getProperty("user.name")+"\\Desktop\\";
             }
         }
-        // cerco se presente il filer da usare  
-        URL URLLocale = NomiFile.class.getResource("fileDatiDocenti.xlsx");
-        File fileLocale = new File(URLLocale.getFile().substring(1));
-        if(fileLocale.exists()) {
-        	fileOrario = fileLocale;
-        } else {
-        	fileOrario = new File(scrivania+NOME_FILE_ORARIO);
-        }
-        fileGiornale = new File(scrivania+NOME_FILE_GIORNALE);
         
-        URLLocale = NomiFile.class.getResource(NOME_FILE_XML);
-        fileLocale = new File(URLLocale.getFile().substring(1));
-        if(fileLocale.exists()) {
-        	fileOrarioXml = fileLocale;
+        fileOrario = trovaFile(scrivania, NOME_FILE_ORARIO);
+        fileOrarioXml = trovaFile(scrivania, NOME_FILE_XML);
+        fileGiornale = new File(scrivania+NOME_FILE_GIORNALE);
+    }
+    
+    private static File trovaFile(String scrivania, String file) {
+        File cercato = new File(scrivania+file);
+        if(cercato.exists()) {
+            return cercato;
         } else {
-        	fileOrarioXml = new File(scrivania+NOME_FILE_XML);
+            return new File( NomiFile.class.getResource(file).getFile() );
         }
     }
 

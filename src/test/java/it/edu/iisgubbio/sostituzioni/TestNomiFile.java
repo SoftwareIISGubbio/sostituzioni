@@ -2,7 +2,7 @@ package it.edu.iisgubbio.sostituzioni;
 
 import it.edu.iisgubbio.sostituzioni.NomiFile;
 
-public class TestPosizioneFile {
+public class TestNomiFile {
 
     public static void main(String[] args) {
         System.out.println(NomiFile.fileOrario);

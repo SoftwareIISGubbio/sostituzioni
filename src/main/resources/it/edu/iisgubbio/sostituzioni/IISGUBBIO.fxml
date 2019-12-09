@@ -107,7 +107,7 @@
       </MenuButton>
       <ImageView fitHeight="84.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@logo_iis_cassata_gattapone1.png" />
+            <Image url="@logo_iis_cassata_gattapone.png" />
          </image>
          <effect>
             <Reflection fraction="0.48" topOpacity="0.25" />
