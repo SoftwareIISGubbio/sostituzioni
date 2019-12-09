@@ -14,6 +14,10 @@ public class OraLezione extends Ora{
 		super(giorno,orario);
 	}
 	
+	public OraLezione(){
+		
+	}
+	
 	/**
 	 * @param giorno giorno della settimana, lunedì=1
 	 * @param orario ora del giorno, prima ora = 1

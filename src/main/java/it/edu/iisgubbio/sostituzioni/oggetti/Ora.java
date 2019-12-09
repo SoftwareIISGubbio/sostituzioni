@@ -39,4 +39,8 @@ public class Ora {
 		
 		return s+" "+o;
 	}
+	
+	public Ora() {
+		
+	}
 }
