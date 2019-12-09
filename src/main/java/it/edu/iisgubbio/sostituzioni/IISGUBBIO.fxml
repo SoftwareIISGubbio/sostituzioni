@@ -118,9 +118,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <MenuButton contentDisplay="RIGHT" mnemonicParsing="false" popupSide="TOP" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #3B3B3B;" text="Tutte le ore --" textAlignment="CENTER" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <MenuButton fx:id="item1" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#gestioneClickPulsante" popupSide="TOP" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #3B3B3B;" text="Tutte le ore --" textAlignment="CENTER" textFill="#ffe800" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
         <items>
-          <MenuItem mnemonicParsing="false" text="1^" />
+          <MenuItem fx:id="item1" mnemonicParsing="false" onAction="#gestioneClickPulsante" text="1^" />
             <MenuItem mnemonicParsing="false" text="2^" />
             <MenuItem mnemonicParsing="false" text="3^" />
             <MenuItem mnemonicParsing="false" text="4^" />
@@ -130,12 +130,12 @@
             <MenuItem mnemonicParsing="false" text="8^" />
         </items>
       </MenuButton>
-      <ListView prefHeight="321.0" prefWidth="257.0" style="-fx-background-color: #E6E6E6;" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+      <ListView prefHeight="0.0" prefWidth="247.0" style="-fx-background-color: #E6E6E6;" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
          <GridPane.margin>
-            <Insets bottom="40.0" right="20.0" top="145.0" />
+            <Insets bottom="52.0" right="20.0" top="145.0" />
          </GridPane.margin>
       </ListView>
       <DatePicker fx:id="data" onAction="#gestioneClickPulsante" prefHeight="25.0" prefWidth="181.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -154,5 +154,10 @@
             <Insets bottom="20.0" />
          </GridPane.margin>
       </Label>
+      <Button fx:id="info" mnemonicParsing="false" prefHeight="22.0" prefWidth="25.0" style="-fx-background-color: #3B3B3B;" text="i" textFill="#ffe800" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Bodoni MT Black Italic" size="12.0" />
+         </font>
+      </Button>
    </children>
 </GridPane>

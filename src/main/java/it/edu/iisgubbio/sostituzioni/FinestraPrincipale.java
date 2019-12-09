@@ -20,6 +20,16 @@ public class FinestraPrincipale extends Application {
 	@FXML DatePicker  data;
 	@FXML MenuButton  txtora;
 	@FXML MenuButton  txtclasse;
+	@FXML Button info;
+	
+	@FXML MenuItem item1;
+	@FXML MenuItem item2;
+	@FXML MenuItem item3;
+	@FXML MenuItem item4;
+	@FXML MenuItem item5;
+	@FXML MenuItem item6;
+	@FXML MenuItem item7;
+	@FXML MenuItem item8;
 
 	public void start(Stage x) {
 
@@ -40,7 +50,8 @@ public class FinestraPrincipale extends Application {
 	@FXML
 	private void gestioneClickPulsante(ActionEvent e){
 		System.out.println(data.getValue());
-		
+		System.out.println(txtora.getItems());
+
 	}
 	
 }
