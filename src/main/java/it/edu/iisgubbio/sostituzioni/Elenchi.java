@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
+import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 
 public class Elenchi {
     public static ArrayList<Docente> docenti = new ArrayList<>();
     
     static {
         docenti = LettoreFile.leggiXML();
-        // FIXME: bisogna integrare le altre informazioni
     }
     
     public static String[] getNomiClassi(){
