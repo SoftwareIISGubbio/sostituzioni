@@ -8,17 +8,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class FinestraPrincipale extends Application {
 
-	@FXML DatePicker data;
-	@FXML MenuButton txtOra;
-	@FXML MenuButton txtClasse;
-	@FXML Button verifica;
-	
+	@FXML
+	DatePicker data;
+	@FXML
+	ComboBox<String> cmbOra;
+	@FXML
+	ComboBox<String> cmbClasse;
+	@FXML
+	Button verifica;
+	@FXML
+	ListView<String> lista;
 
 	public void start(Stage x) {
 
@@ -32,20 +38,29 @@ public class FinestraPrincipale extends Application {
 		x.setTitle("Main Page");
 		x.show();
 	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-    @FXML
-    void initialize() {
-        System.out.println("questo metodo serve per inizializzare gli elementi dell'interfaccia");
-    }
-	
+
 	@FXML
-	private void gestioneClickPulsante(ActionEvent e){
+	void initialize() {
+		String[] classi = Elenchi.getNomiClassi();
+		for (int i = 1; i <= 8; i++) {
+			String n = "" + i;
+			cmbOra.getItems().add(n);
+		}
+		for(int j = 0; j < classi.length; j++) {
+			cmbClasse.getItems().add(classi[j]);
+		}
+		
+	}
+
+	@FXML
+	private void gestioneClickPulsante(ActionEvent e) {
 		System.out.println(data.getValue());
-		System.out.println(txtOra.getItems());
+		System.out.println(cmbOra.getValue());
+		System.out.println(cmbClasse.getValue());
 
 	}
-	
 }
