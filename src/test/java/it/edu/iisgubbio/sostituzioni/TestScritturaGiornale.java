@@ -9,7 +9,7 @@ public class TestScritturaGiornale {
 		System.out.println(NomiFile.fileGiornale);
 		Sostituzione s1 = new Sostituzione(2, 3, "154", "4I", true, "Giammarioli");
 		Sostituzione s2 = new Sostituzione(1, 4, "141", "4I", true, "Pallucca");
-		Gionale.scriviRecord(s1);
-		Gionale.scriviRecord(s2);
+		Giornale.scriviRecord(s1);
+		Giornale.scriviRecord(s2);
 	}
 }
