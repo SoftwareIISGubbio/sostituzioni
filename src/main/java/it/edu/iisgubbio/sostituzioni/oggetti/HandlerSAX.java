@@ -16,6 +16,9 @@ public class HandlerSAX extends DefaultHandler{
         this.docenti = ald;
     }
     
+    /**
+     * legge il file XML e a seconda del tag inserisce il giorno, la classe, la materia, e l'aula
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts){
         if(qName.equals("Teacher")){
@@ -53,6 +56,9 @@ public class HandlerSAX extends DefaultHandler{
         } 
     }
     
+    /**
+     * controlla l'ultimo elemento del file
+     */
     @Override
     public void endElement(String uri, String localName, String qName){
         if( qName.equals("Hour") && oraAttuale.materia!=null){

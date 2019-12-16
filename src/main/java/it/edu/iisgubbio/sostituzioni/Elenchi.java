@@ -14,13 +14,22 @@ public class Elenchi {
         // leggo ulteriori informazioni dei docenti dal file XML
         ArrayList<Docente> informazioniExcel = LettoreFile.leggiExcel();
         
-        System.out.println(informazioniExcel.get(0));
         for(Docente daExcel : informazioniExcel) {
             Docente presente = cercaDocentePerNome(daExcel.nome);
             if(presente!=null) {
                 presente.oraARecupero = daExcel.oraARecupero;
+                presente.oraADisposizioneCassata = daExcel.oraADisposizioneCassata;
+                presente.oraADisposizioneGattapone = daExcel.oraADisposizioneGattapone;
+                presente.oraARecupero = daExcel.oraARecupero;
+                presente.oreAPagamento = daExcel.oreAPagamento;
+                presente.orePotenziamento = daExcel.orePotenziamento;
+            }else {
+            	docenti.add(daExcel);
             }
+            
         }
+        
+        
     }
     
     public static String[] getNomiClassi(){
