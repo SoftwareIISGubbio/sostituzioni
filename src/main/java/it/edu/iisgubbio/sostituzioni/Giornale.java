@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 
-public class Gionale extends NomiFile {
+public class Giornale extends NomiFile {
 
 	public static void scriviRecord(Sostituzione x) {
 		BufferedWriter out = null;
@@ -29,15 +29,11 @@ public class Gionale extends NomiFile {
 	}
 	
 	public static ArrayList<Sostituzione> leggiGiornale(File fileGiornale) throws FileNotFoundException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("giornaleSostituzioni.csv"));
+		BufferedReader reader = new BufferedReader(new FileReader(fileGiornale));
 		ArrayList<Sostituzione> risposta=new ArrayList<>();
-		String line = reader.readLine();
-		while(line!=null) {
-		     System.out.println(line);
-		     line = reader.readLine();
-		     
+		String line;
+		while((line=reader.readLine())!=null) {
 		     Sostituzione x = new Sostituzione(line);
-		     
 		     risposta.add(x);
 		}
 		
