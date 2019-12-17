@@ -22,7 +22,7 @@ public class HandlerSAX extends DefaultHandler{
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts){
         if(qName.equals("Teacher")){
-            docenteAttuale = new Docente(atts.getValue("name"));
+            docenteAttuale = new Docente(atts.getValue("name").trim());
             docenti.add(docenteAttuale);
         }
         if(qName.equals("Day")){
@@ -49,10 +49,10 @@ public class HandlerSAX extends DefaultHandler{
         	oraAttuale.materia = atts.getValue("name");
         }
         if(qName.equals("Students")){
-            oraAttuale.classe = atts.getValue("name");
+            oraAttuale.classe = atts.getValue("name").trim();
         }
         if(qName.equals("Room")){
-            oraAttuale.aula = atts.getValue("name");
+            oraAttuale.aula = atts.getValue("name").trim();
         } 
     }
     

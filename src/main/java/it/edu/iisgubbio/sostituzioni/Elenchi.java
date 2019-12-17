@@ -57,19 +57,35 @@ public class Elenchi {
         
         // vedo se esiste un solo docente che inizia come quello passato
         Docente trovato = null;
-        String primaParte;
+        String split[] = nome.split(" ");
+        String cognome = split[0];
         int numeroCorrispondenze = 0; // devo contarle perché se combaviano in due non va bene
         for(Docente x: docenti) {
+        	String nomeDocente = x.nome.toLowerCase().trim().split(" ")[0];
             // è possibile che il nome cercato sia più lungo di quello presente nell'elenco
             // perché nel file excel a volte vengono inseriti i nomi mentre nel file xml quasi mai
-            primaParte = nome.substring(0, Math.min(x.nome.length(), nome.length() ));
-            if(x.nome.toLowerCase().equals(primaParte.toLowerCase())) {
+            if(nomeDocente.equals(cognome.toLowerCase())) {
                 trovato = x;
                 numeroCorrispondenze++;
             }
         }
+    	
+        
         if(numeroCorrispondenze==1) {
             return trovato;
+        }else if(numeroCorrispondenze == 2) {
+        	String nomeDocente;
+        	if(split.length > 2) {
+        		nomeDocente = split[0]+" "+split[1];
+        	}else {
+        		nomeDocente = nome;
+        	}
+        	
+        	for(Docente x: docenti) {
+        		if(x.nome.toLowerCase().equals(nomeDocente.toLowerCase())) {
+        			return x;
+        		}
+        	}
         }
         return null;
     }
