@@ -32,13 +32,21 @@ public class TestDocente {
 		i5Lunedi.compresenza = false;
 		panfili.oreLezione.add(i5Lunedi);
 		
+		giammarioli.oraARecupero = new Ora(1, 1);
+		giammarioli.oraADisposizioneCassata = new Ora(2, 1);
+		giammarioli.oraADisposizioneGattapone = new Ora(2, 2);
+		
+		giammarioli.oreAPagamento.add(new Ora(5,1));
+		giammarioli.oreAPagamento.add(new Ora(5,2));
+		
+		giammarioli.orePotenziamento.add(new Ora(4,5));
+        giammarioli.orePotenziamento.add(new Ora(4,6));
+		
 		System.out.println(giammarioli);
 		
-		System.out.println(giammarioli.lavoraNellaClasse("4i"));
-		System.out.println(giammarioli.lavoraNellaClasse("4b"));
-		System.out.println(giammarioli.lavoraNellOra(i4Giovedi4));
-		System.out.println(giammarioli.lavoraNellOra(i5Lunedi));
-		
-		
+		System.out.println("lavora in 4i: "+giammarioli.lavoraNellaClasse("4i"));
+		System.out.println("lavora in 4b: "+giammarioli.lavoraNellaClasse("4b"));
+		System.out.println("lavora nell'ora '"+i4Giovedi4+"': "+giammarioli.lavoraNellOra(i4Giovedi4));
+		System.out.println("lavora nell'ora '"+i5Lunedi+"': "+giammarioli.lavoraNellOra(i5Lunedi));
 	}
 }
