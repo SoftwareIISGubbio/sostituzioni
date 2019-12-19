@@ -18,7 +18,7 @@ public class FiltroCoPresenza {
 	public static ArrayList<Docente> docentiCoPresenza(ArrayList<Docente> tutti, OraLezione oraDaSostituire) {
 		ArrayList<Docente> risposta = new ArrayList<>();
 		Ora ora = new Ora(oraDaSostituire.giorno, oraDaSostituire.orario);
-		String classe = new String(oraDaSostituire.classe);
+		String classe = oraDaSostituire.classe;
 
 		for (Docente d : tutti) {
 			if (d.lavoraNellaClasseInOra(ora, classe)) {
