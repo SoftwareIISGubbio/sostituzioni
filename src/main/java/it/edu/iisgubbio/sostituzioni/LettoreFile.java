@@ -32,7 +32,6 @@ public class LettoreFile {
 			Sheet foglio = libro.getSheetAt(posFoglio);
 			calcolaOrario(rigaOre+1, foglio, lista);
 			leggiOreSpeciali(lista);
-			leggiProfSostegno(lista);
 			libro.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,11 +174,11 @@ public class LettoreFile {
 	 * Legge i professori di sostegno e di potenziamento dal file Excel
 	 * @param lista di professori
 	 */
-	private static void leggiProfSostegno(ArrayList<Docente> lista) {
+	public static void leggiProfSostegno(ArrayList<Docente> lista) {
 		try {
 			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
 			Sheet foglio = libro.getSheetAt(posFoglio);
-			int i = calcolaOrario(rigaOre+lista.size()+5, foglio, lista);
+			int i = calcolaOrario(rigaOre+lista.size()+4, foglio, lista);
 			
 			calcolaOrario(i+5, foglio, lista);
 
