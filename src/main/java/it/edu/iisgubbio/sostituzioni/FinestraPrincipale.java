@@ -1,6 +1,12 @@
 package it.edu.iisgubbio.sostituzioni;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
+import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
+import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,10 +75,23 @@ public class FinestraPrincipale extends Application {
 
 	@FXML
 	private void gestioneClickPulsante(ActionEvent e) {
-		System.out.println(nomeProf.getValue());
-		System.out.println(data.getValue());
-		System.out.println(cmbOra.getValue());
-		System.out.println(cmbClasse.getValue()); 
-
+		//System.out.println(data.getValue());
+		//System.out.println(cmbOra.getValue());
+		//System.out.println(cmbClasse.getValue());
+		LocalDate d = data.getValue();
+		OraLezione oraDaSostituire = new OraLezione();
+	//	System.out.println(d);
+		oraDaSostituire.giorno = d.getDayOfWeek().getValue();
+		oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
+		oraDaSostituire.classe = cmbClasse.getValue();
+		//System.out.println("------------");
+		System.out.println(oraDaSostituire);
+		ArrayList<Docente> tuttiIDocenti = Elenchi.docenti;
+		ArrayList<Docente> docentiCoPresenza;
+		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
+		for (int i = 0; i < docentiCoPresenza.size(); i++) {
+			System.out.println(docentiCoPresenza.get(i));
+		}
+		
 	}
 }

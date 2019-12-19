@@ -29,6 +29,8 @@ public class Elenchi {
             
         }
         
+        LettoreFile.leggiProfSostegno(docenti);
+        
         
     }
     
