@@ -49,7 +49,7 @@ public class HandlerSAX extends DefaultHandler{
         	oraAttuale.materia = atts.getValue("name");
         }
         if(qName.equals("Students")){
-            oraAttuale.classe = atts.getValue("name").trim();
+            oraAttuale.classe = atts.getValue("name").trim().replaceAll(" ", "").toLowerCase();
         }
         if(qName.equals("Room")){
             oraAttuale.aula = atts.getValue("name").trim();

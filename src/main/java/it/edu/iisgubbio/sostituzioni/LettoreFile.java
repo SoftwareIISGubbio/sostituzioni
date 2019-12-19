@@ -157,7 +157,7 @@ public class LettoreFile {
 				}else if(contenuto.equals("D")) {
 					docente.oraADisposizioneCassata = new Ora(giorno, orario);
 				}else {
-					ora.classe = contenuto;
+					ora.classe = contenuto.replaceAll(" ", "").toLowerCase();
 					listaOre.add(ora);
 				}
 				
