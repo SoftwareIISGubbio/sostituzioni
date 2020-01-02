@@ -9,6 +9,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,9 +17,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+/************************************************************************************************
+ * classe principale del programma, crea la finestra per la ricerca delle sostituzioni
+ ***********************************************************************************************/
 public class FinestraPrincipale extends Application {
+    
+    public static void main(String[] args) {
+        launch(args);
+    }
 
 	@FXML
 	DatePicker data;
@@ -29,12 +37,15 @@ public class FinestraPrincipale extends Application {
 	@FXML
 	ComboBox<String> cmbClasse;
 	@FXML
-	Button verifica;
-	@FXML
 	ListView<String> lista;
+	@FXML
+	ImageView ivAttenzione;
 
+	/********************************************************************************************
+	 * Creo la finestra principale, non posso impostare qui i valori perché 
+	 * la finestra viene caricata da un file FXML
+	 *******************************************************************************************/
 	public void start(Stage x) {
-
 		Scene scena = null;
 		try {
 			scena = new Scene(FXMLLoader.load(FinestraPrincipale.class.getResource("FinestraPrincipale.fxml")));
@@ -42,15 +53,14 @@ public class FinestraPrincipale extends Application {
 			e.printStackTrace();
 		}
 		x.setScene(scena);
-		x.setTitle("Main Page");
+		x.setTitle("Sostituzioni");
 		x.show();
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	@FXML
+	/********************************************************************************************
+	 * In questo metodo si impostano i valori di alcuni oggetti presenti nella finestra
+	 *******************************************************************************************/	
 	void initialize() {
 		// Ciclo per scorrere le classi e li inserisce alla combobox
 		String[] classi = Elenchi.getNomiClassi();
@@ -70,11 +80,38 @@ public class FinestraPrincipale extends Application {
 		for (int j = 0; j < Elenchi.docenti.size(); j++) {
 			nomeProf.getItems().add(Elenchi.docenti.get(j).nome);
 		}
-
+		
+		if(Elenchi.getProblemi().length()==0) {
+		    ivAttenzione.setVisible(false);
+		}
+	}
+	
+	@FXML
+	/********************************************************************************************
+	 * apre la finestra che contiene tutti i problemi riscontrati in fase di lettura del file
+	 *******************************************************************************************/
+    private void gestioneInformazioniDocente(ActionEvent e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("InformazioniDocente.fxml").openStream()) );
+            InformazioniDocente controller = (InformazioniDocente) fxmlLoader.getController();
+            s.setScene(scena);
+            s.setTitle("info docente");
+            s.show();
+            Docente d = Elenchi.cercaDocentePerNome( nomeProf.getValue() );
+            controller.setDocente(d);
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
 	}
 
 	@FXML
-	private void gestioneClickPulsante(ActionEvent e) {
+	/********************************************************************************************
+	 * effettua la ricerca dei docenti in base ai dati richiesti
+	 *******************************************************************************************/
+	private void gestioneCercaDocenteDisponibile(ActionEvent e) {
 		//System.out.println(data.getValue());
 		//System.out.println(cmbOra.getValue());
 		//System.out.println(cmbClasse.getValue());
@@ -93,5 +130,23 @@ public class FinestraPrincipale extends Application {
 			System.out.println(docentiCoPresenza.get(i));
 		}
 		
+	}
+	
+	@FXML
+	/********************************************************************************************
+	 * mostra una finestra con l'elenco dei problemi rilevati in fase di lettura dei file
+	 *******************************************************************************************/
+	private void mostraProblemi(Event e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("FinestraProblemi.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Problemi nei dati");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
 	}
 }

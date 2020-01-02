@@ -1,6 +1,7 @@
 package it.edu.iisgubbio.sostituzioni;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
@@ -8,10 +9,17 @@ import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 
 public class Elenchi {
     public static ArrayList<Docente> docenti = new ArrayList<>();
+    private static String[]nomiClassi;
+    private static String problemi = "";
     
+    /********************************************************************************************
+     * Questo codice viene eseguito al momento del caricamento della classe in memoria
+     * TODO: forse sarebbe il caso di farlo diventare un normale oggetto e togliere tutte
+     * le proprietà static
+     *******************************************************************************************/
     static {
         docenti = LettoreFile.leggiXML();
-        // leggo ulteriori informazioni dei docenti dal file XML
+        // leggo ulteriori informazioni dei docenti dal file xlsx
         ArrayList<Docente> informazioniExcel = LettoreFile.leggiExcel();
         
         for(Docente daExcel : informazioniExcel) {
@@ -26,23 +34,41 @@ public class Elenchi {
             }else {
             	docenti.add(daExcel);
             }
-            
         }
-        
         LettoreFile.leggiProfSostegno(docenti);
         
-        
+        // creo elenco con nomi di classi e controllo se c'è qualche nome strano
+        HashSet<String> insiemeNomiDiClassi = new HashSet<>();
+        String nomeClasse;
+        for(Docente docente: docenti) {
+            for(OraLezione ol: docente.oreLezione) {
+                nomeClasse = ol.classe.toLowerCase();
+                // ci facciamo andar bene:
+                //   [\\[(]? → una parentesi quadra o tonda aperta se c'è
+                //   [1-5] → un numero da 1 a 5
+                //   [a-z] → una lettera
+                //   [\\-1-5a-z]* → una sequenza di uno o più lettere numeri e "-" 
+                //   [\\])]? → una parentesi quadra o tonda chiusa se c'è
+                if( nomeClasse.matches("[\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?") ){
+                    insiemeNomiDiClassi.add(nomeClasse);
+                } else {
+                    // classe strana!
+                    problemi += "classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
+                }
+            }
+        }
+        nomiClassi = insiemeNomiDiClassi.toArray( new String[0] );
+        Arrays.sort(nomiClassi);
     }
     
     public static String[] getNomiClassi(){
-        HashSet<String> insiemeNomiDiClassi = new HashSet<>();
-        for(Docente docente: docenti) {
-            for(OraLezione ol: docente.oreLezione) {
-                insiemeNomiDiClassi.add(ol.classe);
-            }
-        }
-        return insiemeNomiDiClassi.toArray( new String[0] );
+        return nomiClassi;
     }
+    
+    public static String getProblemi() {
+        return problemi;
+    }
+    
     
     /********************************************************************************************
      * 

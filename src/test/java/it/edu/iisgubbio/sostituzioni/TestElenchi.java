@@ -7,7 +7,11 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 public class TestElenchi {
 
     public static void main(String[] args) {
+        long inizio = System.currentTimeMillis();
         ArrayList<Docente> elencoDocenti = Elenchi.docenti;
+        long fine = System.currentTimeMillis();
+        System.out.println("tempo impiegato: "+(fine-inizio)+"msec");
+        
         for(int i=0; i<elencoDocenti.size(); i++) {
             System.out.println(elencoDocenti.get(i).nome);
         }
@@ -19,7 +23,8 @@ public class TestElenchi {
                 System.out.println("-");
             }
         }
-
+        
+        System.out.println(Elenchi.getProblemi());
     }
 
 }

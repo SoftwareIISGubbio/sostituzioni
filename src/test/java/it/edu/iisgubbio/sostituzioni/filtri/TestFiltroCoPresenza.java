@@ -12,7 +12,10 @@ public class TestFiltroCoPresenza {
 		ArrayList<Docente> tuttiIDocenti = Elenchi.docenti;
 		ArrayList<Docente> docentiCoPresenza;
 		OraLezione classeCercata = new OraLezione(1, 1, null, "4i", false);
+		long inizio = System.currentTimeMillis();
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, classeCercata);
+		long fine = System.currentTimeMillis();
+		System.out.println("tempo impiegato: "+(fine-inizio)+"msec");
 
 		System.out.println("I docenti totali sono: " + tuttiIDocenti.size());
 		System.out.println("I docenti in copresenza: " + docentiCoPresenza.size());
