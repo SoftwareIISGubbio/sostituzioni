@@ -1,9 +1,9 @@
-== Docente
+= Ricerca sostituzioni
 
-* nome: String 
-* ore: elenco di OraLezione
-* oraARecupero: Ora
-* oraADisposizioneCassata: Ora
-* oraADisposizioneGattapone: Ora
-* oreAPagamento: elenco di Ora
-* pot: elenco Ora
+Lo scopo del programma è cercare un sostituto per un docente assente.
+
+I dati vengono recuperati da due file: un xml prodotto da 
+https://lalescu.ro/liviu/fet/[fet] 
+e un file xlsx editato manualmente.
+
+La ricerca avviene tramite filtri che scorrono i docenti in cerca di diverse proprietà.
