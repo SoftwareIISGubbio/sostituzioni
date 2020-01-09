@@ -3,9 +3,14 @@ package it.edu.iisgubbio.sostituzioni;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
+import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -128,8 +133,28 @@ public class FinestraPrincipale extends Application {
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiCoPresenza.size(); i++) {
 			System.out.println(docentiCoPresenza.get(i));
+			lista.getItems().add(docentiCoPresenza.get(i).nome+"   (copresenza)");
 		}
 		
+		ArrayList<Docente> docentiRecupero;
+		docentiRecupero=FiltroRecupero.docentiRecupero( tuttiIDocenti, oraDaSostituire);
+		
+		for (int i = 0; i < docentiRecupero.size(); i++) {
+			lista.getItems().add(docentiRecupero.get(i).nome+"   (recupero)");
+		}
+		
+		ArrayList<Docente> docentiDellaClasse;
+		docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
+		ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
+		
+		for (int i = 0; i < docentiLiberiClasse.size(); i++) {
+			lista.getItems().add(docentiLiberiClasse.get(i).nome+"   (della classe)");
+		}
+		ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
+		
+		for (int i = 0; i < docentiLiberi.size(); i++) {
+			lista.getItems().add(docentiLiberi.get(i).nome+"   (liberi)");
+		}
 	}
 	
 	@FXML
