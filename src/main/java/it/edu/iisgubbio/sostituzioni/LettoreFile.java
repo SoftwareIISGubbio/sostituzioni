@@ -30,8 +30,8 @@ public class LettoreFile {
 		try {
 			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
 			Sheet foglio = libro.getSheetAt(posFoglio);
-			calcolaOrario(rigaOre+1, foglio, lista);
-			leggiOreSpeciali(lista);
+			calcolaOrario(rigaOre+1, foglio, lista, null);
+			//leggiOreSpeciali(lista);
 			libro.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,66 +59,16 @@ public class LettoreFile {
 		return lista;
 	}
 
-	/**
-	 * Legge le ore speciali dal file Excel (Es. Ore a recupero)
-	 * @param lista di professori
-	 * @return lista dei docenti completa
-	 */
-	
-	private static void leggiOreSpeciali(ArrayList<Docente> lista) {
-
-		try {
-			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
-			Sheet foglio = libro.getSheetAt(posFoglio);
-
-			for(int i = rigaOre+1; foglio.getRow(i)!= null && foglio.getRow(i).getCell(1)!= null; i++) {
-				Docente docente = lista.get(i-rigaOre-1);
-				for(int j = 2; j<35; j++) {
-					int giorno;
-					int orario = 0;
-					if(j<=10) giorno = 1;
-					else if(j<=16) giorno = 2;
-					else if(j<=22) giorno = 3;
-					else if(j<=28) giorno = 4;
-					else  giorno = 5;
-
-					String stringaOra = foglio.getRow(rigaOre).getCell(j).getStringCellValue();
-
-					for (int k = 1; k < Ora.nomiOre.length; k++) {
-						if(Ora.nomiOre[k].startsWith(stringaOra)) {
-							orario = k;
-							break;
-						}
-					}
-					String cella = foglio.getRow(i).getCell(j).getStringCellValue();
-					if(cella.equals("R")) {
-						docente.oraARecupero = new Ora(giorno,orario);
-					}else if(cella.equals("PAGAM")) {
-						docente.oreAPagamento.add(new Ora(giorno, orario));
-					}else if(cella.equals("POT")) {
-						docente.orePotenziamento.add(new Ora(giorno, orario));
-					}else if(cella.equals("D")) {
-						docente.oraADisposizioneCassata = new Ora(giorno, orario);
-					}
-					
-					libro.close();
-					
-				}
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	/***
-	 * Calcola le ore di lezione dei professori dal file Excel
+	 * Calcola le ore di lezione e quelle speciali dei professori dal file Excel
 	 * @param riga di partenza del foglio (da 0 a N-1)
 	 * @param foglio da leggere
 	 * @param lista di professori
+	 * @param materia (facoltativo, usata per i prof di sostegno)
 	 * @return indice in cui si ferma il ciclo
 	 */
-	private static int calcolaOrario(int partenza, Sheet foglio, ArrayList<Docente> lista) {
+	private static int calcolaOrario(int partenza, Sheet foglio, ArrayList<Docente> lista, String materia) {
 		int i;
 		//il ciclo si ripete finche' non incontra una riga vuota
 		for( i = partenza;foglio.getRow(i)!=null&&foglio.getRow(i).getCell(1)!=null;i++) {
@@ -145,6 +95,7 @@ public class LettoreFile {
 				}
 
 				OraLezione ora = new OraLezione(giorno, orario);
+				ora.materia = materia;
 				String contenuto = foglio.getRow(i).getCell(j).getStringCellValue();
 				
 				//controlla le ore speciali e le assegna al professore
@@ -157,8 +108,11 @@ public class LettoreFile {
 				}else if(contenuto.equals("D")) {
 					docente.oraADisposizioneCassata = new Ora(giorno, orario);
 				}else {
-					ora.classe = contenuto.replaceAll(" ", "").toLowerCase();
-					if(contenuto.length()>0) { // TODO: l'ho messa io, verificate che sia corretto
+					if(contenuto.contains("®")){
+						docente.oraARecupero = new Ora(giorno,orario);
+					}
+					ora.classe = contenuto.replaceAll(" ", "").replaceAll("®", "").toLowerCase();
+					if(ora.classe.length()>0) {
 					    listaOre.add(ora);
 					}
 				}
@@ -180,9 +134,11 @@ public class LettoreFile {
 		try {
 			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
 			Sheet foglio = libro.getSheetAt(posFoglio);
-			int i = calcolaOrario(rigaOre+lista.size()+4, foglio, lista);
+			int i = calcolaOrario(rigaOre+lista.size()+4, foglio, lista, "sostegno");
 			
-			calcolaOrario(i+5, foglio, lista);
+			calcolaOrario(i+5, foglio, lista, "potenziamento");
+			
+			
 
 			libro.close();
 		}catch(Exception e) {
