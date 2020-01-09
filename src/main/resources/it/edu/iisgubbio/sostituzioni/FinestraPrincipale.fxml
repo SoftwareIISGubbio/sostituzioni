@@ -131,8 +131,7 @@
         <menus>
             <Menu mnemonicParsing="false" text="File">
               <items>
-                <MenuItem mnemonicParsing="false" text="informazioni" />
-                  <MenuItem mnemonicParsing="false" text="chiudi" />
+                <MenuItem mnemonicParsing="false" onAction="#finestraInfoSoftaware" text="informazioni" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Opzioni">
