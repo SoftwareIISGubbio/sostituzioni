@@ -32,10 +32,12 @@ public class InformazioniDocente {
 
 	public void setDocente(Docente d) {
 		eNomeDocente.setText(d.nome);
+		if (d.oraARecupero != null) {
 		cOraRecupero.setText(d.oraARecupero.toString());
+		}
 		for (int i = 0; i < d.oreLezione.size(); i++) {
 			lOreLezione.getItems().add(d.oreLezione.get(i).toString() + "\n");
-		}
+		} 
 		if (d.oraADisposizioneCassata != null) {
 			cOraDisposizioneCassata.setText(d.oraADisposizioneCassata.toString());
 		}
