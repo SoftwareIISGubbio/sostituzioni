@@ -106,7 +106,25 @@ public class FinestraPrincipale extends Application {
             x.printStackTrace();
         }
 	}
-
+	
+	@FXML
+	/********************************************************************************************
+	 * apre la finestra che contiene le informazioni del software
+	 *******************************************************************************************/
+	private void finestraInfoSoftaware(ActionEvent e) {
+		 Stage s = new Stage();
+	        Scene scena;
+	        try {
+	            FXMLLoader fxmlLoader = new FXMLLoader();
+	            fxmlLoader.setLocation(FinestraPrincipale.class.getResource("InfoProgramma.fxml"));
+	            scena = new Scene(  fxmlLoader.load(getClass().getResource("InfoProgramma.fxml").openStream()) );
+	            s.setScene(scena);
+	            s.setTitle("Informazioni Sowtware");
+	            s.show();
+	        } catch (IOException x) {
+	            x.printStackTrace();
+	        }
+		}
 	@FXML
 	/********************************************************************************************
 	 * effettua la ricerca dei docenti in base ai dati richiesti
