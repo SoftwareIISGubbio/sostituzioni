@@ -12,7 +12,7 @@ public class TestElenchi {
         long fine = System.currentTimeMillis();
         System.out.println("tempo impiegato: "+(fine-inizio)+"msec");
         
-        for(int i=0; i<elencoDocenti.size(); i++) {
+         for(int i=0; i<elencoDocenti.size(); i++) {
             System.out.println(elencoDocenti.get(i).nome);
         }
 
