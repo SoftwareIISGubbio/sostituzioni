@@ -77,11 +77,7 @@ public class FinestraPrincipale extends Application {
 		for (int j = 0; j < classi.length; j++) {
 			cmbClasse.getItems().add(classi[j]);
 		}
-		// Ciclo per scorrerel l'elenco dei professori e li inserisce alla combobox
-		for (int i = 1; i <= 8; i++) {
-			String n = "" + i;
-			cmbOra.getItems().add(n);
-		}
+		// Ciclo per scorrere l'elenco dei professori e li inserisce alla combobox
 
 		for (int j = 0; j < Elenchi.docenti.size(); j++) {
 			nomeProf.getItems().add(Elenchi.docenti.get(j).nome);
