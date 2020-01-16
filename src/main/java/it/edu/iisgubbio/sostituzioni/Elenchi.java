@@ -49,11 +49,12 @@ public class Elenchi {
                 //   [a-z] → una lettera
                 //   [\\-1-5a-z]* → una sequenza di uno o più lettere numeri e "-" 
                 //   [\\])]? → una parentesi quadra o tonda chiusa se c'è
-                if( nomeClasse.matches("[\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?") ){
+                if( nomeClasse.matches("[\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?") || nomeClasse.equals("gatt")){
                     insiemeNomiDiClassi.add(nomeClasse);
                 } else {
-                    // classe strana!
-                    problemi += "classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
+                	if(!nomeClasse.equals("vp") ) {
+                		problemi += "classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
+                	}
                 }
             }
         }
