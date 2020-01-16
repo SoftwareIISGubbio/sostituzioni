@@ -49,7 +49,7 @@
       </Label>
         <ImageView fitHeight="71.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
            <image>
-              <Image url="@logo2.png" />
+              <Image url="@logo_iis_cassata_gattapone.png" />
            </image>
         </ImageView>
       <Label text="Build Information" GridPane.columnIndex="1" GridPane.rowIndex="1">

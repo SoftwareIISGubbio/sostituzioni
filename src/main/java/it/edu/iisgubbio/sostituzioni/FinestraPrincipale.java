@@ -84,6 +84,7 @@ public class FinestraPrincipale extends Application {
 
 		for (int j = 0; j < Elenchi.docenti.size(); j++) {
 			nomeProf.getItems().add(Elenchi.docenti.get(j).nome);
+			
 		}
 		
 		if(Elenchi.getProblemi().length()==0) {
