@@ -9,6 +9,7 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
+import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
@@ -136,18 +137,17 @@ public class FinestraPrincipale extends Application {
 	 * effettua la ricerca dei docenti in base ai dati richiesti
 	 *******************************************************************************************/
 	private void gestioneCercaDocenteDisponibile(ActionEvent e) {
-		//System.out.println(data.getValue());
-		//System.out.println(cmbOra.getValue());
-		//System.out.println(cmbClasse.getValue());
 		LocalDate d = data.getValue();
 		OraLezione oraDaSostituire = new OraLezione();
-	//	System.out.println(d);
+		String docenteAssente = nomeProf.getValue();
 		oraDaSostituire.giorno = d.getDayOfWeek().getValue();
 		oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
 		oraDaSostituire.classe = cmbClasse.getValue();
-		//System.out.println("------------");
 		System.out.println(oraDaSostituire);
+		
 		ArrayList<Docente> tuttiIDocenti = Elenchi.docenti;
+		tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
+		
 		ArrayList<Docente> docentiCoPresenza;
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiCoPresenza.size(); i++) {
@@ -157,7 +157,6 @@ public class FinestraPrincipale extends Application {
 		
 		ArrayList<Docente> docentiRecupero;
 		docentiRecupero=FiltroRecupero.docentiRecupero( tuttiIDocenti, oraDaSostituire);
-		
 		for (int i = 0; i < docentiRecupero.size(); i++) {
 			lista.getItems().add(docentiRecupero.get(i).nome+"   (recupero)");
 		}
@@ -165,15 +164,15 @@ public class FinestraPrincipale extends Application {
 		ArrayList<Docente> docentiDellaClasse;
 		docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
 		ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
-		
 		for (int i = 0; i < docentiLiberiClasse.size(); i++) {
 			lista.getItems().add(docentiLiberiClasse.get(i).nome+"   (della classe)");
 		}
-		ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
 		
+		ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiLiberi.size(); i++) {
 			lista.getItems().add(docentiLiberi.get(i).nome+"   (liberi)");
 		}
+
 	}
 	
 	@FXML
