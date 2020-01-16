@@ -72,7 +72,7 @@ public class LettoreFile {
 		int i;
 		//il ciclo si ripete finche' non incontra una riga vuota
 		for( i = partenza;foglio.getRow(i)!=null&&foglio.getRow(i).getCell(1)!=null;i++) {
-			Docente docente = new Docente(foglio.getRow(i).getCell(1).getStringCellValue().trim());
+			Docente docente = new Docente(foglio.getRow(i).getCell(1).getStringCellValue().trim().toUpperCase());
 			ArrayList<OraLezione> listaOre = new ArrayList<>();
 			docente.oreLezione = listaOre;
 			for(int j = 2; j<35; j++) {
