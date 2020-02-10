@@ -188,4 +188,9 @@ public class FinestraPrincipale extends Application {
             x.printStackTrace();
         }
 	}
+	
+	@FXML
+	private void finestraPreferenze(Event e) {
+	    
+	}
 }

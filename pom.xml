@@ -1,31 +1,81 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>it.edu.iisgubbio</groupId>
-  <artifactId>sostituzioni</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<!-- informazioni generali sul programma -->
+	<groupId>it.edu.iisgubbio</groupId>
+	<artifactId>sostituzioni</artifactId>
+	<version>0.1</version>
+	<packaging>jar</packaging>
+	<name>sostituzioni</name>
+	<url>http://www.iisgubbio.edu.it</url>
 
-  <name>sostituzioni</name>
-  <url>http://www.iisgubbio.edu.it</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>11</maven.compiler.release>
+		<progetto.jars>${project.build.directory}/jars</progetto.jars>
+	</properties>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties>
-
-  <dependencies>
-	<dependency>
-	  <groupId>org.apache.poi</groupId>
-	  <artifactId>poi-ooxml</artifactId>
-	  <version>4.1.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.openjfx</groupId>
-	  <artifactId>javafx-controls</artifactId>
-	  <version>13</version>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<!-- usata per leggere il file xlsx con le informazioni -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>13</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!--  per controllare le verisoni di java in compilazione -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>${maven.compiler.release}</release>
+				</configuration>
+			</plugin>
+			<!-- gestione delle dipendenze, e in particolare per copiare i jar in una unica cartella -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<outputDirectory>${progetto.jars}</outputDirectory>
+					<overWriteReleases>false</overWriteReleases>
+					<overWriteSnapshots>false</overWriteSnapshots>
+					<overWriteIfNewer>true</overWriteIfNewer>
+				</configuration>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- impostare la cartella di destinazione del progetto -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<outputDirectory>${progetto.jars}</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
