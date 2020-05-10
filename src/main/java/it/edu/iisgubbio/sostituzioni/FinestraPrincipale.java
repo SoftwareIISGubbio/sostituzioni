@@ -191,6 +191,16 @@ public class FinestraPrincipale extends Application {
 	
 	@FXML
 	private void finestraPreferenze(Event e) {
-	    
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("Preferenze.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Preferenze");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
 	}
 }
