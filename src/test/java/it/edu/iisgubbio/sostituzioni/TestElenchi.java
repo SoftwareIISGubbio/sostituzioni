@@ -8,7 +8,7 @@ public class TestElenchi {
 
     public static void main(String[] args) {
         long inizio = System.currentTimeMillis();
-        ArrayList<Docente> elencoDocenti = Elenchi.docenti;
+        ArrayList<Docente> elencoDocenti = Ambiente.docenti;
         long fine = System.currentTimeMillis();
         System.out.println("tempo impiegato: "+(fine-inizio)+"msec");
         
@@ -16,7 +16,7 @@ public class TestElenchi {
             System.out.println(elencoDocenti.get(i).nome);
         }
 
-        String nomiClassi[] = Elenchi.getNomiClassi();
+        String nomiClassi[] = Ambiente.getNomiClassi();
         for(int i=0; i<nomiClassi.length; i++) {
             System.out.print(nomiClassi[i]+", ");
             if(i>0 && i%10==0) {
@@ -24,7 +24,7 @@ public class TestElenchi {
             }
         }
         
-        System.out.println(Elenchi.getProblemi());
+        System.out.println(Ambiente.getProblemi());
     }
 
 }

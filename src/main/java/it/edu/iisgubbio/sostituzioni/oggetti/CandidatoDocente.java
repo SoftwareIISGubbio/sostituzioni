@@ -2,7 +2,7 @@ package it.edu.iisgubbio.sostituzioni.oggetti;
 
 import java.util.ArrayList;
 
-import it.edu.iisgubbio.sostituzioni.Elenchi;
+import it.edu.iisgubbio.sostituzioni.Ambiente;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 
 public class CandidatoDocente extends Docente{

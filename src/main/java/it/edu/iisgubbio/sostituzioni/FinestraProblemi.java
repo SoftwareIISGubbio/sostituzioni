@@ -12,7 +12,7 @@ public class FinestraProblemi {
     
     @FXML
     void initialize() {
-        taDescrizioneProblemi.setText(Elenchi.getProblemi());
+        taDescrizioneProblemi.setText(Ambiente.getProblemi());
     }
     
     @FXML

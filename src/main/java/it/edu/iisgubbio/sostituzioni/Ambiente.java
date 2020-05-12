@@ -1,16 +1,64 @@
 package it.edu.iisgubbio.sostituzioni;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Properties;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
-public class Elenchi {
+public class Ambiente {
     public static ArrayList<Docente> docenti = new ArrayList<>();
     private static String[]nomiClassi;
     private static String problemi = "";
+    
+    static Properties proprieta = new Properties();
+    private static final String percorso = System.getProperties().getProperty("user.home")+File.separator+".sostituzioni.proprieta"; 
+    
+    // le preferenze vengono caricate in automatico al caricamento della classe
+
+    public static void salvaProprieta() {
+        System.out.println("proprietà in: "+percorso);
+        
+        try( FileOutputStream uscita = new FileOutputStream(percorso) ){
+            proprieta.store(uscita, "proprieta del programma dell'orario");
+        } catch (Exception e) {
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, 
+                    "Un problema ha impedito il salvataggio delle preferenze: "+e.getMessage() );
+            dialogoAllerta.showAndWait();
+            e.printStackTrace();
+        }
+    }
+    
+    public static File getFileGiornale() {
+        return new File(proprieta.getProperty("fileGiornale"));
+    }
+
+    public static void setFileGiornale(File fileGiornale) {
+        proprieta.put("fileGiornale", fileGiornale.toString());
+    }
+
+    public static File getFileOrarioExcel() {
+        return new File(proprieta.getProperty("fileOrarioExcel"));
+    }
+
+    public static void setFileOrarioExcel(File fileOrarioExcel) {
+        proprieta.put("fileOrarioExcel", fileOrarioExcel.toString());
+    }
+
+    public static File getFileOrarioFET() {
+        return new File(proprieta.getProperty("fileOrarioFET"));
+    }
+
+    public static void setFileOrarioFET(File fileOrarioFET) {
+        proprieta.put("fileOrarioFET", fileOrarioFET.toString());
+    }
     
     /********************************************************************************************
      * Questo codice viene eseguito al momento del caricamento della classe in memoria
@@ -18,6 +66,18 @@ public class Elenchi {
      * le proprietà static
      *******************************************************************************************/
     static {
+        // le preferenze vengono caricate in automatico al caricamento della classe
+        System.out.println("proprietà in: "+percorso);
+        
+        try( FileInputStream entrata = new FileInputStream(percorso) ){
+            proprieta.load(entrata);
+        } catch (Exception e) {
+            problemi += "impossibile leggere i nomi dei file, aggiornale le preferenze e ricaricare il programma\n";
+            // in fase di avvio non si può aprire una finestra con i messaggi di errore
+            e.printStackTrace();
+        }
+        
+        // leggo le informazioni dei docenti dal file XML
         docenti = LettoreFile.leggiXML();
         // leggo ulteriori informazioni dei docenti dal file xlsx
         ArrayList<Docente> informazioniExcel = LettoreFile.leggiExcel();

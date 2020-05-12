@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 
-public class Giornale extends NomiFile {
+public class Giornale {
 
 	public static void scriviRecord(Sostituzione x) {
 		BufferedWriter out = null;
 		try
 		{
-			out = new BufferedWriter(new FileWriter(NomiFile.fileGiornale, true));
+			out = new BufferedWriter(new FileWriter(Ambiente.getFileGiornale(), true));
 			out.write(x+"\n");
 			out.close();
 			

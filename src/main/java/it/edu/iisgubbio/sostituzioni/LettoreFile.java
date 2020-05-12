@@ -28,7 +28,9 @@ public class LettoreFile {
 	public static ArrayList<Docente> leggiExcel() {
 		ArrayList<Docente> lista = new ArrayList<>();
 		try {
-			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
+			Workbook libro = new XSSFWorkbook(new FileInputStream(
+			        Ambiente.getFileOrarioExcel()
+			));
 			Sheet foglio = libro.getSheetAt(posFoglio);
 			calcolaOrario(rigaOre+1, foglio, lista, null);
 			//leggiOreSpeciali(lista);
@@ -47,7 +49,9 @@ public class LettoreFile {
 	public static ArrayList<Docente> leggiXML(){
 		ArrayList<Docente> lista = new ArrayList<>();	
 		try {
-			FileInputStream is = new FileInputStream(NomiFile.fileOrarioXml);
+			FileInputStream is = new FileInputStream(
+			        Ambiente.getFileOrarioFET()
+			);
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 	        SAXParser saxParser = factory.newSAXParser();
 	        HandlerSAX handlerEdoardo = new HandlerSAX(lista);
@@ -132,7 +136,9 @@ public class LettoreFile {
 	 */
 	public static void leggiProfSostegno(ArrayList<Docente> lista) {
 		try {
-			Workbook libro = new XSSFWorkbook(new FileInputStream(NomiFile.fileOrario));
+			Workbook libro = new XSSFWorkbook(new FileInputStream(
+			        Ambiente.getFileOrarioExcel()
+			));
 			Sheet foglio = libro.getSheetAt(posFoglio);
 			int i = calcolaOrario(rigaOre+lista.size()+4, foglio, lista, "sostegno");
 			

@@ -20,7 +20,7 @@ public class TestInformazioniDocente extends Application{
             s.setScene(scena);
             s.setTitle("info");
             s.show();
-            Docente d = Elenchi.cercaDocentePerNome("giammarioli");
+            Docente d = Ambiente.cercaDocentePerNome("giammarioli");
             controller.setDocente(d);
         } catch (IOException e) {
             e.printStackTrace();

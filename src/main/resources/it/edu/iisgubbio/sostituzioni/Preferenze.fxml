@@ -16,15 +16,19 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
       <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextField fx:id="cFileFET" prefWidth="234.0" GridPane.columnIndex="1" />
+      <TextField fx:id="cFileFET" prefWidth="234.0" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></TextField>
       <Label text="File prodotto da FET:" GridPane.halignment="RIGHT">
          <GridPane.margin>
-            <Insets right="20.0" />
+            <Insets right="10.0" />
          </GridPane.margin>
          <font>
             <Font size="16.0" />
@@ -32,30 +36,51 @@
       </Label>
       <Label text="Tabella orario:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets right="20.0" />
+            <Insets right="10.0" />
          </GridPane.margin>
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="cFileTabella" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button fx:id="pSelezionaFileFET" mnemonicParsing="false" text="scegli..." GridPane.columnIndex="2">
+      <TextField fx:id="cFileTabella" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></TextField>
+      <Button fx:id="pSelezionaFileFET" mnemonicParsing="false" onAction="#gestioneSelezioneFileFET" text="scegli..." GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="pSelezionaFileTabella" mnemonicParsing="false" text="scegli..." GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Button fx:id="pSelezionaFileTabella" mnemonicParsing="false" onAction="#gestioneSelezioneFileTabella" text="scegli..." GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="pApplica" mnemonicParsing="false" text="Applica" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Button fx:id="pApplica" mnemonicParsing="false" onAction="#gestioneApplica" text="Applica" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
          <font>
             <Font size="15.0" />
          </font>
+      </Button>
+      <Label text="File Giornale:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="cFileGiornale" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button fx:id="pSelezionaFileGiornalepSelezionaFileGiornale" mnemonicParsing="false" onAction="#gestioneSelezioneFileGiornale" text="scegli..." GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
       </Button>
    </children>
 </GridPane>

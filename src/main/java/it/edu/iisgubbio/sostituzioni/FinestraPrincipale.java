@@ -3,7 +3,6 @@ package it.edu.iisgubbio.sostituzioni;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
@@ -11,7 +10,6 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
-import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,7 +17,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -69,7 +66,7 @@ public class FinestraPrincipale extends Application {
 	 *******************************************************************************************/	
 	void initialize() {
 		// Ciclo per scorrere le classi e li inserisce alla combobox
-		String[] classi = Elenchi.getNomiClassi();
+		String[] classi = Ambiente.getNomiClassi();
 		for (int i = 1; i <= 8; i++) {
 			String n = "" + i;
 			cmbOra.getItems().add(n);
@@ -79,12 +76,12 @@ public class FinestraPrincipale extends Application {
 		}
 		// Ciclo per scorrere l'elenco dei professori e li inserisce alla combobox
 
-		for (int j = 0; j < Elenchi.docenti.size(); j++) {
-			nomeProf.getItems().add(Elenchi.docenti.get(j).nome);
+		for (int j = 0; j < Ambiente.docenti.size(); j++) {
+			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
 			
 		}
 		
-		if(Elenchi.getProblemi().length()==0) {
+		if(Ambiente.getProblemi().length()==0) {
 		    ivAttenzione.setVisible(false);
 		}
 	}
@@ -103,7 +100,7 @@ public class FinestraPrincipale extends Application {
             s.setScene(scena);
             s.setTitle("info docente");
             s.show();
-            Docente d = Elenchi.cercaDocentePerNome( nomeProf.getValue() );
+            Docente d = Ambiente.cercaDocentePerNome( nomeProf.getValue() );
             controller.setDocente(d);
         } catch (IOException x) {
             x.printStackTrace();
@@ -141,7 +138,7 @@ public class FinestraPrincipale extends Application {
 		oraDaSostituire.classe = cmbClasse.getValue();
 		System.out.println(oraDaSostituire);
 		
-		ArrayList<Docente> tuttiIDocenti = Elenchi.docenti;
+		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
 		tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 		
 		ArrayList<Docente> docentiCoPresenza;
