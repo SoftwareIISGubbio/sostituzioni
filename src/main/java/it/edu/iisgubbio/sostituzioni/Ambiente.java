@@ -13,16 +13,34 @@ import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/****************************************************************************
+ * 
+ * Mantiene tutti i dati necessari all'applicazione per funzionare,
+ * carica tutte le informazioni in faase di avvio:
+ * - posizione dei file di input e giornale
+ * - elenco dei docenti con relativo orario
+ * - elenco delle classi
+ * - messaggi di errore (problemi in fase di avvio)
+ * 
+ * @author classe4i_2019-20
+ ***************************************************************************/
 public class Ambiente {
+    /** docenti con relative informazioni, letti dal foglio Excel e da un file 
+     * XML prodotto da FET */
     public static ArrayList<Docente> docenti = new ArrayList<>();
+    /** vettore contenente nomi di tutte le classe */
     private static String[]nomiClassi;
+    /** contiene un elenco di descrizioni dei problemi riscontrati in fase di avvio  */
     private static String problemi = "";
-    
-    static Properties proprieta = new Properties();
-    private static final String percorso = System.getProperties().getProperty("user.home")+File.separator+".sostituzioni.proprieta"; 
-    
-    // le preferenze vengono caricate in automatico al caricamento della classe
+    /** contiene i percorsi dei file Excell, FET e del giornale */
+    private static Properties proprieta = new Properties();
+    /** il file delle proprietà si trova in questa posizione */
+    private static final String percorso = System.getProperties().getProperty("user.home")+
+            File.separator+".sostituzioni.proprieta"; 
 
+    /************************************************************************
+     * Salava i diversi percorsi nel file delle preferenze
+     ***********************************************************************/
     public static void salvaProprieta() {
         System.out.println("proprietà in: "+percorso);
         
@@ -36,28 +54,64 @@ public class Ambiente {
         }
     }
     
+    /************************************************************************
+     * @return il File in cui è contenuto il giornale
+     ***********************************************************************/
     public static File getFileGiornale() {
+        // TODO: se il file non esiste sarebbe il caso di crearlo
         return new File(proprieta.getProperty("fileGiornale"));
     }
 
+    /************************************************************************
+     * @param fileGiornale il File in cui è contenuto il giornale
+     ***********************************************************************/
     public static void setFileGiornale(File fileGiornale) {
         proprieta.put("fileGiornale", fileGiornale.toString());
     }
 
+    /************************************************************************
+     * @return il File in cui è contenuta la tabella Excel con i dati
+     ***********************************************************************/
     public static File getFileOrarioExcel() {
         return new File(proprieta.getProperty("fileOrarioExcel"));
     }
 
+    /************************************************************************
+     * @param fileOrarioExcel il File in cui è contenuta la tabella 
+     * Excel con i dati
+     ***********************************************************************/
     public static void setFileOrarioExcel(File fileOrarioExcel) {
         proprieta.put("fileOrarioExcel", fileOrarioExcel.toString());
     }
 
+    /************************************************************************
+     * @return il File in cui sono contenuti i dati esportati da FET
+     ***********************************************************************/
     public static File getFileOrarioFET() {
         return new File(proprieta.getProperty("fileOrarioFET"));
     }
 
+    /************************************************************************
+     * @param fileOrarioFET il File in cui sono contenuti i dati esportati 
+     * da FET
+     ***********************************************************************/
     public static void setFileOrarioFET(File fileOrarioFET) {
         proprieta.put("fileOrarioFET", fileOrarioFET.toString());
+    }
+    
+    /************************************************************************
+     * @return l'elenco dei nomi delle classi
+     ***********************************************************************/
+    public static String[] getNomiClassi(){
+        return nomiClassi;
+    }
+    
+    /************************************************************************
+     * @return una unica stringa con tutti i problemi riscontrati in fase
+     *      di avvio elencati uno per linea
+     ***********************************************************************/
+    public static String getProblemi() {
+        return problemi;
     }
     
     /********************************************************************************************
@@ -120,16 +174,7 @@ public class Ambiente {
         }
         nomiClassi = insiemeNomiDiClassi.toArray( new String[0] );
         Arrays.sort(nomiClassi);
-    }
-    
-    public static String[] getNomiClassi(){
-        return nomiClassi;
-    }
-    
-    public static String getProblemi() {
-        return problemi;
-    }
-    
+    }    
     
     /********************************************************************************************
      * 

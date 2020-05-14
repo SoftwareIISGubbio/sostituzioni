@@ -3,6 +3,7 @@ package it.edu.iisgubbio.sostituzioni;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
@@ -17,6 +18,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -43,6 +48,8 @@ public class FinestraPrincipale extends Application {
 	ListView<String> lista;
 	@FXML
 	ImageView ivAttenzione;
+	@FXML
+	Button pSalva;
 
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché 
@@ -199,5 +206,16 @@ public class FinestraPrincipale extends Application {
         } catch (IOException x) {
             x.printStackTrace();
         }
+	}
+	
+	@FXML
+	private void gestioneSalva(ActionEvent e) {
+	    Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, 
+	            "messaggio sostituzione");
+	    Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
+	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
+	        // TODO
+	    }
+	
 	}
 }
