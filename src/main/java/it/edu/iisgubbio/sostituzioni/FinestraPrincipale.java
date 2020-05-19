@@ -12,6 +12,7 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
+import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -119,30 +120,36 @@ public class FinestraPrincipale extends Application {
 	 * apre la finestra che contiene le informazioni del software
 	 *******************************************************************************************/
 	private void finestraInfoSoftaware(ActionEvent e) {
-		 Stage s = new Stage();
-	        Scene scena;
-	        try {
-	            FXMLLoader fxmlLoader = new FXMLLoader();
-	            fxmlLoader.setLocation(FinestraPrincipale.class.getResource("InfoProgramma.fxml"));
-	            scena = new Scene(  fxmlLoader.load(getClass().getResource("InfoProgramma.fxml").openStream()) );
-	            s.setScene(scena);
-	            s.setTitle("Informazioni Sowtware");
-	            s.show();
-	        } catch (IOException x) {
-	            x.printStackTrace();
-	        }
-		}
+		Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(FinestraPrincipale.class.getResource("InfoProgramma.fxml"));
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("InfoProgramma.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Informazioni Sowtware");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+	}
+	
+	private OraLezione leggiOraLezione() {
+	    LocalDate d = data.getValue();
+	    OraLezione oraDaSostituire = new OraLezione();
+        oraDaSostituire.giorno = d.getDayOfWeek().getValue();
+        oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
+        oraDaSostituire.classe = cmbClasse.getValue();
+        return oraDaSostituire;
+	}
+	
 	@FXML
 	/********************************************************************************************
 	 * effettua la ricerca dei docenti in base ai dati richiesti
 	 *******************************************************************************************/
 	private void gestioneCercaDocenteDisponibile(ActionEvent e) {
-		LocalDate d = data.getValue();
-		OraLezione oraDaSostituire = new OraLezione();
 		String docenteAssente = nomeProf.getValue();
-		oraDaSostituire.giorno = d.getDayOfWeek().getValue();
-		oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
-		oraDaSostituire.classe = cmbClasse.getValue();
+		OraLezione oraDaSostituire = leggiOraLezione();
 		System.out.println(oraDaSostituire);
 		
 		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
@@ -210,8 +217,13 @@ public class FinestraPrincipale extends Application {
 	
 	@FXML
 	private void gestioneSalva(ActionEvent e) {
+	    OraLezione oraDaSostituire = leggiOraLezione();
+	    
+	    Sostituzione s = new Sostituzione(oraDaSostituire.giorno, 
+	            oraDaSostituire.orario, oraDaSostituire.aula, 
+	            oraDaSostituire.classe, oraDaSostituire.compresenza, "pluto");
 	    Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, 
-	            "messaggio sostituzione");
+	            s.getDescrizione());
 	    Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
 	        // TODO
