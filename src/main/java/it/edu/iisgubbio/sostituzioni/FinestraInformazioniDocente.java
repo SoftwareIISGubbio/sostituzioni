@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-public class InformazioniDocente {
+public class FinestraInformazioniDocente {
 
 	@FXML
 	Label eNomeDocente;

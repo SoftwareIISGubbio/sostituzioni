@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class Preferenze {
+public class FinestraPreferenze {
     @FXML
     Button pSelezionaFileFET;
     @FXML

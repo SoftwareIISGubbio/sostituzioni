@@ -16,7 +16,7 @@ public class TestInformazioniDocente extends Application{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             scena = new Scene(  fxmlLoader.load(getClass().getResource("InformazioniDocente.fxml").openStream()) );
-            InformazioniDocente controller = (InformazioniDocente) fxmlLoader.getController();
+            FinestraInformazioniDocente controller = (FinestraInformazioniDocente) fxmlLoader.getController();
             s.setScene(scena);
             s.setTitle("info");
             s.show();
