@@ -1,9 +1,10 @@
-package it.edu.iisgubbio.sostituzioni.oggetti;
+package it.edu.iisgubbio.sostituzioni.filtri;
 
 import java.util.ArrayList;
 
 import it.edu.iisgubbio.sostituzioni.Ambiente;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
+import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 
 public class TestRimozioneDocente {
 	

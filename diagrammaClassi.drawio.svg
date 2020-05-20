@@ -1,0 +1,395 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="781px" height="1044px" viewBox="-0.5 -0.5 781 1044" content="&lt;mxfile host=&quot;localhost&quot; modified=&quot;2020-05-20T14:12:54.261Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.1 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36&quot; etag=&quot;iBxVH9QvG_CzlAuefrdd&quot; version=&quot;13.0.9&quot;&gt;&lt;diagram id=&quot;6hGFLwfOUW9BJ-s0fimq&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs>
+        <clipPath id="mx-clip-474-39-302-26-0">
+            <rect x="474" y="39" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-119-302-26-0">
+            <rect x="474" y="119" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-199-302-26-0">
+            <rect x="474" y="199" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-279-302-26-0">
+            <rect x="474" y="279" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-359-302-26-0">
+            <rect x="474" y="359" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-439-302-26-0">
+            <rect x="474" y="439" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-519-302-26-0">
+            <rect x="474" y="519" width="302" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-24-31-232-84-0">
+            <rect x="24" y="31" width="232" height="84"/>
+        </clipPath>
+        <clipPath id="mx-clip-24-123-232-132-0">
+            <rect x="24" y="123" width="232" height="132"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-339-262-46-0">
+            <rect x="4" y="339" width="262" height="46"/>
+        </clipPath>
+        <clipPath id="mx-clip-14-451-252-44-0">
+            <rect x="14" y="451" width="252" height="44"/>
+        </clipPath>
+        <clipPath id="mx-clip-14-503-252-82-0">
+            <rect x="14" y="503" width="252" height="82"/>
+        </clipPath>
+        <clipPath id="mx-clip-188-951-202-42-0">
+            <rect x="188" y="951" width="202" height="42"/>
+        </clipPath>
+        <clipPath id="mx-clip-188-1001-202-44-0">
+            <rect x="188" y="1001" width="202" height="44"/>
+        </clipPath>
+        <clipPath id="mx-clip-134-631-262-114-0">
+            <rect x="134" y="631" width="262" height="114"/>
+        </clipPath>
+        <clipPath id="mx-clip-134-753-262-92-0">
+            <rect x="134" y="753" width="262" height="92"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-611-262-64-0">
+            <rect x="474" y="611" width="262" height="64"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-683-262-52-0">
+            <rect x="474" y="683" width="262" height="52"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-791-262-64-0">
+            <rect x="474" y="791" width="262" height="64"/>
+        </clipPath>
+        <clipPath id="mx-clip-474-863-262-52-0">
+            <rect x="474" y="863" width="262" height="52"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path d="M 470 26 L 470 0 L 780 0 L 780 26" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 470 26 L 470 60 L 780 60 L 780 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 26 L 780 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="17.5">
+                filtri.FiltroAPagamento
+            </text>
+        </g>
+        <path d="M 470 30 L 780 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-39-302-26-0)" font-size="12px">
+            <text x="475.5" y="51.5">
+                + docentiAPagamento(ArrayList&lt;Docente&gt;, Ora)
+            </text>
+        </g>
+        <path d="M 470 106 L 470 80 L 780 80 L 780 106" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 106 L 470 140 L 780 140 L 780 106" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 106 L 780 106" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="97.5">
+                filtri.FiltroClasse
+            </text>
+        </g>
+        <path d="M 470 110 L 780 110" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-119-302-26-0)" font-size="12px">
+            <text x="475.5" y="131.5">
+                + docentiDellaClasse(ArrayList&lt;Docente&gt;, String)
+            </text>
+        </g>
+        <path d="M 470 186 L 470 160 L 780 160 L 780 186" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 186 L 470 220 L 780 220 L 780 186" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 186 L 780 186" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="177.5">
+                filtri.FiltroCoPresenza
+            </text>
+        </g>
+        <path d="M 470 190 L 780 190" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-199-302-26-0)" font-size="12px">
+            <text x="475.5" y="211.5">
+                + docentiCoPresenza(ArrayList&lt;Docente&gt;, OraLezione)
+            </text>
+        </g>
+        <path d="M 470 266 L 470 240 L 780 240 L 780 266" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 266 L 470 300 L 780 300 L 780 266" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 266 L 780 266" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="257.5">
+                filtri.FiltroLibero
+            </text>
+        </g>
+        <path d="M 470 270 L 780 270" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-279-302-26-0)" font-size="12px">
+            <text x="475.5" y="291.5">
+                + docentiLiberi(ArrayList&lt;Docente&gt;, Ora)
+            </text>
+        </g>
+        <path d="M 470 346 L 470 320 L 780 320 L 780 346" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 346 L 470 380 L 780 380 L 780 346" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 346 L 780 346" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="337.5">
+                filtri.FiltroOreBuche
+            </text>
+        </g>
+        <path d="M 470 350 L 780 350" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-359-302-26-0)" font-size="12px">
+            <text x="475.5" y="371.5">
+                + docentiOreBuche(ArrayList&lt;Docente&gt;, Ora)
+            </text>
+        </g>
+        <path d="M 470 426 L 470 400 L 780 400 L 780 426" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 426 L 470 460 L 780 460 L 780 426" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 426 L 780 426" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="417.5">
+                filtri.FiltroRecupero
+            </text>
+        </g>
+        <path d="M 470 430 L 780 430" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-439-302-26-0)" font-size="12px">
+            <text x="475.5" y="451.5">
+                + docentiRecupero(ArrayList&lt;Docente&gt;, Ora)
+            </text>
+        </g>
+        <path d="M 470 506 L 470 480 L 780 480 L 780 506" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 506 L 470 540 L 780 540 L 780 506" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 506 L 780 506" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="624.5" y="497.5">
+                filtri.RimozioneDocente
+            </text>
+        </g>
+        <path d="M 470 510 L 780 510" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-519-302-26-0)" font-size="12px">
+            <text x="475.5" y="531.5">
+                + docentiRimozione(ArrayList&lt;Docente&gt;, String)
+            </text>
+        </g>
+        <path d="M 20 26 L 20 0 L 260 0 L 260 26" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 20 26 L 20 250 L 260 250 L 260 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 20 26 L 260 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="139.5" y="17.5">
+                Ambiente
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-24-31-232-84-0)" font-size="12px">
+            <text x="25.5" y="43.5">
+                - docenti: ArrayList&lt;Docente&gt;
+            </text>
+            <text x="25.5" y="57.5">
+                - nomiclassi: String[]
+            </text>
+            <text x="25.5" y="71.5">
+                - problemi: String
+            </text>
+            <text x="25.5" y="85.5">
+                - proprieta: Properties
+            </text>
+            <text x="25.5" y="99.5">
+                - percorso: String
+            </text>
+        </g>
+        <path d="M 20 114 L 260 114" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-24-123-232-132-0)" font-size="12px">
+            <text x="25.5" y="135.5">
+                + salvaProprieta()
+            </text>
+            <text x="25.5" y="149.5">
+                + getFileGiornale(): File
+            </text>
+            <text x="25.5" y="163.5">
+                + setFileGiornale(File)
+            </text>
+            <text x="25.5" y="177.5">
+                + getFileOrarioExcel():File
+            </text>
+            <text x="25.5" y="191.5">
+                + setFileOrarioExcel(File)
+            </text>
+            <text x="25.5" y="205.5">
+                + getNomiClassi(): String[]
+            </text>
+            <text x="25.5" y="219.5">
+                + getProblemi(): String
+            </text>
+            <text x="25.5" y="233.5">
+                + cercaDocentePerNome(String): Docente
+            </text>
+        </g>
+        <path d="M 0 326 L 0 300 L 270 300 L 270 326" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 0 326 L 0 380 L 270 380 L 270 326" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 0 326 L 270 326" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="134.5" y="317.5">
+                Giornale
+            </text>
+        </g>
+        <path d="M 0 330 L 270 330" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-4-339-262-46-0)" font-size="12px">
+            <text x="5.5" y="351.5">
+                + scriviRecord(Sostituzione x)
+            </text>
+            <text x="5.5" y="365.5">
+                + leggioGiornale(File): ArrayList&lt;Sostituzione&gt;
+            </text>
+        </g>
+        <path d="M 10 446 L 10 420 L 270 420 L 270 446" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 10 446 L 10 580 L 270 580 L 270 446" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 10 446 L 270 446" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="139.5" y="437.5">
+                LettoreFile
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-14-451-252-44-0)" font-size="12px">
+            <text x="15.5" y="463.5">
+                - posFoglio: byte
+            </text>
+            <text x="15.5" y="477.5">
+                - rigaOre: byte
+            </text>
+        </g>
+        <path d="M 10 494 L 270 494" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-14-503-252-82-0)" font-size="12px">
+            <text x="15.5" y="515.5">
+                + leggiExcel(): ArrayList&lt;Docente&gt;
+            </text>
+            <text x="15.5" y="529.5">
+                + leggiXML(): ArrayList&lt;Docente&gt;
+            </text>
+            <text x="15.5" y="543.5">
+                - calcolaOrario(partenza, foglio, lista, materia)
+            </text>
+            <text x="15.5" y="557.5">
+                + leggiProfSostegno(): ArrayList&lt;Docente&gt;
+            </text>
+        </g>
+        <path d="M 289 920 L 274.95 846.26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 273.97 841.1 L 278.72 847.32 L 274.95 846.26 L 271.84 848.63 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 184 946 L 184 920 L 394 920 L 394 946" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 184 946 L 184 1040 L 394 1040 L 394 946" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 184 946 L 394 946" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="288.5" y="937.5">
+                CandidatoDocente
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-188-951-202-42-0)" font-size="12px">
+            <text x="189.5" y="963.5">
+                + livello: int
+            </text>
+            <text x="189.5" y="977.5">
+                docentiOrdinati: ArrayList&lt;Docente&gt;
+            </text>
+        </g>
+        <path d="M 184 992 L 394 992" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-188-1001-202-44-0)" font-size="12px">
+            <text x="189.5" y="1013.5">
+                + CandidatoDocente(String, int)
+            </text>
+            <text x="189.5" y="1027.5">
+                + setLivello(int)
+            </text>
+        </g>
+        <path d="M 130 626 L 130 600 L 400 600 L 400 626" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 130 626 L 130 840 L 400 840 L 400 626" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 130 626 L 400 626" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="264.5" y="617.5">
+                Docente
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-134-631-262-114-0)" font-size="12px">
+            <text x="135.5" y="643.5">
+                + nome: String
+            </text>
+            <text x="135.5" y="657.5">
+                + oraLezione: ArrayList&lt;OraLezione&gt;
+            </text>
+            <text x="135.5" y="671.5">
+                + oraRecupero: Ora
+            </text>
+            <text x="135.5" y="685.5">
+                + oraADisposizioneCassata: Ora
+            </text>
+            <text x="135.5" y="699.5">
+                + oraADisposizioneGattapone: Ora
+            </text>
+            <text x="135.5" y="713.5">
+                + oreAPagamento: ArrayList&lt;Ora&gt;
+            </text>
+            <text x="135.5" y="727.5">
+                + orePotenziamento: ArrayList&lt;Ora&gt;
+            </text>
+        </g>
+        <path d="M 130 744 L 400 744" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-134-753-262-92-0)" font-size="12px">
+            <text x="135.5" y="765.5">
+                + Docente(String)
+            </text>
+            <text x="135.5" y="779.5">
+                + toString(): String
+            </text>
+            <text x="135.5" y="793.5">
+                + lavoraNellaClasse(String): boolean
+            </text>
+            <text x="135.5" y="807.5">
+                + lavoraNellOra(Ora): boolean
+            </text>
+            <text x="135.5" y="821.5">
+                + lavoraNellaClasseInOra(Ora, String): boolean
+            </text>
+        </g>
+        <path d="M 470 606 L 470 580 L 740 580 L 740 606" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 606 L 470 730 L 740 730 L 740 606" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 606 L 740 606" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="604.5" y="597.5">
+                Ora
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-611-262-64-0)" font-size="12px">
+            <text x="475.5" y="623.5">
+                + nomiGiorni: String[]      (è static)
+            </text>
+            <text x="475.5" y="637.5">
+                + nomiOre: String[]          (è static)
+            </text>
+            <text x="475.5" y="651.5">
+                + giorno:int
+            </text>
+            <text x="475.5" y="665.5">
+                + orario: int
+            </text>
+        </g>
+        <path d="M 470 674 L 740 674" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-683-262-52-0)" font-size="12px">
+            <text x="475.5" y="695.5">
+                + Ora(int int)
+            </text>
+            <text x="475.5" y="709.5">
+                + Ora()
+            </text>
+            <text x="475.5" y="723.5">
+                + toString(): String
+            </text>
+        </g>
+        <path d="M 605 760 L 607.97 736.73" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 608.64 731.52 L 611.22 738.91 L 607.97 736.73 L 604.28 738.02 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 786 L 470 760 L 740 760 L 740 786" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 786 L 470 910 L 740 910 L 740 786" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 470 786 L 740 786" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="604.5" y="777.5">
+                OraLezione
+            </text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-791-262-64-0)" font-size="12px">
+            <text x="475.5" y="803.5">
+                ???
+            </text>
+        </g>
+        <path d="M 470 854 L 740 854" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-863-262-52-0)" font-size="12px">
+            <text x="475.5" y="875.5">
+                ???
+            </text>
+        </g>
+    </g>
+</svg>
