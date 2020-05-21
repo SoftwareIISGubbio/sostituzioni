@@ -6,13 +6,16 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 
+/**
+ * Questo filtro serve per trovare i docenti in copresenza nell'ora della classe in cui c'è bisogno della sostituzione
+ * @author Bianca
+ */
 public class FiltroCoPresenza {
 
 	/**
 	 * @param tutti rappresenta un elenco di docenti
 	 * @param oraDaSostituire ora in cui viene richiesta la sostituzione
 	 * @return l'elenco dei professori che sono in copresenza nella classe e nell'ora richiesta
-	 * @author Bianca
 	 */
 
 	public static ArrayList<Docente> docentiCoPresenza(ArrayList<Docente> tutti, OraLezione oraDaSostituire) {

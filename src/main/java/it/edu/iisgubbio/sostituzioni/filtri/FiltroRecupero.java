@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 
+/**
+ * Questo filtro serve per avere l'elenco dei prof che mettono a disposizione l'ora di recupero in una determinata ora 
+ * @author Bianca
+ */
 public class FiltroRecupero {
 	/**
 	 * @param tutti rappresenta un elenco di docenti
 	 * @param oraDaRecuperare ora in cui il docente è disponibile a fare recupero
 	 * @return l'elenco dei professori che mettono a disposizione un'ora di recupero in un determinato giorno
-	 * @author Bianca
 	 */
 	public static ArrayList<Docente> docentiRecupero(ArrayList<Docente> tutti, Ora oraDaRecuperare) {
 		ArrayList<Docente> risposta = new ArrayList<>();
