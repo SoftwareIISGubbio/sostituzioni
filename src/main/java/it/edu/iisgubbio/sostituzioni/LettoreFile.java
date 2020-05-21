@@ -15,25 +15,33 @@ import it.edu.iisgubbio.sostituzioni.oggetti.HandlerSAX;
 import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 
+/**
+ * Legge il documento XML (prodotto da FET) e il file Excel
+ * inserisce le informazioni in una ArrayList di Docente
+ * 
+ * @author 4i
+ */
 public class LettoreFile {
-	private static byte posFoglio = 4;
-	private final static byte rigaOre = 4;
+	private final static byte RIGA_ORE = 4;
+	private static final String FOGLIO_DOCENTI = "docenti";
 	
 	
 	/**
-	 * Legge il documento Excel
+	 * Legge il documento Excel con le informazioni dei professori
 	 * @return lista dei professori
 	 */
-	
 	public static ArrayList<Docente> leggiExcel() {
 		ArrayList<Docente> lista = new ArrayList<>();
 		try {
+		    // apro il file excel
 			Workbook libro = new XSSFWorkbook(new FileInputStream(
 			        Ambiente.getFileOrarioExcel()
 			));
-			Sheet foglio = libro.getSheetAt(posFoglio);
-			calcolaOrario(rigaOre+1, foglio, lista, null);
-			//leggiOreSpeciali(lista);
+			// il file è composto da più fogli, a noi serve il foglio con le
+			// informazioni sui docenti
+			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
+			// chiama la funzione che legge le informazioni
+			calcolaOrario(RIGA_ORE+1, foglio, lista, null);
 			libro.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +73,8 @@ public class LettoreFile {
 
 
 	/***
-	 * Calcola le ore di lezione e quelle speciali dei professori dal file Excel
+	 * Legge le ore di lezione e quelle speciali dei professori dal file Excel
+	 * Legge dalla riga specificata fino alla prima riga vuota
 	 * @param riga di partenza del foglio (da 0 a N-1)
 	 * @param foglio da leggere
 	 * @param lista di professori
@@ -89,8 +98,9 @@ public class LettoreFile {
 				else if(j<=28) giorno = 4;
 				else  giorno = 5;
 				
-				String stringaOra = foglio.getRow(rigaOre).getCell(j).getStringCellValue();
+				String stringaOra = foglio.getRow(RIGA_ORE).getCell(j).getStringCellValue();
 
+				// trova la posizione dell'ora confrontando con i valori presenti in Ora
 				for (int k = 1; k < Ora.nomiOre.length; k++) {
 					if(Ora.nomiOre[k].startsWith(stringaOra)) {
 						orario = k;
@@ -139,13 +149,11 @@ public class LettoreFile {
 			Workbook libro = new XSSFWorkbook(new FileInputStream(
 			        Ambiente.getFileOrarioExcel()
 			));
-			Sheet foglio = libro.getSheetAt(posFoglio);
-			int i = calcolaOrario(rigaOre+lista.size()+4, foglio, lista, "sostegno");
+			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
+			int i = calcolaOrario(RIGA_ORE+lista.size()+4, foglio, lista, "sostegno");
 			
 			calcolaOrario(i+5, foglio, lista, "potenziamento");
 			
-			
-
 			libro.close();
 		}catch(Exception e) {
 			e.printStackTrace();
