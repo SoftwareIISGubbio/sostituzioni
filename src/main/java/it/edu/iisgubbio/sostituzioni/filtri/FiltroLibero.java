@@ -6,18 +6,21 @@ import java.util.ArrayList;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 
+/**
+ * 
+ * @param tutti rappresenta un elenco di docenti
+ * @param ora rappresenta l' ora da ricercare
+ * @return tutti i docenti liberi in quell'ora
+ * @author Bianca
+ */
 public class FiltroLibero {
 	
-	/**
-	 * 
-	 * @param tutti rappresenta un elenco di docenti
-	 * @param ora rappresenta l' ora da ricercare
-	 * @return  tutti i docenti liberi in quell'ora
-	 */
-
 	public static ArrayList<Docente> docentiLiberi(ArrayList<Docente> tutti, Ora ora) {
+		// lista docenti liberi
 		ArrayList<Docente> risposta = new ArrayList<>();
+		// cerca il docente libero nella lista di tutti i docenti
 		for (Docente d : tutti) {
+		// se un docente non lavora nell'ora inserita, lo aggiunge alla lista dei docenti liberi
 			if (!d.lavoraNellOra(ora)) {
 				risposta.add(d);
 			}
