@@ -28,11 +28,12 @@ esegui(){
 echo "###################################### PER ESEGUIRE ######################################"
 echo "Esportare il programma in un file .jar eseguibile."
 echo "Spostare questo file in una cartella vuota ed eseguire in queste condizioni:"
-echo "  CONDIZIONE 1-Le cartelle del JDK e di javaFX si trovano nella stessa cartella di questo file"
-echo "  CONDIZIONE 2- Bisogna avere WiX 3.0 installato(Windows)"
+echo "Copiare le cartelle del JDK e di javaFX si trovano nella stessa cartella di questo file"
+echo "Eseguire solo in determinate condizioni:"
+echo "  CONDIZIONE 1- Bisogna avere WiX 3.0 installato(Windows)"
 if [ -z ${1+x} ]
 then
-    echo "  CONDIZIONE 3-bisogna passare il percorso (assoluto o relativo non ha importanza) del file.jar scrivendo: Compilatore.sh PERCORSO_FILE.jar"
+    echo "  CONDIZIONE 2-bisogna passare il percorso (assoluto o relativo non ha importanza) del file.jar scrivendo: Compilatore.sh PERCORSO_FILE.jar"
 else
     echo "  INFO-La classe principale è FinestraPrincipale, se verrà cambiata si è liberi di poter modificare questo script"
     echo "  INFO-l'icona viene presa direttamente all'interno del file .jar"
