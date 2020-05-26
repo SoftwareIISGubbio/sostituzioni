@@ -3,7 +3,24 @@ package it.edu.iisgubbio.sostituzioni.oggetti;
 public class Sostituzione extends OraLezione{
 
 	protected String nomeSostituto;
+	protected String motivazione; 
 	
+    public String getNomeSostituto() {
+        return nomeSostituto;
+    }
+
+    public void setNomeSostituto(String nomeSostituto) {
+        this.nomeSostituto = nomeSostituto;
+    }
+
+    public String getMotivazione() {
+        return motivazione;
+    }
+
+    public void setMotivazione(String motivazione) {
+        this.motivazione = motivazione;
+    }
+
     /** 
      * @param giorno giorno della settimana, lunedì=1
      * @param orario ora del giorno, prima ora = 1
@@ -21,18 +38,19 @@ public class Sostituzione extends OraLezione{
     public Sostituzione(String x) {
         String v[]=x.split(",");
         this.nomeSostituto = v[0];
-        this.classe=v[1];
-        this.giorno=Integer.parseInt(v[2]);
-        this.orario=Integer.parseInt(v[3]);
-        this.aula=v[4];
-        this.compresenza=Boolean.parseBoolean(v[5]);
+        this.motivazione = v[1];
+        this.classe=v[2];
+        this.giorno=Integer.parseInt(v[3]);
+        this.orario=Integer.parseInt(v[4]);
+        this.aula=v[5];
+        this.compresenza=Boolean.parseBoolean(v[6]);
     }
 
 	public String toString() {
 		if( compresenza ) {
-			return nomeSostituto +","+classe+ ","+ giorno+ ","+ orario +","+aula+","+compresenza+","+"sostituzione";
+			return nomeSostituto +","+motivazione+","+classe+ ","+ giorno+ ","+ orario +","+aula+","+compresenza+","+"sostituzione";
 		}else {
-		    return nomeSostituto +","+classe+ ","+ giorno+ ","+ orario +","+aula+",sostituzione";
+		    return nomeSostituto +","+motivazione+","+classe+ ","+ giorno+ ","+ orario +","+aula+",sostituzione";
 		}		
 	}
 	

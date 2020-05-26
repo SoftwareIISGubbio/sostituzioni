@@ -46,7 +46,7 @@ public class FinestraPrincipale extends Application {
 	@FXML
 	ComboBox<String> cmbClasse;
 	@FXML
-	ListView<String> lista;
+	ListView<Sostituzione> lista;
 	@FXML
 	ImageView ivAttenzione;
 	@FXML
@@ -155,29 +155,66 @@ public class FinestraPrincipale extends Application {
 		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
 		tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 		
+		// recupero tutti gli eventuali docenti in compresenza
 		ArrayList<Docente> docentiCoPresenza;
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiCoPresenza.size(); i++) {
 			System.out.println(docentiCoPresenza.get(i));
-			lista.getItems().add(docentiCoPresenza.get(i).nome+"   (copresenza)");
+			Sostituzione s = new Sostituzione(
+		        oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
+		        oraDaSostituire.orario, 
+		        oraDaSostituire.aula, 
+		        oraDaSostituire.classe, 
+		        true, 
+	            docentiCoPresenza.get(i).nome
+		    );
+			s.setMotivazione("copresenza");
+			lista.getItems().add(s);
 		}
 		
 		ArrayList<Docente> docentiRecupero;
 		docentiRecupero=FiltroRecupero.docentiRecupero( tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiRecupero.size(); i++) {
-			lista.getItems().add(docentiRecupero.get(i).nome+"   (recupero)");
+		    Sostituzione s = new Sostituzione(
+                oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
+                oraDaSostituire.orario, 
+                oraDaSostituire.aula, 
+                oraDaSostituire.classe, 
+                false, 
+                docentiRecupero.get(i).nome
+            );
+		    s.setMotivazione("recupero");
+			lista.getItems().add(s);
 		}
 		
 		ArrayList<Docente> docentiDellaClasse;
 		docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
 		ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
 		for (int i = 0; i < docentiLiberiClasse.size(); i++) {
-			lista.getItems().add(docentiLiberiClasse.get(i).nome+"   (della classe)");
+	          Sostituzione s = new Sostituzione(
+                  oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
+                  oraDaSostituire.orario, 
+                  oraDaSostituire.aula, 
+                  oraDaSostituire.classe, 
+                  false, 
+                  docentiLiberiClasse.get(i).nome
+              );
+              s.setMotivazione("della classe");
+              lista.getItems().add(s);
 		}
 		
 		ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiLiberi.size(); i++) {
-			lista.getItems().add(docentiLiberi.get(i).nome+"   (liberi)");
+			Sostituzione s = new Sostituzione(
+                  oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
+                  oraDaSostituire.orario, 
+                  oraDaSostituire.aula, 
+                  oraDaSostituire.classe, 
+                  false, 
+                  docentiLiberi.get(i).nome
+              );
+              s.setMotivazione("libero");
+              lista.getItems().add(s);
 		}
 
 	}
@@ -217,17 +254,16 @@ public class FinestraPrincipale extends Application {
 	
 	@FXML
 	private void gestioneSalva(ActionEvent e) {
-	    OraLezione oraDaSostituire = leggiOraLezione();
-	    
-	    Sostituzione s = new Sostituzione(oraDaSostituire.giorno, 
-	            oraDaSostituire.orario, oraDaSostituire.aula, 
-	            oraDaSostituire.classe, oraDaSostituire.compresenza, "pluto");
+        // recupero l'indice dell'elemento selezionato
+        int indiceSelezionato = lista.getSelectionModel().getSelectedIndex();
+        // recupero l'oggetto selezionato usando il suo indice
+        Sostituzione s = lista.getItems().get(indiceSelezionato);
+        
 	    Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, 
 	            s.getDescrizione());
 	    Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
-	        // TODO
+	        Giornale.scriviRecord(s);
 	    }
-	
 	}
 }
