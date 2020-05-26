@@ -147,77 +147,57 @@ public class FinestraPrincipale extends Application {
 	/********************************************************************************************
 	 * effettua la ricerca dei docenti in base ai dati richiesti
 	 *******************************************************************************************/
-	private void gestioneCercaDocenteDisponibile(ActionEvent e) {
-		String docenteAssente = nomeProf.getValue();
-		OraLezione oraDaSostituire = leggiOraLezione();
-		System.out.println(oraDaSostituire);
-		
-		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
-		tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
-		
-		// recupero tutti gli eventuali docenti in compresenza
-		ArrayList<Docente> docentiCoPresenza;
-		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
-		for (int i = 0; i < docentiCoPresenza.size(); i++) {
-			System.out.println(docentiCoPresenza.get(i));
-			Sostituzione s = new Sostituzione(
-		        oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
-		        oraDaSostituire.orario, 
-		        oraDaSostituire.aula, 
-		        oraDaSostituire.classe, 
-		        true, 
-	            docentiCoPresenza.get(i).nome
-		    );
-			s.setMotivazione("copresenza");
-			lista.getItems().add(s);
-		}
-		
-		ArrayList<Docente> docentiRecupero;
-		docentiRecupero=FiltroRecupero.docentiRecupero( tuttiIDocenti, oraDaSostituire);
-		for (int i = 0; i < docentiRecupero.size(); i++) {
-		    Sostituzione s = new Sostituzione(
-                oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
-                oraDaSostituire.orario, 
-                oraDaSostituire.aula, 
-                oraDaSostituire.classe, 
-                false, 
-                docentiRecupero.get(i).nome
-            );
-		    s.setMotivazione("recupero");
-			lista.getItems().add(s);
-		}
-		
-		ArrayList<Docente> docentiDellaClasse;
-		docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
-		ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
-		for (int i = 0; i < docentiLiberiClasse.size(); i++) {
-	          Sostituzione s = new Sostituzione(
-                  oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
-                  oraDaSostituire.orario, 
-                  oraDaSostituire.aula, 
-                  oraDaSostituire.classe, 
-                  false, 
-                  docentiLiberiClasse.get(i).nome
-              );
-              s.setMotivazione("della classe");
-              lista.getItems().add(s);
-		}
-		
-		ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
-		for (int i = 0; i < docentiLiberi.size(); i++) {
-			Sostituzione s = new Sostituzione(
-                  oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione 
-                  oraDaSostituire.orario, 
-                  oraDaSostituire.aula, 
-                  oraDaSostituire.classe, 
-                  false, 
-                  docentiLiberi.get(i).nome
-              );
-              s.setMotivazione("libero");
-              lista.getItems().add(s);
-		}
+    private void gestioneCercaDocenteDisponibile(ActionEvent e) {
+        String docenteAssente = nomeProf.getValue();
+        OraLezione oraDaSostituire = leggiOraLezione();
+        System.out.println(oraDaSostituire);
 
-	}
+        ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+        tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
+
+        // recupero tutti gli eventuali docenti in compresenza
+        ArrayList<Docente> docentiCoPresenza;
+        docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
+        for (int i = 0; i < docentiCoPresenza.size(); i++) {
+            System.out.println(docentiCoPresenza.get(i));
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
+                    docentiCoPresenza.get(i).nome);
+            s.setMotivazione("copresenza");
+            lista.getItems().add(s);
+        }
+
+        ArrayList<Docente> docentiRecupero;
+        docentiRecupero = FiltroRecupero.docentiRecupero(tuttiIDocenti, oraDaSostituire);
+        for (int i = 0; i < docentiRecupero.size(); i++) {
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docentiRecupero.get(i).nome);
+            s.setMotivazione("recupero");
+            lista.getItems().add(s);
+        }
+
+        ArrayList<Docente> docentiDellaClasse;
+        docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
+        ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
+        for (int i = 0; i < docentiLiberiClasse.size(); i++) {
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docentiLiberiClasse.get(i).nome);
+            s.setMotivazione("della classe");
+            lista.getItems().add(s);
+        }
+
+        ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
+        for (int i = 0; i < docentiLiberi.size(); i++) {
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docentiLiberi.get(i).nome);
+            s.setMotivazione("libero");
+            lista.getItems().add(s);
+        }
+
+    }
 	
 	@FXML
 	/********************************************************************************************
