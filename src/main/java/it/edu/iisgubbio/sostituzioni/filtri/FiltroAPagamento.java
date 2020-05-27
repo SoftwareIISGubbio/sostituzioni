@@ -16,7 +16,7 @@ public class FiltroAPagamento {
 	 * 
 	 * @param tutti rappresenta un elenco di docenti
 	 * @param oraDaPagare rappresenta l' ora da pagare da ricercare
-	 * @return tutti i docenti che hanno l'ora libera che deve essere pagata
+	 * @return tutti i docenti che hanno l'ora libera e che deve essere pagata
 	 */
 	public static ArrayList<Docente> docentiAPagamento(ArrayList<Docente> tutti, Ora oraDaPagare) {
 		//lista dei docenti che hanno l'ora libera
