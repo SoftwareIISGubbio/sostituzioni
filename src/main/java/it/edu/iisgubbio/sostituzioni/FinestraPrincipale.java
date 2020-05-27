@@ -10,6 +10,8 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
+import it.edu.iisgubbio.sostituzioni.gui.CasellaSostituzione;
+import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselle;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
@@ -25,9 +27,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 /************************************************************************************************
  * classe principale del programma, crea la finestra per la ricerca delle sostituzioni
  ***********************************************************************************************/
@@ -82,8 +86,8 @@ public class FinestraPrincipale extends Application {
 		for (int j = 0; j < classi.length; j++) {
 			cmbClasse.getItems().add(classi[j]);
 		}
+		
 		// Ciclo per scorrere l'elenco dei professori e li inserisce alla combobox
-
 		for (int j = 0; j < Ambiente.docenti.size(); j++) {
 			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
 			
@@ -92,6 +96,8 @@ public class FinestraPrincipale extends Application {
 		if(Ambiente.getProblemi().length()==0) {
 		    ivAttenzione.setVisible(false);
 		}
+		
+        lista.setCellFactory(new FabbricaDiCaselle());
 	}
 	
 	@FXML
