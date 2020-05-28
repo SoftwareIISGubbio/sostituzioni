@@ -20,6 +20,7 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
             switch( item.getMotivazione() ) {
             case "copresenza":
                 icona = "🤝";
+                break;
             // FIXME mancano gli altri
             default:
                 icona = "??";

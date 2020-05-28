@@ -92,7 +92,7 @@
                </effect>
             </ComboBox>
             <Button fx:id="pSalva" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" style="-fx-background-color: #3B3B3B;" text="Salva" textFill="#ffe800" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-            <ComboBox fx:id="nomeProf" editable="true" prefHeight="25.0" prefWidth="185.0" promptText="Professore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <ComboBox fx:id="nomeProf" prefWidth="185.0" promptText="Professore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Label text="Selezionare Prof." textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="13.0" />

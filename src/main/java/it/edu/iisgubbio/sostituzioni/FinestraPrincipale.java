@@ -29,6 +29,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -90,8 +91,11 @@ public class FinestraPrincipale extends Application {
 		// Ciclo per scorrere l'elenco dei professori e li inserisce alla combobox
 		for (int j = 0; j < Ambiente.docenti.size(); j++) {
 			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
-			
 		}
+		Tooltip tt = new Tooltip();
+		tt.setAnchorX(0);tt.setAnchorY(0);
+		nomeProf.setTooltip( tt );
+		new ComboBoxAutoComplete<String>(nomeProf);
 		
 		if(Ambiente.getProblemi().length()==0) {
 		    ivAttenzione.setVisible(false);
