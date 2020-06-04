@@ -19,11 +19,19 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
             String icona;
             switch( item.getMotivazione() ) {
             case "copresenza":
-                icona = "🤝";
+                icona = "[copresenza]";
                 break;
-            // FIXME mancano gli altri
+            case "recupero":
+                icona = "[recupero]";
+                break;
+            case "della classe":
+                icona = "[della classe]";
+                break;
+            case "libero":
+                icona = "[libero]";
+                break;
             default:
-                icona = "??";
+                icona = "[??]";
             }
             name = (index + 1) + ". " +
             item.getNomeSostituto() + " " + icona + " "+

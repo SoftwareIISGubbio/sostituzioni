@@ -10,7 +10,6 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
-import it.edu.iisgubbio.sostituzioni.gui.CasellaSostituzione;
 import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselle;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
@@ -27,12 +26,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 /************************************************************************************************
  * classe principale del programma, crea la finestra per la ricerca delle sostituzioni
  ***********************************************************************************************/
@@ -162,6 +159,8 @@ public class FinestraPrincipale extends Application {
         OraLezione oraDaSostituire = leggiOraLezione();
         System.out.println(oraDaSostituire);
 
+        // rimuovo vecchia ricerca
+        lista.getItems().clear();
         ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
         tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
