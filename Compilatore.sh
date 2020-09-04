@@ -17,9 +17,11 @@ esegui(){
     cp javafx*/bin/* esportazione
     echo "Copiati i file di JavaFX"
     echo "Estrazione dell'icona dal file .jar"
-    unzip -p $1 it/edu/iisgubbio/sostituzioni/icon.ico > icon.ico
+    unzip -p $1 it/edu/iisgubbio/sostituzioni/icona.ico > icona.ico
     echo "Inizio compilazione"
-    jdk*/bin/jpackage --type app-image -n ${nome%.jar} --icon icon.ico --input esportazione --add-modules javafx.controls,javafx.media,javafx.fxml --module-path javafx*/lib/ --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar $nome
+    jdk*/bin/jpackage --type app-image -n ${nome%.jar} --icon icona.ico --input esportazione \
+        --add-modules javafx.controls,javafx.media,javafx.fxml,jdk.charsets --module-path javafx*/lib/ \ 
+        --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar $nome
     rm -rf esportazione
     rm icon.ico
     echo "Compilazione completata"
@@ -45,3 +47,4 @@ else
         exit
     fi
 fi
+
