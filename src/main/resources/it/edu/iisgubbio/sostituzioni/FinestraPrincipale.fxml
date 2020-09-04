@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,11 +21,11 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <center>
-      <GridPane hgap="5.0" style="-fx-background-color: #f4d03f;" vgap="5.0">
+      <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4d03f;" vgap="5.0">
         <columnConstraints>
           <ColumnConstraints maxWidth="231.0" minWidth="5.0" prefWidth="231.0" />
-            <ColumnConstraints hgrow="SOMETIMES" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.0" minWidth="0.0" prefWidth="278.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="350.0" />
         </columnConstraints>
          <children>
             <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Seleziona giorno" textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="4">
@@ -60,10 +61,7 @@
                   <Insets top="20.0" />
                </padding>
             </Label>
-            <ListView fx:id="lista" prefHeight="350.0" prefWidth="253.0" style="-fx-background-color: #E6E6E6; -fx-background-radius: 6;" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="8">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
+            <ListView fx:id="lista" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" style="-fx-background-color: #E6E6E6; -fx-background-radius: 6;" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="7">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -107,6 +105,7 @@
                   <Image url="@attenzione.png" />
                </image>
             </ImageView>
+            <TextArea fx:id="taDescrizioneSostituzione" editable="false" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -121,7 +120,7 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints />
+            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
             <RowConstraints />
          </rowConstraints>
       </GridPane>

@@ -27,6 +27,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -53,6 +54,10 @@ public class FinestraPrincipale extends Application {
 	ImageView ivAttenzione;
 	@FXML
 	Button pSalva;
+	@FXML
+	TextArea taDescrizioneSostituzione;
+	
+	private String sostituzioneCercataPer;
 
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché 
@@ -99,6 +104,10 @@ public class FinestraPrincipale extends Application {
 		}
 		
         lista.setCellFactory(new FabbricaDiCaselle());
+        
+        // XXX: è possibile che questa cosa si possa fare dal file FXML 
+        // ma siccome non trovo come quindi la metto qui
+        lista.getSelectionModel().selectedItemProperty().addListener( e -> gestioneSelezioneLista() );
 	}
 	
 	@FXML
@@ -159,6 +168,13 @@ public class FinestraPrincipale extends Application {
         OraLezione oraDaSostituire = leggiOraLezione();
         System.out.println(oraDaSostituire);
 
+        sostituzioneCercataPer = 
+                "data "+data.getValue()+"\n"+
+                "ora "+oraDaSostituire.orario+"\n"+
+                "docente da sostituire: "+docenteAssente+"\n"+
+                "assente per la classe "+oraDaSostituire.classe;
+        taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\nSELEZIONA UNA SOSTITUZIONE DALLA LISTA");
+        
         // rimuovo vecchia ricerca
         lista.getItems().clear();
         ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
@@ -254,5 +270,12 @@ public class FinestraPrincipale extends Application {
 	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
 	        Giornale.scriviRecord(s);
 	    }
+	}
+	
+	@FXML
+	private void gestioneSelezioneLista() {
+	    System.out.println("selection changed");  
+	    Sostituzione scelta = lista.getItems().get(lista.getSelectionModel().getSelectedIndex());
+	    taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\n"+scelta);
 	}
 }
