@@ -16,7 +16,9 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         if (item == null || empty) {
         
         } else {
-            String icona;
+            /*
+            String icona="";
+            l'idea originale era di mettere emoji ma JavaFX ha problemi con il rendering delle emoji
             switch( item.getMotivazione() ) {
             case "copresenza":
                 icona = "[copresenza]";
@@ -30,12 +32,15 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
             case "libero":
                 icona = "[libero]";
                 break;
+            case "a disposizione":
+                icona = "[a disposizione]";
+                break;
             default:
                 icona = "[??]";
-            }
+            }*/
             name = (index + 1) + ". " +
-            item.getNomeSostituto() + " " + icona + " "+
-            item.getMotivazione();
+            item.getNomeSostituto() + " ["+
+            item.getMotivazione()+"]";
         }
          
         this.setText(name);

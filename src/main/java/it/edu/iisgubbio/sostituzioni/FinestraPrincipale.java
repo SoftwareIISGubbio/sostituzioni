@@ -1,10 +1,23 @@
 package it.edu.iisgubbio.sostituzioni;
 
+import java.awt.Desktop;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizioneCassata;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
@@ -58,6 +71,17 @@ public class FinestraPrincipale extends Application {
 	TextArea taDescrizioneSostituzione;
 	
 	private String sostituzioneCercataPer;
+	
+	private String leggiVersione(){
+	    try {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model = reader.read(new FileReader("pom.xml"));
+
+        return "V"+model.getVersion();
+	    }catch(Exception ex) {
+	        return "V?";
+	    }
+	}
 
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché 
@@ -71,7 +95,7 @@ public class FinestraPrincipale extends Application {
 			e.printStackTrace();
 		}
 		x.setScene(scena);
-		x.setTitle("Sostituzioni");
+		x.setTitle("Sostituzioni "+leggiVersione());
 		x.show();
 	}
 
@@ -192,6 +216,7 @@ public class FinestraPrincipale extends Application {
             lista.getItems().add(s);
         }
 
+        // recupero docenti con ore "a recupero"
         ArrayList<Docente> docentiRecupero;
         docentiRecupero = FiltroRecupero.docentiRecupero(tuttiIDocenti, oraDaSostituire);
         for (int i = 0; i < docentiRecupero.size(); i++) {
@@ -199,6 +224,15 @@ public class FinestraPrincipale extends Application {
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiRecupero.get(i).nome);
             s.setMotivazione("recupero");
+            lista.getItems().add(s);
+        }
+        
+        // recupero docenti con l'ora cercata "a disposizione" al Cassata
+        for( Docente docente: FiltroADisposizioneCassata.docentiADisposizioneCassata(tuttiIDocenti, oraDaSostituire)){
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docente.nome);
+            s.setMotivazione("a disposizione");
             lista.getItems().add(s);
         }
 
@@ -258,7 +292,7 @@ public class FinestraPrincipale extends Application {
 	}
 	
 	@FXML
-	private void gestioneSalva(ActionEvent e) {
+	private void gestioneSalva(ActionEvent e) throws IOException, URISyntaxException {
         // recupero l'indice dell'elemento selezionato
         int indiceSelezionato = lista.getSelectionModel().getSelectedIndex();
         // recupero l'oggetto selezionato usando il suo indice
@@ -269,6 +303,11 @@ public class FinestraPrincipale extends Application {
 	    Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
 	        Giornale.scriviRecord(s);
+	        // https://en.wikipedia.org/wiki/Mailto
+	        String mailto="mailto:sconosciuto@iisgubbio.edu.it"+
+	        "?subject=sostituzione"+
+	        "&body="+URLEncoder.encode(taDescrizioneSostituzione.getText(), StandardCharsets.UTF_8.toString());
+	        Desktop.getDesktop().mail(new URI(mailto));
 	    }
 	}
 	

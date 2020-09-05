@@ -6,7 +6,7 @@
 	<!-- informazioni generali sul programma -->
 	<groupId>it.edu.iisgubbio</groupId>
 	<artifactId>sostituzioni</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<packaging>jar</packaging>
 	<name>sostituzioni</name>
 	<url>http://www.iisgubbio.edu.it</url>
@@ -34,6 +34,11 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>13</version>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.6.3</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
