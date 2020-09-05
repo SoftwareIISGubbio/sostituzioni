@@ -1,10 +1,9 @@
 package it.edu.iisgubbio.sostituzioni;
 
 import java.awt.Desktop;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -12,10 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
-
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizioneCassata;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
@@ -74,10 +69,14 @@ public class FinestraPrincipale extends Application {
 	
 	private String leggiVersione(){
 	    try {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model model = reader.read(new FileReader("pom.xml"));
-
-        return "V"+model.getVersion();
+	        InputStream is = FinestraPrincipale.class.getResourceAsStream("versione.txt");
+	        InputStreamReader isr = new InputStreamReader(is);
+	        int numero;
+	        char buffer[] = new char[20];
+	        numero = isr.read(buffer);
+	        isr.close();
+	        is.close();
+	        return new String(buffer,0,numero);
 	    }catch(Exception ex) {
 	        return "V?";
 	    }

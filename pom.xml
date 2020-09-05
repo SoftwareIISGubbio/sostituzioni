@@ -6,14 +6,14 @@
 	<!-- informazioni generali sul programma -->
 	<groupId>it.edu.iisgubbio</groupId>
 	<artifactId>sostituzioni</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 	<name>sostituzioni</name>
 	<url>http://www.iisgubbio.edu.it</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>11</maven.compiler.release>
+		<maven.compiler.release>14</maven.compiler.release>
 		<progetto.jars>${project.build.directory}/jars</progetto.jars>
 	</properties>
 
@@ -27,18 +27,13 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>13</version>
+			<version>14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>13</version>
+			<version>14</version>
 		</dependency>
-		<dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model</artifactId>
-            <version>3.6.3</version>
-        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -82,5 +77,19 @@
 				</configuration>
 			</plugin>
 		</plugins>
+        <resources>
+            <resource>
+                <!-- cartella solita delle risorse -->
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <!-- questa è una cartella in più, serve soltanto a mettere un file in cui maven 
+                quando compila registra il numero di versione -->
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>   
+
 	</build>
 </project>

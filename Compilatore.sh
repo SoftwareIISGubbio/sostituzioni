@@ -29,6 +29,8 @@ esegui(){
     read -p "Premi un tasto per continuare..."
 }
 
+# il secondo parametro di questa funzione non è essenziale, dovrebbe essere possibile recuperarne
+# il nome visto che cambia soltanto il numero di versione
 eseguiCartella(){
     echo ""
     echo "cartella con i jar: $1"
@@ -58,7 +60,7 @@ eseguiCartella(){
 }
 echo "###################################### PER ESEGUIRE ######################################"
 echo "- Esportare il programma in un file .jar eseguibile oppure generare una cartella con tutti i jar necessari"
-echo "- Spostare questo file in una cartella che contiene JDK e JavaFX"
+echo "- Spostare questo file (compilatore.sh) in una cartella che contiene JDK e JavaFX"
 echo "- Se si usa Windows bisogna avere WiX 3.0 installato"
 echo "- La classe principale è it.edu.iisgubbio.sostituzioni.FinestraPrincipale"
 echo "- L'icona deve trovarsi nel jar principale: it/edu/iisgubbio/sostituzioni/icona.ico"
