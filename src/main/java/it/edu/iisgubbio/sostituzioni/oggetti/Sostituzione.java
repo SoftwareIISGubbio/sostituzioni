@@ -4,7 +4,16 @@ public class Sostituzione extends OraLezione{
 
 	protected String nomeSostituto;
 	protected String motivazione; 
+	protected String nomeDocenteDaSostituire;
 	
+    public String getNomeDocenteDaSostituire() {
+        return nomeDocenteDaSostituire;
+    }
+
+    public void setNomeDocenteDaSostituire(String nomeDocenteDaSostituire) {
+        this.nomeDocenteDaSostituire = nomeDocenteDaSostituire;
+    }
+
     public String getNomeSostituto() {
         return nomeSostituto;
     }
@@ -56,7 +65,7 @@ public class Sostituzione extends OraLezione{
 	
 	public String getDescrizione() {
         String nomeGiorno = Ora.nomiGiorni[giorno];
-        return nomeSostituto +" sostituisce ? nella classe "+classe+ " il giorno "+ nomeGiorno+ 
+        return nomeSostituto +" sostituisce "+nomeDocenteDaSostituire+" nella classe "+classe+ " il giorno "+ nomeGiorno+ 
                 " alle ore "+ orario +" nell'aula "+aula;
 	}
 

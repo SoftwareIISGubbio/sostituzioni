@@ -23,7 +23,7 @@
    <center>
       <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4d03f;" vgap="5.0">
         <columnConstraints>
-          <ColumnConstraints maxWidth="231.0" minWidth="5.0" prefWidth="231.0" />
+          <ColumnConstraints minWidth="5.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="350.0" />
         </columnConstraints>
@@ -99,7 +99,10 @@
                   <Insets top="20.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" onAction="#gestioneInformazioniDocente" text="i" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#gestioneInformazioniDocente" text="i" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin></Button>
             <ImageView fx:id="ivAttenzione" fitWidth="50.0" onMouseClicked="#mostraProblemi" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@attenzione.png" />

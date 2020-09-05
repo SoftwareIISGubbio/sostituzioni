@@ -1,13 +1,9 @@
 package it.edu.iisgubbio.sostituzioni;
 
-import java.awt.Desktop;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -190,6 +186,7 @@ public class FinestraPrincipale extends Application {
         String docenteAssente = nomeProf.getValue();
         OraLezione oraDaSostituire = leggiOraLezione();
         System.out.println(oraDaSostituire);
+        String nomeDocenteDaSostituire = nomeProf.getItems().get(nomeProf.getSelectionModel().getSelectedIndex());
 
         sostituzioneCercataPer = 
                 "data "+data.getValue()+"\n"+
@@ -211,6 +208,7 @@ public class FinestraPrincipale extends Application {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
                     docentiCoPresenza.get(i).nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("copresenza");
             lista.getItems().add(s);
         }
@@ -222,6 +220,7 @@ public class FinestraPrincipale extends Application {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiRecupero.get(i).nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("recupero");
             lista.getItems().add(s);
         }
@@ -231,6 +230,7 @@ public class FinestraPrincipale extends Application {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docente.nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("a disposizione");
             lista.getItems().add(s);
         }
@@ -242,6 +242,7 @@ public class FinestraPrincipale extends Application {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiLiberiClasse.get(i).nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("della classe");
             lista.getItems().add(s);
         }
@@ -251,6 +252,7 @@ public class FinestraPrincipale extends Application {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiLiberi.get(i).nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("libero");
             lista.getItems().add(s);
         }
@@ -299,14 +301,10 @@ public class FinestraPrincipale extends Application {
         
 	    Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, 
 	            s.getDescrizione());
+	    
 	    Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 	    if(risposta.isPresent() && risposta.get() == ButtonType.OK) {
 	        Giornale.scriviRecord(s);
-	        // https://en.wikipedia.org/wiki/Mailto
-	        String mailto="mailto:sconosciuto@iisgubbio.edu.it"+
-	        "?subject=sostituzione"+
-	        "&body="+URLEncoder.encode(taDescrizioneSostituzione.getText(), StandardCharsets.UTF_8.toString());
-	        Desktop.getDesktop().mail(new URI(mailto));
 	    }
 	}
 	

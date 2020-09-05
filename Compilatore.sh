@@ -19,6 +19,7 @@ esegui(){
     echo "Copiati i file di JavaFX"
     echo "Estrazione dell'icona dal file .jar"
     unzip -p $1 it/edu/iisgubbio/sostituzioni/icona.ico > icona.ico
+    # jdk.charsets serve ad Apache POI che legge il file Excel
     echo "Inizio compilazione"
     jdk*/bin/jpackage --type app-image -n ${nome%.jar} --icon icona.ico --input esportazione \
         --add-modules javafx.controls,javafx.media,javafx.fxml,jdk.charsets --module-path javafx*/lib/ \ 
@@ -49,6 +50,7 @@ eseguiCartella(){
     echo "Estrazione dell'icona dal file .jar"
     unzip -p $1/$2 it/edu/iisgubbio/sostituzioni/icona.ico > icona.ico
     
+    # jdk.charsets serve ad Apache POI che legge il file Excel
     echo "Inizio compilazione"
     jdk*/bin/jpackage --type app-image -n sostituzioni --icon icona.ico --input esportazione \
         --add-modules javafx.controls,javafx.media,javafx.fxml,jdk.charsets --module-path javafx*/lib/ \

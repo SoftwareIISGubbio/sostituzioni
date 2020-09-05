@@ -4,13 +4,3 @@ Rispetto ad una "normale" procedura descritta sul libro per creare il pacchetto 
 mvn package -DskipTests
 
 ATTENZIONE NON CREA FATJAR
-
-2- costruzione del pacchetto
-$JBIN/jpackage --type app-image -n sostituzioni \
---icon $ICONA \
---input esportazione \
---module-path $FX \
---add-modules javafx.controls,javafx.fxml,javafx.media,jdk.charsets \
---main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar  sostituzioni-0.1.jar
-
-jdk.charsets serve ad Apache POI che legge il file Excel
