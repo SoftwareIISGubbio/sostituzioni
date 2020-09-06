@@ -1,6 +1,0 @@
-Rispetto ad una "normale" procedura descritta sul libro per creare il pacchetto ci sono due variazioni:
-
-1- meglio creare il jar con maven
-mvn package -DskipTests
-
-ATTENZIONE NON CREA FATJAR

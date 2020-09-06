@@ -61,6 +61,8 @@ mvn package -DskipTests
 
 mkdir $CARTELLA_LAVORO
 cp $CARTELLA_JARS/* $CARTELLA_LAVORO
+
+# tolgo i jar messi da maven pr fx imn modo da copiare binari e jar esattamente della stessa versione
 rm $CARTELLA_LAVORO/javafx*
 if [[ "$OSTYPE" == "darwin"*  ]]; then
     cp $CARTELLA_FX_SDK/lib/* $CARTELLA_LAVORO
