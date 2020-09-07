@@ -9,6 +9,11 @@
 if [ "$#" -ne 1 ]; then
     echo "uso del programma:"
     echo "creazionePacchetto.sh <path_cartella_principale_javafx_sdk>"
+    exit 0
+fi
+if [ -z "$JAVA_HOME" ]; then
+    echo "la variabile JAVA_HOME non è stata impostata"
+    exit 0
 fi
 
 # ilprimo parametro è la poszione dell'SDK di JavaFX
@@ -26,11 +31,13 @@ VERSIONE=$(grep -m 1 version pom.xml | sed 's/[^0-9\\.]//g')
 # nome del jar principale (contiene anche il numero di versione)
 JAR_PRINCIPALE="sostituzioni-$VERSIONE.jar"
 # nome icona, dipende dal sistema operativo
+# tolgo i jar messi da maven pr fx imn modo da copiare binari e jar esattamente della stessa versione
+# windows meglio lasciarlo in else
 if [[ "$OSTYPE" == "darwin"*  ]]; then
     # icona per macOS
     ICONA=icona/icona.icns
     TIPO_PACCHETTO="dmg"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [[ "$OSTYPE" == "linux"* ]]; then
     # icona le Linux (l'unico normale visto il tipo del file!)
     ICONA=icona/icona.png
     TIPO_PACCHETTO="app-image"
@@ -45,6 +52,7 @@ echo "JAVA_HOME      : $JAVA_HOME"
 echo "JPACKAGE       : $JPACKAGE"
 echo "CARTELLA_FX_SDK: $CARTELLA_FX_SDK"
 echo "MAVEN          : $(which mvn)"
+echo "OSTYPE         : $OSTYPE"
 echo ""
 echo "CARTELLA_JARS  : $CARTELLA_JARS"
 echo "JAR_PRINCIPALE : $JAR_PRINCIPALE"
@@ -56,19 +64,17 @@ echo "DESTINAZIONE   : $DESTINAZIONE"
 echo "TIPO_PACCHETTO : $TIPO_PACCHETTO"
 echo "--------------------------------------------------------------"
 
-mvn clean
-mvn package -DskipTests
+mvn -q clean
+mvn -q package -DskipTests
 
 mkdir $CARTELLA_LAVORO
 cp $CARTELLA_JARS/* $CARTELLA_LAVORO
-
-# tolgo i jar messi da maven pr fx imn modo da copiare binari e jar esattamente della stessa versione
 rm $CARTELLA_LAVORO/javafx*
+# https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
 if [[ "$OSTYPE" == "darwin"*  ]]; then
     cp $CARTELLA_FX_SDK/lib/* $CARTELLA_LAVORO
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "mancano impostazioni per ambiente linux in questo script"
-    exit
+elif [[ "$OSTYPE" == "linux"* ]]; then
+    cp $CARTELLA_FX_SDK/lib/* $CARTELLA_LAVORO
 else
     cp $CARTELLA_FX_SDK/bin/* $CARTELLA_LAVORO
     cp $CARTELLA_FX_SDK/lib/* $CARTELLA_LAVORO
@@ -78,5 +84,15 @@ $JPACKAGE --name sostituzioni --app-version $VERSIONE --icon $ICONA --type $TIPO
     --input $CARTELLA_LAVORO --dest $DESTINAZIONE --module-path $CARTELLA_LAVORO \
     --add-modules javafx.controls,javafx.media,javafx.fxml,jdk.charsets \
     --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar $JAR_PRINCIPALE
-    
-# su windows non sarebbe male creare lo zip
+
+if [[ "$OSTYPE" == "darwin"*  ]]; then
+    cd . # niente da fare
+elif [[ "$OSTYPE" == "linux"* ]]; then
+    cd target
+    tar -cvzf sostituzioni-$VERSIONE.tgz sostituzioni/
+    cd ..
+else
+    cd target
+    /c/Program\ Files/7-Zip/7z a -tzip sostituzioni-$VERSIONE.zip sostituzioni
+    cd ..
+fi
