@@ -131,6 +131,7 @@ public class FinestraPrincipale extends Application {
         // XXX: è possibile che questa cosa si possa fare dal file FXML 
         // ma siccome non trovo come quindi la metto qui
         lista.getSelectionModel().selectedItemProperty().addListener( e -> gestioneSelezioneLista() );
+        listaOreLezione.getSelectionModel().selectedItemProperty().addListener( e -> gestioneListaOreLezione() );
 	}
 	
 	@FXML
@@ -209,7 +210,6 @@ public class FinestraPrincipale extends Application {
         ArrayList<Docente> docentiCoPresenza;
         docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
         for (int i = 0; i < docentiCoPresenza.size(); i++) {
-            System.out.println(docentiCoPresenza.get(i));
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
                     docentiCoPresenza.get(i).nome);
@@ -347,14 +347,27 @@ public class FinestraPrincipale extends Application {
         String nomeDocenteAssente = nomeProf.getValue();
         if(nomeDocenteAssente!=null && d!=null) {
             int giornoDellaSettimana = d.getDayOfWeek().getValue();
-            System.out.println(giornoDellaSettimana);
             Docente docenteAssente = Ambiente.cercaDocentePerNome(nomeDocenteAssente);
-            System.out.println(docenteAssente);
             listaOreLezione.getItems().clear();
             for(OraLezione o: docenteAssente.oreLezione) {
                 if(o.giorno==giornoDellaSettimana) {
                     listaOreLezione.getItems().add(o);
                 }
+            }
+        }
+	}
+	
+	@FXML
+    private void gestioneListaOreLezione() {
+	    OraLezione ol =  listaOreLezione.getItems().get(listaOreLezione.getSelectionModel().getSelectedIndex());
+	    for(int i=0; i<cmbOra.getItems().size(); i++) {
+	        if(cmbOra.getItems().get(i).equals(""+ol.orario)) {
+	            cmbOra.getSelectionModel().select(i);
+	        }
+	    }
+	    for(int i=0; i<cmbClasse.getItems().size(); i++) {
+            if(cmbClasse.getItems().get(i).equals(ol.classe)) {
+                cmbClasse.getSelectionModel().select(i);
             }
         }
 	}

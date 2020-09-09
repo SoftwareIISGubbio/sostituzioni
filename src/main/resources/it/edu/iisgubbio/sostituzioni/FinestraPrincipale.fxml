@@ -108,7 +108,7 @@
                   <Image url="@attenzione.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="taDescrizioneSostituzione" editable="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <TextArea fx:id="taDescrizioneSostituzione" editable="false" prefHeight="130.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
             <ListView fx:id="listaOreLezione" prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 6;" GridPane.rowIndex="6" />
          </children>
          <padding>

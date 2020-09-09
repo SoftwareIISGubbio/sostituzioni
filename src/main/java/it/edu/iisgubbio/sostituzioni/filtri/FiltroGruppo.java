@@ -23,7 +23,7 @@ public class FiltroGruppo {
 		// cerca il docente che lavora in quella classe nella lista di tutti i docenti
 		if(prendi) {
     		for (Docente d : tutti) {
-    			if (d.gruppo.equals(gruppo)) {
+    			if (d.gruppo!=null && d.gruppo.equals(gruppo)) {
     				risposta.add(d);
     			}
     		}
