@@ -32,18 +32,12 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
             </Label>
-            <Button mnemonicParsing="false" onAction="#gestioneCercaDocenteDisponibile" prefHeight="32.0" prefWidth="151.0" style="-fx-background-color: #3B3B3B;" text="Cerca docenti disponibili" textFill="#ffe800" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere la classe" textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+            <Button mnemonicParsing="false" onAction="#gestioneCercaDocenteDisponibile" prefHeight="32.0" prefWidth="151.0" style="-fx-background-color: #3B3B3B;" text="Cerca docenti disponibili" textFill="#ffe800" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere la classe" textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
             </Label>
             <ImageView fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <image>
@@ -53,7 +47,7 @@
                   <Reflection fraction="0.48" topOpacity="0.25" />
                </effect>
             </ImageView>
-            <Label fx:id="txtOra" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere ora " textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label fx:id="txtOra" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere ora " textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -66,10 +60,13 @@
                   <Insets />
                </GridPane.margin>
             </ListView>
-            <DatePicker fx:id="data" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+            <DatePicker fx:id="data" onAction="#gestioneSelezioneDataEDocente" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
                <effect>
                   <Reflection fraction="0.57" />
                </effect>
+               <GridPane.margin>
+                  <Insets bottom="20.0" />
+               </GridPane.margin>
             </DatePicker>
             <Label alignment="CENTER" contentDisplay="BOTTOM" text="Lista docenti disponibili" textFill="#4d4d4d" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
@@ -79,18 +76,21 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <ComboBox fx:id="cmbOra" promptText="Ore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbOra" promptText="Ore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="TOP">
                <effect>
                   <Reflection bottomOpacity="0.04" fraction="0.64" topOpacity="0.41" />
                </effect>
+               <GridPane.margin>
+                  <Insets bottom="20.0" />
+               </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="cmbClasse" promptText="Classi" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbClasse" promptText="Classi" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="TOP">
                <effect>
                   <Reflection bottomOpacity="0.17" fraction="0.44" topOpacity="0.44" />
                </effect>
             </ComboBox>
-            <Button fx:id="pSalva" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" style="-fx-background-color: #3B3B3B;" text="Salva" textFill="#ffe800" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-            <ComboBox fx:id="nomeProf" prefWidth="185.0" promptText="Professore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="pSalva" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" style="-fx-background-color: #3B3B3B;" text="Salva" textFill="#ffe800" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+            <ComboBox fx:id="nomeProf" onAction="#gestioneSelezioneDataEDocente" prefWidth="185.0" promptText="Professore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Label text="Selezionare Prof." textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -108,13 +108,15 @@
                   <Image url="@attenzione.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="taDescrizioneSostituzione" editable="false" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <TextArea fx:id="taDescrizioneSostituzione" editable="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            <ListView fx:id="listaOreLezione" prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 6;" GridPane.rowIndex="6" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <rowConstraints>
             <RowConstraints minHeight="20.0" />
+            <RowConstraints />
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />

@@ -38,6 +38,7 @@ public class HandlerSAX extends DefaultHandler{
         }
         if(qName.equals("Hour")){
             String ora = atts.getValue("name");
+            oraAttuale = null; // mi serve perché l'ora "13:35" che compare sul file di fet non è in realtà una ora di lezione
             for(int i = 1; i<Ora.nomiOre.length; i++) {
             	if(Ora.nomiOre[i].startsWith(ora)) {
             		oraAttuale = new OraLezione(giornoAttuale, i);
@@ -61,7 +62,7 @@ public class HandlerSAX extends DefaultHandler{
      */
     @Override
     public void endElement(String uri, String localName, String qName){
-        if( qName.equals("Hour") && oraAttuale.materia!=null){
+        if( qName.equals("Hour") && oraAttuale!=null && oraAttuale.materia!=null){
             docenteAttuale.oreLezione.add(oraAttuale);
         }
     }

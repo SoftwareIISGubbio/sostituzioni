@@ -24,7 +24,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 public class LettoreFile {
 	private final static byte RIGA_ORE = 4;
 	private static final String FOGLIO_DOCENTI = "docenti";
-	
+	private static final String FOGLIO_INFORMAZIONI = "informazioni";
 	
 	/**
 	 * Legge il documento Excel con le informazioni dei professori
@@ -42,6 +42,9 @@ public class LettoreFile {
 			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
 			// chiama la funzione che legge le informazioni
 			calcolaOrario(RIGA_ORE+1, foglio, lista, null);
+			// 
+			foglio = libro.getSheet(FOGLIO_INFORMAZIONI);
+			aggiungiInformazioniDocenti(foglio, lista);
 			libro.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,4 +162,31 @@ public class LettoreFile {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * il foglio da cui legge deve avere informazioni a partire dalla seconda riga, 
+	 * la prima riga vuota è considerata lo stop.
+	 * le colonne sono in ordine: nome, gruppo
+	 * @param foglio da cui leggere le informazioni
+	 * @param listaDocenti in cui inserire le informazioni
+	 */
+	private static void aggiungiInformazioniDocenti(Sheet foglio, ArrayList<Docente> listaDocenti) {
+        //il ciclo si ripete finche' non incontra una riga vuota
+        for( int i = 1; foglio.getRow(i)!=null&&foglio.getRow(i).getCell(1)!=null; i++) {
+            String nome = foglio.getRow(i).getCell(0).getStringCellValue().trim().toUpperCase();
+            String gruppo = foglio.getRow(i).getCell(1).getStringCellValue().trim().toUpperCase();
+            boolean preso = false;
+            for(Docente d: listaDocenti) {
+                if(d.nome.equals(nome)) {
+                    d.gruppo=gruppo;
+                    preso = true;
+                    break;
+                }
+            }
+            if(!preso) {
+                // FIXME deve scriverlo nel log
+                System.out.println(nome+" non esiste");
+            }
+        }
+    }
 }

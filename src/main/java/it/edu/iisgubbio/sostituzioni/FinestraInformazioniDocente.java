@@ -22,6 +22,8 @@ public class FinestraInformazioniDocente {
 	ListView<String> lOrePagamento;
 	@FXML
 	ListView<String> lOrePotenziamento;
+	@FXML
+    TextField cGruppo;
 
 	Docente docente;
 
@@ -32,6 +34,7 @@ public class FinestraInformazioniDocente {
 
 	public void setDocente(Docente d) {
 		eNomeDocente.setText(d.nome);
+		cGruppo.setText(d.gruppo);
 		if (d.oraARecupero != null) {
 		cOraRecupero.setText(d.oraARecupero.toString());
 		}

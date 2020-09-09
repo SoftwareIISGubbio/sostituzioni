@@ -11,7 +11,9 @@ import java.util.Optional;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizioneCassata;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroPotenziamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
 import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselle;
@@ -60,6 +62,8 @@ public class FinestraPrincipale extends Application {
 	Button pSalva;
 	@FXML
 	TextArea taDescrizioneSostituzione;
+	@FXML
+	ListView<OraLezione> listaOreLezione;
 	
 	private String sostituzioneCercataPer;
 	
@@ -184,6 +188,7 @@ public class FinestraPrincipale extends Application {
 	 *******************************************************************************************/
     private void gestioneCercaDocenteDisponibile(ActionEvent e) {
         String docenteAssente = nomeProf.getValue();
+        String gruppoDocenteAssente = Ambiente.cercaDocentePerNome(docenteAssente).gruppo;
         OraLezione oraDaSostituire = leggiOraLezione();
         System.out.println(oraDaSostituire);
         String nomeDocenteDaSostituire = nomeProf.getItems().get(nomeProf.getSelectionModel().getSelectedIndex());
@@ -191,7 +196,7 @@ public class FinestraPrincipale extends Application {
         sostituzioneCercataPer = 
                 "data "+data.getValue()+"\n"+
                 "ora "+oraDaSostituire.orario+"\n"+
-                "docente da sostituire: "+docenteAssente+"\n"+
+                "docente da sostituire: "+docenteAssente+" ["+gruppoDocenteAssente+"]\n"+
                 "assente per la classe "+oraDaSostituire.classe;
         taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\nSELEZIONA UNA SOSTITUZIONE DALLA LISTA");
         
@@ -210,6 +215,27 @@ public class FinestraPrincipale extends Application {
                     docentiCoPresenza.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("copresenza");
+            lista.getItems().add(s);
+        }
+        
+        // potenziamento
+        ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti, oraDaSostituire);
+        // prima i docenti di potenziamento di materie affini
+        for( Docente docente: FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente, true)){
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docente.nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+            s.setMotivazione("potenziamento stesse discipline");
+            lista.getItems().add(s);
+        }
+        // poi tutti gli altri
+        for( Docente docente: FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente, false)){
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docente.nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+            s.setMotivazione("potenziamento altre discipline");
             lista.getItems().add(s);
         }
 
@@ -313,5 +339,23 @@ public class FinestraPrincipale extends Application {
 	    System.out.println("selection changed");  
 	    Sostituzione scelta = lista.getItems().get(lista.getSelectionModel().getSelectedIndex());
 	    taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\n"+scelta);
+	}
+	
+	@FXML
+	private void gestioneSelezioneDataEDocente() {
+	    LocalDate d = data.getValue();
+        String nomeDocenteAssente = nomeProf.getValue();
+        if(nomeDocenteAssente!=null && d!=null) {
+            int giornoDellaSettimana = d.getDayOfWeek().getValue();
+            System.out.println(giornoDellaSettimana);
+            Docente docenteAssente = Ambiente.cercaDocentePerNome(nomeDocenteAssente);
+            System.out.println(docenteAssente);
+            listaOreLezione.getItems().clear();
+            for(OraLezione o: docenteAssente.oreLezione) {
+                if(o.giorno==giornoDellaSettimana) {
+                    listaOreLezione.getItems().add(o);
+                }
+            }
+        }
 	}
 }

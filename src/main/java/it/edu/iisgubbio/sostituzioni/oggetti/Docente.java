@@ -13,6 +13,8 @@ public class Docente {
 	public Ora oraADisposizioneGattapone;
 	public ArrayList<Ora> oreAPagamento;
 	public ArrayList<Ora> orePotenziamento;
+	public String gruppo; // una cosa tipo "lettere" o "matematica" ...
+	public int oreDaRecuperare;
 
 	public Docente(String nome) {
 		this.nome = nome;

@@ -139,6 +139,7 @@ public class Ambiente {
         for(Docente daExcel : informazioniExcel) {
             Docente presente = cercaDocentePerNome(daExcel.nome);
             if(presente!=null) {
+                presente.gruppo = daExcel.gruppo;
                 presente.oraARecupero = daExcel.oraARecupero;
                 presente.oraADisposizioneCassata = daExcel.oraADisposizioneCassata;
                 presente.oraADisposizioneGattapone = daExcel.oraADisposizioneGattapone;
