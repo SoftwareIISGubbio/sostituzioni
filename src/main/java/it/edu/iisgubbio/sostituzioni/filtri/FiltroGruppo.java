@@ -29,7 +29,7 @@ public class FiltroGruppo {
     		}
 		}else {
 		    for (Docente d : tutti) {
-                if (!d.gruppo.equals(gruppo)) {
+                if (d.gruppo!=null && !d.gruppo.equals(gruppo)) {
                     risposta.add(d);
                 }
             }

@@ -33,7 +33,7 @@ public class TestDocente {
 		panfili.oreLezione.add(i5Lunedi);
 		
 		giammarioli.oraARecupero = new Ora(1, 1);
-		giammarioli.oraADisposizioneCassata = new Ora(2, 1);
+		giammarioli.oreADisposizioneCassata.add( new Ora(2, 1) );
 		giammarioli.oraADisposizioneGattapone = new Ora(2, 2);
 		
 		giammarioli.oreAPagamento.add(new Ora(5,1));

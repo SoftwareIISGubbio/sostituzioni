@@ -82,7 +82,7 @@ fi
 
 $JPACKAGE --name sostituzioni --app-version $VERSIONE --icon $ICONA --type $TIPO_PACCHETTO \
     --input $CARTELLA_LAVORO --dest $DESTINAZIONE --module-path $CARTELLA_LAVORO \
-    --add-modules javafx.controls,javafx.media,javafx.fxml,jdk.charsets \
+    --add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,jdk.charsets \
     --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar $JAR_PRINCIPALE
 
 if [[ "$OSTYPE" == "darwin"*  ]]; then

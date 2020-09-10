@@ -24,9 +24,12 @@ public class FiltroADisposizioneCassata {
 		//viene cercato il docente che è libero nell'ora richiesta
 		for (Docente d : tutti) {
 			//se il giorno e l'orario libero del docente è uguale al giorno e l'orario cercato, il docente viene aggiunto ad un ArrayList 
-			if (d.oraADisposizioneCassata!=null && d.oraADisposizioneCassata.giorno == oraCercata.giorno && d.oraADisposizioneCassata.orario == oraCercata.orario) {
-			    risposta.add(d);
-			}
+			for (Ora o : d.oreADisposizioneCassata) {
+                //se il giorno e l'orario libero del docente è uguale al giorno e l'orario cercato, il docente viene aggiunto ad un ArrayList 
+                if (o.giorno == oraCercata.giorno && o.orario == oraCercata.orario) {
+                    risposta.add(d);
+                }
+            }
 		}
 		//ritorna un ArrayList di docenti
 		return risposta;

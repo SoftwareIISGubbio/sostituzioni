@@ -123,7 +123,7 @@ public class LettoreFile {
 				}else if(contenuto.equals("POT")) {
 					docente.orePotenziamento.add(new Ora(giorno, orario));
 				}else if(contenuto.equals("D")) {
-					docente.oraADisposizioneCassata = new Ora(giorno, orario);
+					docente.oreADisposizioneCassata.add( new Ora(giorno, orario) );
 				}else {
 					if(contenuto.contains("®")){
 						docente.oraARecupero = new Ora(giorno,orario);

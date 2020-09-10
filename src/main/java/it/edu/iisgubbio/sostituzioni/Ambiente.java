@@ -141,7 +141,7 @@ public class Ambiente {
             if(presente!=null) {
                 presente.gruppo = daExcel.gruppo;
                 presente.oraARecupero = daExcel.oraARecupero;
-                presente.oraADisposizioneCassata = daExcel.oraADisposizioneCassata;
+                presente.oreADisposizioneCassata = daExcel.oreADisposizioneCassata;
                 presente.oraADisposizioneGattapone = daExcel.oraADisposizioneGattapone;
                 presente.oraARecupero = daExcel.oraARecupero;
                 presente.oreAPagamento = daExcel.oreAPagamento;

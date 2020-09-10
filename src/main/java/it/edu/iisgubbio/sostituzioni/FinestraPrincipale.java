@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizioneCassata;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroAPagamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
@@ -28,15 +30,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
 /************************************************************************************************
  * classe principale del programma, crea la finestra per la ricerca delle sostituzioni
  ***********************************************************************************************/
@@ -46,27 +50,34 @@ public class FinestraPrincipale extends Application {
         launch(args);
     }
 
+    @FXML
+    ComboBox<String> nomeProf;
 	@FXML
 	DatePicker data;
 	@FXML
+    ListView<OraLezione> listaOreLezione;
+	@FXML
 	ComboBox<String> cmbOra;
 	@FXML
-	ComboBox<String> nomeProf;
-	@FXML
 	ComboBox<String> cmbClasse;
-	@FXML
-	ListView<Sostituzione> lista;
-	@FXML
+
+    @FXML
 	ImageView ivAttenzione;
 	@FXML
-	Button pSalva;
+	ListView<Sostituzione> listaSostituzioniPossibili;
+	
 	@FXML
 	TextArea taDescrizioneSostituzione;
 	@FXML
-	ListView<OraLezione> listaOreLezione;
+    Label lDescrizioneOreLezione;
 	
-	private String sostituzioneCercataPer;
+	@FXML
+	WebView ww;
 	
+	/********************************************************************************************
+	 * Legge il numero di versione dal file versione.txt contenuto nel pacchetto
+	 * @return il numero di versione del programma
+	 *******************************************************************************************/
 	private String leggiVersione(){
 	    try {
 	        InputStream is = FinestraPrincipale.class.getResourceAsStream("versione.txt");
@@ -103,20 +114,21 @@ public class FinestraPrincipale extends Application {
 	 * In questo metodo si impostano i valori di alcuni oggetti presenti nella finestra
 	 *******************************************************************************************/	
 	void initialize() {
-		// Ciclo per scorrere le classi e li inserisce alla combobox
+		// scorrere le classi e li inserisce alla combobox
 		String[] classi = Ambiente.getNomiClassi();
-		for (int i = 1; i <= 8; i++) {
-			String n = "" + i;
-			cmbOra.getItems().add(n);
-		}
 		for (int j = 0; j < classi.length; j++) {
 			cmbClasse.getItems().add(classi[j]);
 		}
-		
-		// Ciclo per scorrere l'elenco dei professori e li inserisce alla combobox
+		// inserisce i nomi delle ore nel combo box 
+	    for (int i = 1; i <= 8; i++) {
+	        String n = "" + i;
+	        cmbOra.getItems().add(n);
+	    }
+		// scorrere l'elenco dei professori e li inserisce alla combobox
 		for (int j = 0; j < Ambiente.docenti.size(); j++) {
 			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
 		}
+		
 		Tooltip tt = new Tooltip();
 		tt.setAnchorX(0);tt.setAnchorY(0);
 		nomeProf.setTooltip( tt );
@@ -126,17 +138,27 @@ public class FinestraPrincipale extends Application {
 		    ivAttenzione.setVisible(false);
 		}
 		
-        lista.setCellFactory(new FabbricaDiCaselle());
+        listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselle());
         
         // XXX: è possibile che questa cosa si possa fare dal file FXML 
         // ma siccome non trovo come quindi la metto qui
-        lista.getSelectionModel().selectedItemProperty().addListener( e -> gestioneSelezioneLista() );
+        listaSostituzioniPossibili.getSelectionModel().selectedItemProperty().addListener( e -> gestioneSelezioneListaSostituzioni() );
         listaOreLezione.getSelectionModel().selectedItemProperty().addListener( e -> gestioneListaOreLezione() );
+        
+        // se cambi ora o classe pulisco, attenzione che sovrascrivo altri eventuali listener
+        cmbOra.setOnAction( e-> puliziaRisultati());
+        cmbClasse.setOnAction( e-> puliziaRisultati());
+	}
+	
+	private void puliziaRisultati() {
+	    System.out.println("pulisco");
+	    listaSostituzioniPossibili.getItems().clear();
+	    ww.getEngine().loadContent("<p>uh!</p>");
 	}
 	
 	@FXML
 	/********************************************************************************************
-	 * apre la finestra che contiene tutti i problemi riscontrati in fase di lettura del file
+	 * apre la finestra con le informazioni del docente selezionato
 	 *******************************************************************************************/
     private void gestioneInformazioniDocente(ActionEvent e) {
         Stage s = new Stage();
@@ -155,11 +177,29 @@ public class FinestraPrincipale extends Application {
         }
 	}
 	
+    @FXML
+    /********************************************************************************************
+     * mostra una finestra con l'elenco dei problemi rilevati in fase di lettura dei file
+     *******************************************************************************************/
+    private void mostraProblemi(Event e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("FinestraProblemi.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Problemi nei dati");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
+	
 	@FXML
 	/********************************************************************************************
 	 * apre la finestra che contiene le informazioni del software
 	 *******************************************************************************************/
-	private void finestraInfoSoftaware(ActionEvent e) {
+	private void finestraInfoSoftware(ActionEvent e) {
 		Stage s = new Stage();
         Scene scena;
         try {
@@ -174,12 +214,35 @@ public class FinestraPrincipale extends Application {
         }
 	}
 	
+    @FXML
+    /********************************************************************************************
+     * apre la finestra delle preferenze
+     *******************************************************************************************/    
+    private void finestraPreferenze(Event e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("Preferenze.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Preferenze");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
+	
+    /********************************************************************************************
+     * Legge le informazioni dalla data selezionata e dall'ora selezionata
+     * @return 
+     *******************************************************************************************/
 	private OraLezione leggiOraLezione() {
 	    LocalDate d = data.getValue();
 	    OraLezione oraDaSostituire = new OraLezione();
         oraDaSostituire.giorno = d.getDayOfWeek().getValue();
         oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
         oraDaSostituire.classe = cmbClasse.getValue();
+        oraDaSostituire.aula = listaOreLezione.getItems().get(listaOreLezione.getSelectionModel().getSelectedIndex()).aula;
         return oraDaSostituire;
 	}
 	
@@ -193,16 +256,9 @@ public class FinestraPrincipale extends Application {
         OraLezione oraDaSostituire = leggiOraLezione();
         System.out.println(oraDaSostituire);
         String nomeDocenteDaSostituire = nomeProf.getItems().get(nomeProf.getSelectionModel().getSelectedIndex());
-
-        sostituzioneCercataPer = 
-                "data "+data.getValue()+"\n"+
-                "ora "+oraDaSostituire.orario+"\n"+
-                "docente da sostituire: "+docenteAssente+" ["+gruppoDocenteAssente+"]\n"+
-                "assente per la classe "+oraDaSostituire.classe;
-        taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\nSELEZIONA UNA SOSTITUZIONE DALLA LISTA");
         
         // rimuovo vecchia ricerca
-        lista.getItems().clear();
+        puliziaRisultati();
         ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
         tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
@@ -215,7 +271,7 @@ public class FinestraPrincipale extends Application {
                     docentiCoPresenza.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("copresenza");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
         
         // potenziamento
@@ -227,7 +283,7 @@ public class FinestraPrincipale extends Application {
                     docente.nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("potenziamento stesse discipline");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
         // poi tutti gli altri
         for( Docente docente: FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente, false)){
@@ -236,7 +292,7 @@ public class FinestraPrincipale extends Application {
                     docente.nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("potenziamento altre discipline");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
 
         // recupero docenti con ore "a recupero"
@@ -248,7 +304,7 @@ public class FinestraPrincipale extends Application {
                     docentiRecupero.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("recupero");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
         
         // recupero docenti con l'ora cercata "a disposizione" al Cassata
@@ -258,9 +314,20 @@ public class FinestraPrincipale extends Application {
                     docente.nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("a disposizione");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
+        }
+        
+        // recupero docenti con l'ora cercata "a pagamento"
+        for( Docente docente: FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire)){
+            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
+                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+                    docente.nome);
+            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+            s.setMotivazione("a pagamento");
+            listaSostituzioniPossibili.getItems().add(s);
         }
 
+        // un elenco di tutti i docenti della classe
         ArrayList<Docente> docentiDellaClasse;
         docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe);
         ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
@@ -270,9 +337,10 @@ public class FinestraPrincipale extends Application {
                     docentiLiberiClasse.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("della classe");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
 
+        // alla fine tutti quelli liberi
         ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
         for (int i = 0; i < docentiLiberi.size(); i++) {
             Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
@@ -280,50 +348,17 @@ public class FinestraPrincipale extends Application {
                     docentiLiberi.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
             s.setMotivazione("libero");
-            lista.getItems().add(s);
+            listaSostituzioniPossibili.getItems().add(s);
         }
 
     }
 	
 	@FXML
-	/********************************************************************************************
-	 * mostra una finestra con l'elenco dei problemi rilevati in fase di lettura dei file
-	 *******************************************************************************************/
-	private void mostraProblemi(Event e) {
-        Stage s = new Stage();
-        Scene scena;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            scena = new Scene(  fxmlLoader.load(getClass().getResource("FinestraProblemi.fxml").openStream()) );
-            s.setScene(scena);
-            s.setTitle("Problemi nei dati");
-            s.show();
-        } catch (IOException x) {
-            x.printStackTrace();
-        }
-	}
-	
-	@FXML
-	private void finestraPreferenze(Event e) {
-        Stage s = new Stage();
-        Scene scena;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            scena = new Scene(  fxmlLoader.load(getClass().getResource("Preferenze.fxml").openStream()) );
-            s.setScene(scena);
-            s.setTitle("Preferenze");
-            s.show();
-        } catch (IOException x) {
-            x.printStackTrace();
-        }
-	}
-	
-	@FXML
 	private void gestioneSalva(ActionEvent e) throws IOException, URISyntaxException {
         // recupero l'indice dell'elemento selezionato
-        int indiceSelezionato = lista.getSelectionModel().getSelectedIndex();
+        int indiceSelezionato = listaSostituzioniPossibili.getSelectionModel().getSelectedIndex();
         // recupero l'oggetto selezionato usando il suo indice
-        Sostituzione s = lista.getItems().get(indiceSelezionato);
+        Sostituzione s = listaSostituzioniPossibili.getItems().get(indiceSelezionato);
         
 	    Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, 
 	            s.getDescrizione());
@@ -335,17 +370,35 @@ public class FinestraPrincipale extends Application {
 	}
 	
 	@FXML
-	private void gestioneSelezioneLista() {
-	    System.out.println("selection changed");  
-	    Sostituzione scelta = lista.getItems().get(lista.getSelectionModel().getSelectedIndex());
-	    taDescrizioneSostituzione.setText(sostituzioneCercataPer+"\n"+scelta);
+	private void gestioneSelezioneListaSostituzioni() {
+	    Sostituzione sostituzioneScelta = listaSostituzioniPossibili.getItems().get(listaSostituzioniPossibili.getSelectionModel().getSelectedIndex());
+	    // OraLezione oraDaSostituire = leggiOraLezione();
+	    Docente sostituto = Ambiente.cercaDocentePerNome(sostituzioneScelta.getNomeSostituto());
+	    String orarioGiornaliero[] = sostituto.descriviGiornata(sostituzioneScelta.giorno);
+	    String orarioGiornalieroModificato[] = orarioGiornaliero.clone();
+	    LocalDate d = data.getValue();
+	    
+	    orarioGiornalieroModificato[ sostituzioneScelta.orario-1 ] = "<big>"+sostituzioneScelta.classe+" ["+sostituzioneScelta.aula+"]</big>";
+	    	    
+	    String descrizione = "<p>vista l'assenza di "+sostituzioneScelta.getNomeDocenteDaSostituire()+"</p>"+
+	            "<p> Per il giorno "+d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))+"</p>"+
+	            "<p>"+sostituzioneScelta.getNomeSostituto()+" lo sostituirà nella classe "+sostituzioneScelta.classe+" [aula "+sostituzioneScelta.aula+"]</p>"+
+	            "<p>motivazione della scelta: "+sostituzioneScelta.getMotivazione()+"</p>"+
+	            "<pre>vecchio orario: "+String.join("  ", orarioGiornaliero)+"</pre>"+
+	            "<pre style=\"color:red;font-weight:bold\">nuovo orario: "+String.join("  ", orarioGiornalieroModificato)+"</pre>";
+	    
+	    // costruisco il messaggio della sostituzione
+	    ww.getEngine().loadContent(descrizione);
 	}
 	
 	@FXML
 	private void gestioneSelezioneDataEDocente() {
+	    puliziaRisultati();
 	    LocalDate d = data.getValue();
         String nomeDocenteAssente = nomeProf.getValue();
         if(nomeDocenteAssente!=null && d!=null) {
+            lDescrizioneOreLezione.setText("ore da sostituire per "+nomeDocenteAssente+"\n"+
+                    d.format(DateTimeFormatter.ofPattern("EEE dd MMMM, yyyy")));
             int giornoDellaSettimana = d.getDayOfWeek().getValue();
             Docente docenteAssente = Ambiente.cercaDocentePerNome(nomeDocenteAssente);
             listaOreLezione.getItems().clear();

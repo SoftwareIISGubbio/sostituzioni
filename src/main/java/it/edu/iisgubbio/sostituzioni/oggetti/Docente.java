@@ -9,7 +9,7 @@ public class Docente {
 	public String nome;
 	public ArrayList<OraLezione> oreLezione;
 	public Ora oraARecupero;
-	public Ora oraADisposizioneCassata;
+	public ArrayList<Ora> oreADisposizioneCassata;
 	public Ora oraADisposizioneGattapone;
 	public ArrayList<Ora> oreAPagamento;
 	public ArrayList<Ora> orePotenziamento;
@@ -21,13 +21,13 @@ public class Docente {
 		oreLezione = new ArrayList<>();
 		oreAPagamento = new ArrayList<Ora>();
 		orePotenziamento = new ArrayList<Ora>();
+		oreADisposizioneCassata = new ArrayList<>();
 	}
 
 	public String toString() {
 		String risposta;
 		risposta = nome;
 		risposta = risposta + "\n  ora a recupero: " + oraARecupero;
-		risposta = risposta + "\n  ora a disp. Cassata: " + oraADisposizioneCassata;
 		risposta = risposta + "\n  ora a disp. Gattapone: " + oraADisposizioneGattapone;
 		risposta = risposta + "\n  ore a pagamento: ";
 		for (int i = 0; i < oreAPagamento.size(); i++) {
@@ -37,6 +37,11 @@ public class Docente {
         for (int i = 0; i < orePotenziamento.size(); i++) {
             risposta = risposta + orePotenziamento.get(i)+" ";
         }
+        risposta = risposta + "\n  ore a disposizione Cassata: ";
+        for (int i = 0; i < oreADisposizioneCassata.size(); i++) {
+            risposta = risposta + oreADisposizioneCassata.get(i)+" ";
+        }
+        risposta = risposta + "\n  ore di lezione ";
 		for (int i = 0; i < oreLezione.size(); i++) {
 			risposta = risposta + "\n  " + oreLezione.get(i);
 		}
@@ -83,6 +88,24 @@ public class Docente {
 			}
 		}
 		return false;
+	}
+	
+	public String[] descriviGiornata(int giorno) {
+	    String risposta[];
+	    if(giorno==1) {
+	        risposta = new String[8];
+	    }else {
+	        risposta = new String[6];
+	    }
+	    for(int i=0; i<risposta.length; i++) {
+	        risposta[i] = "-";
+	    }
+	    for(OraLezione ol: oreLezione) {
+	        if(ol.giorno==giorno) {
+	            risposta[ol.orario-1] = ol.classe;
+	        }
+	    }
+	    return risposta;
 	}
 
 }
