@@ -151,6 +151,11 @@
               <MenuItem mnemonicParsing="false" onAction="#mostraProblemi" text="mostra" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Strumenti">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#gestioneStatistiche" text="Statistiche" />
+              </items>
+            </Menu>
         </menus>
          <BorderPane.margin>
             <Insets right="5.0" />

@@ -175,10 +175,18 @@ public class LettoreFile {
         for( int i = 1; foglio.getRow(i)!=null&&foglio.getRow(i).getCell(1)!=null; i++) {
             String nome = foglio.getRow(i).getCell(0).getStringCellValue().trim().toUpperCase();
             String gruppo = foglio.getRow(i).getCell(1).getStringCellValue().trim().toUpperCase();
+            int oreDaRecuperare;
+            try {
+                oreDaRecuperare = (int) foglio.getRow(i).getCell(2).getNumericCellValue();
+            }catch (Exception e) {
+                // TODO: forse si può far di meglio
+                oreDaRecuperare = -1;
+            }
             boolean preso = false;
             for(Docente d: listaDocenti) {
                 if(d.nome.equals(nome)) {
                     d.gruppo=gruppo;
+                    d.oreDaRecuperare = oreDaRecuperare;
                     preso = true;
                     break;
                 }

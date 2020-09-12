@@ -146,6 +146,7 @@ public class Ambiente {
                 presente.oraARecupero = daExcel.oraARecupero;
                 presente.oreAPagamento = daExcel.oreAPagamento;
                 presente.orePotenziamento = daExcel.orePotenziamento;
+                presente.oreDaRecuperare = daExcel.oreDaRecuperare;
             }else {
             	docenti.add(daExcel);
             }

@@ -19,6 +19,7 @@
     <RowConstraints vgrow="SOMETIMES" />
     <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="4.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
@@ -31,36 +32,36 @@
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
-      <Label text="Ora Recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+      <Label text="Ora Recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
-      <Label text="Ora disposizione Cassata" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="TOP">
+      <Label text="Ora disposizione Cassata" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
-      <Label text="Ora disposizione Gattapone" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Label text="Ora disposizione Gattapone" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
-      <Label text="Ore pagamento" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="TOP">
+      <Label text="Ore pagamento" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
       <ListView fx:id="lOreLezione" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Ore potenziamento" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
+      <Label text="Ore potenziamento" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="TOP">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Label>
-      <ListView fx:id="lOrePagamento" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <ListView fx:id="lOrePotenziamento" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <TextField fx:id="cOraRecupero" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField fx:id="cOraDisposizioneGattapone" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <ListView fx:id="lOrePagamento" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <ListView fx:id="lOrePotenziamento" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <TextField fx:id="cOraRecupero" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="cOraDisposizioneGattapone" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Label fx:id="eNomeDocente" prefHeight="24.0" prefWidth="195.0" text="Informazioni Docente" textAlignment="JUSTIFY" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Lucida Bright" size="18.0" />
@@ -68,7 +69,9 @@
       </Label>
       <TextField fx:id="cGruppo" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="Gruppo" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-      <ListView fx:id="lOreDisposizioneCassata" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <ListView fx:id="lOreDisposizioneCassata" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label text="Ore da recuperare" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+      <TextField fx:id="cOreDaRecuperare" style="-fx-background-color: #FFFFDA #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -179,6 +179,24 @@ public class FinestraPrincipale extends Application {
 	
     @FXML
     /********************************************************************************************
+     * apre la finestra con le informazioni del docente selezionato
+     *******************************************************************************************/
+    private void gestioneStatistiche(ActionEvent e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(getClass().getResource("FinestraStatistiche.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("statistiche docenti");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
+	
+    @FXML
+    /********************************************************************************************
      * mostra una finestra con l'elenco dei problemi rilevati in fase di lettura dei file
      *******************************************************************************************/
     private void mostraProblemi(Event e) {

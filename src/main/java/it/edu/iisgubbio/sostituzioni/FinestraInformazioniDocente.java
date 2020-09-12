@@ -13,6 +13,8 @@ public class FinestraInformazioniDocente {
 	@FXML
 	ListView<String> lOreLezione;
 	@FXML
+	TextField cOreDaRecuperare;
+	@FXML
 	TextField cOraRecupero;
 	@FXML
 	ListView<String> lOreDisposizioneCassata;
@@ -35,6 +37,7 @@ public class FinestraInformazioniDocente {
 	public void setDocente(Docente d) {
 		eNomeDocente.setText(d.nome);
 		cGruppo.setText(d.gruppo);
+		cOreDaRecuperare.setText(""+d.oreDaRecuperare);
 		if (d.oraARecupero != null) {
 		cOraRecupero.setText(d.oraARecupero.toString());
 		}
