@@ -1,7 +1,10 @@
 package it.edu.iisgubbio.sostituzioni.gui;
 
+import it.edu.iisgubbio.sostituzioni.Ambiente;
+import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.scene.control.ListCell;
+import javafx.scene.paint.Color;
 
 // https://examples.javacodegeeks.com/desktop-java/javafx/listview-javafx/javafx-listview-example/
 public class CasellaSostituzione extends ListCell<Sostituzione>{
@@ -16,31 +19,20 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         if (item == null || empty) {
         
         } else {
-            /*
-            String icona="";
-            l'idea originale era di mettere emoji ma JavaFX ha problemi con il rendering delle emoji
-            switch( item.getMotivazione() ) {
-            case "copresenza":
-                icona = "[copresenza]";
-                break;
-            case "recupero":
-                icona = "[recupero]";
-                break;
-            case "della classe":
-                icona = "[della classe]";
-                break;
-            case "libero":
-                icona = "[libero]";
-                break;
-            case "a disposizione":
-                icona = "[a disposizione]";
-                break;
-            default:
-                icona = "[??]";
-            }*/
+            if(item.getMotivazione().equals("a disposizione Cassata") || 
+                    item.getMotivazione().equals("libero della classe") ||
+                    item.getMotivazione().equals("libero altra classe") ) {
+                this.setTextFill(Color.GRAY);
+            }else {
+                this.setTextFill(Color.BLACK);
+            }
+            Docente bersaglio = Ambiente.cercaDocentePerNome(item.getNomeSostituto());
+            
+            // this.setBackground(new Background(new BackgroundFill( Color.RED, null, null)));
             name = (index + 1) + ". " +
             item.getNomeSostituto() + " ["+
-            item.getMotivazione()+"]";
+            item.getMotivazione()+"]"+
+            "  [recuperate "+(bersaglio.oreRecuperate+" su "+bersaglio.oreDaRecuperare)+"]";
         }
          
         this.setText(name);

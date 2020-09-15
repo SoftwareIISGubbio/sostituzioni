@@ -47,7 +47,7 @@ public class FinestraStatistiche {
 
 
         try {
-            
+            // FIXME: ora i docneti hanno queste informazioni, non serve rileggerle dai file
             ArrayList<Sostituzione> records = Giornale.leggiGiornale(Ambiente.getFileGiornale());
             ResocontoDocente resoconti[] = new ResocontoDocente[Ambiente.docenti.size()];
             int i=0;
@@ -57,7 +57,7 @@ public class FinestraStatistiche {
                 resoconti[i].setOreDaFare( d.oreDaRecuperare );
                 i++;
             }
-            // carico ogni singola ora su ogni docente, la srategia è penosa ma
+            // carico ogni singola ora su ogni docente, la strategia è penosa ma
             // visto il carico dovrebbe essere sopportabile
             for(Sostituzione s: records) {
                 for(ResocontoDocente r: resoconti) {
@@ -75,7 +75,7 @@ public class FinestraStatistiche {
             }
         }catch(Exception ex) {
             // FIXME: 
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
     

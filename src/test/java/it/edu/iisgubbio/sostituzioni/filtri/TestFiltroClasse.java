@@ -11,7 +11,7 @@ public class TestFiltroClasse {
 		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
 		ArrayList<Docente> docentiClasse;
 
-		docentiClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, "1i");
+		docentiClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, "1i", true);
 		for (int i = 0; i < docentiClasse.size(); i++) {
 			System.out.println(docentiClasse.get(i));
 		}

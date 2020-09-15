@@ -15,6 +15,7 @@ public class Docente {
 	public ArrayList<Ora> orePotenziamento;
 	public String gruppo; // una cosa tipo "lettere" o "matematica" ...
 	public int oreDaRecuperare;
+	public int oreRecuperate;
 
 	public Docente(String nome) {
 		this.nome = nome;
@@ -22,6 +23,7 @@ public class Docente {
 		oreAPagamento = new ArrayList<Ora>();
 		orePotenziamento = new ArrayList<Ora>();
 		oreADisposizioneCassata = new ArrayList<>();
+		oreRecuperate = 0;
 	}
 
 	public String toString() {

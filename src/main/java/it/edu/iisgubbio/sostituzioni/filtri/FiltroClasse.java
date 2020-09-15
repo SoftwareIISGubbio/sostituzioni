@@ -16,14 +16,22 @@ public class FiltroClasse {
 	 * @param classe rappresenta la classe da ricercare
 	 * @return tutti i docenti che lavorano in quella classe
 	 */
-	public static ArrayList<Docente> docentiDellaClasse(ArrayList<Docente> tutti, String classe) {
+	public static ArrayList<Docente> docentiDellaClasse(ArrayList<Docente> tutti, String classe, boolean prendi) {
 		// lista docenti della classe
 		ArrayList<Docente> risposta = new ArrayList<>();
 		// cerca il docente che lavora in quella classe nella lista di tutti i docenti
 		for (Docente d : tutti) {
-			if (d.lavoraNellaClasse(classe)) {
-				risposta.add(d);
-			}
+		    if(prendi) {
+		        // interessano queli della classe
+    			if (d.lavoraNellaClasse(classe)) {
+    				risposta.add(d);
+    			}
+		    }else {
+		        // interessano quelli non della classe
+		        if (!d.lavoraNellaClasse(classe)) {
+		            risposta.add(d);
+		        }
+		    }
 		}
 		return risposta;
 	}

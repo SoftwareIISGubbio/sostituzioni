@@ -3,6 +3,7 @@ package it.edu.iisgubbio.sostituzioni;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Properties;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
+import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -114,6 +116,27 @@ public class Ambiente {
         return problemi;
     }
     
+    public static void aggiornaOreSvolteDocenti() {
+        ArrayList<Sostituzione> records;
+        try {
+            records = Giornale.leggiGiornale(Ambiente.getFileGiornale());
+            // carico ogni singola ora su ogni docente, la strategia è penosa ma
+            // visto il carico dovrebbe essere sopportabile
+            for(Sostituzione s: records) {
+                for(Docente docente: docenti) {
+                    if(docente.nome.equals(s.getNomeSostituto())){
+                        // TODO: controlla che la sostituzione sia su singola ora
+                        docente.oreRecuperate++;
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block, tocca fa di meglio
+            e.printStackTrace();
+        }
+    }
+    
     /********************************************************************************************
      * Questo codice viene eseguito al momento del caricamento della classe in memoria
      * TODO: forse sarebbe il caso di farlo diventare un normale oggetto e togliere tutte
@@ -147,6 +170,7 @@ public class Ambiente {
                 presente.oreAPagamento = daExcel.oreAPagamento;
                 presente.orePotenziamento = daExcel.orePotenziamento;
                 presente.oreDaRecuperare = daExcel.oreDaRecuperare;
+                // le ore recuperate vengono lette direttamente dal giornale
             }else {
             	docenti.add(daExcel);
             }
@@ -176,6 +200,7 @@ public class Ambiente {
         }
         nomiClassi = insiemeNomiDiClassi.toArray( new String[0] );
         Arrays.sort(nomiClassi);
+        aggiornaOreSvolteDocenti();
     }    
     
     /********************************************************************************************
@@ -183,7 +208,7 @@ public class Ambiente {
      * @param nome del docente da cercare
      * @return il docente cercato o null se non l'ha trovato
      *******************************************************************************************/
-    static Docente cercaDocentePerNome(String nome) {
+    public static Docente cercaDocentePerNome(String nome) {
         // prima ricerca: per corrispondenza esatta
         for(Docente x: docenti) {
             if(x.nome.toLowerCase().equals(nome.toLowerCase())) {

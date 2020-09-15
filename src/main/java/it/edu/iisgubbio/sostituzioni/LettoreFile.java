@@ -166,7 +166,7 @@ public class LettoreFile {
 	/**
 	 * il foglio da cui legge deve avere informazioni a partire dalla seconda riga, 
 	 * la prima riga vuota è considerata lo stop.
-	 * le colonne sono in ordine: nome, gruppo
+	 * le colonne sono in ordine: nome, gruppo, oreDaSvolgereNell'anno
 	 * @param foglio da cui leggere le informazioni
 	 * @param listaDocenti in cui inserire le informazioni
 	 */

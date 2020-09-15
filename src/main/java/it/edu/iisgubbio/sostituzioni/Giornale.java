@@ -33,10 +33,11 @@ public class Giornale {
 			// chiude il file
 			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		    // FIXME: se si stampa su console non lo vede nessuno
+			e.printStackTrace();
 			// in caso dà errori, il programma deve stampare gli errori in console
 		}
-	
+		Ambiente.aggiornaOreSvolteDocenti(); // Esitono altri modi molto più eleganti di farlo
 	}
 	
 	public static ArrayList<Sostituzione> leggiGiornale(File fileGiornale) throws FileNotFoundException, IOException {
