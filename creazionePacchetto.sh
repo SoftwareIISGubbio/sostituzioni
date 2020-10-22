@@ -6,9 +6,9 @@
 # - mvn package mette tutti i jar in target/jars
 # - le icone sono nella cartella icone
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "uso del programma:"
-    echo "creazionePacchetto.sh <path_cartella_principale_javafx_sdk>"
+    echo "creazionePacchetto.sh <path_cartella_principale_javafx_sdk> <path_cartella_principale_javafx_jmods>"
     exit 0
 fi
 if [ -z "$JAVA_HOME" ]; then
@@ -18,6 +18,7 @@ fi
 
 # ilprimo parametro è la poszione dell'SDK di JavaFX
 CARTELLA_FX_SDK=$1
+CARTELLA_FX_JMODS=$2
 # comando per jpackage
 JPACKAGE=$JAVA_HOME/bin/jpackage
 # dove stanno i jar (cartella impostata nel file pom.xml)
@@ -48,11 +49,12 @@ else
 fi
 
 echo "----- ambiente di lavoro -------------------------------------"
-echo "JAVA_HOME      : $JAVA_HOME"
-echo "JPACKAGE       : $JPACKAGE"
-echo "CARTELLA_FX_SDK: $CARTELLA_FX_SDK"
-echo "MAVEN          : $(which mvn)"
-echo "OSTYPE         : $OSTYPE"
+echo "JAVA_HOME        : $JAVA_HOME"
+echo "JPACKAGE         : $JPACKAGE"
+echo "CARTELLA_FX_SDK  : $CARTELLA_FX_SDK"
+echo "CARTELLA_FX_JMODS: $CARTELLA_FX_JMODS"
+echo "MAVEN            : $(which mvn)"
+echo "OSTYPE           : $OSTYPE"
 echo ""
 echo "CARTELLA_JARS  : $CARTELLA_JARS"
 echo "JAR_PRINCIPALE : $JAR_PRINCIPALE"
@@ -81,7 +83,7 @@ else
 fi
 
 $JPACKAGE --name sostituzioni --app-version $VERSIONE --icon $ICONA --type $TIPO_PACCHETTO \
-    --input $CARTELLA_LAVORO --dest $DESTINAZIONE --module-path $CARTELLA_LAVORO \
+    --input $CARTELLA_LAVORO --dest $DESTINAZIONE --module-path $CARTELLA_FX_JMODS \
     --add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,jdk.charsets \
     --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar $JAR_PRINCIPALE
 
