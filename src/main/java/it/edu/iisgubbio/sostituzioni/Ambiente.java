@@ -7,13 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Properties;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import javafx.scene.control.ButtonType;
 
 /****************************************************************************
  * 
@@ -149,8 +154,19 @@ public class Ambiente {
         try( FileInputStream entrata = new FileInputStream(percorso) ){
             proprieta.load(entrata);
         } catch (Exception e) {
-            problemi += "impossibile leggere i nomi dei file, aggiornale le preferenze e ricaricare il programma\n";
-            // in fase di avvio non si può aprire una finestra con i messaggi di errore
+            // se non sono riuscito ad aprire il file mostro le preferenze 
+            Stage s = new Stage();
+            Scene scena;
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                scena = new Scene(  fxmlLoader.load(Ambiente.class.getResource("Preferenze.fxml").openStream()) );
+                s.setScene(scena);
+                s.setTitle("Preferenze");
+                s.showAndWait();
+                System.exit(0);
+            } catch (IOException x) {
+                x.printStackTrace();
+            }
             e.printStackTrace();
         }
         
