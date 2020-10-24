@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Properties;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
@@ -18,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import javafx.scene.control.ButtonType;
 
 /****************************************************************************
  * 
@@ -49,7 +47,7 @@ public class Ambiente {
      * Salava i diversi percorsi nel file delle preferenze
      ***********************************************************************/
     public static void salvaProprieta() {
-        System.out.println("proprietà in: "+percorso);
+        System.out.println("proprietà salvate in: "+percorso);
         
         try( FileOutputStream uscita = new FileOutputStream(percorso) ){
             proprieta.store(uscita, "proprieta del programma dell'orario");
@@ -149,7 +147,7 @@ public class Ambiente {
      *******************************************************************************************/
     static {
         // le preferenze vengono caricate in automatico al caricamento della classe
-        System.out.println("proprietà in: "+percorso);
+        System.out.println("proprietà lette da: "+percorso);
         
         try( FileInputStream entrata = new FileInputStream(percorso) ){
             proprieta.load(entrata);

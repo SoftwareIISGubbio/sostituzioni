@@ -56,7 +56,7 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="pApplica" mnemonicParsing="false" onAction="#gestioneApplica" text="Applica" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="pApplica" mnemonicParsing="false" onAction="#gestioneApplica" text="Applica &amp; chiudi" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>

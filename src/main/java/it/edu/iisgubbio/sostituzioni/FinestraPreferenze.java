@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class FinestraPreferenze {
     @FXML
@@ -56,6 +57,8 @@ public class FinestraPreferenze {
         Ambiente.setFileOrarioExcel( new File(fileTabella) );
         Ambiente.setFileGiornale( new File(fileGiornale) );
         Ambiente.salvaProprieta();
+        Stage stage = (Stage) pSelezionaFileFET.getScene().getWindow();
+        stage.close();
     }
     
     @FXML
