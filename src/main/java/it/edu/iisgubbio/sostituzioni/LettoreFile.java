@@ -55,11 +55,12 @@ public class LettoreFile {
 			aggiungiInformazioniDocenti(foglio, lista);
 			libro.close();
 		} catch (Exception e) {
+		    e.printStackTrace();
             Alert dialogoAllerta = new Alert(AlertType.ERROR, e.getMessage() );
             dialogoAllerta.showAndWait();
-			e.printStackTrace();
-			System.exit(1);
+            Ambiente.impostaPreferenzeEEsci();
 		}
+		System.err.println("=======>docenti presenti excel ===> "+lista.size());
 		return lista;
 	}
 	
@@ -81,7 +82,7 @@ public class LettoreFile {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		
+		System.err.println("=======>docenti presenti XML ===> "+lista.size());
 		return lista;
 	}
 
@@ -98,7 +99,11 @@ public class LettoreFile {
 	private static int calcolaOrario(int partenza, Sheet foglio, ArrayList<Docente> lista, String materia) {
 		int i;
 		//il ciclo si ripete finche' non incontra una riga vuota
-		for( i = partenza;foglio.getRow(i)!=null&&foglio.getRow(i).getCell(1)!=null;i++) {
+		for( i = partenza ; 
+		        foglio.getRow(i)!=null 
+		        && foglio.getRow(i).getCell(1)!=null
+		        && foglio.getRow(i).getCell(1).getStringCellValue().trim().length()>0
+		    ; i++) {
 			Docente docente = new Docente(foglio.getRow(i).getCell(1).getStringCellValue().trim().toUpperCase());
 			ArrayList<OraLezione> listaOre = new ArrayList<>();
 			docente.oreLezione = listaOre;

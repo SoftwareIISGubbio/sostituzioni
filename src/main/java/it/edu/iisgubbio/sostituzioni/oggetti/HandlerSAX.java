@@ -45,8 +45,14 @@ public class HandlerSAX extends DefaultHandler{
             		break;
             	}
             }
+            if(oraAttuale==null) {
+                // System.err.println("Non riconosco l'ora \""+ora+"\"");
+            }
         }
         if(qName.equals("Subject")){
+            if(oraAttuale==null) {
+                System.err.println("Subject per un'ora nulla \""+atts.getValue("name")+"\"");
+            }
         	oraAttuale.materia = atts.getValue("name");
         }
         if(qName.equals("Students")){
