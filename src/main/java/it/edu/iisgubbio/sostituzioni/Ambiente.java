@@ -140,6 +140,22 @@ public class Ambiente {
         }
     }
     
+    public static void impostaPreferenzeEEsci() {
+        // se non sono riuscito ad aprire il file mostro le preferenze 
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(  fxmlLoader.load(Ambiente.class.getResource("Preferenze.fxml").openStream()) );
+            s.setScene(scena);
+            s.setTitle("Preferenze");
+            s.showAndWait();
+            System.exit(0);
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
+    
     /********************************************************************************************
      * Questo codice viene eseguito al momento del caricamento della classe in memoria
      * TODO: forse sarebbe il caso di farlo diventare un normale oggetto e togliere tutte
@@ -152,20 +168,7 @@ public class Ambiente {
         try( FileInputStream entrata = new FileInputStream(percorso) ){
             proprieta.load(entrata);
         } catch (Exception e) {
-            // se non sono riuscito ad aprire il file mostro le preferenze 
-            Stage s = new Stage();
-            Scene scena;
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                scena = new Scene(  fxmlLoader.load(Ambiente.class.getResource("Preferenze.fxml").openStream()) );
-                s.setScene(scena);
-                s.setTitle("Preferenze");
-                s.showAndWait();
-                System.exit(0);
-            } catch (IOException x) {
-                x.printStackTrace();
-            }
-            e.printStackTrace();
+           impostaPreferenzeEEsci();
         }
         
         // leggo le informazioni dei docenti dal file XML
