@@ -14,6 +14,8 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.HandlerSAX;
 import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Legge il documento XML (prodotto da FET) e il file Excel
@@ -40,14 +42,23 @@ public class LettoreFile {
 			// il file è composto da più fogli, a noi serve il foglio con le
 			// informazioni sui docenti
 			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
+			if(foglio==null) {
+                throw new Exception("Non esiste il foglio \""+FOGLIO_DOCENTI+"\" nel file "+Ambiente.getFileOrarioExcel());
+            }
 			// chiama la funzione che legge le informazioni
 			calcolaOrario(RIGA_ORE+1, foglio, lista, null);
 			// 
 			foglio = libro.getSheet(FOGLIO_INFORMAZIONI);
+			if(foglio==null) {
+			    throw new Exception("Non esiste il foglio \""+FOGLIO_INFORMAZIONI+"\" nel file "+Ambiente.getFileOrarioExcel());
+			}
 			aggiungiInformazioniDocenti(foglio, lista);
 			libro.close();
 		} catch (Exception e) {
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, e.getMessage() );
+            dialogoAllerta.showAndWait();
 			e.printStackTrace();
+			System.exit(1);
 		}
 		return lista;
 	}
@@ -137,8 +148,6 @@ public class LettoreFile {
 			}
 			lista.add(docente);
 		}
-		
-		
 		return i;
 	}
 	

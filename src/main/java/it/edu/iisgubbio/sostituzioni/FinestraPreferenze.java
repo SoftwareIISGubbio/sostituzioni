@@ -84,7 +84,7 @@ public class FinestraPreferenze {
         String cartellaPartenza = System.getProperties().getProperty("user.home");
         selettoreFile.setInitialDirectory(new File(cartellaPartenza));
         // creare filtro per estensione file
-        selettoreFile.getExtensionFilters().addAll(new ExtensionFilter("File dati Excel", "*.xlsx"));
+        selettoreFile.getExtensionFilters().addAll(new ExtensionFilter("File dati Excel", "*.xlsx", "*.xlsm"));
         // aprire la finestra e recuperare file selezionato
         File fileSelezionato = selettoreFile.showOpenDialog( null );
         // metto il nome sulla casella
@@ -99,7 +99,7 @@ public class FinestraPreferenze {
         String cartellaPartenza = System.getProperties().getProperty("user.home");
         selettoreFile.setInitialDirectory(new File(cartellaPartenza));
         // creare filtro per estensione file
-        selettoreFile.getExtensionFilters().addAll(new ExtensionFilter("File dati Excel", "*.txt"));
+        selettoreFile.getExtensionFilters().addAll(new ExtensionFilter("File di testo", "*.txt"));
         // aprire la finestra e recuperare file selezionato
         File fileSelezionato = selettoreFile.showOpenDialog( null );
         // metto il nome sulla casella
