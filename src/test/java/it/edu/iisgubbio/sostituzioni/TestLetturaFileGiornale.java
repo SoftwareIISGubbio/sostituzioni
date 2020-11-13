@@ -9,7 +9,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 public class TestLetturaFileGiornale {
 	public static void main(String[] args) {		
 		try {
-			ArrayList<Sostituzione> sostituzione= Giornale.leggiGiornale(Ambiente.getFileGiornale());
+			ArrayList<Sostituzione> sostituzione= Giornale.leggiGiornale();
 			for (int i=0; i < sostituzione.size(); i++) {
 	            System.out.println(sostituzione.get(i));
 			}

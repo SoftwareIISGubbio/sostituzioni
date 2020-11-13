@@ -122,7 +122,7 @@ public class Ambiente {
     public static void aggiornaOreSvolteDocenti() {
         ArrayList<Sostituzione> records;
         try {
-            records = Giornale.leggiGiornale(Ambiente.getFileGiornale());
+            records = Giornale.leggiGiornale();
             // carico ogni singola ora su ogni docente, la strategia è penosa ma
             // visto il carico dovrebbe essere sopportabile
             for(Sostituzione s: records) {
