@@ -40,9 +40,9 @@ public class Giornale {
 		Ambiente.aggiornaOreSvolteDocenti(); // Esitono altri modi molto più eleganti di farlo
 	}
 	
-	public static ArrayList<Sostituzione> leggiGiornale(File fileGiornale) throws FileNotFoundException, IOException {
+	public static ArrayList<Sostituzione> leggiGiornale() throws FileNotFoundException, IOException {
 		//serve per leggere da un file
-		BufferedReader reader = new BufferedReader(new FileReader(fileGiornale));
+		BufferedReader reader = new BufferedReader(new FileReader(Ambiente.getFileGiornale()));
 		//prendiamo il file che vogliamo leggere
 		ArrayList<Sostituzione> risposta=new ArrayList<>();
 		String line;

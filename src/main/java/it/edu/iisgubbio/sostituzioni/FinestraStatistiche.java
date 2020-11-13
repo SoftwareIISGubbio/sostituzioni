@@ -48,7 +48,7 @@ public class FinestraStatistiche {
 
         try {
             // FIXME: ora i docneti hanno queste informazioni, non serve rileggerle dai file
-            ArrayList<Sostituzione> records = Giornale.leggiGiornale(Ambiente.getFileGiornale());
+            ArrayList<Sostituzione> records = Giornale.leggiGiornale();
             ResocontoDocente resoconti[] = new ResocontoDocente[Ambiente.docenti.size()];
             int i=0;
             // creo un resoconto per ogni docente
