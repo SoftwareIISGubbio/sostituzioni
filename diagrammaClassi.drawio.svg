@@ -1,486 +1,1491 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="781px" height="1214px" viewBox="-0.5 -0.5 781 1214" content="&lt;mxfile host=&quot;localhost&quot; modified=&quot;2020-05-21T08:36:28.505Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.1 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36&quot; etag=&quot;cJKHD-lYWd-sDrtB0oBL&quot; version=&quot;13.0.9&quot;&gt;&lt;diagram id=&quot;6hGFLwfOUW9BJ-s0fimq&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
-    <defs>
-        <clipPath id="mx-clip-474-39-302-26-0">
-            <rect x="474" y="39" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-119-302-26-0">
-            <rect x="474" y="119" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-199-302-26-0">
-            <rect x="474" y="199" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-279-302-26-0">
-            <rect x="474" y="279" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-359-302-26-0">
-            <rect x="474" y="359" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-439-302-26-0">
-            <rect x="474" y="439" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-519-302-26-0">
-            <rect x="474" y="519" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-24-31-232-84-0">
-            <rect x="24" y="31" width="232" height="84"/>
-        </clipPath>
-        <clipPath id="mx-clip-24-123-232-132-0">
-            <rect x="24" y="123" width="232" height="132"/>
-        </clipPath>
-        <clipPath id="mx-clip-4-339-262-46-0">
-            <rect x="4" y="339" width="262" height="46"/>
-        </clipPath>
-        <clipPath id="mx-clip-14-451-252-44-0">
-            <rect x="14" y="451" width="252" height="44"/>
-        </clipPath>
-        <clipPath id="mx-clip-14-503-252-82-0">
-            <rect x="14" y="503" width="252" height="82"/>
-        </clipPath>
-        <clipPath id="mx-clip-134-631-262-114-0">
-            <rect x="134" y="631" width="262" height="114"/>
-        </clipPath>
-        <clipPath id="mx-clip-134-753-262-92-0">
-            <rect x="134" y="753" width="262" height="92"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-611-262-64-0">
-            <rect x="474" y="611" width="262" height="64"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-683-262-52-0">
-            <rect x="474" y="683" width="262" height="52"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-791-262-64-0">
-            <rect x="474" y="791" width="262" height="64"/>
-        </clipPath>
-        <clipPath id="mx-clip-474-863-262-72-0">
-            <rect x="474" y="863" width="262" height="72"/>
-        </clipPath>
-        <clipPath id="mx-clip-164-911-202-42-0">
-            <rect x="164" y="911" width="202" height="42"/>
-        </clipPath>
-        <clipPath id="mx-clip-164-961-202-44-0">
-            <rect x="164" y="961" width="202" height="44"/>
-        </clipPath>
-        <clipPath id="mx-clip-444-1021-302-26-0">
-            <rect x="444" y="1021" width="302" height="26"/>
-        </clipPath>
-        <clipPath id="mx-clip-444-1055-302-70-0">
-            <rect x="444" y="1055" width="302" height="70"/>
-        </clipPath>
-        <clipPath id="mx-clip-164-1101-262-64-0">
-            <rect x="164" y="1101" width="262" height="64"/>
-        </clipPath>
-        <clipPath id="mx-clip-164-1173-262-42-0">
-            <rect x="164" y="1173" width="262" height="42"/>
-        </clipPath>
-    </defs>
-    <g>
-        <path d="M 470 26 L 470 0 L 780 0 L 780 26" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
-        <path d="M 470 26 L 470 60 L 780 60 L 780 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 26 L 780 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="17.5">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="diagrammaClassi.drawio.svg"
+   id="svg1301"
+   content="&lt;mxfile host=&quot;localhost&quot; modified=&quot;2020-05-21T08:36:28.505Z&quot; agent=&quot;5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.1 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36&quot; etag=&quot;cJKHD-lYWd-sDrtB0oBL&quot; version=&quot;13.0.9&quot;&gt;&lt;diagram id=&quot;6hGFLwfOUW9BJ-s0fimq&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;"
+   viewBox="-0.5 -0.5 781 1214"
+   height="1214px"
+   width="781px"
+   version="1.1">
+  <metadata
+     id="metadata1305">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:current-layer="g1299"
+     inkscape:window-maximized="0"
+     inkscape:window-y="227"
+     inkscape:window-x="1106"
+     inkscape:cy="607"
+     inkscape:cx="390.5"
+     inkscape:zoom="0.83031301"
+     showgrid="false"
+     id="namedview1303"
+     inkscape:window-height="1290"
+     inkscape:window-width="1570"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <defs
+     id="defs905">
+    <clipPath
+       id="mx-clip-474-39-302-26-0">
+      <rect
+         id="rect833"
+         height="26"
+         width="302"
+         y="39"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-119-302-26-0">
+      <rect
+         id="rect836"
+         height="26"
+         width="302"
+         y="119"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-199-302-26-0">
+      <rect
+         id="rect839"
+         height="26"
+         width="302"
+         y="199"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-279-302-26-0">
+      <rect
+         id="rect842"
+         height="26"
+         width="302"
+         y="279"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-359-302-26-0">
+      <rect
+         id="rect845"
+         height="26"
+         width="302"
+         y="359"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-439-302-26-0">
+      <rect
+         id="rect848"
+         height="26"
+         width="302"
+         y="439"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-519-302-26-0">
+      <rect
+         id="rect851"
+         height="26"
+         width="302"
+         y="519"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-24-31-232-84-0">
+      <rect
+         id="rect854"
+         height="84"
+         width="232"
+         y="31"
+         x="24" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-24-123-232-132-0">
+      <rect
+         id="rect857"
+         height="132"
+         width="232"
+         y="123"
+         x="24" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-4-339-262-46-0">
+      <rect
+         id="rect860"
+         height="46"
+         width="262"
+         y="339"
+         x="4" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-14-451-252-44-0">
+      <rect
+         id="rect863"
+         height="44"
+         width="252"
+         y="451"
+         x="14" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-14-503-252-82-0">
+      <rect
+         id="rect866"
+         height="82"
+         width="252"
+         y="503"
+         x="14" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-134-631-262-114-0">
+      <rect
+         id="rect869"
+         height="114"
+         width="262"
+         y="631"
+         x="134" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-134-753-262-92-0">
+      <rect
+         id="rect872"
+         height="92"
+         width="262"
+         y="753"
+         x="134" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-611-262-64-0">
+      <rect
+         id="rect875"
+         height="64"
+         width="262"
+         y="611"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-683-262-52-0">
+      <rect
+         id="rect878"
+         height="52"
+         width="262"
+         y="683"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-791-262-64-0">
+      <rect
+         id="rect881"
+         height="64"
+         width="262"
+         y="791"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-474-863-262-72-0">
+      <rect
+         id="rect884"
+         height="72"
+         width="262"
+         y="863"
+         x="474" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-164-911-202-42-0">
+      <rect
+         id="rect887"
+         height="42"
+         width="202"
+         y="911"
+         x="164" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-164-961-202-44-0">
+      <rect
+         id="rect890"
+         height="44"
+         width="202"
+         y="961"
+         x="164" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-444-1021-302-26-0">
+      <rect
+         id="rect893"
+         height="26"
+         width="302"
+         y="1021"
+         x="444" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-444-1055-302-70-0">
+      <rect
+         id="rect896"
+         height="70"
+         width="302"
+         y="1055"
+         x="444" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-164-1101-262-64-0">
+      <rect
+         id="rect899"
+         height="64"
+         width="262"
+         y="1101"
+         x="164" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-164-1173-262-42-0">
+      <rect
+         id="rect902"
+         height="42"
+         width="262"
+         y="1173"
+         x="164" />
+    </clipPath>
+  </defs>
+  <g
+     id="g1299">
+    <path
+       id="path907"
+       pointer-events="all"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 26 L 470 0 L 780 0 L 780 26" />
+    <path
+       id="path909"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 26 L 470 60 L 780 60 L 780 26" />
+    <path
+       id="path911"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 26 L 780 26" />
+    <g
+       id="g915"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text913"
+         y="17.5"
+         x="624.5">
                 filtri.FiltroAPagamento
             </text>
-        </g>
-        <path d="M 470 30 L 780 30" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-39-302-26-0)" font-size="12px">
-            <text x="475.5" y="51.5">
+    </g>
+    <path
+       id="path917"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 30 L 780 30" />
+    <g
+       id="g921"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-39-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text919"
+         y="51.5"
+         x="475.5">
                 + docentiAPagamento(ArrayList&lt;Docente&gt;, Ora)
             </text>
-        </g>
-        <path d="M 470 106 L 470 80 L 780 80 L 780 106" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 106 L 470 140 L 780 140 L 780 106" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 106 L 780 106" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="97.5">
+    </g>
+    <path
+       id="path923"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 106 L 470 80 L 780 80 L 780 106" />
+    <path
+       id="path925"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 106 L 470 140 L 780 140 L 780 106" />
+    <path
+       id="path927"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 106 L 780 106" />
+    <g
+       id="g931"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text929"
+         y="97.5"
+         x="624.5">
                 filtri.FiltroClasse
             </text>
-        </g>
-        <path d="M 470 110 L 780 110" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-119-302-26-0)" font-size="12px">
-            <text x="475.5" y="131.5">
+    </g>
+    <path
+       id="path933"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 110 L 780 110" />
+    <g
+       id="g937"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-119-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text935"
+         y="131.5"
+         x="475.5">
                 + docentiDellaClasse(ArrayList&lt;Docente&gt;, String)
             </text>
-        </g>
-        <path d="M 470 186 L 470 160 L 780 160 L 780 186" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 186 L 470 220 L 780 220 L 780 186" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 186 L 780 186" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="177.5">
+    </g>
+    <path
+       id="path939"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 186 L 470 160 L 780 160 L 780 186" />
+    <path
+       id="path941"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 186 L 470 220 L 780 220 L 780 186" />
+    <path
+       id="path943"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 186 L 780 186" />
+    <g
+       id="g947"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text945"
+         y="177.5"
+         x="624.5">
                 filtri.FiltroCoPresenza
             </text>
-        </g>
-        <path d="M 470 190 L 780 190" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-199-302-26-0)" font-size="12px">
-            <text x="475.5" y="211.5">
+    </g>
+    <path
+       id="path949"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 190 L 780 190" />
+    <g
+       id="g953"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-199-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text951"
+         y="211.5"
+         x="475.5">
                 + docentiCoPresenza(ArrayList&lt;Docente&gt;, OraLezione)
             </text>
-        </g>
-        <path d="M 470 266 L 470 240 L 780 240 L 780 266" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 266 L 470 300 L 780 300 L 780 266" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 266 L 780 266" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="257.5">
+    </g>
+    <path
+       id="path955"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 266 L 470 240 L 780 240 L 780 266" />
+    <path
+       id="path957"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 266 L 470 300 L 780 300 L 780 266" />
+    <path
+       id="path959"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 266 L 780 266" />
+    <g
+       id="g963"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text961"
+         y="257.5"
+         x="624.5">
                 filtri.FiltroLibero
             </text>
-        </g>
-        <path d="M 470 270 L 780 270" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-279-302-26-0)" font-size="12px">
-            <text x="475.5" y="291.5">
+    </g>
+    <path
+       id="path965"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 270 L 780 270" />
+    <g
+       id="g969"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-279-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text967"
+         y="291.5"
+         x="475.5">
                 + docentiLiberi(ArrayList&lt;Docente&gt;, Ora)
             </text>
-        </g>
-        <path d="M 470 346 L 470 320 L 780 320 L 780 346" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 346 L 470 380 L 780 380 L 780 346" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 346 L 780 346" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="337.5">
+    </g>
+    <path
+       id="path971"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 346 L 470 320 L 780 320 L 780 346" />
+    <path
+       id="path973"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 346 L 470 380 L 780 380 L 780 346" />
+    <path
+       id="path975"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 346 L 780 346" />
+    <g
+       id="g979"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text977"
+         y="337.5"
+         x="624.5">
                 filtri.FiltroOreBuche
             </text>
-        </g>
-        <path d="M 470 350 L 780 350" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-359-302-26-0)" font-size="12px">
-            <text x="475.5" y="371.5">
+    </g>
+    <path
+       id="path981"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 350 L 780 350" />
+    <g
+       id="g985"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-359-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text983"
+         y="371.5"
+         x="475.5">
                 + docentiOreBuche(ArrayList&lt;Docente&gt;, Ora)
             </text>
-        </g>
-        <path d="M 470 426 L 470 400 L 780 400 L 780 426" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 426 L 470 460 L 780 460 L 780 426" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 426 L 780 426" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="417.5">
+    </g>
+    <path
+       id="path987"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 426 L 470 400 L 780 400 L 780 426" />
+    <path
+       id="path989"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 426 L 470 460 L 780 460 L 780 426" />
+    <path
+       id="path991"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 426 L 780 426" />
+    <g
+       id="g995"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text993"
+         y="417.5"
+         x="624.5">
                 filtri.FiltroRecupero
             </text>
-        </g>
-        <path d="M 470 430 L 780 430" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-439-302-26-0)" font-size="12px">
-            <text x="475.5" y="451.5">
+    </g>
+    <path
+       id="path997"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 430 L 780 430" />
+    <g
+       id="g1001"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-439-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text999"
+         y="451.5"
+         x="475.5">
                 + docentiRecupero(ArrayList&lt;Docente&gt;, Ora)
             </text>
-        </g>
-        <path d="M 470 506 L 470 480 L 780 480 L 780 506" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 506 L 470 540 L 780 540 L 780 506" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 506 L 780 506" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="624.5" y="497.5">
+    </g>
+    <path
+       id="path1003"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 506 L 470 480 L 780 480 L 780 506" />
+    <path
+       id="path1005"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 506 L 470 540 L 780 540 L 780 506" />
+    <path
+       id="path1007"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 506 L 780 506" />
+    <g
+       id="g1011"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1009"
+         y="497.5"
+         x="624.5">
                 filtri.RimozioneDocente
             </text>
-        </g>
-        <path d="M 470 510 L 780 510" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-474-519-302-26-0)" font-size="12px">
-            <text x="475.5" y="531.5">
+    </g>
+    <path
+       id="path1013"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 510 L 780 510" />
+    <g
+       id="g1017"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-519-302-26-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1015"
+         y="531.5"
+         x="475.5">
                 + docentiRimozione(ArrayList&lt;Docente&gt;, String)
             </text>
-        </g>
-        <path d="M 20 26 L 20 0 L 260 0 L 260 26" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 20 26 L 20 250 L 260 250 L 260 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 20 26 L 260 26" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="139.5" y="17.5">
+    </g>
+    <path
+       id="path1019"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 20 26 L 20 0 L 260 0 L 260 26" />
+    <path
+       id="path1021"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 20 26 L 20 250 L 260 250 L 260 26" />
+    <path
+       id="path1023"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 20 26 L 260 26" />
+    <g
+       id="g1027"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1025"
+         y="17.5"
+         x="139.5">
                 Ambiente
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-24-31-232-84-0)" font-size="12px">
-            <text x="25.5" y="43.5">
+    </g>
+    <g
+       id="g1039"
+       font-size="12px"
+       clip-path="url(#mx-clip-24-31-232-84-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1029"
+         y="43.5"
+         x="25.5">
                 - docenti: ArrayList&lt;Docente&gt;
             </text>
-            <text x="25.5" y="57.5">
+      <text
+         id="text1031"
+         y="57.5"
+         x="25.5">
                 - nomiclassi: String[]
             </text>
-            <text x="25.5" y="71.5">
+      <text
+         id="text1033"
+         y="71.5"
+         x="25.5">
                 - problemi: String
             </text>
-            <text x="25.5" y="85.5">
+      <text
+         id="text1035"
+         y="85.5"
+         x="25.5">
                 - proprieta: Properties
             </text>
-            <text x="25.5" y="99.5">
+      <text
+         id="text1037"
+         y="99.5"
+         x="25.5">
                 - percorso: String
             </text>
-        </g>
-        <path d="M 20 114 L 260 114" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-24-123-232-132-0)" font-size="12px">
-            <text x="25.5" y="135.5">
+    </g>
+    <path
+       id="path1041"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 20 114 L 260 114" />
+    <g
+       id="g1059"
+       font-size="12px"
+       clip-path="url(#mx-clip-24-123-232-132-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1043"
+         y="135.5"
+         x="25.5">
                 + salvaProprieta()
             </text>
-            <text x="25.5" y="149.5">
+      <text
+         id="text1045"
+         y="149.5"
+         x="25.5">
                 + getFileGiornale(): File
             </text>
-            <text x="25.5" y="163.5">
+      <text
+         id="text1047"
+         y="163.5"
+         x="25.5">
                 + setFileGiornale(File)
             </text>
-            <text x="25.5" y="177.5">
+      <text
+         id="text1049"
+         y="177.5"
+         x="25.5">
                 + getFileOrarioExcel():File
             </text>
-            <text x="25.5" y="191.5">
+      <text
+         id="text1051"
+         y="191.5"
+         x="25.5">
                 + setFileOrarioExcel(File)
             </text>
-            <text x="25.5" y="205.5">
+      <text
+         id="text1053"
+         y="205.5"
+         x="25.5">
                 + getNomiClassi(): String[]
             </text>
-            <text x="25.5" y="219.5">
+      <text
+         id="text1055"
+         y="219.5"
+         x="25.5">
                 + getProblemi(): String
             </text>
-            <text x="25.5" y="233.5">
+      <text
+         id="text1057"
+         y="233.5"
+         x="25.5">
                 + cercaDocentePerNome(String): Docente
             </text>
-        </g>
-        <path d="M 0 326 L 0 300 L 270 300 L 270 326" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 0 326 L 0 380 L 270 380 L 270 326" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 0 326 L 270 326" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="134.5" y="317.5">
+    </g>
+    <path
+       id="path1061"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 0 326 L 0 300 L 270 300 L 270 326" />
+    <path
+       id="path1063"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 0 326 L 0 380 L 270 380 L 270 326" />
+    <path
+       id="path1065"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 0 326 L 270 326" />
+    <g
+       id="g1069"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1067"
+         y="317.5"
+         x="134.5">
                 Giornale
             </text>
-        </g>
-        <path d="M 0 330 L 270 330" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-4-339-262-46-0)" font-size="12px">
-            <text x="5.5" y="351.5">
+    </g>
+    <path
+       id="path1071"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 0 330 L 270 330" />
+    <g
+       id="g1077"
+       font-size="12px"
+       clip-path="url(#mx-clip-4-339-262-46-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1073"
+         y="351.5"
+         x="5.5">
                 + scriviRecord(Sostituzione x)
             </text>
-            <text x="5.5" y="365.5">
+      <text
+         id="text1075"
+         y="365.5"
+         x="5.5">
                 + leggioGiornale(File): ArrayList&lt;Sostituzione&gt;
             </text>
-        </g>
-        <path d="M 10 446 L 10 420 L 270 420 L 270 446" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 10 446 L 10 580 L 270 580 L 270 446" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 10 446 L 270 446" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="139.5" y="437.5">
+    </g>
+    <path
+       id="path1079"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 10 446 L 10 420 L 270 420 L 270 446" />
+    <path
+       id="path1081"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 10 446 L 10 580 L 270 580 L 270 446" />
+    <path
+       id="path1083"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 10 446 L 270 446" />
+    <g
+       id="g1087"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1085"
+         y="437.5"
+         x="139.5">
                 LettoreFile
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-14-451-252-44-0)" font-size="12px">
-            <text x="15.5" y="463.5">
+    </g>
+    <g
+       id="g1093"
+       font-size="12px"
+       clip-path="url(#mx-clip-14-451-252-44-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1089"
+         y="463.5"
+         x="15.5">
                 - posFoglio: byte
             </text>
-            <text x="15.5" y="477.5">
+      <text
+         id="text1091"
+         y="477.5"
+         x="15.5">
                 - rigaOre: byte
             </text>
-        </g>
-        <path d="M 10 494 L 270 494" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-14-503-252-82-0)" font-size="12px">
-            <text x="15.5" y="515.5">
+    </g>
+    <path
+       id="path1095"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 10 494 L 270 494" />
+    <g
+       id="g1105"
+       font-size="12px"
+       clip-path="url(#mx-clip-14-503-252-82-0)"
+       text-decoration="underline"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1097"
+         y="515.5"
+         x="15.5">
                 + leggiExcel(): ArrayList&lt;Docente&gt;
             </text>
-            <text x="15.5" y="529.5">
+      <text
+         id="text1099"
+         y="529.5"
+         x="15.5">
                 + leggiXML(): ArrayList&lt;Docente&gt;
             </text>
-            <text x="15.5" y="543.5">
+      <text
+         id="text1101"
+         y="543.5"
+         x="15.5">
                 - calcolaOrario(partenza, foglio, lista, materia)
             </text>
-            <text x="15.5" y="557.5">
+      <text
+         id="text1103"
+         y="557.5"
+         x="15.5">
                 + leggiProfSostegno(): ArrayList&lt;Docente&gt;
             </text>
-        </g>
-        <path d="M 265 880 L 265 846.37" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 265 841.12 L 268.5 848.12 L 265 846.37 L 261.5 848.12 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 130 626 L 130 600 L 400 600 L 400 626" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 130 626 L 130 840 L 400 840 L 400 626" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 130 626 L 400 626" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="264.5" y="617.5">
+    </g>
+    <path
+       id="path1111"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 130 626 L 130 600 L 400 600 L 400 626" />
+    <path
+       id="path1113"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 130 626 L 130 840 L 400 840 L 400 626" />
+    <path
+       id="path1115"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 130 626 L 400 626" />
+    <g
+       id="g1119"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1117"
+         y="617.5"
+         x="264.5">
                 Docente
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-134-631-262-114-0)" font-size="12px">
-            <text x="135.5" y="643.5">
+    </g>
+    <g
+       id="g1135"
+       font-size="12px"
+       clip-path="url(#mx-clip-134-631-262-114-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1121"
+         y="643.5"
+         x="135.5">
                 + nome: String
             </text>
-            <text x="135.5" y="657.5">
+      <text
+         id="text1123"
+         y="657.5"
+         x="135.5">
                 + oraLezione: ArrayList&lt;OraLezione&gt;
             </text>
-            <text x="135.5" y="671.5">
+      <text
+         id="text1125"
+         y="671.5"
+         x="135.5">
                 + oraRecupero: Ora
             </text>
-            <text x="135.5" y="685.5">
+      <text
+         id="text1127"
+         y="685.5"
+         x="135.5">
                 + oraADisposizioneCassata: Ora
             </text>
-            <text x="135.5" y="699.5">
+      <text
+         id="text1129"
+         y="699.5"
+         x="135.5">
                 + oraADisposizioneGattapone: Ora
             </text>
-            <text x="135.5" y="713.5">
+      <text
+         id="text1131"
+         y="713.5"
+         x="135.5">
                 + oreAPagamento: ArrayList&lt;Ora&gt;
             </text>
-            <text x="135.5" y="727.5">
+      <text
+         id="text1133"
+         y="727.5"
+         x="135.5">
                 + orePotenziamento: ArrayList&lt;Ora&gt;
             </text>
-        </g>
-        <path d="M 130 744 L 400 744" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-134-753-262-92-0)" font-size="12px">
-            <text x="135.5" y="765.5">
+    </g>
+    <path
+       id="path1137"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 130 744 L 400 744" />
+    <g
+       id="g1149"
+       font-size="12px"
+       clip-path="url(#mx-clip-134-753-262-92-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1139"
+         y="765.5"
+         x="135.5">
                 + Docente(String)
             </text>
-            <text x="135.5" y="779.5">
+      <text
+         id="text1141"
+         y="779.5"
+         x="135.5">
                 + toString(): String
             </text>
-            <text x="135.5" y="793.5">
+      <text
+         id="text1143"
+         y="793.5"
+         x="135.5">
                 + lavoraNellaClasse(String): boolean
             </text>
-            <text x="135.5" y="807.5">
+      <text
+         id="text1145"
+         y="807.5"
+         x="135.5">
                 + lavoraNellOra(Ora): boolean
             </text>
-            <text x="135.5" y="821.5">
+      <text
+         id="text1147"
+         y="821.5"
+         x="135.5">
                 + lavoraNellaClasseInOra(Ora, String): boolean
             </text>
-        </g>
-        <path d="M 470 606 L 470 580 L 740 580 L 740 606" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 606 L 470 730 L 740 730 L 740 606" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 606 L 740 606" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="604.5" y="597.5">
+    </g>
+    <path
+       id="path1151"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 606 L 470 580 L 740 580 L 740 606" />
+    <path
+       id="path1153"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 606 L 470 730 L 740 730 L 740 606" />
+    <path
+       id="path1155"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 606 L 740 606" />
+    <g
+       id="g1159"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1157"
+         y="597.5"
+         x="604.5">
                 Ora
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-611-262-64-0)" font-size="12px">
-            <text x="475.5" y="623.5">
+    </g>
+    <g
+       id="g1169"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-611-262-64-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1161"
+         y="623.5"
+         x="475.5">
                 + nomiGiorni: String[]      (è static)
             </text>
-            <text x="475.5" y="637.5">
+      <text
+         id="text1163"
+         y="637.5"
+         x="475.5">
                 + nomiOre: String[]          (è static)
             </text>
-            <text x="475.5" y="651.5">
+      <text
+         id="text1165"
+         y="651.5"
+         x="475.5">
                 + giorno:int
             </text>
-            <text x="475.5" y="665.5">
+      <text
+         id="text1167"
+         y="665.5"
+         x="475.5">
                 + orario: int
             </text>
-        </g>
-        <path d="M 470 674 L 740 674" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-683-262-52-0)" font-size="12px">
-            <text x="475.5" y="695.5">
+    </g>
+    <path
+       id="path1171"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 674 L 740 674" />
+    <g
+       id="g1179"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-683-262-52-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1173"
+         y="695.5"
+         x="475.5">
                 + Ora(int int)
             </text>
-            <text x="475.5" y="709.5">
+      <text
+         id="text1175"
+         y="709.5"
+         x="475.5">
                 + Ora()
             </text>
-            <text x="475.5" y="723.5">
+      <text
+         id="text1177"
+         y="723.5"
+         x="475.5">
                 + toString(): String
             </text>
-        </g>
-        <path d="M 605 760 L 607.97 736.73" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 608.64 731.52 L 611.22 738.91 L 607.97 736.73 L 604.28 738.02 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 786 L 470 760 L 740 760 L 740 786" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 786 L 470 930 L 740 930 L 740 786" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 470 786 L 740 786" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="604.5" y="777.5">
+    </g>
+    <path
+       id="path1181"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 605 760 L 607.97 736.73" />
+    <path
+       id="path1183"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#000000"
+       d="M 608.64 731.52 L 611.22 738.91 L 607.97 736.73 L 604.28 738.02 Z" />
+    <path
+       id="path1185"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 470 786 L 470 760 L 740 760 L 740 786" />
+    <path
+       id="path1187"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 786 L 470 930 L 740 930 L 740 786" />
+    <path
+       id="path1189"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 786 L 740 786" />
+    <g
+       id="g1193"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1191"
+         y="777.5"
+         x="604.5">
                 OraLezione
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-791-262-64-0)" font-size="12px">
-            <text x="475.5" y="803.5">
+    </g>
+    <g
+       id="g1203"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-791-262-64-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1195"
+         y="803.5"
+         x="475.5">
                 + aula: String
             </text>
-            <text x="475.5" y="817.5">
+      <text
+         id="text1197"
+         y="817.5"
+         x="475.5">
                 + classe: String
             </text>
-            <text x="475.5" y="831.5">
+      <text
+         id="text1199"
+         y="831.5"
+         x="475.5">
                 + compresenza: boolean
             </text>
-            <text x="475.5" y="845.5">
+      <text
+         id="text1201"
+         y="845.5"
+         x="475.5">
                 + materia: String
             </text>
-        </g>
-        <path d="M 470 854 L 740 854" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-474-863-262-72-0)" font-size="12px">
-            <text x="475.5" y="875.5">
+    </g>
+    <path
+       id="path1205"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 470 854 L 740 854" />
+    <g
+       id="g1215"
+       font-size="12px"
+       clip-path="url(#mx-clip-474-863-262-72-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1207"
+         y="875.5"
+         x="475.5">
                 + OraLezione(int, int)
             </text>
-            <text x="475.5" y="889.5">
+      <text
+         id="text1209"
+         y="889.5"
+         x="475.5">
                 + Oralezione()
             </text>
-            <text x="475.5" y="903.5">
+      <text
+         id="text1211"
+         y="903.5"
+         x="475.5">
                 + OraLezione(int, int, String, String, boolean)
             </text>
-            <text x="475.5" y="917.5">
+      <text
+         id="text1213"
+         y="917.5"
+         x="475.5">
                 + toString(): String
             </text>
-        </g>
-        <path d="M 160 906 L 160 880 L 370 880 L 370 906" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 160 906 L 160 1000 L 370 1000 L 370 906" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 160 906 L 370 906" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="264.5" y="897.5">
-                CandidatoDocente
-            </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-164-911-202-42-0)" font-size="12px">
-            <text x="165.5" y="923.5">
-                + livello: int
-            </text>
-            <text x="165.5" y="937.5">
-                docentiOrdinati: ArrayList&lt;Docente&gt;
-            </text>
-        </g>
-        <path d="M 160 952 L 370 952" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-164-961-202-44-0)" font-size="12px">
-            <text x="165.5" y="973.5">
-                + CandidatoDocente(String, int)
-            </text>
-            <text x="165.5" y="987.5">
-                + setLivello(int)
-            </text>
-        </g>
-        <path d="M 595 990 L 600.59 936.33" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 601.13 931.11 L 603.89 938.44 L 600.59 936.33 L 596.93 937.71 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 440 1016 L 440 990 L 750 990 L 750 1016" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 440 1016 L 440 1120 L 750 1120 L 750 1016" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 440 1016 L 750 1016" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="594.5" y="1007.5">
+    </g>
+    <path
+       id="path1241"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 595 990 L 600.59 936.33" />
+    <path
+       id="path1243"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#000000"
+       d="M 601.13 931.11 L 603.89 938.44 L 600.59 936.33 L 596.93 937.71 Z" />
+    <path
+       id="path1245"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 440 1016 L 440 990 L 750 990 L 750 1016" />
+    <path
+       id="path1247"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 440 1016 L 440 1120 L 750 1120 L 750 1016" />
+    <path
+       id="path1249"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 440 1016 L 750 1016" />
+    <g
+       id="g1253"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1251"
+         y="1007.5"
+         x="594.5">
                 Sostituzione
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-444-1021-302-26-0)" font-size="12px">
-            <text x="445.5" y="1033.5">
+    </g>
+    <g
+       id="g1257"
+       font-size="12px"
+       clip-path="url(#mx-clip-444-1021-302-26-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1255"
+         y="1033.5"
+         x="445.5">
                 # nomeSostituto: String
             </text>
-        </g>
-        <path d="M 440 1046 L 750 1046" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-444-1055-302-70-0)" font-size="12px">
-            <text x="445.5" y="1067.5">
+    </g>
+    <path
+       id="path1259"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 440 1046 L 750 1046" />
+    <g
+       id="g1269"
+       font-size="12px"
+       clip-path="url(#mx-clip-444-1055-302-70-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1261"
+         y="1067.5"
+         x="445.5">
                 + Sostituzione(int, int, String, String, boolean, String)
             </text>
-            <text x="445.5" y="1081.5">
+      <text
+         id="text1263"
+         y="1081.5"
+         x="445.5">
                 + Sostituzione(String)
             </text>
-            <text x="445.5" y="1095.5">
+      <text
+         id="text1265"
+         y="1095.5"
+         x="445.5">
                 + toString(): String
             </text>
-            <text x="445.5" y="1109.5">
+      <text
+         id="text1267"
+         y="1109.5"
+         x="445.5">
                 + getDescrizione(): String
             </text>
-        </g>
-        <path d="M 160 1096 L 160 1070 L 430 1070 L 430 1096" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 160 1096 L 160 1210 L 430 1210 L 430 1096" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <path d="M 160 1096 L 430 1096" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
-            <text x="294.5" y="1087.5">
+    </g>
+    <path
+       id="path1271"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="#ffffff"
+       d="M 160 1096 L 160 1070 L 430 1070 L 430 1096" />
+    <path
+       id="path1273"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 160 1096 L 160 1210 L 430 1210 L 430 1096" />
+    <path
+       id="path1275"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 160 1096 L 430 1096" />
+    <g
+       id="g1279"
+       font-size="12px"
+       text-anchor="middle"
+       font-weight="bold"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1277"
+         y="1087.5"
+         x="294.5">
                 HandlerSAX
             </text>
-        </g>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-164-1101-262-64-0)" font-size="12px">
-            <text x="165.5" y="1113.5">
+    </g>
+    <g
+       id="g1289"
+       font-size="12px"
+       clip-path="url(#mx-clip-164-1101-262-64-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1281"
+         y="1113.5"
+         x="165.5">
                 ~ docenti: ArrayList&lt;Docenti&gt;
             </text>
-            <text x="165.5" y="1127.5">
+      <text
+         id="text1283"
+         y="1127.5"
+         x="165.5">
                 ~ docenteAttuale: Docente
             </text>
-            <text x="165.5" y="1141.5">
+      <text
+         id="text1285"
+         y="1141.5"
+         x="165.5">
                 ~ oraAttuale: OraLezione
             </text>
-            <text x="165.5" y="1155.5">
+      <text
+         id="text1287"
+         y="1155.5"
+         x="165.5">
                 ~ giornoAttuale: giorno
             </text>
-        </g>
-        <path d="M 160 1164 L 430 1164" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/>
-        <g fill="#000000" font-family="Helvetica" clip-path="url(#mx-clip-164-1173-262-42-0)" font-size="12px">
-            <text x="165.5" y="1185.5">
+    </g>
+    <path
+       id="path1291"
+       pointer-events="none"
+       stroke-miterlimit="10"
+       stroke="#000000"
+       fill="none"
+       d="M 160 1164 L 430 1164" />
+    <g
+       id="g1297"
+       font-size="12px"
+       clip-path="url(#mx-clip-164-1173-262-42-0)"
+       font-family="Helvetica"
+       fill="#000000">
+      <text
+         id="text1293"
+         y="1185.5"
+         x="165.5">
                 + HandlerSAX(ArrayList&lt;Docente)
             </text>
-            <text x="165.5" y="1199.5">
+      <text
+         id="text1295"
+         y="1199.5"
+         x="165.5">
                 + startElement(String, String, String, Attributes)
             </text>
-        </g>
     </g>
+  </g>
 </svg>
