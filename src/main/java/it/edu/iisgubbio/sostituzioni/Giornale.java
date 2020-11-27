@@ -8,8 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 /**
  * Questo programma serve a gestire le letture o scritture delle sostituzioni in un file.
  * @author Loris
@@ -39,24 +40,33 @@ public class Giornale {
 		Ambiente.aggiornaOreSvolteDocenti(); // Esitono altri modi molto più eleganti di farlo
 	}
 	
-	public static ArrayList<Sostituzione> leggiGiornale() throws FileNotFoundException, IOException {
-		//serve per leggere da un file
-		BufferedReader reader = new BufferedReader(new FileReader(Ambiente.getFileGiornale()));
-		//prendiamo il file che vogliamo leggere
-		ArrayList<Sostituzione> risposta=new ArrayList<>();
-		String line;
-		while((line=reader.readLine())!=null) {
-		// facciamo un while che continua finchè una riga è null, quindi abbiamo letto tutto ciò che è scritto nel file
-		     Sostituzione x = new Sostituzione(line);
-			// nella variabile appena creata x scriviamo tutta la riga che abbiamo appena letto
-		     risposta.add(x);
-			//dentro l'ArrayList risposta aggiungiamo la variabile creata precedente x
-		}
-		
-		reader.close();
-		//chiudiamo il file
-		return risposta;
-		//ritorna tutte le righe che abbiamo letto 
+	public static ArrayList<Sostituzione> leggiGiornale() throws IOException {
+	    try {
+    		//serve per leggere da un file
+    		BufferedReader reader = new BufferedReader(new FileReader(Ambiente.getFileGiornale()));
+    		//prendiamo il file che vogliamo leggere
+    		ArrayList<Sostituzione> risposta=new ArrayList<>();
+    		String line;
+    		while((line=reader.readLine())!=null) {
+    		    // evitiamo problemi con le linee vuote
+    		    if(line.trim().length()>0) {
+    		        Sostituzione x = new Sostituzione(line);
+    		        //dentro l'ArrayList risposta aggiungiamo la variabile creata precedente x
+    		        risposta.add(x);
+    		    }
+    		}
+    		
+    		reader.close();
+    		//chiudiamo il file
+    		return risposta;
+    		//ritorna tutte le righe che abbiamo letto
+	    } catch (FileNotFoundException fnf){
+	        System.err.println("************************************************");
+	        Alert dialogoAllerta = new Alert(AlertType.ERROR, "il file del giornale \""+Ambiente.getFileGiornale()+"\" non esiste!");
+	        dialogoAllerta.showAndWait();
+	        Ambiente.impostaPreferenzeEEsci();
+	    }
+	    return null;
 	}
 }
 
