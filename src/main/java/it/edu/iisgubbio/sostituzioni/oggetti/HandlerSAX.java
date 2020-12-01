@@ -51,15 +51,24 @@ public class HandlerSAX extends DefaultHandler{
         }
         if(qName.equals("Subject")){
             if(oraAttuale==null) {
-                System.err.println("Subject per un'ora nulla \""+atts.getValue("name")+"\"");
+                System.err.println("ora nulla con Subject \""+atts.getValue("name")+"\"");
+            } else {
+                oraAttuale.materia = atts.getValue("name");
             }
-        	oraAttuale.materia = atts.getValue("name");
         }
         if(qName.equals("Students")){
-            oraAttuale.classe = atts.getValue("name").trim().replaceAll(" ", "").toLowerCase();
+            if(oraAttuale==null) {
+                System.err.println("ora nulla per Students \""+atts.getValue("name")+"\"");
+            } else {
+                oraAttuale.classe = atts.getValue("name").trim().replaceAll(" ", "").toLowerCase();
+            }
         }
         if(qName.equals("Room")){
-            oraAttuale.aula = atts.getValue("name").trim();
+            if(oraAttuale==null) {
+                System.err.println("ora nulla per Room \""+atts.getValue("name")+"\"");
+            } else {
+                oraAttuale.aula = atts.getValue("name").trim();
+            }
         } 
     }
     
