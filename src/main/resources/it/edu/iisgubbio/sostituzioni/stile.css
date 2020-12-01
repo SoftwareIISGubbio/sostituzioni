@@ -1,0 +1,17 @@
+.pannelloPrincipale{
+	-fx-background-color: #f4d03f; 
+}
+.bottoni{
+	-fx-text-fill: #ffe800;
+	-fx-background-color: #3B3B3B;
+}
+.textColor{
+	-fx-text-fill: #3b3b3b;
+}
+.liste{
+	-fx-background-color: White;
+	-fx-background-radius: 6;
+}
+.SfondoDateEComeBox{
+	-fx-background-color: e6e6e6;
+}
