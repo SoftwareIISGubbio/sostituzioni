@@ -9,71 +9,100 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #F4D03F;" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraInformazioniDocente">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="392.0" style="-fx-background-color: #f4d03f;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraInformazioniDocente">
   <columnConstraints>
-    <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
-    <ColumnConstraints minWidth="10.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="4.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="261.0" minHeight="0.0" prefHeight="56.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="377.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="413.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="405.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Ore Lezione" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="249.0" style="-fx-background-color: #ffff; -fx-border-radius: 5;" text="INFORMAZIONI DOCENTE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label text="Ora Recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Label fx:id="eNomeDocente" text="Nome Docente" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
+            <Font size="14.0" />
          </font>
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
       </Label>
-      <Label text="Ora disposizione Cassata" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP">
-         <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
-         </font>
+      <Label text="Ore Lezione" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Label text="Ore Disposizione Cassata" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <ListView fx:id="lOreLezione" prefHeight="95.0" prefWidth="169.0" GridPane.rowIndex="3">
+         <opaqueInsets>
+            <Insets left="10.0" right="10.0" />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </GridPane.margin>
+      </ListView>
+      <ListView fx:id="lOreADisposizioneCassata" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </GridPane.margin>
+      </ListView>
+      <Label text="Ore Pagamento" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Label text="Ore Potenziamento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <ListView fx:id="lOrePagamento" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </GridPane.margin>
+      </ListView>
+      <ListView fx:id="lOrePotenziamento" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </GridPane.margin>
+      </ListView>
+      <Label text="Ora disponibile al recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </Label>
-      <Label text="Ora disposizione Gattapone" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-         <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
-         </font>
+      <Label text="Ore da recuperare" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </Label>
-      <Label text="Ore pagamento" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
-         <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
-         </font>
+      <TextField fx:id="cOraRecupero" GridPane.columnIndex="1" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="cOreDaRecuperare" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="cOraDisposizioneGattapone" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Ora a Disposizione Gattapone" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </Label>
-      <ListView fx:id="lOreLezione" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Ore potenziamento" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="TOP">
-         <font>
-            <Font name="Lucida Sans Unicode" size="14.0" />
-         </font>
-      </Label>
-      <ListView fx:id="lOrePagamento" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <ListView fx:id="lOrePotenziamento" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <TextField fx:id="cOraRecupero" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField fx:id="cOraDisposizioneGattapone" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label fx:id="eNomeDocente" prefHeight="24.0" prefWidth="195.0" text="Informazioni Docente" textAlignment="JUSTIFY" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Lucida Bright" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="cGruppo" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label text="Gruppo" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-      <ListView fx:id="lOreDisposizioneCassata" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label text="Ore da recuperare" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-      <TextField fx:id="cOreDaRecuperare" style="-fx-background-color: #FFFFDA #FFFFDA;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="cGruppo" prefHeight="25.0" prefWidth="63.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets left="10.0" right="70.0" />
+         </GridPane.margin>
+      </TextField>
    </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
 </GridPane>
