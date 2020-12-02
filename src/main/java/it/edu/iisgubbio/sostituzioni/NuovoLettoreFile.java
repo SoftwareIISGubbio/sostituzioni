@@ -11,6 +11,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 
 public class NuovoLettoreFile {
+    
+    private static final String MARCATORE_ORA_RECUPERO = "R";
+    private static final String MARCATORE_ORA_DISPOSIZIONE_CASSATA = "D";
+    private static final String MARCATORE_ORA_DISPOSIZIONE_GATTAPONE = "GATT";
+    private static final String MARCATORE_ORA_PAGAMENTO = "PAGAM";
+    private static final String MARCATORE_ORA_POTENZIAMENTO = "POT";
 	
 	private final static byte RIGA_ORE = 4;
 	private static final String FOGLIO_DOCENTI = "Insieme_totale";
