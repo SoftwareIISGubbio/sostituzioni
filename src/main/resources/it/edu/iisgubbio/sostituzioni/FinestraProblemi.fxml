@@ -5,12 +5,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane stylesheets="@stile.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f4d03f #f4d03f;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraProblemi">
+<BorderPane stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" styleClass="pannelloPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraProblemi">
    <center>
       <TextArea fx:id="taDescrizioneProblemi" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#chiudi" text="ok, ho capito" BorderPane.alignment="CENTER" styleClass="bottoni">
+      <Button mnemonicParsing="false" onAction="#chiudi" text="ok, ho capito" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin></Button>
