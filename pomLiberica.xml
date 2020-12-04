@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- informazioni generali sul programma -->
+	<groupId>it.edu.iisgubbio</groupId>
+	<artifactId>sostituzioni</artifactId>
+	<version>1.0.2</version>
+	<packaging>jar</packaging>
+	<name>sostituzioni</name>
+	<url>http://www.iisgubbio.edu.it</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.release>15</maven.compiler.release>
+		<progetto.jars>${project.build.directory}/jars</progetto.jars>
+	</properties>
+
+	<dependencies>
+		<!-- usata per leggere il file xlsx con le informazioni -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.1</version> <!-- TODO: possibile usare 4.2.1 http://poi.apache.org/changes.html#4.1.2 -->
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!--  per controllare le verisoni di java in compilazione -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>${maven.compiler.release}</release>
+				</configuration>
+			</plugin>
+			<!-- gestione delle dipendenze, e in particolare per copiare i jar in una unica cartella -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<outputDirectory>${progetto.jars}</outputDirectory>
+					<overWriteReleases>false</overWriteReleases>
+					<overWriteSnapshots>false</overWriteSnapshots>
+					<overWriteIfNewer>true</overWriteIfNewer>
+				</configuration>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- impostare la cartella di destinazione del progetto -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<outputDirectory>${progetto.jars}</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+        <resources>
+            <resource>
+                <!-- cartella solita delle risorse -->
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <!-- questa è una cartella in più, serve soltanto a mettere un file in cui maven 
+                quando compila registra il numero di versione -->
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>   
+
+	</build>
+</project>
