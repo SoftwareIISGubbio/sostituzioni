@@ -22,6 +22,7 @@ import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselle;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
+import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione.Motivo;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -286,7 +287,7 @@ public class FinestraPrincipale extends Application {
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
                     docentiCoPresenza.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-            s.setMotivazione("copresenza");
+            s.setMotivazione(Motivo.copresenza);
             listaSostituzioniPossibili.getItems().add(s);
         }        
 
@@ -299,7 +300,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("potenziamento stesse discipline");
+                s.setMotivazione(Motivo.potenziamento_stesse_discipline);
                 listaSostituzioniPossibili.getItems().add(s);
             }
             // poi tutti gli altri
@@ -308,7 +309,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("potenziamento altre discipline");
+                s.setMotivazione(Motivo.potenziamento_altre_discipline);
                 listaSostituzioniPossibili.getItems().add(s);
             }
         }
@@ -323,7 +324,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("recupero stessa classe");
+                s.setMotivazione(Motivo.recupero_stessa_classe);
                 listaSostituzioniPossibili.getItems().add(s);
             }
             // altre classi
@@ -334,7 +335,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("recupero altra classe, stesso gruppo");
+                s.setMotivazione(Motivo.recupero_altra_classe_Stesso_gruppo);
                 listaSostituzioniPossibili.getItems().add(s);
             }
             // altre classi, gruppi dversi 
@@ -343,7 +344,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("recupero altra classe, altro gruppo");
+                s.setMotivazione(Motivo.recupero_altra_classe_Altro_gruppo);
                 listaSostituzioniPossibili.getItems().add(s);
             }
         }
@@ -357,7 +358,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("a pagamento stessa classe");
+                s.setMotivazione(Motivo.a_pagamento_Stessa_classe);
                 listaSostituzioniPossibili.getItems().add(s);
             }
             // non della stessa classe 
@@ -368,7 +369,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("a pagamento altra classe ma stesso gruppo");
+                s.setMotivazione(Motivo.a_pagamento_altra_classe_Stesso_gruppo);
                 listaSostituzioniPossibili.getItems().add(s);
             }
             // altre classi e altro gruppo di materie
@@ -377,7 +378,7 @@ public class FinestraPrincipale extends Application {
                         oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                         docente.nome);
                 s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-                s.setMotivazione("a pagamento altra classe e altro gruppo");
+                s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
                 listaSostituzioniPossibili.getItems().add(s);
             }
         }
@@ -390,7 +391,7 @@ public class FinestraPrincipale extends Application {
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docente.nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-            s.setMotivazione("a disposizione Cassata");
+            s.setMotivazione(Motivo.a_disposizione_Cassata);
             listaSostituzioniPossibili.getItems().add(s);
         }
         // un elenco di tutti i docenti liberi della classe
@@ -402,7 +403,7 @@ public class FinestraPrincipale extends Application {
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiLiberiClasse.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-            s.setMotivazione("libero della classe");
+            s.setMotivazione(Motivo.libero_della_classe);
             listaSostituzioniPossibili.getItems().add(s);
         }
         // alla fine tutti quelli liberi
@@ -412,7 +413,7 @@ public class FinestraPrincipale extends Application {
                     oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
                     docentiLiberi.get(i).nome);
             s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-            s.setMotivazione("libero altra classe");
+            s.setMotivazione(Motivo.libero_altra_classe);
             listaSostituzioniPossibili.getItems().add(s);
         }
 

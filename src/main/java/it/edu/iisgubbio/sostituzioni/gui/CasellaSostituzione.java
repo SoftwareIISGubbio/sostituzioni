@@ -30,42 +30,44 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	this.setTextFill(Color.rgb(255, 255, 255));
         	
         	switch(item.getMotivazione()) {
-        	case("copresenza"):
+        	case copresenza:
         		this.setStyle("-fx-background-color: #CC0000");
         		break;
-        	case("potenziamento stesse discipline"):
+        	case potenziamento_stesse_discipline:
         		this.setStyle("-fx-background-color: #FF0000");
         		break;
-        	case("potenziamento altre discipline"):
+        	case potenziamento_altre_discipline:
         		this.setStyle("-fx-background-color: #FF8000");
         		break;
-        	case("recupero stessa classe"):
+        	case recupero_stessa_classe:
         		this.setStyle("-fx-background-color: #FFFF00");
         		break;
-        	case("recupero altra classe, stesso gruppo"):
+        	case recupero_altra_classe_Stesso_gruppo:
         		this.setStyle("-fx-background-color: #80FF00");
         		break;
-        	case("recupero altra classe, altro gruppo"):
+        	case recupero_altra_classe_Altro_gruppo:
         		this.setStyle("-fx-background-color: #33FF33");
         		break;
-        	case("a pagamento stessa classe"):
+        	case a_pagamento_Stessa_classe:
         		this.setStyle("-fx-background-color: #33FF99");
         		break;
-        	case("a pagamento altra classe ma stesso gruppo"):
+        	case a_pagamento_altra_classe_Stesso_gruppo:
         		this.setStyle("-fx-background-color: #33FFFF");
         		break;
-        	case("a pagamento altra classe e altro gruppo"):
+        	case a_pagamento_altra_classe_e_altro_gruppo:
         		this.setStyle("-fx-background-color: #66B2FF");
         		break;
-        	case("a disposizione Cassata"):
+        	case a_disposizione_Cassata:
         		this.setStyle("-fx-background-color: #6666FF");
         		break;
-        	case("libero della classe"):
+        	case libero_della_classe:
         		this.setStyle("-fx-background-color: #B266FF");
         		break;
-        	case("libero altra classe"):
+        	case libero_altra_classe:
         		this.setStyle("-fx-background-color: #FF99FF");
         		break;
+        	default:
+        		this.setStyle("-fx-background-color: #727272");
         	}
         	
             Docente bersaglio = Ambiente.cercaDocentePerNome(item.getNomeSostituto());
