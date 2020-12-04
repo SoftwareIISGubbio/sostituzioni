@@ -1,0 +1,33 @@
+.pannelloPrincipale{
+	-fx-background-color: #f4d03f; 
+}
+.button{
+	-fx-text-fill: #ffe800;
+	-fx-background-color: #3B3B3B;
+}
+.label{
+	-fx-text-fill: #3b3b3b; 
+	-fx-font-family:"Times New Roman";
+	-fx-font-weight: bold;
+	-fx-font-size: 12pt;
+}
+.date-picker{
+	-fx-background-color: #e6e6e6;
+	-fx-text-fill: #3b3b3b; 
+	-fx-font-weight: bold;
+}
+.combo-box{
+	-fx-background-color: #e6e6e6;
+	-fx-text-fill: #3b3b3b; 
+	-fx-font-weight: bold;
+}
+.text-area{
+	-fx-text-fill: #3b3b3b;
+	-fx-font-weight: bold;
+	-fx-background-color: White;
+}
+.list-cell{
+	-fx-background-color: White;
+	-fx-background-radius: 6;
+	-fx-text-fill: #3b3b3b;
+}

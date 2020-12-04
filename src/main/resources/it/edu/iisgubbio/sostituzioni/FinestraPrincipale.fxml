@@ -19,22 +19,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale" stylesheets="@stile.css">
    <center>
-      <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4d03f;" vgap="5.0">
+      <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="pannelloPrincipale" vgap="5.0">
         <columnConstraints>
           <ColumnConstraints minWidth="5.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" />
         </columnConstraints>
          <children>
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Seleziona giorno" textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Seleziona giorno"  GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#gestioneCercaDocenteDisponibile" style="-fx-background-color: #3B3B3B;" text="Cerca docenti disponibili" textFill="#ffe800" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere la classe" textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+             <Button mnemonicParsing="false" onAction="#gestioneCercaDocenteDisponibile" text="Cerca docenti disponibili" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere la classe" GridPane.halignment="CENTER" GridPane.rowIndex="10">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -47,20 +47,17 @@
                   <Reflection fraction="0.48" topOpacity="0.25" />
                </effect>
             </ImageView>
-            <Label fx:id="txtOra" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere ora " textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
+            <Label fx:id="txtOra" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere ora " GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <padding>
                   <Insets top="20.0" />
                </padding>
             </Label>
-            <ListView fx:id="listaSostituzioniPossibili" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" style="-fx-background-color: #E6E6E6; -fx-background-radius: 6;" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="6">
+            <ListView fx:id="listaSostituzioniPossibili" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="6">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </ListView>
-            <DatePicker fx:id="data" onAction="#gestioneSelezioneDataEDocente" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+            <DatePicker fx:id="data" onAction="#gestioneSelezioneDataEDocente" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
                <effect>
                   <Reflection fraction="0.57" />
                </effect>
@@ -68,15 +65,12 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </DatePicker>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" text="Lista docenti disponibili" textFill="#4d4d4d" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="Arial" size="13.0" />
-               </font>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" text="Lista docenti disponibili" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <ComboBox fx:id="cmbOra" promptText="Ore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbOra" promptText="Ore" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP">
                <effect>
                   <Reflection bottomOpacity="0.04" fraction="0.64" topOpacity="0.41" />
                </effect>
@@ -84,7 +78,7 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="cmbClasse" promptText="Classi" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbClasse" promptText="Classi" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="TOP">
                <effect>
                   <Reflection bottomOpacity="0.17" fraction="0.44" topOpacity="0.44" />
                </effect>
@@ -92,12 +86,9 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </ComboBox>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" style="-fx-background-color: #3B3B3B;" text="Salva" textFill="#ffe800" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
-            <ComboBox fx:id="nomeProf" onAction="#gestioneSelezioneDataEDocente" prefWidth="185.0" promptText="Professore" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Label text="Selezionare Prof." textFill="#3b3b3b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" text="Salva" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+            <ComboBox fx:id="nomeProf" onAction="#gestioneSelezioneDataEDocente" prefWidth="185.0" promptText="Professore" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Label text="Selezionare Prof." GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <padding>
                   <Insets top="20.0" />
                </padding>
@@ -111,7 +102,7 @@
                   <Image url="@attenzione.png" />
                </image>
             </ImageView>
-            <ListView fx:id="listaOreLezione" prefHeight="200.0" prefWidth="250.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 6;" GridPane.rowIndex="7" />
+            <ListView fx:id="listaOreLezione" prefHeight="200.0" prefWidth="250.0" GridPane.rowIndex="7" />
             <Label fx:id="lDescrizioneOreLezione" alignment="BOTTOM_CENTER" text="ore da sostituire" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <WebView fx:id="ww" prefHeight="250.0" prefWidth="450.0" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.rowSpan="4" />
          </children>
@@ -138,7 +129,7 @@
       </GridPane>
    </center>
    <top>
-      <MenuBar prefHeight="21.0" prefWidth="494.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="21.0" prefWidth="494.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Opzioni">
             <items>
