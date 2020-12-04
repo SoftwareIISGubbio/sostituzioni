@@ -18,15 +18,7 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
  
         if (item == null || empty) {
         
-        } else {
-            /*if(item.getMotivazione().equals("a disposizione Cassata") || 
-                    item.getMotivazione().equals("libero della classe") ||
-                    item.getMotivazione().equals("libero altra classe") ) {
-                this.setTextFill(Color.GRAY);
-            }else {
-                this.setTextFill(Color.BLACK);
-            }*/
-        	
+        } else {        	
         	this.setTextFill(Color.rgb(255, 255, 255));
         	
         	switch(item.getMotivazione()) {
@@ -42,22 +34,22 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	case recupero_stessa_classe:
         		this.setStyle("-fx-background-color: #FFFF00");
         		break;
-        	case recupero_altra_classe_Stesso_gruppo:
+        	case recupero_altra_classe_stesso_gruppo:
         		this.setStyle("-fx-background-color: #80FF00");
         		break;
-        	case recupero_altra_classe_Altro_gruppo:
+        	case recupero_altra_classe_altro_gruppo:
         		this.setStyle("-fx-background-color: #33FF33");
         		break;
-        	case a_pagamento_Stessa_classe:
+        	case a_pagamento_stessa_classe:
         		this.setStyle("-fx-background-color: #33FF99");
         		break;
-        	case a_pagamento_altra_classe_Stesso_gruppo:
+        	case a_pagamento_altra_classe_stesso_gruppo:
         		this.setStyle("-fx-background-color: #33FFFF");
         		break;
         	case a_pagamento_altra_classe_e_altro_gruppo:
         		this.setStyle("-fx-background-color: #66B2FF");
         		break;
-        	case a_disposizione_Cassata:
+        	case a_disposizione_cassata:
         		this.setStyle("-fx-background-color: #6666FF");
         		break;
         	case libero_della_classe:
@@ -80,6 +72,6 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         }
          
         this.setText(name);
-        setGraphic(null);
+        setGraphic(null);  // TODO: questo a cosa serve?
     }
 }

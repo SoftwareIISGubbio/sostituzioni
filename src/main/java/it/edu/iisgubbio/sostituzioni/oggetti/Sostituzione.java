@@ -5,11 +5,10 @@ public class Sostituzione extends OraLezione {
 	protected String nomeSostituto;
 	protected Motivo motivazione;
 	protected String nomeDocenteDaSostituire;
-
 	public enum Motivo {
 		copresenza, potenziamento_stesse_discipline, potenziamento_altre_discipline, recupero_stessa_classe,
-		recupero_altra_classe_Stesso_gruppo, recupero_altra_classe_Altro_gruppo, a_pagamento_Stessa_classe,
-		a_pagamento_altra_classe_Stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, a_disposizione_Cassata,
+		recupero_altra_classe_stesso_gruppo, recupero_altra_classe_altro_gruppo, a_pagamento_stessa_classe,
+		a_pagamento_altra_classe_stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, a_disposizione_cassata,
 		libero_della_classe, libero_altra_classe, indefinito
 	}
 
@@ -56,27 +55,27 @@ public class Sostituzione extends OraLezione {
 		this.motivazione = switch (v[1]) {
 		case ("copresenza"):
 			yield Motivo.copresenza;
-		case ("potenziamento stesse discipline"):
+		case ("potenziamento_stesse_discipline"):
 			yield Motivo.potenziamento_stesse_discipline;
-		case ("potenziamento altre discipline"):
+		case ("potenziamento_altre_discipline"):
 			yield Motivo.potenziamento_altre_discipline;
-		case ("recupero stessa classe"):
+		case ("recupero_stessa_classe"):
 			yield Motivo.recupero_stessa_classe;
-		case ("recupero altra classe, stesso gruppo"):
-			yield Motivo.recupero_altra_classe_Stesso_gruppo;
-		case ("recupero altra classe, altro gruppo"):
-			yield Motivo.recupero_altra_classe_Altro_gruppo;
-		case ("a pagamento stessa classe"):
-			yield Motivo.a_pagamento_Stessa_classe;
-		case ("a pagamento altra classe ma stesso gruppo"):
-			yield Motivo.a_pagamento_altra_classe_Stesso_gruppo;
-		case ("a pagamento altra classe e altro gruppo"):
+		case ("recupero_altra_classe_stesso_gruppo"):
+			yield Motivo.recupero_altra_classe_stesso_gruppo;
+		case ("recupero_altra_classe_altro_gruppo"):
+			yield Motivo.recupero_altra_classe_altro_gruppo;
+		case ("a_pagamento_stessa_classe"):
+			yield Motivo.a_pagamento_stessa_classe;
+		case ("a_pagamento_altra_classe_stesso_gruppo"):
+		    yield Motivo.a_pagamento_altra_classe_stesso_gruppo;
+		case ("a_pagamento_altra_classe_e_altro_gruppo"):
 			yield Motivo.a_pagamento_altra_classe_e_altro_gruppo;
-		case ("a disposizione Cassata"):
-			yield Motivo.a_disposizione_Cassata;
-		case ("libero della classe"):
+		case ("a_disposizione_cassata"):
+			yield Motivo.a_disposizione_cassata;
+		case ("libero_della_classe"):
 			yield Motivo.libero_della_classe;
-		case ("libero altra classe"):
+		case ("libero_altra_classe"):
 			yield Motivo.libero_altra_classe;
 		default:
 			yield Motivo.indefinito;
