@@ -4,7 +4,6 @@ import it.edu.iisgubbio.sostituzioni.Ambiente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.scene.control.ListCell;
-import javafx.scene.paint.Color;
 
 // https://examples.javacodegeeks.com/desktop-java/javafx/listview-javafx/javafx-listview-example/
 public class CasellaSostituzione extends ListCell<Sostituzione>{
@@ -12,15 +11,16 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
     @Override
     public void updateItem(Sostituzione item, boolean empty) {
         super.updateItem(item, empty);
- 
         int index = this.getIndex();
         String name = null;
- 
-        if (item == null || empty) {
         
-        } else {        	
-        	this.setTextFill(Color.rgb(255, 255, 255));
-        	
+        if (item != null && !empty) {
+            if( this.isSelected() ) {
+                this.getStyleClass().add("selezionato");
+            } else {
+                this.getStyleClass().remove("selezionato");
+            }
+
         	switch(item.getMotivazione()) {
         	case copresenza:
         		this.setStyle("-fx-background-color: #CC0000");
@@ -64,7 +64,6 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	
             Docente bersaglio = Ambiente.cercaDocentePerNome(item.getNomeSostituto());
             
-            // this.setBackground(new Background(new BackgroundFill( Color.RED, null, null)));
             name = (index + 1) + ". " +
             item.getNomeSostituto() + " ["+
             item.getMotivazione()+"]"+
@@ -72,6 +71,5 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         }
          
         this.setText(name);
-        setGraphic(null);  // TODO: questo a cosa serve?
     }
 }

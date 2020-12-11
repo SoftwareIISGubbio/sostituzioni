@@ -27,7 +27,11 @@
 	-fx-background-color: White;
 }
 .list-cell{
+    -fx-font-family:"Arial";
 	-fx-background-color: White;
 	-fx-background-radius: 6;
 	-fx-text-fill: #3b3b3b;
+}
+.selezionato{
+    -fx-font-weight: bold;
 }
