@@ -12,11 +12,13 @@ public class DebugDocenti {
 		//ottiene un docente a caso
 		Docente d = lista.get(118);//(int) (Math.random()*lista.size()));
 		System.out.println(d);
-		System.out.println("Disposizione gattapone: "+d.oraADisposizioneGattapone);
 		System.out.println("Recupero: "+d.oraARecupero);
 		for(int i = 0; i<d.oreADisposizioneCassata.size(); i++) {
-		    System.out.println("pagamento: "+d.orePotenziamento.get(i));
+		    System.out.println("disposizione Cassata: "+d.oreADisposizioneCassata.get(i));
 	    }
+		for(int i = 0; i<d.oreADisposizioneGattapone.size(); i++) {
+            System.out.println("disposizione Gattapone: "+d.oreADisposizioneGattapone.get(i));
+        }
 		for(int i = 0; i<d.orePotenziamento.size(); i++) {
 			System.out.println("potenziamento: "+d.orePotenziamento.get(i));
 		}
