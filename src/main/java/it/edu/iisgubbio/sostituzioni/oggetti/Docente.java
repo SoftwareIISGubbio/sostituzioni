@@ -10,7 +10,7 @@ public class Docente {
 	public ArrayList<OraLezione> oreLezione;
 	public Ora oraARecupero;
 	public ArrayList<Ora> oreADisposizioneCassata;
-	public Ora oraADisposizioneGattapone;
+	public ArrayList<Ora> oreADisposizioneGattapone;
 	public ArrayList<Ora> oreAPagamento;
 	public ArrayList<Ora> orePotenziamento;
 	public String gruppo; // una cosa tipo "lettere" o "matematica" ...
@@ -23,6 +23,7 @@ public class Docente {
 		oreAPagamento = new ArrayList<Ora>();
 		orePotenziamento = new ArrayList<Ora>();
 		oreADisposizioneCassata = new ArrayList<>();
+		oreADisposizioneGattapone = new ArrayList<>();
 		oreRecuperate = 0;
 	}
 
@@ -30,7 +31,6 @@ public class Docente {
 		String risposta;
 		risposta = nome;
 		risposta = risposta + "\n  ora a recupero: " + oraARecupero;
-		risposta = risposta + "\n  ora a disp. Gattapone: " + oraADisposizioneGattapone;
 		risposta = risposta + "\n  ore a pagamento: ";
 		for (int i = 0; i < oreAPagamento.size(); i++) {
 		    risposta = risposta + oreAPagamento.get(i)+" ";
@@ -42,6 +42,10 @@ public class Docente {
         risposta = risposta + "\n  ore a disposizione Cassata: ";
         for (int i = 0; i < oreADisposizioneCassata.size(); i++) {
             risposta = risposta + oreADisposizioneCassata.get(i)+" ";
+        }
+        risposta = risposta + "\n  ore a disposizione Gattapone: ";
+        for (int i = 0; i < oreADisposizioneGattapone.size(); i++) {
+            risposta = risposta + oreADisposizioneGattapone.get(i)+" ";
         }
         risposta = risposta + "\n  ore di lezione ";
 		for (int i = 0; i < oreLezione.size(); i++) {

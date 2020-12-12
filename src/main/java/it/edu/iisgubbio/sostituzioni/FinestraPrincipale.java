@@ -481,6 +481,7 @@ public class FinestraPrincipale extends Application {
 	    int indiceSelezionato = listaOreLezione.getSelectionModel().getSelectedIndex();
 	    if(indiceSelezionato>-1) {
     	    OraLezione ol =  listaOreLezione.getItems().get(indiceSelezionato);
+    	    System.out.println(ol.classe);
     	    for(int i=0; i<cmbOra.getItems().size(); i++) {
     	        if(cmbOra.getItems().get(i).equals(""+ol.orario)) {
     	            cmbOra.getSelectionModel().select(i);

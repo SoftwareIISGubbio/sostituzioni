@@ -40,16 +40,16 @@ public class Ambiente {
     /** contiene i percorsi dei file Excell, FET e del giornale */
     private static Properties proprieta = new Properties();
     /** il file delle proprietà si trova in questa posizione */
-    private static final String percorso = System.getProperties().getProperty("user.home")+
-            File.separator+".sostituzioni.proprieta"; 
+    private static final String PERCORSO_FILE_PROPRIETA = 
+            System.getProperties().getProperty("user.home")+ File.separator+".sostituzioni.proprieta"; 
 
     /************************************************************************
      * Salava i diversi percorsi nel file delle preferenze
      ***********************************************************************/
     public static void salvaProprieta() {
-        System.out.println("proprietà salvate in: "+percorso);
+        System.out.println("proprietà salvate in: "+PERCORSO_FILE_PROPRIETA);
         
-        try( FileOutputStream uscita = new FileOutputStream(percorso) ){
+        try( FileOutputStream uscita = new FileOutputStream(PERCORSO_FILE_PROPRIETA) ){
             proprieta.store(uscita, "proprieta del programma dell'orario");
         } catch (Exception e) {
             Alert dialogoAllerta = new Alert(AlertType.ERROR, 
@@ -92,17 +92,17 @@ public class Ambiente {
     /************************************************************************
      * @return il File in cui sono contenuti i dati esportati da FET
      ***********************************************************************/
-    public static File getFileOrarioFET() {
+    /*public static File getFileOrarioFET() {
         return new File(proprieta.getProperty("fileOrarioFET"));
-    }
+    }*/
 
     /************************************************************************
      * @param fileOrarioFET il File in cui sono contenuti i dati esportati 
      * da FET
      ***********************************************************************/
-    public static void setFileOrarioFET(File fileOrarioFET) {
+    /*public static void setFileOrarioFET(File fileOrarioFET) {
         proprieta.put("fileOrarioFET", fileOrarioFET.toString());
-    }
+    }*/
     
     /************************************************************************
      * @return l'elenco dei nomi delle classi
@@ -163,36 +163,18 @@ public class Ambiente {
      *******************************************************************************************/
     static {
         // le preferenze vengono caricate in automatico al caricamento della classe
-        System.out.println("proprietà lette da: "+percorso);
+        System.out.println("proprietà lette da: "+PERCORSO_FILE_PROPRIETA);
         
-        try( FileInputStream entrata = new FileInputStream(percorso) ){
+        try( FileInputStream entrata = new FileInputStream(PERCORSO_FILE_PROPRIETA) ){
             proprieta.load(entrata);
         } catch (Exception e) {
            impostaPreferenzeEEsci();
         }
         
         // leggo le informazioni dei docenti dal file XML
-        docenti = LettoreFile.leggiXML();
-        // leggo ulteriori informazioni dei docenti dal file xlsx
-        ArrayList<Docente> informazioniExcel = LettoreFile.leggiExcel();
-        
-        for(Docente daExcel : informazioniExcel) {
-            Docente presente = cercaDocentePerNome(daExcel.nome);
-            if(presente!=null) {
-                presente.gruppo = daExcel.gruppo;
-                presente.oraARecupero = daExcel.oraARecupero;
-                presente.oreADisposizioneCassata = daExcel.oreADisposizioneCassata;
-                presente.oraADisposizioneGattapone = daExcel.oraADisposizioneGattapone;
-                presente.oraARecupero = daExcel.oraARecupero;
-                presente.oreAPagamento = daExcel.oreAPagamento;
-                presente.orePotenziamento = daExcel.orePotenziamento;
-                presente.oreDaRecuperare = daExcel.oreDaRecuperare;
-                // le ore recuperate vengono lette direttamente dal giornale
-            }else {
-            	docenti.add(daExcel);
-            }
-        }
-        LettoreFile.leggiProfSostegno(docenti);
+        docenti = NuovoLettoreFile.leggiExcel( getFileOrarioExcel() );
+        // FIXME: non abbiamo impolementato questa funzionalità
+        // LettoreFile.leggiProfSostegno(docenti);
         
         // creo elenco con nomi di classi e controllo se c'è qualche nome strano
         HashSet<String> insiemeNomiDiClassi = new HashSet<>();

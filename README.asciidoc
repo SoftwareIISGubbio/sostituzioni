@@ -2,8 +2,6 @@
 
 Lo scopo del programma è cercare un sostituto per un docente assente.
 
-I dati vengono recuperati da due file: un xml prodotto da 
-https://lalescu.ro/liviu/fet/[fet] 
-e un file xlsx editato manualmente.
+I dati vengono recuperati un file xlsx editato manualmente da chi gestisce l'orario.
 
 La ricerca avviene tramite filtri che scorrono i docenti in cerca di diverse proprietà.

@@ -19,7 +19,7 @@ public class FinestraInformazioniDocente {
 	@FXML
 	ListView<String> lOreDisposizioneCassata;
 	@FXML
-	TextField cOraDisposizioneGattapone;
+	ListView<String> lOreDisposizioneGattapone;
 	@FXML
 	ListView<String> lOrePagamento;
 	@FXML
@@ -49,10 +49,11 @@ public class FinestraInformazioniDocente {
                 lOreDisposizioneCassata.getItems().add(d.oreADisposizioneCassata.get(i).toString() + "\n");
             }
         }
-		if (d.oraADisposizioneGattapone != null) {
-			cOraDisposizioneGattapone.setText(d.oraADisposizioneGattapone.toString());
-		}
-		
+		if (d.oreADisposizioneGattapone != null) {
+            for (int i = 0; i < d.oreADisposizioneGattapone.size(); i++) {
+                lOreDisposizioneGattapone.getItems().add(d.oreADisposizioneGattapone.get(i).toString() + "\n");
+            }
+        }
 		if (d.oreAPagamento != null) {
 			for (int i = 0; i < d.oreAPagamento.size(); i++) {
 				lOrePagamento.getItems().add(d.oreAPagamento.get(i).toString() + "\n");

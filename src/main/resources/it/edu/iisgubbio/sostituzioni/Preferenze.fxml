@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" styleClass="pannelloPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPreferenze">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="600.0" styleClass="pannelloPrincipale" stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPreferenze">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" />
@@ -22,11 +22,11 @@
       <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextField fx:id="cFileFET" prefWidth="234.0" GridPane.columnIndex="1">
+      <TextField fx:id="cFileFET" disable="true" prefWidth="234.0" text="stiamo rimuovendo questa caratteristica" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></TextField>
-      <Label text="File prodotto da FET:" GridPane.halignment="RIGHT">
+      <Label disable="true" text="File prodotto da FET:" GridPane.halignment="RIGHT">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin>
@@ -43,7 +43,7 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></TextField>
-      <Button fx:id="pSelezionaFileFET" mnemonicParsing="false" onAction="#gestioneSelezioneFileFET" text="scegli..." GridPane.columnIndex="2">
+      <Button fx:id="pSelezionaFileFET" disable="true" mnemonicParsing="false" onAction="#gestioneSelezioneFileFET" text="scegli..." GridPane.columnIndex="2">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>

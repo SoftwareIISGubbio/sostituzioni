@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class FinestraPreferenze {
     @FXML
-    Button pSelezionaFileFET;
+    Button pSelezionaFileFET;  // TODO da rimuovere prima della versione 2
     @FXML
     Button pSelezionaFileTabella;
     @FXML
@@ -31,8 +31,9 @@ public class FinestraPreferenze {
      * In questo metodo si impostano i valori di alcuni oggetti presenti nella finestra
      *******************************************************************************************/   
     void initialize() {
+        // FIXME: da togliere nella versione 2.0
         try {
-            cFileFET.setText(Ambiente.getFileOrarioFET().toString());
+            // cFileFET.setText(Ambiente.getFileOrarioFET().toString());
         }catch(Exception x) {
             ; // non faccio nulla vuol dire che la proprietà non c'è e deve inserirla
         }
@@ -53,7 +54,7 @@ public class FinestraPreferenze {
         String fileFET = cFileFET.getText();
         String fileTabella = cFileTabella.getText();
         String fileGiornale = cFileGiornale.getText();
-        Ambiente.setFileOrarioFET( new File(fileFET) );
+        // Ambiente.setFileOrarioFET( new File(fileFET) );
         Ambiente.setFileOrarioExcel( new File(fileTabella) );
         Ambiente.setFileGiornale( new File(fileGiornale) );
         Ambiente.salvaProprieta();
@@ -63,6 +64,7 @@ public class FinestraPreferenze {
     
     @FXML
     private void gestioneSelezioneFileFET(ActionEvent e) {
+     /* TODO: da rimuovere prima della versione 2  
         // creare FileChooser
         FileChooser selettoreFile = new FileChooser();
         // indicare cartella di partenza
@@ -74,6 +76,7 @@ public class FinestraPreferenze {
         File fileSelezionato = selettoreFile.showOpenDialog( null );
         // metto il nome sulla casella
         cFileFET.setText( fileSelezionato.toString() );
+        */
     }
     
     @FXML

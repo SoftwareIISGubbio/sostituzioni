@@ -18,6 +18,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
+ * FIXME: questa classe va rimossa prima della versione 2
+ * 
  * Legge il documento XML (prodotto da FET) e il file Excel
  * inserisce le informazioni in una ArrayList di Docente
  * 
