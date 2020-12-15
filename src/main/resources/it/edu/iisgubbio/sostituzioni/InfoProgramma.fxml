@@ -1,56 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 
-<GridPane stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" styleClass="pannelloPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="229.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="182.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="63.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="160.0" minHeight="0.0" prefHeight="15.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="218.0" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="218.0" minHeight="7.0" prefHeight="23.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="724.0" prefWidth="540.0" styleClass="pannelloPrincipale" stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="ProfFinder" GridPane.columnIndex="1">
-      </Label>
-      <Label text="Version: 1.0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-      </Label>
-      <Label prefHeight="20.0" prefWidth="197.0" text="© Copyright ProfFinder 2019" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP">
-      </Label>
-      <Label prefHeight="26.0" prefWidth="122.0" text="All Rights Reserved." GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.valignment="TOP">
-      </Label>
-        <ImageView fitHeight="71.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER">
-           <image>
-              <Image url="@logo_iis_cassata_gattapone.png" />
-           </image>
-        </ImageView>
-      <Label text="Build Information" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      </Label>
-      <Label text="Date: 09/01/2020" GridPane.columnIndex="1" GridPane.rowIndex="3">
-      </Label>
-      <Label text="Java" GridPane.rowIndex="3">
-      </Label>
-      <Label prefHeight="31.0" prefWidth="103.0" text="11.0.1+13" GridPane.rowIndex="4">
-      </Label>
-      <Label GridPane.rowIndex="7" />
+      <ListView fx:id="lListaSviluppatori" layoutX="290.0" layoutY="82.0" prefHeight="295.0" prefWidth="221.0" />
+      <Label alignment="CENTER" layoutX="282.0" layoutY="36.0" prefHeight="52.0" prefWidth="221.0" text="Sviluppatori" />
+      <Label alignment="CENTER" layoutX="37.0" layoutY="165.0" prefHeight="36.0" prefWidth="164.0" text="Versione Programma" />
+      <Label alignment="CENTER" layoutX="37.0" layoutY="194.0" prefHeight="36.0" prefWidth="164.0" text="Versione 1.1.4" />
+      <Label alignment="CENTER" layoutX="37.0" layoutY="237.0" prefHeight="36.0" prefWidth="164.0" text="Ultimo Aggiornamento:" />
+      <Label alignment="CENTER" layoutX="37.0" layoutY="273.0" prefHeight="36.0" prefWidth="164.0" text="15/12/2020" />
+      <ImageView fitHeight="75.0" fitWidth="170.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo_iis_cassata_gattapone.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="37.0" layoutY="111.0" prefHeight="36.0" prefWidth="164.0" text="Versione Java" />
+      <Label fx:id="lController" alignment="CENTER" layoutX="37.0" layoutY="129.0" prefHeight="36.0" prefWidth="164.0" text="Test" />
+      <Label alignment="CENTER" layoutX="188.0" layoutY="392.0" prefHeight="36.0" prefWidth="146.0" text="Licenza MIT" />
+      <TextArea layoutX="14.0" layoutY="440.0" prefHeight="257.0" prefWidth="493.0" text="Copyright (c) 2020 Prof Finder&#10;&#10;Permission is hereby granted, free of charge, to any person&#10;obtaining a copy of this software and associated documentation&#10;files (the &quot;Software&quot;), to deal in the Software without&#10;restriction, including without limitation the rights to use,&#10;copy, modify, merge, publish, distribute, sublicense, and/or sell&#10;copies of the Software, and to permit persons to whom the&#10;Software is furnished to do so, subject to the following&#10;conditions:&#10;&#10;The above copyright notice and this permission notice shall be&#10;included in all copies or substantial portions of the Software.&#10;&#10;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,&#10;EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES&#10;OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#10;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT&#10;HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,&#10;WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING&#10;FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR&#10;OTHER DEALINGS IN THE SOFTWARE." />
    </children>
-   <padding>
-      <Insets left="20.0" />
-   </padding>
-</GridPane>
+</Pane>
