@@ -28,7 +28,7 @@ public class NuovoLettoreFile {
 	private static final String MARCATORE_ORA_POTENZIAMENTO = "POT";
 
 	private final static byte COLONNA_FINALE_ORARIO = 43;
-	private static final String FOGLIO_DOCENTI = "Insieme_totale";
+	private static final String FOGLIO_DOCENTI = "insieme_totale";
 	private static final String FOGLIO_INFORMAZIONI = "informazioni";
 	private final static String FOGLIO_SOSTEGNO = "sostegno";
 

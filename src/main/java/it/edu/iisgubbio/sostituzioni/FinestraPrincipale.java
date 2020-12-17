@@ -1,8 +1,6 @@
 package it.edu.iisgubbio.sostituzioni;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -75,25 +73,7 @@ public class FinestraPrincipale extends Application {
 	@FXML
 	WebView ww;
 	
-	/********************************************************************************************
-	 * Legge il numero di versione dal file versione.txt contenuto nel pacchetto
-	 * @return il numero di versione del programma
-	 *******************************************************************************************/
-	private String leggiVersione(){
-	    try {
-	        InputStream is = FinestraPrincipale.class.getResourceAsStream("versione.txt");
-	        InputStreamReader isr = new InputStreamReader(is);
-	        int numero;
-	        char buffer[] = new char[20];
-	        numero = isr.read(buffer);
-	        isr.close();
-	        is.close();
-	        return new String(buffer,0,numero);
-	    }catch(Exception ex) {
-	        return "V?";
-	    }
-	}
-
+	
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché 
 	 * la finestra viene caricata da un file FXML
@@ -106,7 +86,7 @@ public class FinestraPrincipale extends Application {
 			e.printStackTrace();
 		}
 		x.setScene(scena);
-		x.setTitle("Sostituzioni "+leggiVersione());
+		x.setTitle("Sostituzioni "+Ambiente.VERSIONE);
 		x.show();
 	}
 

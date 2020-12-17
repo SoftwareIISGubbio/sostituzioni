@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,6 +44,9 @@ public class Ambiente {
     /** il file delle proprietà si trova in questa posizione */
     private static final String PERCORSO_FILE_PROPRIETA = 
             System.getProperties().getProperty("user.home")+ File.separator+".sostituzioni.proprieta"; 
+    
+    public static final String VERSIONE = leggiVersione();
+    public static final String DATA_COMPILAZIONE = leggiDataCompilazione();
 
     /************************************************************************
      * Salava i diversi percorsi nel file delle preferenze
@@ -119,6 +124,9 @@ public class Ambiente {
         return problemi;
     }
     
+    /********************************************************************************************
+     * FIXME: che succede qui? le ore vengono sempre sommarte e se carico ,due volte il giornale??
+     *******************************************************************************************/
     public static void aggiornaOreSvolteDocenti() {
         ArrayList<Sostituzione> records;
         try {
@@ -128,7 +136,7 @@ public class Ambiente {
             for(Sostituzione s: records) {
                 for(Docente docente: docenti) {
                     if(docente.nome.equals(s.getNomeSostituto())){
-                        // TODO: controlla che la sostituzione sia su singola ora
+                        // FIXME: controlla che la sostituzione sia su singola ora
                         docente.oreRecuperate++;
                         break;
                     }
@@ -140,6 +148,9 @@ public class Ambiente {
         }
     }
     
+    /********************************************************************************************
+     * Mostra la finestra per impostare le preferenze, le salva e esce dal programma
+     *******************************************************************************************/
     public static void impostaPreferenzeEEsci() {
         // se non sono riuscito ad aprire il file mostro le preferenze 
         Stage s = new Stage();
@@ -157,6 +168,44 @@ public class Ambiente {
     }
     
     /********************************************************************************************
+     * Legge il contenuto di un file (una sola riga)
+     * @param nome del file da leggere
+     * @param predefinito valore di default
+     * @return il testo contenuto nel file o il valore predefinito in caso di errore
+     *******************************************************************************************/
+    private static String leggiInteroFile(String nome, String predefinito) {
+        try {
+            InputStream is = FinestraPrincipale.class.getResourceAsStream( nome );
+            InputStreamReader isr = new InputStreamReader(is);
+            int numero;
+            char buffer[] = new char[20];
+            numero = isr.read(buffer);
+            isr.close();
+            is.close();
+            return new String(buffer,0,numero);
+        }catch(Exception ex) {
+            return predefinito;
+        }
+    }
+    
+    /********************************************************************************************
+     * Legge il numero di versione dal file versione.txt contenuto nel pacchetto
+     * @return il numero di versione del programma
+     *******************************************************************************************/
+    private static String leggiVersione(){
+        return leggiInteroFile("versione.txt", "V?.?");
+    }
+    
+    /********************************************************************************************
+     * Legge la data di compilazione dal file versione.txt contenuto nel pacchetto
+     * @return la data di compilazione
+     *******************************************************************************************/
+    private static String leggiDataCompilazione(){
+        return leggiInteroFile("dataCompilazione.txt", "data sconosciuta");
+    }
+
+    
+    /********************************************************************************************
      * Questo codice viene eseguito al momento del caricamento della classe in memoria
      * TODO: forse sarebbe il caso di farlo diventare un normale oggetto e togliere tutte
      * le proprietà static
@@ -168,11 +217,18 @@ public class Ambiente {
         try( FileInputStream entrata = new FileInputStream(PERCORSO_FILE_PROPRIETA) ){
             proprieta.load(entrata);
         } catch (Exception e) {
-           impostaPreferenzeEEsci();
+            impostaPreferenzeEEsci();
         }
         
         // leggo le informazioni dei docenti dal file XML
-        docenti = NuovoLettoreFile.leggiExcel( getFileOrarioExcel() );
+        try( FileInputStream entrata = new FileInputStream(PERCORSO_FILE_PROPRIETA) ){
+            proprieta.load(entrata);
+            docenti = NuovoLettoreFile.leggiExcel( getFileOrarioExcel() );
+        } catch (Exception e) {
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file excel contiene errori che non consentono di analizzarlo, indicane uno funzionante nelle preferenze");
+            dialogoAllerta.showAndWait();
+            impostaPreferenzeEEsci();
+        }
         // FIXME: non abbiamo impolementato questa funzionalità
         // LettoreFile.leggiProfSostegno(docenti);
         

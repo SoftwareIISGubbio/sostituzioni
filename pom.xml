@@ -15,6 +15,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>14</maven.compiler.release>
 		<progetto.jars>${project.build.directory}/jars</progetto.jars>
+		<!-- https://rterp.wordpress.com/2012/03/16/stamping-version-number-and-build-time-in-properties-file-with-maven/ -->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>dd-mm-yyyy HH:mm</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>

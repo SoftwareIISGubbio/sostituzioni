@@ -34,4 +34,5 @@
 }
 .selezionato{
     -fx-font-weight: bold;
+    -fx-text-fill: #000000;
 }
