@@ -6,9 +6,10 @@ public class Sostituzione extends OraLezione {
 	protected Motivo motivazione;
 	protected String nomeDocenteDaSostituire;
 	public enum Motivo {
-		copresenza, potenziamento_stesse_discipline, potenziamento_altre_discipline, recupero_stessa_classe,
-		recupero_altra_classe_stesso_gruppo, recupero_altra_classe_altro_gruppo, a_pagamento_stessa_classe,
-		a_pagamento_altra_classe_stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, a_disposizione_cassata,
+		copresenza, potenziamento_stesse_discipline, potenziamento_altre_discipline, 
+		recupero_stessa_classe,recupero_altra_classe_stesso_gruppo, recupero_altra_classe_altro_gruppo, 
+		a_pagamento_stessa_classe,a_pagamento_altra_classe_stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, 
+		a_disposizione_stessa_classe,a_disposizione_altra_classe_stesso_gruppo, a_disposizione_altra_classe_altro_gruppo,
 		libero_della_classe, libero_altra_classe, indefinito
 	}
 
@@ -71,8 +72,12 @@ public class Sostituzione extends OraLezione {
 		    yield Motivo.a_pagamento_altra_classe_stesso_gruppo;
 		case ("a_pagamento_altra_classe_e_altro_gruppo"):
 			yield Motivo.a_pagamento_altra_classe_e_altro_gruppo;
-		case ("a_disposizione_cassata"):
-			yield Motivo.a_disposizione_cassata;
+		case ("a_disposizione_stessa_classe"):
+			yield Motivo.a_disposizione_stessa_classe;
+	    case ("a_disposizione_altra_classe_stesso_gruppo"):
+	        yield Motivo.a_disposizione_altra_classe_stesso_gruppo;
+	    case ("a_disposizione_altra_classe_altro_gruppo"):
+	        yield Motivo.a_disposizione_altra_classe_altro_gruppo;
 		case ("libero_della_classe"):
 			yield Motivo.libero_della_classe;
 		case ("libero_altra_classe"):

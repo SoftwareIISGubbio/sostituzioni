@@ -49,9 +49,15 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	case a_pagamento_altra_classe_e_altro_gruppo:
         		this.setStyle("-fx-background-color: #89ee8e");
         		break;
-        	case a_disposizione_cassata:
-        		this.setStyle("-fx-background-color: #ff8c00");
-        		break;
+        	case a_disposizione_stessa_classe:
+                this.setStyle("-fx-background-color: #ff8c00");
+                break;
+        	case a_disposizione_altra_classe_stesso_gruppo:
+                this.setStyle("-fx-background-color: #ff9900");
+                break;
+        	case a_disposizione_altra_classe_altro_gruppo:
+        	    this.setStyle("-fx-background-color: #ffb340");
+                break;
         	case libero_della_classe:
         		this.setStyle("-fx-background-color: #9778ba");
         		break;

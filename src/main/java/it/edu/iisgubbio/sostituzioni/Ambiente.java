@@ -225,12 +225,11 @@ public class Ambiente {
             proprieta.load(entrata);
             docenti = NuovoLettoreFile.leggiExcel( getFileOrarioExcel() );
         } catch (Exception e) {
+            e.printStackTrace();
             Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file excel contiene errori che non consentono di analizzarlo, indicane uno funzionante nelle preferenze");
             dialogoAllerta.showAndWait();
             impostaPreferenzeEEsci();
         }
-        // FIXME: non abbiamo impolementato questa funzionalità
-        // LettoreFile.leggiProfSostegno(docenti);
         
         // creo elenco con nomi di classi e controllo se c'è qualche nome strano
         HashSet<String> insiemeNomiDiClassi = new HashSet<>();

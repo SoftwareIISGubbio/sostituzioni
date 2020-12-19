@@ -1,0 +1,41 @@
+package it.edu.iisgubbio.sostituzioni.gui;
+
+import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
+import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione.Motivo;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class TestCasellaSostituzione extends Application{
+
+    ListView<Sostituzione> listaSostituzioniPossibili = new ListView<Sostituzione>();
+
+    @Override
+    public void start(Stage primaryStage){
+          
+        StackPane root = new StackPane();
+        root.getChildren().add(listaSostituzioniPossibili);
+        listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselle());
+        
+        Scene scene = new Scene(root, 550, 450);
+          
+        for(Motivo motivo: Motivo.values()) {
+            Sostituzione s = new Sostituzione(1, 1, "aula", "5i", false, "PANFILI edoardo");
+            s.compresenza = motivo==Motivo.copresenza;
+            s.setMotivazione(motivo);
+            listaSostituzioniPossibili.getItems().add(s);
+        }
+        
+        primaryStage.setTitle("test colori");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    
+    public static void main(String[] args) {
+        launch(args);
+
+    }
+
+}

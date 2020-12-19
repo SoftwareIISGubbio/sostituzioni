@@ -43,7 +43,20 @@ public class NuovoLettoreFile {
 	 * @return un arraylist con dentro tutti i docenti
 	 */
 	public static ArrayList<Docente> leggiExcel(File percorso) {
-		ArrayList<Docente> lista = new ArrayList<Docente>();
+	    ArrayList<Docente> curricolari = leggiDocentiCurricolari(percorso);
+	    ArrayList<Docente> sostegno = leggiProfSostegno(percorso);
+	    
+	    curricolari.addAll(sostegno);
+	    return curricolari;
+	}
+	
+	/**
+     * Riempie un arraylist di docenti curricolari
+     * 
+     * @param listaDocenti
+     */
+	public static ArrayList<Docente> leggiDocentiCurricolari(File percorso) {
+	    ArrayList<Docente> lista = new ArrayList<Docente>();
 		try {
 			Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
 			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
@@ -110,6 +123,7 @@ public class NuovoLettoreFile {
 
 			Sheet fGruppi = libro.getSheet(FOGLIO_INFORMAZIONI);
 			i = 0;
+			// FIXME non è detto che siano nello stesso ordine
 			while (fGruppi.getRow(i + 1) != null) {
 				String gruppo = fGruppi.getRow(i + 1).getCell(1).getStringCellValue();
 				int oreARecupero = (int) fGruppi.getRow(i + 1).getCell(2).getNumericCellValue();
@@ -158,80 +172,80 @@ public class NuovoLettoreFile {
 	}
 
 	/**
-	 * Riempe un arraylist di docenti di sostegno
+	 * Riempie un arraylist di docenti di sostegno
 	 * 
 	 * @param listaDocenti
 	 */
-	public static void leggiProfSostegno(ArrayList<Docente> listaDocenti) {
+	public static ArrayList<Docente> leggiProfSostegno(File percorso) {
 		Workbook libro;
+		ArrayList<Docente> listaDocenti = new ArrayList<Docente>();
 		try {
-			libro = new XSSFWorkbook(
-					new FileInputStream("C:\\Users\\rigiu\\git\\sostituzioni\\datiDiProva\\fileDatiDocenti2020.xlsx"));
+			libro = new XSSFWorkbook(new FileInputStream(percorso));
 			Sheet foglio = libro.getSheet(FOGLIO_SOSTEGNO);
 			int i = PRIMO_INSEGNANTE;
 			String contenuto;
+			String classe,annotazione;
 			// scorro fino a quando arriva alla fine degli insegnanti
 			while (( foglio.getRow(i).getCell(COLONNA_INSEGNANTE)) != null) {
 				// System.out.println(i + " " + contenuto);
 				contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
 				Docente d = new Docente(contenuto);
-
+				d.gruppo = "sostegno";
 				// scorre le ore dell'orario(colonne)
 				for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
-					// controlla se a quell'ora il professore lavora
-					//System.out.println("///////j: " + j);
-					if (foglio.getRow(i).getCell(j) != null) {
-						if (foglio.getRow(i).getCell(j).getStringCellValue().length() != 0) {
-							// calcolo il numero del giorno(da 1 a 5)
-							int giorno = ((j - (j % 9) + 1) / 9) + 1;
-							// calcolo l'ora di lezione(da 1 a 8 )
-							int orario = j % 9 > 6 ? j % 9 : j % 9 + 1;
-							// System.out.println(orario);
-							// String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
-							// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
-							String classe = foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "")
-									.toLowerCase();
-
-							switch (classe) {
-							case MARCATORE_ORA_RECUPERO:
-								d.oraARecupero = new Ora(giorno, orario);
-								break;
-
-							case "":
-								break;
-
-							default:
-								OraLezione ora = new OraLezione(giorno, orario);
-								ora.classe = classe;
-								d.oreLezione.add(ora);
-
-								// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
-								// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
-
-							}
-
-							// System.out.println(giorno +" " + (((j-(j%9)+ 1) /9)+1));
+				    // per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
+				    classe = foglio.getRow(i).getCell(j)!=null 
+				            ? foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "").toLowerCase()
+				            : "";
+				    annotazione = foglio.getRow(i+1).getCell(j)!=null
+				            ? foglio.getRow(i+1).getCell(j).getStringCellValue().replaceAll(" ", "")
+				            : "";
+				    // controlla se a quell'ora il professore lavora
+					if (classe.length() != 0 || annotazione.length() != 0) {
+						// calcolo il numero del giorno(da 1 a 5)
+						int giorno = ((j - (j % 9) + 1) / 9) + 1;
+						// calcolo l'ora di lezione(da 1 a 8 )
+						int orario = j % 9 > 6 ? j % 9 : j % 9 + 1;
+						switch (annotazione) {
+						case MARCATORE_ORA_RECUPERO:
+							d.oraARecupero = new Ora(giorno, orario);
+							break;
+	                    case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
+	                        d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
+	                        break;
+	                    case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
+	                        d.oreADisposizioneCassata.add(new Ora(giorno, orario));
+	                        break;
+	                    case MARCATORE_ORA_PAGAMENTO:
+	                        d.oreAPagamento.add(new Ora(giorno, orario));
+	                        break;
+						default:
+							OraLezione ora = new OraLezione(giorno, orario);
+							ora.classe = classe;
+							d.oreLezione.add(ora);
+							// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
+							// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
 						}
 					}
+				
 				}
 
 				i += 2;
-				System.out.println(i);
-				System.out.println("nome: " + d.nome);
+				// System.out.println(i);
+				// System.out.println("nome: " + d.nome);
 				listaDocenti.add(d);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+		    // FIXME non è che conviene far propagare le eccezioni?
 			e.printStackTrace();
 		}
-
-		// indice degli insegnanti (righe)
-
+		return(listaDocenti);
 	}
 
 	public static void main(String[] args) {
 		leggiExcel(new File("C:\\Users\\rigiu\\git\\sostituzioni\\datiDiProva\\fileDatiDocenti2020-tagliato.xlsx"));
-		leggiProfSostegno(new ArrayList<Docente>());
+		leggiProfSostegno(new File("C:\\Users\\rigiu\\git\\sostituzioni\\datiDiProva\\fileDatiDocenti2020-tagliato.xlsx"));
 	}
 
 }

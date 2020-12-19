@@ -5,3 +5,12 @@ Lo scopo del programma è cercare un sostituto per un docente assente.
 I dati vengono recuperati un file xlsx editato manualmente da chi gestisce l'orario.
 
 La ricerca avviene tramite filtri che scorrono i docenti in cerca di diverse proprietà.
+
+== Eseguire il programma
+
+In Eclipse nelle configurazioni di avvio vanno specificati dei parametri per la Virtual Machine (ovviamente inserendo il path giusto per l'SDK di JavaFX
+
+- Run configurations...
+- (x)= Arguments
+- VM Arguments
+- `--add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web --module-path  /opt/javafx-sdk-14/lib/`
