@@ -28,14 +28,13 @@ public class TestCasellaSostituzione extends Application{
             listaSostituzioniPossibili.getItems().add(s);
         }
         
-        primaryStage.setTitle("test colori");
+        primaryStage.setTitle("Legenda colori sostituzioni");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
     
     public static void main(String[] args) {
         launch(args);
-
     }
 
 }

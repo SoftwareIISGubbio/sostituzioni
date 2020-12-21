@@ -14,7 +14,6 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="261.0" minHeight="0.0" prefHeight="56.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="261.0" minHeight="0.0" vgrow="SOMETIMES" />
     <RowConstraints vgrow="SOMETIMES" />
       <RowConstraints maxHeight="413.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -27,49 +26,47 @@
       <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="249.0" styleClass="textColor" text="INFORMAZIONI DOCENTE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-      </Label>
-      <Label fx:id="eNomeDocente" styleClass="pannelloPrincipale" text="Nome Docente" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Label fx:id="eNomeDocente" styleClass="pannelloPrincipale" text="Nome Docente" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="10.0" right="10.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="pannelloPrincipale" text="Ore Lezione" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <Label styleClass="pannelloPrincipale" text="Ore Disposizione Cassata" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-      <ListView fx:id="lOreLezione" prefHeight="95.0" prefWidth="169.0" GridPane.rowIndex="4" GridPane.rowSpan="3">
+      <Label styleClass="pannelloPrincipale" text="Ore Lezione" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Label styleClass="pannelloPrincipale" text="Ore Disposizione Cassata" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+      <ListView fx:id="lOreLezione" prefHeight="95.0" prefWidth="169.0" GridPane.rowIndex="3" GridPane.rowSpan="3">
          <opaqueInsets>
             <Insets left="10.0" right="10.0" />
          </opaqueInsets>
       </ListView>
-      <ListView fx:id="lOreDisposizioneCassata" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
-      <Label text="Ore Pagamento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-      <Label text="Ore Potenziamento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <ListView fx:id="lOrePagamento" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <ListView fx:id="lOrePotenziamento" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label text="Ora disponibile al recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+      <ListView fx:id="lOreDisposizioneCassata" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+      <Label text="Ore Pagamento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Label text="Ore Potenziamento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <ListView fx:id="lOrePagamento" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <ListView fx:id="lOrePotenziamento" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="Ora disponibile al recupero" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
          <padding>
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label text="Ore da recuperare" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
+      <Label text="Ore da recuperare" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <padding>
             <Insets right="10.0" />
          </padding>
       </Label>
-      <TextField fx:id="cOraRecupero" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <TextField fx:id="cOreDaRecuperare" prefWidth="169.0" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Label text="Ora a Disposizione Gattapone" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+      <TextField fx:id="cOraRecupero" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <TextField fx:id="cOreDaRecuperare" prefWidth="169.0" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Label text="Ora a Disposizione Gattapone" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
          <padding>
             <Insets right="10.0" />
          </padding>
       </Label>
-      <TextField fx:id="cGruppo" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Gruppo" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <TextField fx:id="cGruppo" styleClass="informazione" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Gruppo" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <padding>
             <Insets right="10.0" />
          </padding>
       </Label>
-      <ListView fx:id="lOreDisposizioneGattapone" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <ListView fx:id="lOreDisposizioneGattapone" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

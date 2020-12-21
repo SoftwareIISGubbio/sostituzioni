@@ -50,6 +50,26 @@ public class NuovoLettoreFile {
 	    return curricolari;
 	}
 	
+    /** 
+     * @param colonna che si sta elaborando 
+     * @return il numero del giorno (da 1 a 5) 
+     * */
+	private static final int giorno(int colonna) {
+	    return 1 + ((colonna-1) / 9 );
+	}
+	
+	/** 
+	 * @param colonna che si sta elaborando 
+	 * @return l'ora di lezione (da 1 a 8 ) 
+	 * */
+	private static final int ora(int colonna) {
+	    int ora = (colonna-1) % 9 + 1;
+        if(ora>6) { 
+            ora--;
+        }
+        return ora;
+	}
+	
 	/**
      * Riempie un arraylist di docenti curricolari
      * 
@@ -72,10 +92,8 @@ public class NuovoLettoreFile {
 				for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
 					// controlla se a quell'ora il professore lavora
 					if (foglio.getRow(i + 1).getCell(j).getStringCellValue().length() != 0) {
-						// calcolo il numero del giorno(da 1 a 5)
-						int giorno = ((j - (j % 9) + 1) / 9) + 1;
-						// calcolo l'ora di lezione(da 1 a 8 )
-						int orario = j % 9 > 6 ? j % 9 : j % 9 + 1;
+						int giorno = giorno(j);
+						int orario = ora(j);
 						// System.out.println(orario);
 						String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
 						// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
@@ -202,10 +220,8 @@ public class NuovoLettoreFile {
 				            : "";
 				    // controlla se a quell'ora il professore lavora
 					if (classe.length() != 0 || annotazione.length() != 0) {
-						// calcolo il numero del giorno(da 1 a 5)
-						int giorno = ((j - (j % 9) + 1) / 9) + 1;
-						// calcolo l'ora di lezione(da 1 a 8 )
-						int orario = j % 9 > 6 ? j % 9 : j % 9 + 1;
+						int giorno = giorno(j);
+						int orario = ora(j);
 						switch (annotazione) {
 						case MARCATORE_ORA_RECUPERO:
 							d.oraARecupero = new Ora(giorno, orario);
@@ -227,7 +243,6 @@ public class NuovoLettoreFile {
 							// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
 						}
 					}
-				
 				}
 
 				i += 2;

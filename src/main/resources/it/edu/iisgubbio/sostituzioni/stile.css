@@ -36,3 +36,8 @@
     -fx-font-weight: bold;
     -fx-text-fill: #000000;
 }
+.didascalia{
+	-fx-font-family:"Arial";
+	-fx-font-size: 10pt;
+	-fx-font-weight: normal;
+}

@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 public class FinestraPreferenze {
     @FXML
-    Button pSelezionaFileFET;  // TODO da rimuovere prima della versione 2
-    @FXML
     Button pSelezionaFileTabella;
     @FXML
     Button pSelezionaFileGiornale;
@@ -51,32 +49,13 @@ public class FinestraPreferenze {
     
     @FXML
     private void gestioneApplica() {
-        String fileFET = cFileFET.getText();
         String fileTabella = cFileTabella.getText();
         String fileGiornale = cFileGiornale.getText();
-        // Ambiente.setFileOrarioFET( new File(fileFET) );
         Ambiente.setFileOrarioExcel( new File(fileTabella) );
         Ambiente.setFileGiornale( new File(fileGiornale) );
         Ambiente.salvaProprieta();
-        Stage stage = (Stage) pSelezionaFileFET.getScene().getWindow();
+        Stage stage = (Stage) pSelezionaFileGiornale.getScene().getWindow();
         stage.close();
-    }
-    
-    @FXML
-    private void gestioneSelezioneFileFET(ActionEvent e) {
-     /* TODO: da rimuovere prima della versione 2  
-        // creare FileChooser
-        FileChooser selettoreFile = new FileChooser();
-        // indicare cartella di partenza
-        String cartellaPartenza = System.getProperties().getProperty("user.home");
-        selettoreFile.setInitialDirectory(new File(cartellaPartenza));
-        // creare filtro per estensione file
-        selettoreFile.getExtensionFilters().addAll(new ExtensionFilter("File FET", "*.xml"));
-        // aprire la finestra e recuperare file selezionato
-        File fileSelezionato = selettoreFile.showOpenDialog( null );
-        // metto il nome sulla casella
-        cFileFET.setText( fileSelezionato.toString() );
-        */
     }
     
     @FXML
