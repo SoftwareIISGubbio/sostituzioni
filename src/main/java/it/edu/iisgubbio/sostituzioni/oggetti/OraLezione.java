@@ -34,11 +34,13 @@ public class OraLezione extends Ora{
 	
 	@Override
 	public String toString() {
-		String toStringOra = super.toString();
-		if( compresenza ) {
-			return toStringOra+" "+classe+" "+aula+" compresenza";
-		}else {
-			return toStringOra+" "+classe+" "+aula;
+		String toStringOra = super.toString()+" "+classe;
+		if(aula!=null) {
+		    toStringOra += " "+aula;
 		}
+		if( compresenza ) {
+			toStringOra += " compresenza";
+		}
+		return toStringOra;
 	}
 }

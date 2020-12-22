@@ -94,20 +94,6 @@ public class Ambiente {
         proprieta.put("fileOrarioExcel", fileOrarioExcel.toString());
     }
 
-    /************************************************************************
-     * @return il File in cui sono contenuti i dati esportati da FET
-     ***********************************************************************/
-    /*public static File getFileOrarioFET() {
-        return new File(proprieta.getProperty("fileOrarioFET"));
-    }*/
-
-    /************************************************************************
-     * @param fileOrarioFET il File in cui sono contenuti i dati esportati 
-     * da FET
-     ***********************************************************************/
-    /*public static void setFileOrarioFET(File fileOrarioFET) {
-        proprieta.put("fileOrarioFET", fileOrarioFET.toString());
-    }*/
     
     /************************************************************************
      * @return l'elenco dei nomi delle classi
@@ -122,6 +108,13 @@ public class Ambiente {
      ***********************************************************************/
     public static String getProblemi() {
         return problemi;
+    }
+    
+    /********************************************************************************************
+     * @param p il problema da aggiungere all'elenco
+     *******************************************************************************************/
+    public static void addProblema(String p) {
+        problemi += p + "\n";
     }
     
     /********************************************************************************************
@@ -226,7 +219,7 @@ public class Ambiente {
             docenti = NuovoLettoreFile.leggiExcel( getFileOrarioExcel() );
         } catch (Exception e) {
             e.printStackTrace();
-            Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file excel contiene errori che non consentono di analizzarlo, indicane uno funzionante nelle preferenze");
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file excel contiene errori che non consentono di analizzarlo, indicane uno funzionante nelle preferenze (errore: "+e.getMessage()+")");
             dialogoAllerta.showAndWait();
             impostaPreferenzeEEsci();
         }
@@ -243,7 +236,8 @@ public class Ambiente {
                 //   [a-z] → una lettera
                 //   [\\-1-5a-z]* → una sequenza di uno o più lettere numeri e "-" 
                 //   [\\])]? → una parentesi quadra o tonda chiusa se c'è
-                if( nomeClasse.matches("[\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?") || nomeClasse.equals("gatt")){
+                // uno o più delle cose sopra eventualmente separate da "-"
+                if( nomeClasse.matches("([\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?-?)+") || nomeClasse.equals("gatt")){
                     insiemeNomiDiClassi.add(nomeClasse);
                 } else {
                 	if(!nomeClasse.equals("vp") ) {

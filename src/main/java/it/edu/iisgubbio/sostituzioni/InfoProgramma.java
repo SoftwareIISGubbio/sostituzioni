@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class InfoProgramma{
-	private String[] sviluppatori = {"Edoardo Panfili","Angeloni Pietro","Battistoni Giulia","Bejdo Loris","Biagiotti Luca",
+	private String[] sviluppatori = {"Edoardo Panfili","Claudio Giammarioli","Angeloni Pietro","Battistoni Giulia","Bejdo Loris","Biagiotti Luca",
 			"Casagrande Nicola","Cenni Gabriele","Costea Bianca Ioana","Ermirandi Jennifer","Kakcuku Sokol","Mancini Giada",
 			"Morelli Cristian","Natalini Sofia","Pierotti Giorgio","Rinaldoni Matteo","Vantaggi Leonardo","Vantaggi Michele",
 			"Luzi Davide","Andrei Riginel Ungureanu","Flavio Merli","Omar Mohamed Nasr"};
@@ -20,7 +20,7 @@ public class InfoProgramma{
 	@FXML
 	Label lAggiornamento;
 	@FXML
-	ListView lListaSviluppatori;
+	ListView<String> lListaSviluppatori;
 	@FXML
     void initialize() {
 		String javaVersion=System.getProperty("java.version");

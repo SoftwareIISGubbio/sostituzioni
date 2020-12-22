@@ -2,6 +2,7 @@ package it.edu.iisgubbio.sostituzioni;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -41,8 +42,10 @@ public class NuovoLettoreFile {
 	 * @param percorso del file
 	 * 
 	 * @return un arraylist con dentro tutti i docenti
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static ArrayList<Docente> leggiExcel(File percorso) {
+	public static ArrayList<Docente> leggiExcel(File percorso) throws FileNotFoundException, IOException {
 	    ArrayList<Docente> curricolari = leggiDocentiCurricolari(percorso);
 	    ArrayList<Docente> sostegno = leggiProfSostegno(percorso);
 	    
@@ -74,90 +77,94 @@ public class NuovoLettoreFile {
      * Riempie un arraylist di docenti curricolari
      * 
      * @param listaDocenti
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
      */
-	public static ArrayList<Docente> leggiDocentiCurricolari(File percorso) {
+	public static ArrayList<Docente> leggiDocentiCurricolari(File percorso) throws FileNotFoundException, IOException {
 	    ArrayList<Docente> lista = new ArrayList<Docente>();
-		try {
-			Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
-			Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
-			// indice degli insegnanti (righe)
-			int i = PRIMO_INSEGNANTE;
-			String contenuto;
+		Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
+		Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
+		// indice degli insegnanti (righe)
+		int i = PRIMO_INSEGNANTE;
+		String contenuto;
 
-			// scorro fino a quando arriva alla fine degli insegnanti
-			while ((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
-				// System.out.println(i + " " + contenuto);
-				Docente d = new Docente(contenuto);
-				// scorre le ore dell'orario(colonne)
-				for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
-					// controlla se a quell'ora il professore lavora
-					if (foglio.getRow(i + 1).getCell(j).getStringCellValue().length() != 0) {
-						int giorno = giorno(j);
-						int orario = ora(j);
-						// System.out.println(orario);
-						String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
-						// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
-						String classe = foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "")
-								.toLowerCase();
-						boolean compresenza = compresenza(foglio, i, j, aula);
-						switch (aula) {
-						case MARCATORE_ORA_RECUPERO:
-							d.oraARecupero = new Ora(giorno, orario);
-							break;
+		// scorro fino a quando arriva alla fine degli insegnanti
+		while ((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
+			// System.out.println(i + " " + contenuto);
+			Docente d = new Docente(contenuto);
+			// scorre le ore dell'orario(colonne)
+			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
+				// controlla se a quell'ora il professore lavora
+				if (foglio.getRow(i + 1).getCell(j).getStringCellValue().length() != 0) {
+					int giorno = giorno(j);
+					int orario = ora(j);
+					// System.out.println(orario);
+					String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
+					// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
+					String classe = foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "")
+							.toLowerCase();
+					boolean compresenza = compresenza(foglio, i, j, aula);
+					switch (aula) {
+					case MARCATORE_ORA_RECUPERO:
+						d.oraARecupero = new Ora(giorno, orario);
+						break;
 
-						case MARCATORE_ORA_POTENZIAMENTO:
-							d.orePotenziamento.add(new Ora(giorno, orario));
-							break;
+					case MARCATORE_ORA_POTENZIAMENTO:
+						d.orePotenziamento.add(new Ora(giorno, orario));
+						break;
 
-						case MARCATORE_ORA_PAGAMENTO:
-							d.oreAPagamento.add(new Ora(giorno, orario));
-							break;
+					case MARCATORE_ORA_PAGAMENTO:
+						d.oreAPagamento.add(new Ora(giorno, orario));
+						break;
 
-						case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
-							d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
-							break;
+					case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
+						d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
+						break;
 
-						case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
-							d.oreADisposizioneCassata.add(new Ora(giorno, orario));
-							break;
+					case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
+						d.oreADisposizioneCassata.add(new Ora(giorno, orario));
+						break;
 
-						case "":
-							break;
+					case "":
+						break;
 
-						default:
-							d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
-							// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
-							// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
+					default:
+						d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
+						// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
+						// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
 
-						}
-
-						// System.out.println(giorno +" " + (((j-(j%9)+ 1) /9)+1));
 					}
+
+					// System.out.println(giorno +" " + (((j-(j%9)+ 1) /9)+1));
 				}
-
-				i += 2;
-				lista.add(d);
 			}
 
-			Sheet fGruppi = libro.getSheet(FOGLIO_INFORMAZIONI);
-			i = 0;
-			// FIXME non è detto che siano nello stesso ordine
-			while (fGruppi.getRow(i + 1) != null) {
-				String gruppo = fGruppi.getRow(i + 1).getCell(1).getStringCellValue();
-				int oreARecupero = (int) fGruppi.getRow(i + 1).getCell(2).getNumericCellValue();
-				lista.get(i).gruppo = gruppo;
-				lista.get(i).oreDaRecuperare = oreARecupero;
-				// System.out.println(contenuto);
-				i++;
-			}
-			// System.out.println("FINITO!");
-			// for( i = 0; i< lista.size();i++) {
-			// Docente d = lista.get(i);
-			// System.out.println(d.nome+","+d.gruppo + "," + d.oreDaRecuperare);
-			// }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			i += 2;
+			lista.add(d);
+		}
+
+		Sheet foglioInformazioni = libro.getSheet(FOGLIO_INFORMAZIONI);
+		i = 1;
+		while (foglioInformazioni.getRow(i) != null) {
+		    if(foglioInformazioni.getRow(i).getCell(0)!= null 
+		            && foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim().length()>0) {
+			    String nome = foglioInformazioni.getRow(i).getCell(0).getStringCellValue();
+				String gruppo = foglioInformazioni.getRow(i).getCell(1).getStringCellValue();
+				int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
+				boolean trovato = false;
+				for(Docente d: lista) {
+				    if(d.nome.equals(nome)) {
+				        d.gruppo = gruppo;
+				        d.oreDaRecuperare = oreDaRecuperare;
+				        trovato = true;
+				        break;
+				    }
+				}
+                if(!trovato) {
+                    Ambiente.addProblema("il docente \""+nome+"\" è presente soltanto nel foglio "+FOGLIO_INFORMAZIONI);
+                }
+		    }
+			i++;
 		}
 
 		return (lista);
@@ -193,74 +200,66 @@ public class NuovoLettoreFile {
 	 * Riempie un arraylist di docenti di sostegno
 	 * 
 	 * @param listaDocenti
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static ArrayList<Docente> leggiProfSostegno(File percorso) {
+	public static ArrayList<Docente> leggiProfSostegno(File percorso) throws FileNotFoundException, IOException {
 		Workbook libro;
 		ArrayList<Docente> listaDocenti = new ArrayList<Docente>();
-		try {
-			libro = new XSSFWorkbook(new FileInputStream(percorso));
-			Sheet foglio = libro.getSheet(FOGLIO_SOSTEGNO);
-			int i = PRIMO_INSEGNANTE;
-			String contenuto;
-			String classe,annotazione;
-			// scorro fino a quando arriva alla fine degli insegnanti
-			while (( foglio.getRow(i).getCell(COLONNA_INSEGNANTE)) != null) {
-				// System.out.println(i + " " + contenuto);
-				contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
-				Docente d = new Docente(contenuto);
-				d.gruppo = "sostegno";
-				// scorre le ore dell'orario(colonne)
-				for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
-				    // per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
-				    classe = foglio.getRow(i).getCell(j)!=null 
-				            ? foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "").toLowerCase()
-				            : "";
-				    annotazione = foglio.getRow(i+1).getCell(j)!=null
-				            ? foglio.getRow(i+1).getCell(j).getStringCellValue().replaceAll(" ", "")
-				            : "";
-				    // controlla se a quell'ora il professore lavora
-					if (classe.length() != 0 || annotazione.length() != 0) {
-						int giorno = giorno(j);
-						int orario = ora(j);
-						switch (annotazione) {
-						case MARCATORE_ORA_RECUPERO:
-							d.oraARecupero = new Ora(giorno, orario);
-							break;
-	                    case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
-	                        d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
-	                        break;
-	                    case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
-	                        d.oreADisposizioneCassata.add(new Ora(giorno, orario));
-	                        break;
-	                    case MARCATORE_ORA_PAGAMENTO:
-	                        d.oreAPagamento.add(new Ora(giorno, orario));
-	                        break;
-						default:
-							OraLezione ora = new OraLezione(giorno, orario);
-							ora.classe = classe;
-							d.oreLezione.add(ora);
-							// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
-							// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
-						}
+		
+		libro = new XSSFWorkbook(new FileInputStream(percorso));
+		Sheet foglio = libro.getSheet(FOGLIO_SOSTEGNO);
+		int i = PRIMO_INSEGNANTE;
+		String contenuto;
+		String classe,annotazione;
+		// scorro fino a quando arriva alla fine degli insegnanti
+		while (( foglio.getRow(i).getCell(COLONNA_INSEGNANTE)) != null) {
+			// System.out.println(i + " " + contenuto);
+			contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
+			Docente d = new Docente(contenuto);
+			d.gruppo = "sostegno";
+			// scorre le ore dell'orario(colonne)
+			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
+			    // per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
+			    classe = foglio.getRow(i).getCell(j)!=null 
+			            ? foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "").toLowerCase()
+			            : "";
+			    annotazione = foglio.getRow(i+1).getCell(j)!=null
+			            ? foglio.getRow(i+1).getCell(j).getStringCellValue().replaceAll(" ", "")
+			            : "";
+			    // controlla se a quell'ora il professore lavora
+				if (classe.length() != 0 || annotazione.length() != 0) {
+					int giorno = giorno(j);
+					int orario = ora(j);
+					switch (annotazione) {
+					case MARCATORE_ORA_RECUPERO:
+						d.oraARecupero = new Ora(giorno, orario);
+						break;
+                    case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
+                        d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
+                        break;
+                    case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
+                        d.oreADisposizioneCassata.add(new Ora(giorno, orario));
+                        break;
+                    case MARCATORE_ORA_PAGAMENTO:
+                        d.oreAPagamento.add(new Ora(giorno, orario));
+                        break;
+					default:
+						OraLezione ora = new OraLezione(giorno, orario);
+						ora.classe = classe;
+						d.oreLezione.add(ora);
+						// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
+						// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
 					}
 				}
-
-				i += 2;
-				// System.out.println(i);
-				// System.out.println("nome: " + d.nome);
-				listaDocenti.add(d);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		    // FIXME non è che conviene far propagare le eccezioni?
-			e.printStackTrace();
+
+			i += 2;
+			// System.out.println(i);
+			// System.out.println("nome: " + d.nome);
+			listaDocenti.add(d);
 		}
 		return(listaDocenti);
-	}
-
-	public static void main(String[] args) {
-		leggiExcel(new File("C:\\Users\\rigiu\\git\\sostituzioni\\datiDiProva\\fileDatiDocenti2020-tagliato.xlsx"));
-		leggiProfSostegno(new File("C:\\Users\\rigiu\\git\\sostituzioni\\datiDiProva\\fileDatiDocenti2020-tagliato.xlsx"));
 	}
 
 }
