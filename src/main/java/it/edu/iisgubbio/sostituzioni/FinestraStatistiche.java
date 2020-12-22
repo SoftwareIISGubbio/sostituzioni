@@ -3,14 +3,14 @@ package it.edu.iisgubbio.sostituzioni;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.ResocontoDocente;
-import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -47,26 +47,14 @@ public class FinestraStatistiche {
 
 
         try {
-            // FIXME: ora i docneti hanno queste informazioni, non serve rileggerle dai file
-            ArrayList<Sostituzione> records = Giornale.leggiGiornale();
             ResocontoDocente resoconti[] = new ResocontoDocente[Ambiente.docenti.size()];
             int i=0;
             // creo un resoconto per ogni docente
             for(Docente d: Ambiente.docenti) {
                 resoconti[i] = new ResocontoDocente(d.nome);
+                resoconti[i].setOreFatte(d.oreRecuperate);
                 resoconti[i].setOreDaFare( d.oreDaRecuperare );
                 i++;
-            }
-            // carico ogni singola ora su ogni docente, la strategia è penosa ma
-            // visto il carico dovrebbe essere sopportabile
-            for(Sostituzione s: records) {
-                for(ResocontoDocente r: resoconti) {
-                    if(r.getNome().equals(s.getNomeSostituto())){
-                        // TODO: controlla che la sostituzione sia su singola ora
-                        r.incrementaOreFatte();
-                        break;
-                    }
-                }
             }
             // https://www.codejava.net/java-core/collections/sorting-arrays-examples-with-comparable-and-comparator
             Arrays.sort(resoconti);
@@ -74,8 +62,10 @@ public class FinestraStatistiche {
                 tabella.getItems().add( rd);
             }
         }catch(Exception ex) {
-            // FIXME: 
             ex.printStackTrace();
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, 
+                    "situazione imprevista, contatta uno sviluppatore: "+ex.getMessage());
+            dialogoAllerta.showAndWait();
         }
     }
     

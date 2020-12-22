@@ -22,7 +22,7 @@ public class TestCasellaSostituzione extends Application{
         Scene scene = new Scene(root, 550, 450);
           
         for(Motivo motivo: Motivo.values()) {
-            Sostituzione s = new Sostituzione(1, 1, "aula", "5i", false, "PANFILI edoardo");
+            Sostituzione s = new Sostituzione(1, 1, "aula", "5i", false, "PANFILI edoardo","2020-12-22");
             s.compresenza = motivo==Motivo.copresenza;
             s.setMotivazione(motivo);
             listaSostituzioniPossibili.getItems().add(s);

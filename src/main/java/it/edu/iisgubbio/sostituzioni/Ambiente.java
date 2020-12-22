@@ -118,26 +118,32 @@ public class Ambiente {
     }
     
     /********************************************************************************************
-     * FIXME: che succede qui? le ore vengono sempre sommarte e se carico ,due volte il giornale??
+     * ri-legge il giornale per calcolare le ore svolte da un docente, non è certo efficente
+     * come strategia magari si può fare di meglio
      *******************************************************************************************/
     public static void aggiornaOreSvolteDocenti() {
         ArrayList<Sostituzione> records;
         try {
             records = Giornale.leggiGiornale();
+            // prima di ricalcolare le ore svolte le azzero
+            for(Docente docente: docenti) {
+                docente.oreRecuperate = 0;
+            }
             // carico ogni singola ora su ogni docente, la strategia è penosa ma
             // visto il carico dovrebbe essere sopportabile
             for(Sostituzione s: records) {
                 for(Docente docente: docenti) {
                     if(docente.nome.equals(s.getNomeSostituto())){
-                        // FIXME: controlla che la sostituzione sia su singola ora
                         docente.oreRecuperate++;
                         break;
                     }
                 }
             }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block, tocca fa di meglio
+        } catch (Exception e) {
             e.printStackTrace();
+            Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file del giornale \""+getFileGiornale()+"\" è corrotto, puliscilo e riavvia il programma o impostane uno nuovo");
+            dialogoAllerta.showAndWait();
+            impostaPreferenzeEEsci();
         }
     }
     

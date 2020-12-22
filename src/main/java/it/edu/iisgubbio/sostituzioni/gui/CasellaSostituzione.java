@@ -65,7 +65,7 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         		this.setStyle("-fx-background-color: #beabd4");
         		break;
         	default:
-        		this.setStyle("-fx-background-color: white");
+        		this.setStyle("-fx-background-color: red; -fx-text-fill: yellow");
         	}
         	
             Docente bersaglio = Ambiente.cercaDocentePerNome(item.getNomeSostituto());

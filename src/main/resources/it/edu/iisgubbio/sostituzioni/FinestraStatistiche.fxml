@@ -6,17 +6,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" styleClass="pannelloPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraStatistiche">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" styleClass="pannelloPrincipale" stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraStatistiche">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <center>
-      <TableView fx:id="tabella" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tabella" prefHeight="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colonnaNome" editable="false" prefWidth="300.0" text="nome" />
-          <TableColumn fx:id="colonnaFatte" editable="false" minWidth="0.0" text="ore fatte" />
-            <TableColumn fx:id="colonnaDaFare" editable="false" minWidth="0.0" text="ore da fare" />
-            <TableColumn fx:id="colonnaResidue" editable="false" text="residue" />
+          <TableColumn fx:id="colonnaFatte" editable="false" minWidth="0.0" prefWidth="140.0" text="ore fatte" />
+            <TableColumn fx:id="colonnaDaFare" editable="false" minWidth="0.0" prefWidth="140.0" text="ore da fare" />
+            <TableColumn fx:id="colonnaResidue" editable="false" prefWidth="140.0" text="residue" />
         </columns>
       </TableView>
    </center>
