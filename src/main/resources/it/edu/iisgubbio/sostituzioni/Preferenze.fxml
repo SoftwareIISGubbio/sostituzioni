@@ -61,7 +61,7 @@
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="pSelezionaFileGiornalepSelezionaFileGiornale" mnemonicParsing="false" onAction="#gestioneSelezioneFileGiornale" text="scegli..." GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Button fx:id="pSelezionaFileGiornale" mnemonicParsing="false" onAction="#gestioneSelezioneFileGiornale" text="scegli..." GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
