@@ -61,8 +61,11 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	case libero_della_classe:
         		this.setStyle("-fx-background-color: #9778ba");
         		break;
-        	case libero_altra_classe:
+        	case libero_altra_classe_stesso_gruppo:
         		this.setStyle("-fx-background-color: #beabd4");
+        		break;
+        	case libero_altra_classe_altro_gruppo:
+        		this.setStyle("-fx-background-color: #dcd0e8");
         		break;
         	default:
         		this.setStyle("-fx-background-color: red; -fx-text-fill: yellow");
