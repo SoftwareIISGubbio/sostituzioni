@@ -1,5 +1,7 @@
 package it.edu.iisgubbio.sostituzioni;
 
+import java.util.Arrays;
+
 public class CSV {
 
 	/**
@@ -13,12 +15,15 @@ public class CSV {
 		// e raddoppia quelle che stanno all'interno.
 		String csvLine = "\"" + vector[0].replaceAll("\"", "\"\"") + "\"";
 		for (int i = 1; i < vector.length; i++) {
-			csvLine += String.format(",\"%s\"", vector[i].replaceAll("\"", "\"\""));
+			if (vector[i] == null)
+				csvLine += ",\"\"";
+			else
+				csvLine += String.format(",\"%s\"", vector[i].replaceAll("\"", "\"\""));
 		}
 
 		return csvLine;
 	}
-	
+
 	/**
 	 * Trasforma una stringa in formato CSV in un vettore di stringhe
 	 * 
@@ -59,16 +64,22 @@ public class CSV {
 			}
 			if (!chiuse) {
 				if (vResult[index] == null) {
-					vResult[index] = String.valueOf(vCharCsv[i]);
+					if (String.valueOf(vCharCsv[i]) == "")
+						vResult[index] = null;
+					else
+						vResult[index] = String.valueOf(vCharCsv[i]);
 				} else {
-					vResult[index] += String.valueOf(vCharCsv[i]);
+					if (String.valueOf(vCharCsv[i]) == "")
+						vResult[index] += null;
+					else
+						vResult[index] += String.valueOf(vCharCsv[i]);
 				}
 			}
 		}
 		vResult = restringiVettore(vResult);
 		int index = vResult.length - 1;
 		vResult[index] = vResult[index].substring(0, vResult[index].length() - 1);
-		
+
 		return vResult;
 	}
 
