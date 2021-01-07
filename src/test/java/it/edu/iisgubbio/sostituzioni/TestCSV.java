@@ -53,10 +53,10 @@ public class TestCSV {
             System.out.println("ERRORE");
         }   
         
-        t = "\"uno\",\"\",\"tre\"";
+        t = "\"uno\",null,\"tre\"";
         v = CSV.fromCSV(t);
         System.out.print(t + " → " + Arrays.toString(v) +" : ");
-        if( "uno-du\"e-tre".equals( String.join("-", v) ) ) {
+        if( "uno-null-tre".equals( String.join("-", v) ) ) {
             System.out.println("OK");
         }else {
             System.out.println("ERRORE");

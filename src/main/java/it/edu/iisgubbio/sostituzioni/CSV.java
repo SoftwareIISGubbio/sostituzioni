@@ -1,6 +1,9 @@
 package it.edu.iisgubbio.sostituzioni;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CSV {
 
@@ -16,93 +19,48 @@ public class CSV {
 		String csvLine = "\"" + vector[0].replaceAll("\"", "\"\"") + "\"";
 		for (int i = 1; i < vector.length; i++) {
 			if (vector[i] == null)
-				csvLine += ",\"\"";
+				csvLine += ",null";
 			else
 				csvLine += String.format(",\"%s\"", vector[i].replaceAll("\"", "\"\""));
 		}
 
 		return csvLine;
 	}
-
+	
 	/**
-	 * Trasforma una stringa in formato CSV in un vettore di stringhe
+	 * Trasforma una stringa CSV in 1 vettore.
+	 * 
+	 * @author Nathan Spears - https://stackoverflow.com/questions/1441556/parsing-csv-input-with-a-regex-in-java
+	 * @author java2s - http://www.java2s.com/Code/Java/Development-Class/SimpledemoofCSVmatchingusingRegularExpressions.htm
 	 * 
 	 * @param csv: String in formato CSV
-	 * @return vResult: String[] formato da tutte le 'sezioni' del CSV
+	 * @return vCSV: String[]
 	 */
 	public static String[] fromCSV(String csvLine) {
-		char[] vCharCsv = csvLine.toCharArray();
-		boolean aperte = false, chiuse = false;
-
-		String[] vResult = new String[csvLine.split(",").length];
-
-		// Controlla se le virgolette sono aperte o chiuse, e in base a quello suddivide
-		// la stringa.
-		for (int i = 0, virgoletteDiFila = 0, index = -1; i < vCharCsv.length; i++) {
-			if (vCharCsv[i] == '"') {
-				if (!aperte) {
-					aperte = true;
-					chiuse = false;
-					index++;
-					continue;
-				}
-				virgoletteDiFila++;
-				if (i + 1 < vCharCsv.length && vCharCsv[i + 1] != '"') {
-					if (virgoletteDiFila % 2.00 != 0) {
-						if (i + 1 < vCharCsv.length && vCharCsv[i + 1] == ',' || i + 1 == vCharCsv.length) {
-							chiuse = true;
-							aperte = false;
-						}
-					}
-				} else {
-					if (i + 1 < vCharCsv.length) {
-						i++;
-					}
-				}
-			} else {
-				virgoletteDiFila = 0;
-			}
-			if (!chiuse) {
-				if (vResult[index] == null) {
-					if (String.valueOf(vCharCsv[i]) == "")
-						vResult[index] = null;
-					else
-						vResult[index] = String.valueOf(vCharCsv[i]);
-				} else {
-					if (String.valueOf(vCharCsv[i]) == "")
-						vResult[index] += null;
-					else
-						vResult[index] += String.valueOf(vCharCsv[i]);
-				}
-			}
-		}
-		vResult = restringiVettore(vResult);
-		int index = vResult.length - 1;
-		vResult[index] = vResult[index].substring(0, vResult[index].length() - 1);
-
-		return vResult;
-	}
-
-	/**
-	 * Rimuove da un vettore gli spazi riempiti con null
-	 * 
-	 * @param vector: String[]
-	 * @return newVector: String[]
-	 */
-	private static String[] restringiVettore(String[] vector) {
-		int dimension = 0;
-		for (int i = 0; i < vector.length; i++) {
-			if (vector[dimension] == null) {
+		List<String> list = new ArrayList<>();
+		Pattern csvPattern = Pattern.compile("\"([^\"]*)\"|(?<=,|^)([^,]*)(?=,|$)");
+		Matcher matcher = csvPattern.matcher(csvLine);
+		
+		while (matcher.find()) {
+			String match = matcher.group();
+			if (match == null)
 				break;
+			if (match.endsWith(",")) {
+				match = match.substring(0, match.length() - 1).replace("\\''", "\"");
 			}
-			dimension++;
+			if (match.startsWith("\"")) {
+				match = match.substring(1, match.length() - 1).replace("\\''", "\"");
+			}
+			if (match.length() == 0 || match.equals("null"))
+				match = null;
+			list.add(match);
 		}
-
-		String[] newVector = new String[dimension];
-		for (int i = 0; i < dimension; i++) {
-			newVector[i] = vector[i];
+		
+		String[] vCSV = new String[list.size()];
+		for (int i = 0; i < vCSV.length; i++) {
+			vCSV[i] = list.get(i);
 		}
-
-		return newVector;
+		
+		return vCSV;
 	}
 }
