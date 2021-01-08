@@ -17,7 +17,7 @@ public class TestCasellaSostituzione extends Application{
           
         StackPane root = new StackPane();
         root.getChildren().add(listaSostituzioniPossibili);
-        listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselle());
+        listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselleSostituzione());
         
         Scene scene = new Scene(root, 550, 450);
           

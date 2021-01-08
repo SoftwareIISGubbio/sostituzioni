@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
 //https://examples.javacodegeeks.com/desktop-java/javafx/listview-javafx/javafx-listview-example/
-public class FabbricaDiCaselle implements Callback<ListView<Sostituzione>, ListCell<Sostituzione>>{
+public class FabbricaDiCaselleSostituzione implements Callback<ListView<Sostituzione>, ListCell<Sostituzione>>{
     @Override
     public ListCell<Sostituzione> call(ListView<Sostituzione> studentListView) {
         return new CasellaSostituzione();

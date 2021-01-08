@@ -16,7 +16,8 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroPotenziamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
-import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselle;
+import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselleOraLezione;
+import it.edu.iisgubbio.sostituzioni.gui.FabbricaDiCaselleSostituzione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
@@ -121,7 +122,8 @@ public class FinestraPrincipale extends Application {
 			ivAttenzione.setVisible(false);
 		}
 
-		listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselle());
+		listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselleSostituzione());
+		listaOreLezione.setCellFactory(new FabbricaDiCaselleOraLezione());
 
 		// XXX: è possibile che questa cosa si possa fare dal file FXML
 		// ma siccome non trovo come quindi la metto qui
@@ -533,7 +535,6 @@ public class FinestraPrincipale extends Application {
 		int indiceSelezionato = listaOreLezione.getSelectionModel().getSelectedIndex();
 		if (indiceSelezionato > -1) {
 			OraLezione ol = listaOreLezione.getItems().get(indiceSelezionato);
-			System.out.println(ol.classe);
 			for (int i = 0; i < cmbOra.getItems().size(); i++) {
 				if (cmbOra.getItems().get(i).equals("" + ol.orario)) {
 					cmbOra.getSelectionModel().select(i);
@@ -544,6 +545,7 @@ public class FinestraPrincipale extends Application {
 					cmbClasse.getSelectionModel().select(i);
 				}
 			}
+			gestioneCercaDocenteDisponibile(null);
 		}
 	}
 }
