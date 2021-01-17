@@ -74,6 +74,14 @@ public class NuovoLettoreFile {
 	}
 	
 	/**
+	 * @param nome della classe 
+	 * @return nome senza spazi e tutto maiuscolo
+	 */
+	public static final String uniformaNomeClasse(String nome) {
+	    return nome.replaceAll(" ", "").toUpperCase();
+	}
+	
+	/**
      * Riempie un arraylist di docenti curricolari
      * 
      * @param listaDocenti
@@ -101,9 +109,8 @@ public class NuovoLettoreFile {
 					// System.out.println(orario);
 					String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
 					// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
-					String classe = foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "")
-							.toLowerCase();
-					boolean compresenza = compresenza(foglio, i, j, aula);
+					String classe = uniformaNomeClasse(foglio.getRow(i).getCell(j).getStringCellValue());
+					boolean compresenza = compresenza(foglio, i, j, classe, aula);
 					switch (aula) {
 					case MARCATORE_ORA_RECUPERO:
 						d.oraARecupero = new Ora(giorno, orario);
@@ -171,21 +178,26 @@ public class NuovoLettoreFile {
 	}
 
 	/**
-	 * Controlla se un insegnante ha la compresenza
+	 * Controlla se un insegnante ha la compresenza 
+	 * cioè se lavora nella stessa classe, stessa stanza non funziona
+	 * perché ad esempio in palestra possono trovarsi più classi contemporaneamente
 	 * 
 	 * @param foglio           da dove si prende la tabella
 	 * @param indiceInsegnante riga dell'insegnante che si deve controllare
 	 * @param indiceOra        colonna dell'insegnante che si deve controllare
+	 * @param classe           aula dove avviene la possibile compresenza
 	 * @param aula             aula dove avviene la possibile compresenza
 	 * @return true se c'è la compresenza, falso altriemnti
 	 */
-	public static boolean compresenza(Sheet foglio, int indiceInsegnante, int indiceOra, String aula) {
+	public static boolean compresenza(Sheet foglio, int indiceInsegnante, int indiceOra, String classe, String aula) {
 		boolean risposta = false;
 		int i = PRIMO_INSEGNANTE;
+		String classeAttuale;
 
 		while ((foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
 			if (i != indiceInsegnante) {
-				if (foglio.getRow(i + 1).getCell(indiceOra).getStringCellValue().equals(aula)) {
+		        classeAttuale = uniformaNomeClasse(foglio.getRow(i).getCell(indiceOra).getStringCellValue());
+				if (classeAttuale.equals(classe)) {
 					risposta = true;
 					break;
 				}
@@ -222,7 +234,7 @@ public class NuovoLettoreFile {
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
 			    // per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
 			    classe = foglio.getRow(i).getCell(j)!=null 
-			            ? foglio.getRow(i).getCell(j).getStringCellValue().replaceAll(" ", "").toLowerCase()
+			            ? uniformaNomeClasse( foglio.getRow(i).getCell(j).getStringCellValue() )
 			            : "";
 			    annotazione = foglio.getRow(i+1).getCell(j)!=null
 			            ? foglio.getRow(i+1).getCell(j).getStringCellValue().replaceAll(" ", "")

@@ -235,7 +235,7 @@ public class Ambiente {
         String nomeClasse;
         for(Docente docente: docenti) {
             for(OraLezione ol: docente.oreLezione) {
-                nomeClasse = ol.classe.toLowerCase();
+                nomeClasse = ol.classe;
                 // ci facciamo andar bene:
                 //   [\\[(]? → una parentesi quadra o tonda aperta se c'è
                 //   [1-5] → un numero da 1 a 5
@@ -243,10 +243,11 @@ public class Ambiente {
                 //   [\\-1-5a-z]* → una sequenza di uno o più lettere numeri e "-" 
                 //   [\\])]? → una parentesi quadra o tonda chiusa se c'è
                 // uno o più delle cose sopra eventualmente separate da "-"
-                if( nomeClasse.matches("([\\[(]?[1-5][a-z][\\-1-5a-z]*[\\])]?-?)+") || nomeClasse.equals("gatt")){
+                if( nomeClasse.matches("([\\[(]?[1-5][A-Z][\\-1-5A-Z]*[\\])]?-?)+") || nomeClasse.equals("gatt")){
                     insiemeNomiDiClassi.add(nomeClasse);
                 } else {
-                	if(!nomeClasse.equals("vp") ) {
+                    // FIXME: cosa è questa sigla "VP" ?
+                	if(!nomeClasse.equals("VP") ) {
                 		problemi += "classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
                 	}
                 }

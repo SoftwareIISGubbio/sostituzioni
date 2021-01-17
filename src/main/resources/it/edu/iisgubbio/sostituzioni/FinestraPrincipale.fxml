@@ -61,33 +61,6 @@
             </DatePicker>
             <Label fx:id="lDescrizioneOreLezione" alignment="BOTTOM_CENTER" prefHeight="50.0" text="ore da sostituire" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             <ListView fx:id="listaOreLezione" prefHeight="200.0" prefWidth="300.0" GridPane.rowIndex="7" />
-            <Label fx:id="txtOra" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere ora " visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </Label>
-            <ComboBox fx:id="cmbOra" promptText="Ore" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP">
-               <effect>
-                  <Reflection bottomOpacity="0.04" fraction="0.64" topOpacity="0.41" />
-               </effect>
-               <GridPane.margin>
-                  <Insets bottom="20.0" />
-               </GridPane.margin>
-            </ComboBox>
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="Immettere la classe" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="10">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="cmbClasse" promptText="Classi" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="TOP">
-               <effect>
-                  <Reflection bottomOpacity="0.17" fraction="0.44" topOpacity="0.44" />
-               </effect>
-               <GridPane.margin>
-                  <Insets bottom="20.0" />
-               </GridPane.margin>
-            </ComboBox>
-             <Button mnemonicParsing="false" onAction="#gestioneCercaDocenteDisponibile" text="Cerca docenti disponibili" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
             <ImageView fx:id="ivAttenzione" fitWidth="50.0" onMouseClicked="#mostraProblemi" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@attenzione.png" />

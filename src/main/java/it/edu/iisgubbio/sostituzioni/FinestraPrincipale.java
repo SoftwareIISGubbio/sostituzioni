@@ -57,10 +57,6 @@ public class FinestraPrincipale extends Application {
 	DatePicker data;
 	@FXML
 	ListView<OraLezione> listaOreLezione;
-	@FXML
-	ComboBox<String> cmbOra;
-	@FXML
-	ComboBox<String> cmbClasse;
 
 	@FXML
 	ImageView ivAttenzione;
@@ -74,6 +70,9 @@ public class FinestraPrincipale extends Application {
 
 	@FXML
 	WebView ww;
+	
+	private String classeSelezionata;
+	private int oraSelezionata;
 
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché la
@@ -97,16 +96,6 @@ public class FinestraPrincipale extends Application {
 	 * finestra
 	 *******************************************************************************************/
 	void initialize() {
-		// scorrere le classi e li inserisce alla combobox
-		String[] classi = Ambiente.getNomiClassi();
-		for (int j = 0; j < classi.length; j++) {
-			cmbClasse.getItems().add(classi[j]);
-		}
-		// inserisce i nomi delle ore nel combo box
-		for (int i = 1; i <= 8; i++) {
-			String n = "" + i;
-			cmbOra.getItems().add(n);
-		}
 		// scorrere l'elenco dei professori e li inserisce alla combobox
 		for (int j = 0; j < Ambiente.docenti.size(); j++) {
 			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
@@ -130,11 +119,6 @@ public class FinestraPrincipale extends Application {
 		listaSostituzioniPossibili.getSelectionModel().selectedItemProperty()
 				.addListener(e -> gestioneSelezioneListaSostituzioni());
 		listaOreLezione.getSelectionModel().selectedItemProperty().addListener(e -> gestioneListaOreLezione());
-
-		// se cambi ora o classe pulisco, attenzione che sovrascrivo altri eventuali
-		// listener
-		cmbOra.setOnAction(e -> puliziaRisultati());
-		cmbClasse.setOnAction(e -> puliziaRisultati());
 	}
 
 	private void puliziaRisultati() {
@@ -246,8 +230,8 @@ public class FinestraPrincipale extends Application {
 		LocalDate d = data.getValue();
 		OraLezione oraDaSostituire = new OraLezione();
 		oraDaSostituire.giorno = d.getDayOfWeek().getValue();
-		oraDaSostituire.orario = Integer.parseInt(cmbOra.getValue());
-		oraDaSostituire.classe = cmbClasse.getValue();
+		oraDaSostituire.orario = oraSelezionata;
+		oraDaSostituire.classe = classeSelezionata;
 		oraDaSostituire.aula = listaOreLezione.getItems()
 				.get(listaOreLezione.getSelectionModel().getSelectedIndex()).aula;
 		return oraDaSostituire;
@@ -267,11 +251,13 @@ public class FinestraPrincipale extends Application {
 		// rimuovo vecchia ricerca
 		puliziaRisultati();
 		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+		System.out.println(">>>>>"+tuttiIDocenti.size());
 		tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
 		// --------------- recupero tutti gli eventuali docenti in compresenza
 		// ------------------
 		ArrayList<Docente> docentiCoPresenza;
+		System.out.println(oraDaSostituire);
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 		for (int i = 0; i < docentiCoPresenza.size(); i++) {
 			Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
@@ -534,18 +520,10 @@ public class FinestraPrincipale extends Application {
 	private void gestioneListaOreLezione() {
 		int indiceSelezionato = listaOreLezione.getSelectionModel().getSelectedIndex();
 		if (indiceSelezionato > -1) {
-			OraLezione ol = listaOreLezione.getItems().get(indiceSelezionato);
-			for (int i = 0; i < cmbOra.getItems().size(); i++) {
-				if (cmbOra.getItems().get(i).equals("" + ol.orario)) {
-					cmbOra.getSelectionModel().select(i);
-				}
-			}
-			for (int i = 0; i < cmbClasse.getItems().size(); i++) {
-				if (cmbClasse.getItems().get(i).equals(ol.classe)) {
-					cmbClasse.getSelectionModel().select(i);
-				}
-			}
-			gestioneCercaDocenteDisponibile(null);
+    		OraLezione ol = listaOreLezione.getItems().get(indiceSelezionato);
+    		classeSelezionata = ol.classe;
+    		oraSelezionata = ol.orario;
+    		gestioneCercaDocenteDisponibile(null);
 		}
 	}
 }

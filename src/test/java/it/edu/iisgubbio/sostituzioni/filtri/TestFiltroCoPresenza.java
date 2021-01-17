@@ -11,7 +11,7 @@ public class TestFiltroCoPresenza {
 	public static void main(String[] args) {
 		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
 		ArrayList<Docente> docentiCoPresenza;
-		OraLezione classeCercata = new OraLezione(1, 1, null, "4i", false);
+		OraLezione classeCercata = new OraLezione(1, 6, null, "3I1", false);
 		long inizio = System.currentTimeMillis();
 		docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, classeCercata);
 		long fine = System.currentTimeMillis();

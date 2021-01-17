@@ -16,7 +16,7 @@ public class CasellaOraLezione extends ListCell<OraLezione>{
             } else {
                 this.getStyleClass().remove("selezionato");
             }
-            int ora = item.orario < 6 ? item.orario : item.orario-1;
+            int ora = item.orario < 7 ? item.orario : item.orario-1;
             descrizione = "["+ora+"] "+item.toString();
         }
          
