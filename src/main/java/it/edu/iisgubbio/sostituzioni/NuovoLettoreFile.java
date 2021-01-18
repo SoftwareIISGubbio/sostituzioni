@@ -48,8 +48,25 @@ public class NuovoLettoreFile {
 	public static ArrayList<Docente> leggiExcel(File percorso) throws FileNotFoundException, IOException {
 	    ArrayList<Docente> curricolari = leggiDocentiCurricolari(percorso);
 	    ArrayList<Docente> sostegno = leggiProfSostegno(percorso);
-	    
-	    curricolari.addAll(sostegno);
+	 
+	    // un professore di sostegno può essere anche curricolare
+	    Docente trovato;
+	    for(Docente candidato: sostegno) {
+	        trovato = null;
+	        for(Docente x: curricolari) {
+	            if(x.nome.toLowerCase().equalsIgnoreCase(candidato.nome)) {
+	                trovato=x;
+	                break;
+	            }
+	        }
+	        if(trovato==null) {
+	            curricolari.add(candidato);
+	        } else {
+	            for(OraLezione ol: candidato.oreLezione) {
+	                trovato.oreLezione.add(ol);
+	            }
+	        }
+	    }
 	    return curricolari;
 	}
 	
@@ -225,7 +242,7 @@ public class NuovoLettoreFile {
 		String contenuto;
 		String classe,annotazione;
 		// scorro fino a quando arriva alla fine degli insegnanti
-		while (( foglio.getRow(i).getCell(COLONNA_INSEGNANTE)) != null) {
+		while((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
 			// System.out.println(i + " " + contenuto);
 			contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
 			Docente d = new Docente(contenuto);
