@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /************************************************************************************************
  * Rappresenta un docente con tutte le caratteristiche del suo orario
  ***********************************************************************************************/
-public class Docente {
+public class Docente implements Comparable<Docente>{
 	public String nome;
 	public ArrayList<OraLezione> oreLezione;
 	public Ora oraARecupero;
@@ -19,6 +19,7 @@ public class Docente {
 
 	public Docente(String nome) {
 		this.nome = nome;
+		gruppo = "";
 		oreLezione = new ArrayList<>();
 		oreAPagamento = new ArrayList<Ora>();
 		orePotenziamento = new ArrayList<Ora>();
@@ -26,6 +27,11 @@ public class Docente {
 		oreADisposizioneGattapone = new ArrayList<>();
 		oreRecuperate = 0;
 	}
+	
+    @Override
+    public int compareTo(Docente altro) {
+        return nome.compareTo(altro.nome);
+    }
 
 	public String toString() {
 		String risposta;

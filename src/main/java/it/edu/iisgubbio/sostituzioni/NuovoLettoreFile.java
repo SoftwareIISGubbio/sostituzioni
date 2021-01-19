@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -67,6 +68,8 @@ public class NuovoLettoreFile {
 	            }
 	        }
 	    }
+	    leggiGruppi(percorso, curricolari);
+	    Collections.sort(curricolari);
 	    return curricolari;
 	}
 	
@@ -116,7 +119,7 @@ public class NuovoLettoreFile {
 		// scorro fino a quando arriva alla fine degli insegnanti
 		while ((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
 			// System.out.println(i + " " + contenuto);
-			Docente d = new Docente(contenuto);
+			Docente d = new Docente(contenuto.trim());
 			// scorre le ore dell'orario(colonne)
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
 				// controlla se a quell'ora il professore lavora
@@ -166,32 +169,42 @@ public class NuovoLettoreFile {
 			i += 2;
 			lista.add(d);
 		}
-
-		Sheet foglioInformazioni = libro.getSheet(FOGLIO_INFORMAZIONI);
-		i = 1;
-		while (foglioInformazioni.getRow(i) != null) {
-		    if(foglioInformazioni.getRow(i).getCell(0)!= null 
-		            && foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim().length()>0) {
-			    String nome = foglioInformazioni.getRow(i).getCell(0).getStringCellValue();
-				String gruppo = foglioInformazioni.getRow(i).getCell(1).getStringCellValue();
-				int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
-				boolean trovato = false;
-				for(Docente d: lista) {
-				    if(d.nome.equals(nome)) {
-				        d.gruppo = gruppo;
-				        d.oreDaRecuperare = oreDaRecuperare;
-				        trovato = true;
-				        break;
-				    }
-				}
-                if(!trovato) {
-                    Ambiente.addProblema("il docente \""+nome+"\" è presente soltanto nel foglio "+FOGLIO_INFORMAZIONI);
-                }
-		    }
-			i++;
-		}
-
 		return (lista);
+	}
+	
+	/**
+	 * inserisce il gruppo di ciascun docente
+	 * 
+	 * @param percorso
+	 * @param lista dei docenti in cui inserire i gruppi
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	private static void leggiGruppi(File percorso, ArrayList<Docente> lista) throws FileNotFoundException, IOException {
+	    Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
+	    Sheet foglioInformazioni = libro.getSheet(FOGLIO_INFORMAZIONI);
+	    int i = 1;
+	    while (foglioInformazioni.getRow(i) != null) {
+	        if(foglioInformazioni.getRow(i).getCell(0)!= null 
+	                && foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim().length()>0) {
+	            String nome = foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim();
+	            String gruppo = foglioInformazioni.getRow(i).getCell(1).getStringCellValue().trim();
+	            int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
+	            boolean trovato = false;
+	            for(Docente d: lista) {
+	                if(d.nome.equals(nome)) {
+	                    d.gruppo = gruppo;
+	                    d.oreDaRecuperare = oreDaRecuperare;
+	                    trovato = true;
+	                    break;
+	                }
+	            }
+	            if(!trovato) {
+	                Ambiente.addProblema("il docente \""+nome+"\" è presente soltanto nel foglio "+FOGLIO_INFORMAZIONI);
+	            }
+	        }
+	        i++;
+	    }
 	}
 
 	/**
@@ -245,7 +258,7 @@ public class NuovoLettoreFile {
 		while((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
 			// System.out.println(i + " " + contenuto);
 			contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
-			Docente d = new Docente(contenuto);
+			Docente d = new Docente(contenuto.trim());
 			d.gruppo = "sostegno";
 			// scorre le ore dell'orario(colonne)
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
@@ -277,15 +290,10 @@ public class NuovoLettoreFile {
 						OraLezione ora = new OraLezione(giorno, orario);
 						ora.classe = classe;
 						d.oreLezione.add(ora);
-						// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
-						// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
 					}
 				}
 			}
-
 			i += 2;
-			// System.out.println(i);
-			// System.out.println("nome: " + d.nome);
 			listaDocenti.add(d);
 		}
 		return(listaDocenti);

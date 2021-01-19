@@ -59,6 +59,7 @@ public class Ambiente {
         } catch (Exception e) {
             Alert dialogoAllerta = new Alert(AlertType.ERROR, 
                     "Un problema ha impedito il salvataggio delle preferenze: "+e.getMessage() );
+            dialogoAllerta.setTitle("ERRORE ["+VERSIONE+"]");
             dialogoAllerta.showAndWait();
             e.printStackTrace();
         }
@@ -142,6 +143,7 @@ public class Ambiente {
         } catch (Exception e) {
             e.printStackTrace();
             Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file del giornale \""+getFileGiornale()+"\" è corrotto, puliscilo e riavvia il programma o impostane uno nuovo");
+            dialogoAllerta.setTitle("ERRORE ["+VERSIONE+"]");
             dialogoAllerta.showAndWait();
             impostaPreferenzeEEsci();
         }
@@ -226,8 +228,15 @@ public class Ambiente {
         } catch (Exception e) {
             e.printStackTrace();
             Alert dialogoAllerta = new Alert(AlertType.ERROR, "Il file excel contiene errori che non consentono di analizzarlo, indicane uno funzionante nelle preferenze (errore: "+e.getMessage()+")");
+            dialogoAllerta.setTitle("ERRORE ["+VERSIONE+"]");
             dialogoAllerta.showAndWait();
             impostaPreferenzeEEsci();
+        }
+        // vedo se esistono docenti senza gruppo
+        for(Docente docente: docenti) {
+            if( docente.gruppo.equals("") ) {
+                addProblema("il docente "+docente.nome+" non ha un gruppo");
+            }
         }
         
         // creo elenco con nomi di classi e controllo se c'è qualche nome strano
