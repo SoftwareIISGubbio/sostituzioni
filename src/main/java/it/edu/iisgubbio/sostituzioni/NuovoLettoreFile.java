@@ -101,6 +101,11 @@ public class NuovoLettoreFile {
 	    return nome.replaceAll(" ", "").toUpperCase();
 	}
 	
+	/** la uso per fare trim dappertutto quando leggo */
+	private static final String leggiCella(Sheet foglio, int riga, int colonna) {
+	    return foglio.getRow(riga).getCell(colonna).getStringCellValue().trim();
+	}
+	
 	/**
      * Riempie un arraylist di docenti curricolari
      * 
@@ -117,19 +122,18 @@ public class NuovoLettoreFile {
 		String contenuto;
 
 		// scorro fino a quando arriva alla fine degli insegnanti
-		while ((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
+		while ((contenuto = leggiCella(foglio,i,COLONNA_INSEGNANTE)).length() != 0) {
 			// System.out.println(i + " " + contenuto);
-			Docente d = new Docente(contenuto.trim());
+			Docente d = new Docente(contenuto);
 			// scorre le ore dell'orario(colonne)
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
 				// controlla se a quell'ora il professore lavora
-				if (foglio.getRow(i + 1).getCell(j).getStringCellValue().length() != 0) {
+			    String aula = leggiCella(foglio, i + 1, j);
+			    String classe = uniformaNomeClasse( leggiCella(foglio,i,j) );
+				if ( aula.length() != 0 || classe.length() != 0 ) {
 					int giorno = giorno(j);
 					int orario = ora(j);
-					// System.out.println(orario);
-					String aula = foglio.getRow(i + 1).getCell(j).getStringCellValue();
-					// per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
-					String classe = uniformaNomeClasse(foglio.getRow(i).getCell(j).getStringCellValue());
+
 					boolean compresenza = compresenza(foglio, i, j, classe, aula);
 					switch (aula) {
 					case MARCATORE_ORA_RECUPERO:
@@ -151,10 +155,7 @@ public class NuovoLettoreFile {
 					case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
 						d.oreADisposizioneCassata.add(new Ora(giorno, orario));
 						break;
-
-					case "":
-						break;
-
+						
 					default:
 						d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
 						// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
@@ -186,9 +187,9 @@ public class NuovoLettoreFile {
 	    int i = 1;
 	    while (foglioInformazioni.getRow(i) != null) {
 	        if(foglioInformazioni.getRow(i).getCell(0)!= null 
-	                && foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim().length()>0) {
-	            String nome = foglioInformazioni.getRow(i).getCell(0).getStringCellValue().trim();
-	            String gruppo = foglioInformazioni.getRow(i).getCell(1).getStringCellValue().trim();
+	                && leggiCella(foglioInformazioni, i, 0).length()>0) {
+	            String nome = leggiCella(foglioInformazioni, i, 0);
+	            String gruppo = leggiCella(foglioInformazioni, i, 1);
 	            int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
 	            boolean trovato = false;
 	            for(Docente d: lista) {
@@ -224,9 +225,9 @@ public class NuovoLettoreFile {
 		int i = PRIMO_INSEGNANTE;
 		String classeAttuale;
 
-		while ((foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
+		while (( leggiCella(foglio, i, COLONNA_INSEGNANTE) ).length() != 0) {
 			if (i != indiceInsegnante) {
-		        classeAttuale = uniformaNomeClasse(foglio.getRow(i).getCell(indiceOra).getStringCellValue());
+		        classeAttuale = uniformaNomeClasse( leggiCella(foglio, i, indiceOra) );
 				if (classeAttuale.equals(classe)) {
 					risposta = true;
 					break;
@@ -255,19 +256,19 @@ public class NuovoLettoreFile {
 		String contenuto;
 		String classe,annotazione;
 		// scorro fino a quando arriva alla fine degli insegnanti
-		while((contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue()).length() != 0) {
+		while((contenuto = leggiCella(foglio, i, COLONNA_INSEGNANTE)).length() != 0) {
 			// System.out.println(i + " " + contenuto);
-			contenuto = foglio.getRow(i).getCell(COLONNA_INSEGNANTE).getStringCellValue();
-			Docente d = new Docente(contenuto.trim());
+			contenuto = leggiCella(foglio, i, COLONNA_INSEGNANTE);
+			Docente d = new Docente(contenuto);
 			d.gruppo = "sostegno";
 			// scorre le ore dell'orario(colonne)
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
 			    // per uniformare tolgo gli spazi e metto in minuscolo il nome della classe
 			    classe = foglio.getRow(i).getCell(j)!=null 
-			            ? uniformaNomeClasse( foglio.getRow(i).getCell(j).getStringCellValue() )
+			            ? uniformaNomeClasse( leggiCella(foglio, i, j))
 			            : "";
 			    annotazione = foglio.getRow(i+1).getCell(j)!=null
-			            ? foglio.getRow(i+1).getCell(j).getStringCellValue().replaceAll(" ", "")
+			            ? leggiCella(foglio, i+1, j) // replaceAll(" ", "")
 			            : "";
 			    // controlla se a quell'ora il professore lavora
 				if (classe.length() != 0 || annotazione.length() != 0) {
