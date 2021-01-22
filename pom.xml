@@ -17,7 +17,7 @@
 		<progetto.jars>${project.build.directory}/jars</progetto.jars>
 		<!-- https://rterp.wordpress.com/2012/03/16/stamping-version-number-and-build-time-in-properties-file-with-maven/ -->
         <timestamp>${maven.build.timestamp}</timestamp>
-        <maven.build.timestamp.format>dd-mm-yyyy HH:mm</maven.build.timestamp.format>
+        <maven.build.timestamp.format>dd-MM-yyyy HH:mm</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>
@@ -93,7 +93,7 @@
             </resource>
             <resource>
                 <!-- questa è una cartella in più, serve soltanto a mettere un file in cui maven 
-                quando compila registra il numero di versione -->
+                quando compila registra il numero di versione e momento di compilazione -->
                 <directory>src/main/resources-filtered</directory>
                 <filtering>true</filtering>
             </resource>

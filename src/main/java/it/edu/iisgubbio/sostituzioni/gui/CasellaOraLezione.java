@@ -16,8 +16,7 @@ public class CasellaOraLezione extends ListCell<OraLezione>{
             } else {
                 this.getStyleClass().remove("selezionato");
             }
-            int ora = item.orario;
-            descrizione = "["+ora+"] "+item.toString();
+            descrizione = item.toString();
         }
          
         this.setText(descrizione);
