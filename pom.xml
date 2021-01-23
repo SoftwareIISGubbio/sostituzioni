@@ -13,7 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>14</maven.compiler.release>
+		<maven.compiler.release>15</maven.compiler.release>
 		<progetto.jars>${project.build.directory}/jars</progetto.jars>
 		<!-- https://rterp.wordpress.com/2012/03/16/stamping-version-number-and-build-time-in-properties-file-with-maven/ -->
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -30,17 +30,17 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>14</version>
+			<version>15</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>14</version>
+			<version>15</version>
 		</dependency>
 		<dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>14</version>
+            <version>15</version>
         </dependency>
 	</dependencies>
 	<build>
