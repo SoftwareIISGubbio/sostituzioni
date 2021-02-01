@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -103,7 +104,12 @@ public class NuovoLettoreFile {
 	
 	/** la uso per fare trim dappertutto quando leggo */
 	private static final String leggiCella(Sheet foglio, int riga, int colonna) {
-	    return foglio.getRow(riga).getCell(colonna).getStringCellValue().trim();
+	    Cell cella = foglio.getRow(riga).getCell(colonna);
+	    if(cella!=null) {
+	        return cella.getStringCellValue().trim();
+	    } else {
+	        return "";
+	    }
 	}
 	
 	/**
