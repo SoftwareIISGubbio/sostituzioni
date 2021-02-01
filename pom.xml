@@ -6,7 +6,7 @@
 	<!-- informazioni generali sul programma -->
 	<groupId>it.edu.iisgubbio</groupId>
 	<artifactId>sostituzioni</artifactId>
-	<version>2.2.4</version>
+	<version>2.2.5</version>
 	<packaging>jar</packaging>
 	<name>sostituzioni</name>
 	<url>http://www.iisgubbio.edu.it</url>
