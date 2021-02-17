@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizione;
@@ -243,8 +244,8 @@ public class FinestraPrincipale extends Application {
 			String orarioGiornalieroModificato[] = orarioGiornaliero.clone();
 			LocalDate d = data.getValue();
 
-			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + " ["
-					+ sostituzioneScelta.aula + "]</big>";
+			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + "\n["
+					+ (sostituzioneScelta.aula == null ? "</big><small>Aula non specificata</small><big>" : sostituzioneScelta.aula) + "]</big>";
 
 			String descrizione = """
 				<style>
@@ -266,7 +267,11 @@ public class FinestraPrincipale extends Application {
 						text-align: center;
 						vertical-align: middle;
 					}
-
+					
+					small {
+						font-size: 13px;
+					}
+					
 					#oraDaSostituire {
 						background-color: rgb(255, 77, 77);
 						font-weight: bold;
@@ -303,9 +308,14 @@ public class FinestraPrincipale extends Application {
 				} catch (IndexOutOfBoundsException e) {
 					contenuto = "-";
 				}
-
-				descrizione += String.format("<td" + ((sostituzioneScelta.orario == i) ? " id=\"oraDaSostituire\"" : "") + ">%s</td>", contenuto);
+				
+				if (sostituzioneScelta.orario == i) {
+					descrizione += String.format("<td id=\"oraDaSostituire\">%s</td>", contenuto);
+					continue;
+				}
+				descrizione += String.format("<td>%s</td>", contenuto);
 			}
+			System.out.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
 			descrizione += """
 						</tr>
 					</table>
