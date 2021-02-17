@@ -246,15 +246,70 @@ public class FinestraPrincipale extends Application {
 			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + " ["
 					+ sostituzioneScelta.aula + "]</big>";
 
-			String descrizione = "<p>vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
-					+ "<p> Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" + "<p>"
-					+ sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
-					+ " [aula " + sostituzioneScelta.aula + "]</p>" + "<p>motivazione della scelta: "
-					+ sostituzioneScelta.getMotivazione() + "</p>" + "<pre>vecchio orario: "
-					+ String.join("  ", orarioGiornaliero) + "</pre>"
-					+ "<pre style=\"color:red;font-weight:bold\">nuovo orario: "
-					+ String.join("  ", orarioGiornalieroModificato) + "</pre>";
+			String descrizione = """
+				<style>
+					table, th, td {
+						font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+						border: 0.5px solid black;
+						border-collapse: collapse;
+					}
 
+					th, td {
+						padding: 20px 20px 5px 20px
+					}
+
+					th {
+						background-color: #ffc000;
+					}
+
+					td {
+						text-align: center;
+						vertical-align: middle;
+					}
+
+					#oraDaSostituire {
+						background-color: rgb(255, 77, 77);
+						font-weight: bold;
+					}
+				</style>""" 
+				+ "<p>vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
+				+ "<p> Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" 
+				+ "<p>" + sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
+				+ " [aula " + sostituzioneScelta.aula + "]</p>" 
+				+ "<p>motivazione della scelta: " + sostituzioneScelta.getMotivazione() + "</p>" 
+				+ """
+				<table>
+					<tr>""";
+			for (int i = 1; i <= 8; i++) {
+				descrizione += String.format("\n<th>%s°ORA</th>", i);
+			}
+			descrizione += """
+					</tr>
+					<tr>
+						<th>08:00</th>
+						<th>08:55</th>
+						<th>10:00</th>
+						<th>10:55</th>
+						<th>11:55</th>
+						<th>12:45</th>
+						<th>14:30</th>
+						<th>15:30</th>
+					</tr>
+					<tr>""";
+			for (int i = 1; i <= 8; i++) {
+				String contenuto;
+				try {
+					contenuto = orarioGiornalieroModificato[i - 1];
+				} catch (IndexOutOfBoundsException e) {
+					contenuto = "-";
+				}
+
+				descrizione += String.format("<td" + ((sostituzioneScelta.orario == i) ? " id=\"oraDaSostituire\"" : "") + ">%s</td>", contenuto);
+			}
+			descrizione += """
+						</tr>
+					</table>
+					""";
 			// costruisco il messaggio della sostituzione
 			ww.getEngine().loadContent(descrizione);
 		}
@@ -281,231 +336,237 @@ public class FinestraPrincipale extends Application {
 
 	@FXML
 	/********************************************************************************************
-	 * al click su una ora di lezione
-     * effettua la ricerca dei docenti in base ai dati richiesti
-     *******************************************************************************************/
+	 * al click su una ora di lezione effettua la ricerca dei docenti in base ai
+	 * dati richiesti
+	 *******************************************************************************************/
 	private void gestioneListaOreLezione() {
 		int indiceSelezionato = listaOreLezione.getSelectionModel().getSelectedIndex();
 		if (indiceSelezionato > -1) {
-		    String docenteAssente = nomeProf.getValue();
-	        String gruppoDocenteAssente = Ambiente.cercaDocentePerNome(docenteAssente).gruppo;
-	        String nomeDocenteDaSostituire = nomeProf.getItems().get(nomeProf.getSelectionModel().getSelectedIndex());
-	        String testoData = data.getValue().toString();
-	        
-	        // costruisco l'oggetto che rappresenta l'ora da sostituire
-	        OraLezione oraLezioneSelezionata = listaOreLezione.getItems().get(indiceSelezionato);
-	        LocalDate d = data.getValue();
-	        OraLezione oraDaSostituire = new OraLezione();
-	        oraDaSostituire.giorno = d.getDayOfWeek().getValue();
-	        oraDaSostituire.orario = oraLezioneSelezionata.orario;
-	        oraDaSostituire.classe = oraLezioneSelezionata.classe;
-	        oraDaSostituire.aula = oraLezioneSelezionata.aula;
-	        // TODO: verificare perché ignoriamo campo copresenza
+			String docenteAssente = nomeProf.getValue();
+			String gruppoDocenteAssente = Ambiente.cercaDocentePerNome(docenteAssente).gruppo;
+			String nomeDocenteDaSostituire = nomeProf.getItems().get(nomeProf.getSelectionModel().getSelectedIndex());
+			String testoData = data.getValue().toString();
 
-	        // rimuovo vecchia ricerca
-	        puliziaRisultati();
-	        ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
-	        System.out.println(">>>>>"+tuttiIDocenti.size());
-	        tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
+			// costruisco l'oggetto che rappresenta l'ora da sostituire
+			OraLezione oraLezioneSelezionata = listaOreLezione.getItems().get(indiceSelezionato);
+			LocalDate d = data.getValue();
+			OraLezione oraDaSostituire = new OraLezione();
+			oraDaSostituire.giorno = d.getDayOfWeek().getValue();
+			oraDaSostituire.orario = oraLezioneSelezionata.orario;
+			oraDaSostituire.classe = oraLezioneSelezionata.classe;
+			oraDaSostituire.aula = oraLezioneSelezionata.aula;
+			// TODO: verificare perché ignoriamo campo copresenza
 
-	        // --------------- recupero tutti gli eventuali docenti in compresenza
-	        // ------------------
-	        ArrayList<Docente> docentiCoPresenza;
-	        System.out.println(oraDaSostituire);
-	        docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
-	        for (int i = 0; i < docentiCoPresenza.size(); i++) {
-	            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
-	                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
-	                    docentiCoPresenza.get(i).nome, testoData);
-	            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	            s.setMotivazione(Motivo.copresenza);
-	            listaSostituzioniPossibili.getItems().add(s);
-	        }
+			// rimuovo vecchia ricerca
+			puliziaRisultati();
+			ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+			System.out.println(">>>>>" + tuttiIDocenti.size());
+			tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
-	        // ------------------------------------ potenziamento
-	        // -----------------------------------
-	        { // creo un blocco di visibilità locale in modo da poter fare copia/incolla
-	            // sotto!
-	            ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti,
-	                    oraDaSostituire);
-	            // prima i docenti di potenziamento di materie affini
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.potenziamento_stesse_discipline);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // poi tutti gli altri
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente, false)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.potenziamento_altre_discipline);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	        }
+			// --------------- recupero tutti gli eventuali docenti in compresenza
+			// ------------------
+			ArrayList<Docente> docentiCoPresenza;
+			System.out.println(oraDaSostituire);
+			docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
+			for (int i = 0; i < docentiCoPresenza.size(); i++) {
+				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																			// sostituione
+						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
+						docentiCoPresenza.get(i).nome, testoData);
+				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+				s.setMotivazione(Motivo.copresenza);
+				listaSostituzioniPossibili.getItems().add(s);
+			}
 
-	        // ------------------------------- recupero
-	        // ---------------------------------------------
-	        { // creo un blocco di visibilità locale in modo da poter fare copia/incolla
-	            // sotto!
-	            ArrayList<Docente> docentiRecupero;
-	            docentiRecupero = FiltroRecupero.docentiRecupero(tuttiIDocenti, oraDaSostituire);
-	            // e della stessa classe
-	            for (Docente docente : FiltroClasse.docentiDellaClasse(docentiRecupero, oraDaSostituire.classe, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.recupero_stessa_classe);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // altre classi
-	            ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiRecupero,
-	                    oraDaSostituire.classe, false);
-	            // altre classi ma stesso gruppo di materie
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.recupero_altra_classe_stesso_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // altre classi, gruppi dversi
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.recupero_altra_classe_altro_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	        }
+			// ------------------------------------ potenziamento
+			// -----------------------------------
+			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
+				// sotto!
+				ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti,
+						oraDaSostituire);
+				// prima i docenti di potenziamento di materie affini
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente,
+						true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.potenziamento_stesse_discipline);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// poi tutti gli altri
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente,
+						false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.potenziamento_altre_discipline);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+			}
 
-	        // ----------------- recupero docenti con l'ora cercata "a disposizione"
-	        // -------------------
-	        { // creo un blocco di visibilità locale in modo da poter fare copia/incolla
-	            // sotto!
-	            ArrayList<Docente> docentiADisposizione;
-	            docentiADisposizione = FiltroADisposizione.docentiADisposizione(tuttiIDocenti, oraDaSostituire);
-	            // e della stessa classe
-	            for (Docente docente : FiltroClasse.docentiDellaClasse(docentiADisposizione, oraDaSostituire.classe,
-	                    true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_disposizione_stessa_classe);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // altre classi
-	            ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiADisposizione,
-	                    oraDaSostituire.classe, false);
-	            // altre classi ma stesso gruppo di materie
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_disposizione_altra_classe_stesso_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // altre classi, gruppi dversi
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_disposizione_altra_classe_altro_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	        }
+			// ------------------------------- recupero
+			// ---------------------------------------------
+			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
+				// sotto!
+				ArrayList<Docente> docentiRecupero;
+				docentiRecupero = FiltroRecupero.docentiRecupero(tuttiIDocenti, oraDaSostituire);
+				// e della stessa classe
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiRecupero, oraDaSostituire.classe, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.recupero_stessa_classe);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// altre classi
+				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiRecupero,
+						oraDaSostituire.classe, false);
+				// altre classi ma stesso gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.recupero_altra_classe_stesso_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// altre classi, gruppi dversi
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.recupero_altra_classe_altro_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+			}
 
-	        // ----------------- recupero docenti con l'ora cercata "a pagamento"
-	        // -------------------
-	        {
-	            ArrayList<Docente> docentiAPagamento;
-	            docentiAPagamento = FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire);
-	            // e della stessa classe
-	            for (Docente docente : FiltroClasse.docentiDellaClasse(docentiAPagamento, oraDaSostituire.classe, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_pagamento_stessa_classe);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // non della stessa classe
-	            ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiAPagamento,
-	                    oraDaSostituire.classe, false);
-	            // altre classi ma stesso gruppo di materie
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_pagamento_altra_classe_stesso_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	            // altre classi e altro gruppo di materie
-	            for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
-	                Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
-	                                                                            // sostituione
-	                        oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
-	                        testoData);
-	                s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	                s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
-	                listaSostituzioniPossibili.getItems().add(s);
-	            }
-	        }
+			// ----------------- recupero docenti con l'ora cercata "a disposizione"
+			// -------------------
+			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
+				// sotto!
+				ArrayList<Docente> docentiADisposizione;
+				docentiADisposizione = FiltroADisposizione.docentiADisposizione(tuttiIDocenti, oraDaSostituire);
+				// e della stessa classe
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiADisposizione, oraDaSostituire.classe,
+						true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_disposizione_stessa_classe);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// altre classi
+				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiADisposizione,
+						oraDaSostituire.classe, false);
+				// altre classi ma stesso gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_disposizione_altra_classe_stesso_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// altre classi, gruppi dversi
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_disposizione_altra_classe_altro_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+			}
 
-	        // un elenco di tutti i docenti liberi della classe
-	        ArrayList<Docente> docentiDellaClasse;
-	        docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe, true);
-	        ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
-	        for (int i = 0; i < docentiLiberiClasse.size(); i++) {
-	            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
-	                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
-	                    docentiLiberiClasse.get(i).nome, testoData);
-	            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	            s.setMotivazione(Motivo.libero_della_classe);
-	            listaSostituzioniPossibili.getItems().add(s);
-	        }
-	        // alla fine tutti quelli liberi che si dividono in stesso gruppo e altro gruppo
-	        ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
-	        ArrayList<Sostituzione> docentiLiberiAltroGruppo = new ArrayList<>();
-	        for (int i = 0; i < docentiLiberi.size(); i++) {
-	            Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la sostituione
-	                    oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
-	                    docentiLiberi.get(i).nome, testoData);
-	            s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
-	            if (docentiLiberi.get(i).gruppo.equals(gruppoDocenteAssente)) {
-	                s.setMotivazione(Motivo.libero_altra_classe_stesso_gruppo);
-	            } else {
-	                s.setMotivazione(Motivo.libero_altra_classe_altro_gruppo);
-	                docentiLiberiAltroGruppo.add(s);
-	                continue;
-	            }
-	            listaSostituzioniPossibili.getItems().add(s);
-	        }
-	        
-	        for(Sostituzione sostituzione: docentiLiberiAltroGruppo) {
-	            listaSostituzioniPossibili.getItems().add(sostituzione);
-	        }
+			// ----------------- recupero docenti con l'ora cercata "a pagamento"
+			// -------------------
+			{
+				ArrayList<Docente> docentiAPagamento;
+				docentiAPagamento = FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire);
+				// e della stessa classe
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiAPagamento, oraDaSostituire.classe,
+						true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_pagamento_stessa_classe);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// non della stessa classe
+				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiAPagamento,
+						oraDaSostituire.classe, false);
+				// altre classi ma stesso gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_pagamento_altra_classe_stesso_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// altre classi e altro gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+			}
+
+			// un elenco di tutti i docenti liberi della classe
+			ArrayList<Docente> docentiDellaClasse;
+			docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe, true);
+			ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
+			for (int i = 0; i < docentiLiberiClasse.size(); i++) {
+				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																			// sostituione
+						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+						docentiLiberiClasse.get(i).nome, testoData);
+				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+				s.setMotivazione(Motivo.libero_della_classe);
+				listaSostituzioniPossibili.getItems().add(s);
+			}
+			// alla fine tutti quelli liberi che si dividono in stesso gruppo e altro gruppo
+			ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
+			ArrayList<Sostituzione> docentiLiberiAltroGruppo = new ArrayList<>();
+			for (int i = 0; i < docentiLiberi.size(); i++) {
+				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																			// sostituione
+						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
+						docentiLiberi.get(i).nome, testoData);
+				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+				if (docentiLiberi.get(i).gruppo.equals(gruppoDocenteAssente)) {
+					s.setMotivazione(Motivo.libero_altra_classe_stesso_gruppo);
+				} else {
+					s.setMotivazione(Motivo.libero_altra_classe_altro_gruppo);
+					docentiLiberiAltroGruppo.add(s);
+					continue;
+				}
+				listaSostituzioniPossibili.getItems().add(s);
+			}
+
+			for (Sostituzione sostituzione : docentiLiberiAltroGruppo) {
+				listaSostituzioniPossibili.getItems().add(sostituzione);
+			}
 		}
 	}
 }
