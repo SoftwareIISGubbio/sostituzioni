@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <top>
       <MenuBar prefHeight="21.0" prefWidth="494.0" BorderPane.alignment="CENTER">
         <menus>
@@ -45,7 +45,7 @@
          </BorderPane.margin>
       </MenuBar>
    </top>
-   <bottom>
+   <center>
       <GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="pannelloPrincipale" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints minWidth="5.0" />
@@ -115,10 +115,10 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
             <RowConstraints />
          </rowConstraints>
       </GridPane>
-   </bottom>
+   </center>
 </BorderPane>
