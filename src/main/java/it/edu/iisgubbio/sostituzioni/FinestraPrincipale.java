@@ -14,6 +14,7 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreBuche;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroPotenziamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
@@ -245,46 +246,46 @@ public class FinestraPrincipale extends Application {
 			LocalDate d = data.getValue();
 
 			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + "\n["
-					+ (sostituzioneScelta.aula == null ? "</big><small>Aula non specificata</small><big>" : sostituzioneScelta.aula) + "]</big>";
+					+ (sostituzioneScelta.aula == null ? "</big><small>Aula non specificata</small><big>"
+							: sostituzioneScelta.aula)
+					+ "]</big>";
 
 			String descrizione = """
-				<style>
-					table, th, td {
-						font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-						border: 0.5px solid black;
-						border-collapse: collapse;
-					}
+					<style>
+						table, th, td {
+							font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+							border: 0.5px solid black;
+							border-collapse: collapse;
+						}
 
-					th, td {
-						padding: 20px 20px 5px 20px
-					}
+						th, td {
+							padding: 20px 20px 5px 20px
+						}
 
-					th {
-						background-color: #ffc000;
-					}
+						th {
+							background-color: #ffc000;
+						}
 
-					td {
-						text-align: center;
-						vertical-align: middle;
-					}
-					
-					small {
-						font-size: 13px;
-					}
-					
-					#oraDaSostituire {
-						background-color: rgb(255, 77, 77);
-						font-weight: bold;
-					}
-				</style>""" 
-				+ "<p>vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
-				+ "<p> Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" 
-				+ "<p>" + sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
-				+ " [aula " + sostituzioneScelta.aula + "]</p>" 
-				+ "<p>motivazione della scelta: " + sostituzioneScelta.getMotivazione() + "</p>" 
-				+ """
-				<table>
-					<tr>""";
+						td {
+							text-align: center;
+							vertical-align: middle;
+						}
+
+						small {
+							font-size: 13px;
+						}
+
+						#oraDaSostituire {
+							background-color: rgb(255, 77, 77);
+							font-weight: bold;
+						}
+					</style>""" + "<p>vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
+					+ "<p> Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" + "<p>"
+					+ sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
+					+ " [aula " + sostituzioneScelta.aula + "]</p>" + "<p>motivazione della scelta: "
+					+ sostituzioneScelta.getMotivazione() + "</p>" + """
+							<table>
+								<tr>""";
 			for (int i = 1; i <= 8; i++) {
 				descrizione += String.format("\n<th>%s°ORA</th>", i);
 			}
@@ -308,14 +309,15 @@ public class FinestraPrincipale extends Application {
 				} catch (IndexOutOfBoundsException e) {
 					contenuto = "-";
 				}
-				
+
 				if (sostituzioneScelta.orario == i) {
 					descrizione += String.format("<td id=\"oraDaSostituire\">%s</td>", contenuto);
 					continue;
 				}
 				descrizione += String.format("<td>%s</td>", contenuto);
 			}
-			System.out.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
+			System.out
+					.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
 			descrizione += """
 						</tr>
 					</table>
@@ -539,6 +541,49 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+				}
+			}
+
+			// ----------------- recupero docenti con l'ora cercata "buca"
+			// -------------------
+			{
+				ArrayList<Docente> docentiOreBuche;
+				docentiOreBuche = FiltroOreBuche.docentiOreBuche(tuttiIDocenti, oraDaSostituire);
+				// e della stessa classe
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiOreBuche, oraDaSostituire.classe,
+						true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.ora_buca_della_classe);
+					listaSostituzioniPossibili.getItems().add(s);
+				}
+				// non della stessa classe
+				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiOreBuche,
+						oraDaSostituire.classe, false);
+				// altre classi ma stesso gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.ora_buca_altra_classe_stesso_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+					System.out.println("Stesso gruppo: " + docente.nome + " | " + docente.gruppo);
+				}
+				// altre classi e altro gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.ora_buca_altra_classe_altro_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+					System.out.println("Altro gruppo: " + docente.nome + " | " + docente.gruppo);
 				}
 			}
 

@@ -58,6 +58,15 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	case a_disposizione_altra_classe_altro_gruppo:
         	    this.setStyle("-fx-background-color: #ffb340");
                 break;
+        	case ora_buca_della_classe:
+        		this.setStyle("-fx-background-color: #804d23");
+        		break;
+        	case ora_buca_altra_classe_stesso_gruppo:
+        		this.setStyle("-fx-background-color: #a76f41");
+        		break;
+        	case ora_buca_altra_classe_altro_gruppo:
+        		this.setStyle("-fx-background-color: #d6a47a");
+        		break;
         	case libero_della_classe:
         		this.setStyle("-fx-background-color: #9778ba");
         		break;
