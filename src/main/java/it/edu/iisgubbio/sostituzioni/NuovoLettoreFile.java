@@ -48,6 +48,7 @@ public class NuovoLettoreFile {
 	 * @throws FileNotFoundException 
 	 */
 	public static ArrayList<Docente> leggiExcel(File percorso) throws FileNotFoundException, IOException {
+	    long inizio = System.currentTimeMillis();
 	    ArrayList<Docente> curricolari = leggiDocentiCurricolari(percorso);
 	    ArrayList<Docente> sostegno = leggiProfSostegno(percorso);
 	 
@@ -71,6 +72,23 @@ public class NuovoLettoreFile {
 	    }
 	    leggiGruppi(percorso, curricolari);
 	    Collections.sort(curricolari);
+	    Docente dSinistro, dDestro;
+
+	    for(int iSinistro=0; iSinistro<curricolari.size(); iSinistro++) {
+	        dSinistro = curricolari.get(iSinistro);
+	        for(int iDestro=iSinistro+1; iDestro<curricolari.size(); iDestro++) {
+	            dDestro = curricolari.get(iDestro);
+	            for(OraLezione ol: dSinistro.oreLezione) {
+	                OraLezione oraDaCercare = dDestro.getOra(ol);
+	                if(oraDaCercare!=null) {
+	                    ol.compresenza = true;
+	                    oraDaCercare.compresenza = true;
+	                }
+	            }
+	        }
+	    }
+	    long fine = System.currentTimeMillis();
+	    System.out.println(fine-inizio);
 	    return curricolari;
 	}
 	
@@ -140,7 +158,8 @@ public class NuovoLettoreFile {
 					int giorno = giorno(j);
 					int orario = ora(j);
 
-					boolean compresenza = compresenza(foglio, i, j, classe, aula);
+					// boolean compresenza = compresenza(foglio, i, j, classe, aula);
+					boolean compresenza=false;
 					switch (aula) {
 					case MARCATORE_ORA_RECUPERO:
 						d.oraARecupero = new Ora(giorno, orario);
@@ -164,12 +183,8 @@ public class NuovoLettoreFile {
 						
 					default:
 						d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
-						// System.out.println("Prof "+ contenuto + " giorno " + giorno+ " orario "+
-						// orario + " Compresenza: "+compresenza(foglio,i,j,aula));
-
+						
 					}
-
-					// System.out.println(giorno +" " + (((j-(j%9)+ 1) /9)+1));
 				}
 			}
 

@@ -90,7 +90,7 @@ public class Docente implements Comparable<Docente>{
 	/********************************************************************************************
 	 * @param ora
 	 * @param classe
-	 * @return true se il docente lavotra nell'ora specificata nella classe richiesta
+	 * @return true se il docente lavora nell'ora specificata nella classe richiesta
 	 *******************************************************************************************/
 	public boolean lavoraNellaClasseInOra(Ora ora, String classe) {
 		for (int i = 0; i < oreLezione.size(); i++) {
@@ -101,6 +101,22 @@ public class Docente implements Comparable<Docente>{
 		}
 		return false;
 	}
+	
+	/********************************************************************************************
+	 * confronta per giorno, ora e classe
+	 * @param oraCercata
+	 * @return l'ora di questo docente che combacia con quella cercata o null se non esiste
+	 *******************************************************************************************/
+    public OraLezione getOra(OraLezione oraCercata) {
+        for (int i = 0; i < oreLezione.size(); i++) {
+            if (oreLezione.get(i).giorno == oraCercata.giorno 
+                    && oreLezione.get(i).orario == oraCercata.orario
+                    && oreLezione.get(i).classe.equals(oraCercata.classe)) {
+                return oreLezione.get(i);
+            }
+        }
+        return null;
+    }
 	
 	public String[] descriviGiornata(int giorno) {
 	    String risposta[];
