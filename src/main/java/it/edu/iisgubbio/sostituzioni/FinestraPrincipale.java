@@ -381,13 +381,15 @@ public class FinestraPrincipale extends Application {
 			System.out.println(oraDaSostituire);
 			docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 			for (int i = 0; i < docentiCoPresenza.size(); i++) {
+				Docente sostituto = docentiCoPresenza.get(i);
 				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
 																			// sostituione
 						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
-						docentiCoPresenza.get(i).nome, testoData);
+						sostituto.nome, testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.copresenza);
 				listaSostituzioniPossibili.getItems().add(s);
+				tuttiIDocenti.remove(sostituto);
 			}
 
 			// ------------------------------------ potenziamento
@@ -406,6 +408,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.potenziamento_stesse_discipline);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// poi tutti gli altri
 				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiPotenziamento, gruppoDocenteAssente,
@@ -417,6 +420,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.potenziamento_altre_discipline);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 			}
 
@@ -435,6 +439,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_stessa_classe);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi
 				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiRecupero,
@@ -448,6 +453,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_altra_classe_stesso_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi, gruppi dversi
 				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
@@ -458,6 +464,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_altra_classe_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 			}
 
@@ -477,6 +484,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_stessa_classe);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi
 				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiADisposizione,
@@ -490,6 +498,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_altra_classe_stesso_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi, gruppi dversi
 				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
@@ -500,6 +509,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_altra_classe_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 			}
 
@@ -518,6 +528,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_stessa_classe);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// non della stessa classe
 				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiAPagamento,
@@ -531,6 +542,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_altra_classe_stesso_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi e altro gruppo di materie
 				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
@@ -541,6 +553,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 			}
 
@@ -559,6 +572,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_della_classe);
 					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
 				}
 				// non della stessa classe
 				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiOreBuche,
@@ -572,7 +586,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_altra_classe_stesso_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
-					System.out.println("Stesso gruppo: " + docente.nome + " | " + docente.gruppo);
+					tuttiIDocenti.remove(docente);
 				}
 				// altre classi e altro gruppo di materie
 				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
@@ -583,7 +597,7 @@ public class FinestraPrincipale extends Application {
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_altra_classe_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
-					System.out.println("Altro gruppo: " + docente.nome + " | " + docente.gruppo);
+					tuttiIDocenti.remove(docente);
 				}
 			}
 
@@ -592,13 +606,15 @@ public class FinestraPrincipale extends Application {
 			docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe, true);
 			ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
 			for (int i = 0; i < docentiLiberiClasse.size(); i++) {
+				Docente sostituto = docentiLiberiClasse.get(i);
 				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
 																			// sostituione
 						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
-						docentiLiberiClasse.get(i).nome, testoData);
+						sostituto.nome, testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.libero_della_classe);
 				listaSostituzioniPossibili.getItems().add(s);
+				tuttiIDocenti.remove(sostituto);
 			}
 			// alla fine tutti quelli liberi che si dividono in stesso gruppo e altro gruppo
 			ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
