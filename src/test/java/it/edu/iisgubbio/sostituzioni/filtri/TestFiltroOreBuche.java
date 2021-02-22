@@ -9,7 +9,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 public class TestFiltroOreBuche {
 
 	public static void main(String[] args) {
-		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+		ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
 		ArrayList<Docente> docentiConOraBuca;
 		Ora oraNecessaria = new Ora(3 , 5);
 

@@ -8,7 +8,7 @@ public class TestElenchi {
 
     public static void main(String[] args) {
         long inizio = System.currentTimeMillis();
-        ArrayList<Docente> elencoDocenti = Ambiente.docenti;
+        ArrayList<Docente> elencoDocenti = Ambiente.getDocenti();
         long fine = System.currentTimeMillis();
         System.out.println("tempo impiegato: "+(fine-inizio)+"msec");
         

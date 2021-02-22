@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 public class Ambiente {
     /** docenti con relative informazioni, letti dal foglio Excel e da un file 
      * XML prodotto da FET */
-    public static ArrayList<Docente> docenti = new ArrayList<>();
+    private static ArrayList<Docente> docenti = new ArrayList<>();
     /** vettore contenente nomi di tutte le classe */
     private static String[]nomiClassi;
     /** contiene un elenco di descrizioni dei problemi riscontrati in fase di avvio  */
@@ -52,8 +52,6 @@ public class Ambiente {
      * Salava i diversi percorsi nel file delle preferenze
      ***********************************************************************/
     public static void salvaProprieta() {
-        System.out.println("proprietà salvate in: "+PERCORSO_FILE_PROPRIETA);
-        
         try( FileOutputStream uscita = new FileOutputStream(PERCORSO_FILE_PROPRIETA) ){
             proprieta.store(uscita, "proprieta del programma dell'orario");
         } catch (Exception e) {
@@ -63,6 +61,14 @@ public class Ambiente {
             dialogoAllerta.showAndWait();
             e.printStackTrace();
         }
+    }
+    
+    /********************************************************************************************
+     * Fa una copia delle'enco dei docenti (non una copia dei singoli docenti) 
+     * @return una copia dell'ArrayList dei docenti
+     *******************************************************************************************/
+    public static ArrayList<Docente> getDocenti() {
+        return new ArrayList<Docente>( docenti );
     }
     
     /************************************************************************
@@ -212,9 +218,7 @@ public class Ambiente {
      * le proprietà static
      *******************************************************************************************/
     static {
-        // le preferenze vengono caricate in automatico al caricamento della classe
-        System.out.println("proprietà lette da: "+PERCORSO_FILE_PROPRIETA);
-        
+        // le preferenze vengono caricate in automatico al caricamento della classe        
         try( FileInputStream entrata = new FileInputStream(PERCORSO_FILE_PROPRIETA) ){
             proprieta.load(entrata);
         } catch (Exception e) {

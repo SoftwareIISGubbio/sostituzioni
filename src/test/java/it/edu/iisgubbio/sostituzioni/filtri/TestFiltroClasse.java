@@ -8,7 +8,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 public class TestFiltroClasse {
 
 	public static void main(String[] args) {
-		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+		ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
 		ArrayList<Docente> docentiClasse;
 
 		docentiClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, "1i", true);

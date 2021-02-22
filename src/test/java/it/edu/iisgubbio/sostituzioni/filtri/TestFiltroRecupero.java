@@ -9,7 +9,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Ora;
 public class TestFiltroRecupero {
 
 	public static void main(String[] args) {
-		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+		ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
 		ArrayList<Docente> docentiLiberi;
 		long inizio = System.currentTimeMillis();
 		Ora oraCercata = new Ora(3, 2);

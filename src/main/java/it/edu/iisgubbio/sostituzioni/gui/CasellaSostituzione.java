@@ -81,7 +81,6 @@ public class CasellaSostituzione extends ListCell<Sostituzione>{
         	}
         	
             Docente bersaglio = Ambiente.cercaDocentePerNome(item.getNomeSostituto());
-            
             name = (index + 1) + ". " +
             item.getNomeSostituto() + " ["+
             item.getMotivazione()+"]"+

@@ -96,8 +96,8 @@ public class FinestraPrincipale extends Application {
 	 *******************************************************************************************/
 	void initialize() {
 		// scorrere l'elenco dei professori e li inserisce alla combobox
-		for (int j = 0; j < Ambiente.docenti.size(); j++) {
-			nomeProf.getItems().add(Ambiente.docenti.get(j).nome);
+		for (int j = 0; j < Ambiente.getDocenti().size(); j++) {
+			nomeProf.getItems().add(Ambiente.getDocenti().get(j).nome);
 		}
 
 		Tooltip tt = new Tooltip();
@@ -371,14 +371,13 @@ public class FinestraPrincipale extends Application {
 
 			// rimuovo vecchia ricerca
 			puliziaRisultati();
-			ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
-			System.out.println(">>>>>" + tuttiIDocenti.size());
+			ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
+			// man mano che inserisco insegnanti nella ListView a schermo li tolgo da da questo ArrayList
+			// in modo da non ripeter due volte lo stesso insegnante
 			tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
-			// --------------- recupero tutti gli eventuali docenti in compresenza
-			// ------------------
+			// --------------- recupero tutti gli eventuali docenti in compresenza --------------
 			ArrayList<Docente> docentiCoPresenza;
-			System.out.println(oraDaSostituire);
 			docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 			for (int i = 0; i < docentiCoPresenza.size(); i++) {
 				Docente sostituto = docentiCoPresenza.get(i);
@@ -392,8 +391,7 @@ public class FinestraPrincipale extends Application {
 				tuttiIDocenti.remove(sostituto);
 			}
 
-			// ------------------------------------ potenziamento
-			// -----------------------------------
+			// ------------------------------------ potenziamento -------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti,
@@ -424,8 +422,7 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ------------------------------- recupero
-			// ---------------------------------------------
+			// ------------------------------- recupero -----------------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiRecupero;
@@ -468,8 +465,7 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a disposizione"
-			// -------------------
+			// ----------------- recupero docenti con l'ora cercata "a disposizione" ------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiADisposizione;
@@ -513,8 +509,7 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a pagamento"
-			// -------------------
+			// ----------------- recupero docenti con l'ora cercata "a pagamento" ---------------
 			{
 				ArrayList<Docente> docentiAPagamento;
 				docentiAPagamento = FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire);
@@ -629,12 +624,12 @@ public class FinestraPrincipale extends Application {
 					s.setMotivazione(Motivo.libero_altra_classe_stesso_gruppo);
 				} else {
 					s.setMotivazione(Motivo.libero_altra_classe_altro_gruppo);
+					// li salvo qui per inserirli dopo
 					docentiLiberiAltroGruppo.add(s);
 					continue;
 				}
 				listaSostituzioniPossibili.getItems().add(s);
 			}
-
 			for (Sostituzione sostituzione : docentiLiberiAltroGruppo) {
 				listaSostituzioniPossibili.getItems().add(sostituzione);
 			}

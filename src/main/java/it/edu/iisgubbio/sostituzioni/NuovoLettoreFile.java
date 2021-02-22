@@ -48,7 +48,6 @@ public class NuovoLettoreFile {
 	 * @throws FileNotFoundException 
 	 */
 	public static ArrayList<Docente> leggiExcel(File percorso) throws FileNotFoundException, IOException {
-	    long inizio = System.currentTimeMillis();
 	    ArrayList<Docente> curricolari = leggiDocentiCurricolari(percorso);
 	    ArrayList<Docente> sostegno = leggiProfSostegno(percorso);
 	 
@@ -87,8 +86,6 @@ public class NuovoLettoreFile {
 	            }
 	        }
 	    }
-	    long fine = System.currentTimeMillis();
-	    System.out.println(fine-inizio);
 	    return curricolari;
 	}
 	
@@ -147,7 +144,6 @@ public class NuovoLettoreFile {
 
 		// scorro fino a quando arriva alla fine degli insegnanti
 		while ((contenuto = leggiCella(foglio,i,COLONNA_INSEGNANTE)).length() != 0) {
-			// System.out.println(i + " " + contenuto);
 			Docente d = new Docente(contenuto);
 			// scorre le ore dell'orario(colonne)
 			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
@@ -278,7 +274,6 @@ public class NuovoLettoreFile {
 		String classe,annotazione;
 		// scorro fino a quando arriva alla fine degli insegnanti
 		while((contenuto = leggiCella(foglio, i, COLONNA_INSEGNANTE)).length() != 0) {
-			// System.out.println(i + " " + contenuto);
 			contenuto = leggiCella(foglio, i, COLONNA_INSEGNANTE);
 			Docente d = new Docente(contenuto);
 			d.gruppo = "sostegno";

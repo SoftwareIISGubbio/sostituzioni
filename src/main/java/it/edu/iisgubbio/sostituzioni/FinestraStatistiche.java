@@ -47,10 +47,10 @@ public class FinestraStatistiche {
 
 
         try {
-            ResocontoDocente resoconti[] = new ResocontoDocente[Ambiente.docenti.size()];
+            ResocontoDocente resoconti[] = new ResocontoDocente[Ambiente.getDocenti().size()];
             int i=0;
             // creo un resoconto per ogni docente
-            for(Docente d: Ambiente.docenti) {
+            for(Docente d: Ambiente.getDocenti()) {
                 resoconti[i] = new ResocontoDocente(d.nome);
                 resoconti[i].setOreFatte(d.oreRecuperate);
                 resoconti[i].setOreDaFare( d.oreDaRecuperare );

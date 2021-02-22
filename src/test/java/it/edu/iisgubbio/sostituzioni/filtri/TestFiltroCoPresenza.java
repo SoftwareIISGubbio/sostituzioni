@@ -9,7 +9,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 public class TestFiltroCoPresenza {
 
 	public static void main(String[] args) {
-		ArrayList<Docente> tuttiIDocenti = Ambiente.docenti;
+		ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
 		ArrayList<Docente> docentiCoPresenza;
 		OraLezione classeCercata = new OraLezione(1, 6, null, "3I1", false);
 		long inizio = System.currentTimeMillis();

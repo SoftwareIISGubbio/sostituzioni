@@ -7,7 +7,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
 public class DebugDocenti {
 
 	public static void main(String[] args) {
-		ArrayList<Docente> lista = Ambiente.docenti;
+		ArrayList<Docente> lista = Ambiente.getDocenti();
 		
 		//ottiene un docente a caso
 		Docente d = lista.get(118);//(int) (Math.random()*lista.size()));

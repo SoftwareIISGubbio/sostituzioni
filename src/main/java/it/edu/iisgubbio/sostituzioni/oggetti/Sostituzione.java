@@ -65,9 +65,7 @@ public class Sostituzione extends OraLezione {
 	}
 
 	public Sostituzione(String lineaCSV) {
-	    System.out.println(lineaCSV);
 	    String v[] = CSV.fromCSV( lineaCSV );
-	    System.out.println(String.join("##", v));
 	    this.giorno = Integer.parseInt( v[INDICE_GIORNO] ); 
 	    this.orario = Integer.parseInt( v[INDICE_ORARIO]); 
 	    this.aula = v[INDICE_AULA];
