@@ -95,6 +95,7 @@ elif [[ "$OSTYPE" == "linux"* ]]; then
     cd ..
 else
     cd target
-    /c/Program\ Files/7-Zip/7z a -tzip sostituzioni-$VERSIONE.zip sostituzioni
+    cd sostituzioni
+    /c/Program\ Files/7-Zip/7z a -tzip ../sostituzioni-$VERSIONE.zip *
     cd ..
 fi
