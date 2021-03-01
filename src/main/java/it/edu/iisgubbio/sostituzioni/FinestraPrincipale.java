@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizione;
@@ -244,14 +243,18 @@ public class FinestraPrincipale extends Application {
 			String orarioGiornaliero[] = sostituto.descriviGiornata(sostituzioneScelta.giorno);
 			String orarioGiornalieroModificato[] = orarioGiornaliero.clone();
 			LocalDate d = data.getValue();
+			String aulaSostituzione = sostituzioneScelta.aula == null ? 
+			        "aula non specificata" : "aula "+sostituzioneScelta.aula;
 
-			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + "\n["
-					+ (sostituzioneScelta.aula == null ? "</big><small>Aula non specificata</small><big>"
-							: sostituzioneScelta.aula)
-					+ "]</big>";
+			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + "</big>\n"
+					+ "[<small>"+aulaSostituzione+"</small>]";
 
 			String descrizione = """
 					<style>
+			            p { 
+			                margin: 0.25em 0; 
+			            }
+					
 						table, th, td {
 							font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 							border: 0.5px solid black;
@@ -259,11 +262,13 @@ public class FinestraPrincipale extends Application {
 						}
 
 						th, td {
-							padding: 20px 20px 5px 20px
+							padding: 0.1em 0.3em 0.1em 0.3em;
+							border: 1px solid gray;
 						}
 
 						th {
 							background-color: #ffc000;
+							font-weight: normal;
 						}
 
 						td {
@@ -272,17 +277,18 @@ public class FinestraPrincipale extends Application {
 						}
 
 						small {
-							font-size: 13px;
+							font-size: 0.85em;
 						}
 
 						#oraDaSostituire {
-							background-color: rgb(255, 77, 77);
+							background-color: #ff3300;
 							font-weight: bold;
 						}
-					</style>""" + "<p>vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
-					+ "<p> Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" + "<p>"
+					</style>"""  
+					+ "<p>Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" + "<p>"
+					+ "<p>Vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
 					+ sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
-					+ " [aula " + sostituzioneScelta.aula + "]</p>" + "<p>motivazione della scelta: "
+					+ " ["+ aulaSostituzione + "]</p>" + "<p>Motivazione della scelta: "
 					+ sostituzioneScelta.getMotivazione() + "</p>" + """
 							<table>
 								<tr>""";
@@ -316,8 +322,8 @@ public class FinestraPrincipale extends Application {
 				}
 				descrizione += String.format("<td>%s</td>", contenuto);
 			}
-			System.out
-					.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
+			// System.out
+			// 		.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
 			descrizione += """
 						</tr>
 					</table>
@@ -333,7 +339,7 @@ public class FinestraPrincipale extends Application {
 		LocalDate d = data.getValue();
 		String nomeDocenteAssente = nomeProf.getValue();
 		if (nomeDocenteAssente != null && d != null) {
-			lDescrizioneOreLezione.setText("ore da sostituire per " + nomeDocenteAssente + "\n"
+			lDescrizioneOreLezione.setText("Ore da sostituire per " + nomeDocenteAssente + "\n"
 					+ d.format(DateTimeFormatter.ofPattern("EEE dd MMMM, yyyy")));
 			int giornoDellaSettimana = d.getDayOfWeek().getValue();
 			Docente docenteAssente = Ambiente.cercaDocentePerNome(nomeDocenteAssente);

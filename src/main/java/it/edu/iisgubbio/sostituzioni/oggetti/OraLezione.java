@@ -34,7 +34,7 @@ public class OraLezione extends Ora{
 	
 	@Override
 	public String toString() {
-		String toStringOra = "["+orario+"] "+super.toString()+" "+classe;
+		String toStringOra = "["+orario+"] "+super.toString()+" classe "+classe;
 		if(aula!=null) {
 		    toStringOra += " "+aula;
 		}

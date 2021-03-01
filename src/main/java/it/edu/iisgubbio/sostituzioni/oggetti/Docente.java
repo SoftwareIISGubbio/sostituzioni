@@ -120,11 +120,8 @@ public class Docente implements Comparable<Docente>{
 	
 	public String[] descriviGiornata(int giorno) {
 	    String risposta[];
-	    if(giorno==1) {
-	        risposta = new String[8];
-	    }else {
-	        risposta = new String[6];
-	    }
+	    // siccome alcuni insegnanti hanno ore il pomeriggio degli altri giorni
+	    risposta = new String[8];
 	    for(int i=0; i<risposta.length; i++) {
 	        risposta[i] = "-";
 	    }

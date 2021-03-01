@@ -19,9 +19,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <top>
-      <MenuBar prefHeight="21.0" prefWidth="494.0" BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="21.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Opzioni">
             <items>
@@ -84,8 +84,8 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </DatePicker>
-            <Label fx:id="lDescrizioneOreLezione" alignment="BOTTOM_CENTER" prefHeight="50.0" text="ore da sostituire" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-            <ListView fx:id="listaOreLezione" maxHeight="-Infinity" prefHeight="200.0" prefWidth="300.0" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+            <Label fx:id="lDescrizioneOreLezione" alignment="BOTTOM_CENTER" prefHeight="50.0" text="Ore da sostituire" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <ListView fx:id="listaOreLezione" maxHeight="-Infinity" prefHeight="200.0" prefWidth="350.0" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.valignment="TOP" />
             <ImageView fx:id="ivAttenzione" fitWidth="50.0" onMouseClicked="#mostraProblemi" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@attenzione.png" />
@@ -96,7 +96,7 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <ListView fx:id="listaSostituzioniPossibili" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="500.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="6">
+            <ListView fx:id="listaSostituzioniPossibili" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="550.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="6">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
