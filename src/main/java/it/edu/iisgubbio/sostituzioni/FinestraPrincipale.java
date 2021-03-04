@@ -32,6 +32,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -71,6 +72,9 @@ public class FinestraPrincipale extends Application {
 
 	@FXML
 	WebView ww;
+	
+	@FXML
+	CheckBox cbOraRecupero;
 
 	/********************************************************************************************
 	 * Creo la finestra principale, non posso impostare qui i valori perché la
@@ -225,11 +229,12 @@ public class FinestraPrincipale extends Application {
 		int indiceSelezionato = listaSostituzioniPossibili.getSelectionModel().getSelectedIndex();
 		// recupero l'oggetto selezionato usando il suo indice
 		Sostituzione s = listaSostituzioniPossibili.getItems().get(indiceSelezionato);
-
-		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione());
+		
+		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione() + "\nLa sostituzione " + (cbOraRecupero.isSelected() ? "" : "NON ") + "verrà considerata come 'ora di recupero'.");
 
 		Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 		if (risposta.isPresent() && risposta.get() == ButtonType.OK) {
+			s.setRecupero(cbOraRecupero.isSelected());
 			Giornale.scriviRecord(s);
 		}
 	}
@@ -243,18 +248,18 @@ public class FinestraPrincipale extends Application {
 			String orarioGiornaliero[] = sostituto.descriviGiornata(sostituzioneScelta.giorno);
 			String orarioGiornalieroModificato[] = orarioGiornaliero.clone();
 			LocalDate d = data.getValue();
-			String aulaSostituzione = sostituzioneScelta.aula == null ? 
-			        "aula non specificata" : "aula "+sostituzioneScelta.aula;
+			String aulaSostituzione = sostituzioneScelta.aula == null || sostituzioneScelta.aula.isEmpty() ? "aula non specificata"
+					: "aula " + sostituzioneScelta.aula;
 
-			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe + "</big>\n"
-					+ "[<small>"+aulaSostituzione+"</small>]";
+			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe
+					+ "</big>\n" + "[<small>" + aulaSostituzione + "</small>]";
 
 			String descrizione = """
 					<style>
-			            p { 
-			                margin: 0.25em 0; 
-			            }
-					
+					          p {
+					              margin: 0.25em 0;
+					          }
+
 						table, th, td {
 							font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 							border: 0.5px solid black;
@@ -284,11 +289,10 @@ public class FinestraPrincipale extends Application {
 							background-color: #ff3300;
 							font-weight: bold;
 						}
-					</style>"""  
-					+ "<p>Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy")) + "</p>" + "<p>"
-					+ "<p>Vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire() + "</p>"
-					+ sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe " + sostituzioneScelta.classe
-					+ " ["+ aulaSostituzione + "]</p>" + "<p>Motivazione della scelta: "
+					</style>""" + "<p>Per il giorno " + d.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy"))
+					+ "</p>" + "<p>" + "<p>Vista l'assenza di " + sostituzioneScelta.getNomeDocenteDaSostituire()
+					+ "</p>" + sostituzioneScelta.getNomeSostituto() + " lo sostituirà nella classe "
+					+ sostituzioneScelta.classe + " [" + aulaSostituzione + "]</p>" + "<p>Motivazione della scelta: "
 					+ sostituzioneScelta.getMotivazione() + "</p>" + """
 							<table>
 								<tr>""";
@@ -323,7 +327,8 @@ public class FinestraPrincipale extends Application {
 				descrizione += String.format("<td>%s</td>", contenuto);
 			}
 			// System.out
-			// 		.println(Arrays.toString(orarioGiornalieroModificato) + "\n" + Arrays.toString(orarioGiornaliero));
+			// .println(Arrays.toString(orarioGiornalieroModificato) + "\n" +
+			// Arrays.toString(orarioGiornaliero));
 			descrizione += """
 						</tr>
 					</table>
@@ -378,26 +383,29 @@ public class FinestraPrincipale extends Application {
 			// rimuovo vecchia ricerca
 			puliziaRisultati();
 			ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
-			// man mano che inserisco insegnanti nella ListView a schermo li tolgo da da questo ArrayList
+			// man mano che inserisco insegnanti nella ListView a schermo li tolgo da da
+			// questo ArrayList
 			// in modo da non ripeter due volte lo stesso insegnante
 			tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 
-			// --------------- recupero tutti gli eventuali docenti in compresenza --------------
+			// --------------- recupero tutti gli eventuali docenti in compresenza
+			// --------------
 			ArrayList<Docente> docentiCoPresenza;
 			docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 			for (int i = 0; i < docentiCoPresenza.size(); i++) {
 				Docente sostituto = docentiCoPresenza.get(i);
 				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
 																			// sostituione
-						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true,
-						sostituto.nome, testoData);
+						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, true, sostituto.nome,
+						testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.copresenza);
 				listaSostituzioniPossibili.getItems().add(s);
 				tuttiIDocenti.remove(sostituto);
 			}
 
-			// ------------------------------------ potenziamento -------------------------------
+			// ------------------------------------ potenziamento
+			// -------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti,
@@ -428,7 +436,8 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ------------------------------- recupero -----------------------------------------
+			// ------------------------------- recupero
+			// -----------------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiRecupero;
@@ -471,7 +480,8 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a disposizione" ------------
+			// ----------------- recupero docenti con l'ora cercata "a disposizione"
+			// ------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiADisposizione;
@@ -515,7 +525,8 @@ public class FinestraPrincipale extends Application {
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a pagamento" ---------------
+			// ----------------- recupero docenti con l'ora cercata "a pagamento"
+			// ---------------
 			{
 				ArrayList<Docente> docentiAPagamento;
 				docentiAPagamento = FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire);
@@ -564,8 +575,7 @@ public class FinestraPrincipale extends Application {
 				ArrayList<Docente> docentiOreBuche;
 				docentiOreBuche = FiltroOreBuche.docentiOreBuche(tuttiIDocenti, oraDaSostituire);
 				// e della stessa classe
-				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiOreBuche, oraDaSostituire.classe,
-						true)) {
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiOreBuche, oraDaSostituire.classe, true)) {
 					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
 																				// sostituione
 							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
@@ -610,8 +620,8 @@ public class FinestraPrincipale extends Application {
 				Docente sostituto = docentiLiberiClasse.get(i);
 				Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
 																			// sostituione
-						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false,
-						sostituto.nome, testoData);
+						oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, sostituto.nome,
+						testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.libero_della_classe);
 				listaSostituzioniPossibili.getItems().add(s);

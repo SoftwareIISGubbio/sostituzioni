@@ -139,6 +139,11 @@ public class Ambiente {
             // carico ogni singola ora su ogni docente, la strategia è penosa ma
             // visto il carico dovrebbe essere sopportabile
             for(Sostituzione s: records) {
+            	// Se la sostituzione non conta come recupero va alla sostituzione successiva
+            	if (!s.isRecupero()) {
+            		continue;
+            	}
+            	
                 for(Docente docente: docenti) {
                     if(docente.nome.equals(s.getNomeSostituto())){
                         docente.oreRecuperate++;

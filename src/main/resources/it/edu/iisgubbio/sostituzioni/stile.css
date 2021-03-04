@@ -1,43 +1,61 @@
 .pannelloPrincipale{
 	-fx-background-color: #f4d03f; 
 }
+
 .button{
 	-fx-text-fill: #ffe800;
 	-fx-background-color: #3B3B3B;
 }
+
 .label{
 	-fx-text-fill: #3b3b3b; 
 	-fx-font-family:"Times New Roman";
 	-fx-font-weight: bold;
 	-fx-font-size: 12pt;
 }
+
 .date-picker{
 	-fx-background-color: #e6e6e6;
 	-fx-text-fill: #3b3b3b; 
 	-fx-font-weight: bold;
 }
+
 .combo-box{
 	-fx-background-color: #e6e6e6;
 	-fx-text-fill: #3b3b3b; 
 	-fx-font-weight: bold;
 }
+
 .text-area{
 	-fx-text-fill: #3b3b3b;
 	-fx-font-weight: bold;
 	-fx-background-color: White;
 }
+
 .list-cell{
     -fx-font-family:"Arial";
 	-fx-background-color: White;
 	-fx-background-radius: 6;
 	-fx-text-fill: #3b3b3b;
 }
+
 .selezionato{
     -fx-font-weight: bold;
     -fx-text-fill: #000000;
 }
+
 .didascalia{
 	-fx-font-family:"Arial";
 	-fx-font-size: 10pt;
 	-fx-font-weight: normal;
+}
+
+.checkbox .box{
+	-fx-background-color: #5C5C5C;
+}
+.checkbox:selected .box {
+	-fx-background-color: #3B3B3B;
+}
+.checkbox:selected .mark {
+    -fx-background-color: #FFE800;
 }
