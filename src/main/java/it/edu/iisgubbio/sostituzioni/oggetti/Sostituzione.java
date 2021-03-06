@@ -22,12 +22,14 @@ public class Sostituzione extends OraLezione {
 	protected boolean recupero;
 
 	public enum Motivo {
-		copresenza, potenziamento_stesse_discipline, potenziamento_altre_discipline, recupero_stessa_classe,
-		recupero_altra_classe_stesso_gruppo, recupero_altra_classe_altro_gruppo, a_pagamento_stessa_classe,
-		a_pagamento_altra_classe_stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, a_disposizione_stessa_classe,
-		a_disposizione_altra_classe_stesso_gruppo, a_disposizione_altra_classe_altro_gruppo, libero_della_classe,
-		libero_altra_classe_stesso_gruppo, libero_altra_classe_altro_gruppo, ora_buca_della_classe,
-		ora_buca_altra_classe_stesso_gruppo, ora_buca_altra_classe_altro_gruppo, indefinito
+		copresenza, 
+		potenziamento_stesse_discipline, potenziamento_altre_discipline, 
+		recupero_stessa_classe, recupero_altra_classe_stesso_gruppo, recupero_altra_classe_altro_gruppo, 
+		a_disposizione_stessa_classe, a_disposizione_altra_classe_stesso_gruppo, a_disposizione_altra_classe_altro_gruppo,
+		a_pagamento_stessa_classe, a_pagamento_altra_classe_stesso_gruppo, a_pagamento_altra_classe_e_altro_gruppo, 
+		ora_buca_della_classe, ora_buca_altra_classe_stesso_gruppo, ora_buca_altra_classe_altro_gruppo,
+		libero_della_classe, libero_altra_classe_stesso_gruppo, libero_altra_classe_altro_gruppo,
+		indefinito
 	}
 
 	public String getNomeDocenteDaSostituire() {
