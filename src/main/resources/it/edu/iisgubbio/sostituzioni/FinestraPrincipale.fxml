@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <top>
       <MenuBar prefHeight="21.0" BorderPane.alignment="CENTER">
         <menus>
@@ -104,7 +104,7 @@
             </ListView>
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#gestioneSalva" text="Salva" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
             <WebView fx:id="ww" minHeight="-1.0" minWidth="-1.0" prefHeight="250.0" prefWidth="-1.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <CheckBox fx:id="cbOraRecupero" mnemonicParsing="false" styleClass="checkbox" stylesheets="@stile.css" text="Vuoi considerare questa sostituzione come 'ora di recupero'?" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
+            <CheckBox fx:id="cbOraRecupero" mnemonicParsing="false" styleClass="checkbox" stylesheets="@stile.css" text="considerare questa sostituzione come &quot;ora a recupero&quot;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

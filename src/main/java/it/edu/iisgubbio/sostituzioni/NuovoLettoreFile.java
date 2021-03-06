@@ -73,6 +73,7 @@ public class NuovoLettoreFile {
 	    Collections.sort(curricolari);
 	    Docente dSinistro, dDestro;
 
+	    // a questo punto posso calcolare le ore di compresenza
 	    for(int iSinistro=0; iSinistro<curricolari.size(); iSinistro++) {
 	        dSinistro = curricolari.get(iSinistro);
 	        for(int iDestro=iSinistro+1; iDestro<curricolari.size(); iDestro++) {
@@ -136,57 +137,60 @@ public class NuovoLettoreFile {
      */
 	public static ArrayList<Docente> leggiDocentiCurricolari(File percorso) throws FileNotFoundException, IOException {
 	    ArrayList<Docente> lista = new ArrayList<Docente>();
-		Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
-		Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
-		// indice degli insegnanti (righe)
-		int i = PRIMO_INSEGNANTE;
-		String contenuto;
-
-		// scorro fino a quando arriva alla fine degli insegnanti
-		while ((contenuto = leggiCella(foglio,i,COLONNA_INSEGNANTE)).length() != 0) {
-			Docente d = new Docente(contenuto);
-			// scorre le ore dell'orario(colonne)
-			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
-				// controlla se a quell'ora il professore lavora
-			    String aula = leggiCella(foglio, i + 1, j);
-			    String classe = uniformaNomeClasse( leggiCella(foglio,i,j) );
-				if ( aula.length() != 0 || classe.length() != 0 ) {
-					int giorno = giorno(j);
-					int orario = ora(j);
-
-					// boolean compresenza = compresenza(foglio, i, j, classe, aula);
-					boolean compresenza=false;
-					switch (aula) {
-					case MARCATORE_ORA_RECUPERO:
-						d.oraARecupero = new Ora(giorno, orario);
-						break;
-
-					case MARCATORE_ORA_POTENZIAMENTO:
-						d.orePotenziamento.add(new Ora(giorno, orario));
-						break;
-
-					case MARCATORE_ORA_PAGAMENTO:
-						d.oreAPagamento.add(new Ora(giorno, orario));
-						break;
-
-					case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
-						d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
-						break;
-
-					case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
-						d.oreADisposizioneCassata.add(new Ora(giorno, orario));
-						break;
-						
-					default:
-						d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
-						
-					}
-				}
-			}
-
-			i += 2;
-			lista.add(d);
-		}
+	    try(FileInputStream in = new FileInputStream(percorso);
+	        Workbook libro = new XSSFWorkbook(in) ){
+    		
+    		Sheet foglio = libro.getSheet(FOGLIO_DOCENTI);
+    		// indice degli insegnanti (righe)
+    		int i = PRIMO_INSEGNANTE;
+    		String contenuto;
+    
+    		// scorro fino a quando arriva alla fine degli insegnanti
+    		while ((contenuto = leggiCella(foglio,i,COLONNA_INSEGNANTE)).length() != 0) {
+    			Docente d = new Docente(contenuto);
+    			// scorre le ore dell'orario(colonne)
+    			for (int j = 1; j < COLONNA_FINALE_ORARIO; j++) {
+    				// controlla se a quell'ora il professore lavora
+    			    String aula = leggiCella(foglio, i + 1, j);
+    			    String classe = uniformaNomeClasse( leggiCella(foglio,i,j) );
+    				if ( aula.length() != 0 || classe.length() != 0 ) {
+    					int giorno = giorno(j);
+    					int orario = ora(j);
+    
+    					// boolean compresenza = compresenza(foglio, i, j, classe, aula);
+    					boolean compresenza=false;
+    					switch (aula) {
+    					case MARCATORE_ORA_RECUPERO:
+    						d.oraARecupero = new Ora(giorno, orario);
+    						break;
+    
+    					case MARCATORE_ORA_POTENZIAMENTO:
+    						d.orePotenziamento.add(new Ora(giorno, orario));
+    						break;
+    
+    					case MARCATORE_ORA_PAGAMENTO:
+    						d.oreAPagamento.add(new Ora(giorno, orario));
+    						break;
+    
+    					case MARCATORE_ORA_DISPOSIZIONE_GATTAPONE:
+    						d.oreADisposizioneGattapone.add(new Ora(giorno, orario));
+    						break;
+    
+    					case MARCATORE_ORA_DISPOSIZIONE_CASSATA:
+    						d.oreADisposizioneCassata.add(new Ora(giorno, orario));
+    						break;
+    						
+    					default:
+    						d.oreLezione.add(new OraLezione(giorno, orario, aula, classe, compresenza));
+    						
+    					}
+    				}
+    			}
+    
+    			i += 2;
+    			lista.add(d);
+    		}
+	    }
 		return (lista);
 	}
 	
@@ -199,29 +203,31 @@ public class NuovoLettoreFile {
 	 * @throws IOException
 	 */
 	private static void leggiGruppi(File percorso, ArrayList<Docente> lista) throws FileNotFoundException, IOException {
-	    Workbook libro = new XSSFWorkbook(new FileInputStream(percorso));
-	    Sheet foglioInformazioni = libro.getSheet(FOGLIO_INFORMAZIONI);
-	    int i = 1;
-	    while (foglioInformazioni.getRow(i) != null) {
-	        if(foglioInformazioni.getRow(i).getCell(0)!= null 
-	                && leggiCella(foglioInformazioni, i, 0).length()>0) {
-	            String nome = leggiCella(foglioInformazioni, i, 0);
-	            String gruppo = leggiCella(foglioInformazioni, i, 1);
-	            int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
-	            boolean trovato = false;
-	            for(Docente d: lista) {
-	                if(d.nome.equals(nome)) {
-	                    d.gruppo = gruppo;
-	                    d.oreDaRecuperare = oreDaRecuperare;
-	                    trovato = true;
-	                    break;
-	                }
-	            }
-	            if(!trovato) {
-	                Ambiente.addProblema("il docente \""+nome+"\" è presente soltanto nel foglio "+FOGLIO_INFORMAZIONI);
-	            }
-	        }
-	        i++;
+	    try(FileInputStream in = new FileInputStream(percorso);
+	        Workbook libro = new XSSFWorkbook(in) ){
+    	    Sheet foglioInformazioni = libro.getSheet(FOGLIO_INFORMAZIONI);
+    	    int i = 1;
+    	    while (foglioInformazioni.getRow(i) != null) {
+    	        if(foglioInformazioni.getRow(i).getCell(0)!= null 
+    	                && leggiCella(foglioInformazioni, i, 0).length()>0) {
+    	            String nome = leggiCella(foglioInformazioni, i, 0);
+    	            String gruppo = leggiCella(foglioInformazioni, i, 1);
+    	            int oreDaRecuperare = (int) foglioInformazioni.getRow(i).getCell(2).getNumericCellValue();
+    	            boolean trovato = false;
+    	            for(Docente d: lista) {
+    	                if(d.nome.equals(nome)) {
+    	                    d.gruppo = gruppo;
+    	                    d.oreDaRecuperare = oreDaRecuperare;
+    	                    trovato = true;
+    	                    break;
+    	                }
+    	            }
+    	            if(!trovato) {
+    	                Ambiente.addProblema("il docente \""+nome+"\" è presente soltanto nel foglio "+FOGLIO_INFORMAZIONI);
+    	            }
+    	        }
+    	        i++;
+    	    }
 	    }
 	}
 

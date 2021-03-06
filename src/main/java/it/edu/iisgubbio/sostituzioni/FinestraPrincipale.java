@@ -24,6 +24,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione.Motivo;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -90,7 +91,14 @@ public class FinestraPrincipale extends Application {
 		x.setScene(scena);
 		x.setTitle("Sostituzioni " + Ambiente.VERSIONE);
 		x.show();
-	}
+        x.setOnCloseRequest( e -> esci() );
+    }
+    
+    private void esci() {
+        // TODO: funziona ma forse serve soltanto perché prima non venivano chiusi
+        // i file da cui si leggeva i dati
+        Platform.exit();
+    }
 
 	@FXML
 	/********************************************************************************************
@@ -121,11 +129,14 @@ public class FinestraPrincipale extends Application {
 		listaSostituzioniPossibili.getSelectionModel().selectedItemProperty()
 				.addListener(e -> gestioneSelezioneListaSostituzioni());
 		listaOreLezione.getSelectionModel().selectedItemProperty().addListener(e -> gestioneListaOreLezione());
+		
+		ww.getEngine().loadContent("<p style='color:red'>Abbiamo riscontrato le seguenti criticità nei dati</p><pre>"+Ambiente.getProblemi()+"</pre>");
 	}
 
 	private void puliziaRisultati() {
 		listaSostituzioniPossibili.getItems().clear();
-		ww.getEngine().loadContent("<p>uh?</p>");
+		ww.getEngine().loadContent("");
+		cbOraRecupero.setSelected(true);
 	}
 
 	@FXML
@@ -230,7 +241,7 @@ public class FinestraPrincipale extends Application {
 		// recupero l'oggetto selezionato usando il suo indice
 		Sostituzione s = listaSostituzioniPossibili.getItems().get(indiceSelezionato);
 		
-		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione() + "\nLa sostituzione " + (cbOraRecupero.isSelected() ? "" : "NON ") + "verrà considerata come 'ora di recupero'.");
+		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione() + "\nLa sostituzione " + (cbOraRecupero.isSelected() ? "" : "NON ") + "verrà considerata come \"ora a recupero\".");
 
 		Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 		if (risposta.isPresent() && risposta.get() == ButtonType.OK) {

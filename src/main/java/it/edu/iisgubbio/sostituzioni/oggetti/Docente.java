@@ -59,6 +59,16 @@ public class Docente implements Comparable<Docente>{
 		}
 		return risposta;
 	}
+	
+	public int oreOccupateNellaMattina(int giorno) {
+	    int n=0;
+	    for(OraLezione ol: oreLezione) {
+	        if(ol.giorno==giorno) {
+	            n++;
+	        }
+	    }
+	    return n;
+	}
 
 	/********************************************************************************************
 	 * @param nomeClasse 
@@ -108,11 +118,19 @@ public class Docente implements Comparable<Docente>{
 	 * @return l'ora di questo docente che combacia con quella cercata o null se non esiste
 	 *******************************************************************************************/
     public OraLezione getOra(OraLezione oraCercata) {
+        String classiCercate[] = oraCercata.classe.replaceAll("[\\[\\]\\(\\)]", "").split("-");
         for (int i = 0; i < oreLezione.size(); i++) {
             if (oreLezione.get(i).giorno == oraCercata.giorno 
-                    && oreLezione.get(i).orario == oraCercata.orario
-                    && oreLezione.get(i).classe.equals(oraCercata.classe)) {
-                return oreLezione.get(i);
+                    && oreLezione.get(i).orario == oraCercata.orario) {
+                String mieClassi[] = oreLezione.get(i).classe.replaceAll("[\\[\\]\\(\\)]", "").split("-");
+                    // && oreLezione.get(i).classe.equals(oraCercata.classe)) {
+                for(String c1: classiCercate) {
+                    for(String c2: mieClassi) {
+                        if(c1.equals(c2)) {
+                            return oreLezione.get(i);
+                        }
+                    }
+                }
             }
         }
         return null;
