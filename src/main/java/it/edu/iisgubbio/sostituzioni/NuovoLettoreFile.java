@@ -37,6 +37,12 @@ public class NuovoLettoreFile {
 
 	private final static byte PRIMO_INSEGNANTE = 5;
 	private final static byte COLONNA_INSEGNANTE = 0;
+	
+	// XXX: magari funziona ma se ad un certo punto si leggessero ancora più colonne?
+	private static final String nomiColonne[] = {"a","b","c","d","e","f","g","h","i","j","k",
+	        "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+	        "aa","ab","ac","ad","ae","af","ag","ah","ai","aj"};
+
 
 	/**
 	 * legge il file excel e restituisce la lista degli insegnanti
@@ -120,11 +126,17 @@ public class NuovoLettoreFile {
 	
 	/** la uso per fare trim dappertutto quando leggo */
 	private static final String leggiCella(Sheet foglio, int riga, int colonna) {
-	    Cell cella = foglio.getRow(riga).getCell(colonna);
-	    if(cella!=null) {
-	        return cella.getStringCellValue().trim();
-	    } else {
-	        return "";
+	    try {
+    	    Cell cella = foglio.getRow(riga).getCell(colonna);
+    	    if(cella!=null) {
+    	        return cella.getStringCellValue().trim();
+    	    } else {
+    	        return "";
+    	    }
+	    }catch(Exception ex) {
+	        throw new RuntimeException("Non riesco a leggere al cella del foglio \""+
+	                foglio.getSheetName()+
+	                "\" alla cella "+nomiColonne[colonna]+(riga+1) );
 	    }
 	}
 	
