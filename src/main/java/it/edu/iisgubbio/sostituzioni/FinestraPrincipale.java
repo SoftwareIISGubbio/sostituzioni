@@ -14,6 +14,7 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreBuche;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreAdiacenti;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroPotenziamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
@@ -73,7 +74,7 @@ public class FinestraPrincipale extends Application {
 
 	@FXML
 	WebView ww;
-	
+
 	@FXML
 	CheckBox cbOraRecupero;
 
@@ -91,14 +92,14 @@ public class FinestraPrincipale extends Application {
 		x.setScene(scena);
 		x.setTitle("Sostituzioni " + Ambiente.VERSIONE);
 		x.show();
-        x.setOnCloseRequest( e -> esci() );
-    }
-    
-    private void esci() {
-        // TODO: funziona ma forse serve soltanto perché prima non venivano chiusi
-        // i file da cui si leggeva i dati
-        Platform.exit();
-    }
+		x.setOnCloseRequest(e -> esci());
+	}
+
+	private void esci() {
+		// TODO: funziona ma forse serve soltanto perché prima non venivano chiusi
+		// i file da cui si leggeva i dati
+		Platform.exit();
+	}
 
 	@FXML
 	/********************************************************************************************
@@ -129,8 +130,9 @@ public class FinestraPrincipale extends Application {
 		listaSostituzioniPossibili.getSelectionModel().selectedItemProperty()
 				.addListener(e -> gestioneSelezioneListaSostituzioni());
 		listaOreLezione.getSelectionModel().selectedItemProperty().addListener(e -> gestioneListaOreLezione());
-		
-		ww.getEngine().loadContent("<p style='color:red'>Abbiamo riscontrato le seguenti criticità nei dati</p><pre>"+Ambiente.getProblemi()+"</pre>");
+
+		ww.getEngine().loadContent("<p style='color:red'>Abbiamo riscontrato le seguenti criticità nei dati</p><pre>"
+				+ Ambiente.getProblemi() + "</pre>");
 	}
 
 	private void puliziaRisultati() {
@@ -240,8 +242,9 @@ public class FinestraPrincipale extends Application {
 		int indiceSelezionato = listaSostituzioniPossibili.getSelectionModel().getSelectedIndex();
 		// recupero l'oggetto selezionato usando il suo indice
 		Sostituzione s = listaSostituzioniPossibili.getItems().get(indiceSelezionato);
-		
-		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione() + "\nLa sostituzione " + (cbOraRecupero.isSelected() ? "" : "NON ") + "verrà considerata come \"ora a recupero\".");
+
+		Alert dialogoAllerta = new Alert(AlertType.CONFIRMATION, s.getDescrizione() + "\nLa sostituzione "
+				+ (cbOraRecupero.isSelected() ? "" : "NON ") + "verrà considerata come \"ora a recupero\".");
 
 		Optional<ButtonType> risposta = dialogoAllerta.showAndWait();
 		if (risposta.isPresent() && risposta.get() == ButtonType.OK) {
@@ -259,7 +262,8 @@ public class FinestraPrincipale extends Application {
 			String orarioGiornaliero[] = sostituto.descriviGiornata(sostituzioneScelta.giorno);
 			String orarioGiornalieroModificato[] = orarioGiornaliero.clone();
 			LocalDate d = data.getValue();
-			String aulaSostituzione = sostituzioneScelta.aula == null || sostituzioneScelta.aula.isEmpty() ? "aula non specificata"
+			String aulaSostituzione = sostituzioneScelta.aula == null || sostituzioneScelta.aula.isEmpty()
+					? "aula non specificata"
 					: "aula " + sostituzioneScelta.aula;
 
 			orarioGiornalieroModificato[sostituzioneScelta.orario - 1] = "<big>" + sostituzioneScelta.classe
@@ -618,6 +622,49 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_altra_classe_altro_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
+				}
+			}
+
+			// ----------------- recupero docenti con l'ora cercata disponibile ma occupato in quelle adiacenti
+			// -------------------
+			{
+				ArrayList<Docente> docentiOccupatiOreAdiacenti;
+				docentiOccupatiOreAdiacenti = FiltroOreAdiacenti.docentiOccupatiOreAdiacenti(tuttiIDocenti, oraDaSostituire);
+				// e della stessa classe
+				for (Docente docente : FiltroClasse.docentiDellaClasse(docentiOccupatiOreAdiacenti, oraDaSostituire.classe, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.lavora_ora_adiacente_della_classe);
+					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
+				}
+				// non della stessa classe
+				ArrayList<Docente> docentiAltreClassi = FiltroClasse.docentiDellaClasse(docentiOccupatiOreAdiacenti,
+						oraDaSostituire.classe, false);
+				// altre classi ma stesso gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, true)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.lavora_ora_adiacente_altra_classe_stesso_gruppo);
+					listaSostituzioniPossibili.getItems().add(s);
+					tuttiIDocenti.remove(docente);
+				}
+				// altre classi e altro gruppo di materie
+				for (Docente docente : FiltroGruppo.docentiDelGruppo(docentiAltreClassi, gruppoDocenteAssente, false)) {
+					Sostituzione s = new Sostituzione(oraDaSostituire.giorno, // giorno in cui dovrà essere fatta la
+																				// sostituione
+							oraDaSostituire.orario, oraDaSostituire.aula, oraDaSostituire.classe, false, docente.nome,
+							testoData);
+					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
+					s.setMotivazione(Motivo.lavora_ora_adiacente_altra_classe_altro_gruppo);
 					listaSostituzioniPossibili.getItems().add(s);
 					tuttiIDocenti.remove(docente);
 				}
