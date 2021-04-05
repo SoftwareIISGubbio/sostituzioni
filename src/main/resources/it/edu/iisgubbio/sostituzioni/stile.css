@@ -59,3 +59,88 @@
 .checkbox:selected .mark {
     -fx-background-color: #FFE800;
 }
+
+.copresenza {
+	-fx-background-color: #f7f7f7;
+}
+
+.potenziamento_stesse_discipline {
+	-fx-background-color: #ff1a1a;
+}
+
+.potenziamento_altre_discipline {
+	-fx-background-color: #ff6666;
+}
+
+.recupero_stessa_classe {
+	-fx-background-color: #4670e8;
+}
+
+.recupero_altra_classe_stesso_gruppo {
+	-fx-background-color: #6688e8;
+}
+
+
+.recupero_altra_classe_altro_gruppo {
+	-fx-background-color: #95aced;
+}
+
+.a_disposizione_stessa_classe {
+	-fx-background-color: #d67702;
+}
+
+.a_disposizione_altra_classe_stesso_gruppo {
+	-fx-background-color: #ff9900;
+}
+
+.a_disposizione_altra_classe_altro_gruppo {
+	-fx-background-color: #ffb340;
+}
+
+.a_pagamento_stessa_classe {
+	-fx-background-color: #22943e;
+}
+
+.a_pagamento_altra_classe_stesso_gruppo {
+	-fx-background-color: #45ad5f;
+}
+
+.a_pagamento_altra_classe_e_altro_gruppo {
+	-fx-background-color: #74c288;
+}
+
+.ora_buca_della_classe {
+	-fx-background-color: #FAE400;
+}
+
+.ora_buca_altra_classe_stesso_gruppo {
+	-fx-background-color: #FFF865;
+}
+
+.ora_buca_altra_classe_altro_gruppo {
+	-fx-background-color: #FFF9AA;
+}
+
+.lavora_ora_adiacente_della_classe {
+	-fx-background-color: #02cfcf;
+}
+
+.lavora_ora_adiacente_altra_classe_stesso_gruppo {
+	-fx-background-color: #4cd9d9;
+}
+
+.lavora_ora_adiacente_altra_classe_altro_gruppo {
+	-fx-background-color: #84e8e8;
+}
+
+.libero_della_classe {
+	-fx-background-color: #9778ba;
+}
+
+.libero_altra_classe_stesso_gruppo {
+	-fx-background-color: #beabd4;
+}
+
+.libero_altra_classe_altro_gruppo {
+	-fx-background-color: #dcd0e8;
+}
