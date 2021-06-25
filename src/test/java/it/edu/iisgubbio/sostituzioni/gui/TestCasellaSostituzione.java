@@ -20,7 +20,8 @@ public class TestCasellaSostituzione extends Application{
         listaSostituzioniPossibili.setCellFactory(new FabbricaDiCaselleSostituzione());
         
         Scene scene = new Scene(root, 550, 450);
-          
+        scene.getStylesheets().add("it/edu/iisgubbio/sostituzioni/stile.css");
+        
         for(Motivo motivo: Motivo.values()) {
             Sostituzione s = new Sostituzione(1, 1, "aula", "5i", false, "PANFILI edoardo","2020-12-22");
             s.compresenza = motivo==Motivo.copresenza;

@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizione;
@@ -13,8 +15,8 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
-import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreBuche;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreAdiacenti;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreBuche;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroPotenziamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroRecupero;
 import it.edu.iisgubbio.sostituzioni.filtri.RimozioneDocente;
@@ -33,13 +35,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
@@ -55,6 +57,10 @@ public class FinestraPrincipale extends Application {
 		launch(args);
 	}
 
+	@FXML 
+	Button bProfessorePrecedente;
+	@FXML 
+    Button bProfessoreSuccessivo;
 	@FXML
 	ComboBox<String> nomeProf;
 	@FXML
@@ -67,8 +73,6 @@ public class FinestraPrincipale extends Application {
 	@FXML
 	ListView<Sostituzione> listaSostituzioniPossibili;
 
-	@FXML
-	TextArea taDescrizioneSostituzione;
 	@FXML
 	Label lDescrizioneOreLezione;
 
@@ -354,6 +358,12 @@ public class FinestraPrincipale extends Application {
 	}
 
 	@FXML
+	private void gestioneSelezioneDocente(ActionEvent ae) {
+	    selezionatoInsegnantePerStorico(nomeProf.getValue());
+	    gestioneSelezioneDataEDocente();    
+	}
+	
+	@FXML
 	private void gestioneSelezioneDataEDocente() {
 		puliziaRisultati();
 		LocalDate d = data.getValue();
@@ -402,9 +412,11 @@ public class FinestraPrincipale extends Application {
 			// questo ArrayList
 			// in modo da non ripeter due volte lo stesso insegnante
 			tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
+			
+			// inserisco le sostituzioni in un ArrayList per poi poterli ordinare
+			ArrayList<Sostituzione> candidati = new ArrayList<>();
 
-			// --------------- recupero tutti gli eventuali docenti in compresenza
-			// --------------
+			// --------------- recupero tutti gli eventuali docenti in compresenza --------------
 			ArrayList<Docente> docentiCoPresenza;
 			docentiCoPresenza = FiltroCoPresenza.docentiCoPresenza(tuttiIDocenti, oraDaSostituire);
 			for (int i = 0; i < docentiCoPresenza.size(); i++) {
@@ -415,12 +427,11 @@ public class FinestraPrincipale extends Application {
 						testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.copresenza);
-				listaSostituzioniPossibili.getItems().add(s);
+				candidati.add(s);
 				tuttiIDocenti.remove(sostituto);
 			}
 
-			// ------------------------------------ potenziamento
-			// -------------------------------
+			// ------------------------------------ potenziamento -------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiPotenziamento = FiltroPotenziamento.docentiPotenziamento(tuttiIDocenti,
@@ -434,7 +445,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.potenziamento_stesse_discipline);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// poi tutti gli altri
@@ -446,13 +457,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.potenziamento_altre_discipline);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// ------------------------------- recupero
-			// -----------------------------------------
+			// ------------------------------- recupero -----------------------------------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiRecupero;
@@ -465,7 +475,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_stessa_classe);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi
@@ -479,7 +489,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_altra_classe_stesso_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi, gruppi dversi
@@ -490,13 +500,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.recupero_altra_classe_altro_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a disposizione"
-			// ------------
+			// ----------------- recupero docenti con l'ora cercata "a disposizione" ------------
 			{ // creo un blocco di visibilità locale in modo da poter fare copia/incolla
 				// sotto!
 				ArrayList<Docente> docentiADisposizione;
@@ -510,7 +519,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_stessa_classe);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi
@@ -524,7 +533,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_altra_classe_stesso_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi, gruppi dversi
@@ -535,13 +544,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_disposizione_altra_classe_altro_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "a pagamento"
-			// ---------------
+			// ----------------- recupero docenti con l'ora cercata "a pagamento" ---------------
 			{
 				ArrayList<Docente> docentiAPagamento;
 				docentiAPagamento = FiltroAPagamento.docentiAPagamento(tuttiIDocenti, oraDaSostituire);
@@ -554,7 +562,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_stessa_classe);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// non della stessa classe
@@ -568,7 +576,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_altra_classe_stesso_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi e altro gruppo di materie
@@ -579,13 +587,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.a_pagamento_altra_classe_e_altro_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata "buca"
-			// -------------------
+			// ----------------- recupero docenti con l'ora cercata "buca" ----------------------
 			{
 				ArrayList<Docente> docentiOreBuche;
 				docentiOreBuche = FiltroOreBuche.docentiOreBuche(tuttiIDocenti, oraDaSostituire);
@@ -597,7 +604,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_della_classe);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// non della stessa classe
@@ -611,7 +618,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_altra_classe_stesso_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi e altro gruppo di materie
@@ -622,13 +629,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.ora_buca_altra_classe_altro_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// ----------------- recupero docenti con l'ora cercata disponibile ma occupato in quelle adiacenti
-			// -------------------
+			// - recupero docenti con l'ora cercata disponibile ma occupato in quelle adiacenti -
 			{
 				ArrayList<Docente> docentiOccupatiOreAdiacenti;
 				docentiOccupatiOreAdiacenti = FiltroOreAdiacenti.docentiOccupatiOreAdiacenti(tuttiIDocenti, oraDaSostituire);
@@ -640,7 +646,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.lavora_ora_adiacente_della_classe);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// non della stessa classe
@@ -654,7 +660,7 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.lavora_ora_adiacente_altra_classe_stesso_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 				// altre classi e altro gruppo di materie
@@ -665,12 +671,12 @@ public class FinestraPrincipale extends Application {
 							testoData);
 					s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 					s.setMotivazione(Motivo.lavora_ora_adiacente_altra_classe_altro_gruppo);
-					listaSostituzioniPossibili.getItems().add(s);
+					candidati.add(s);
 					tuttiIDocenti.remove(docente);
 				}
 			}
 
-			// un elenco di tutti i docenti liberi della classe
+			// ------------- un elenco di tutti i docenti liberi della classe -------------------
 			ArrayList<Docente> docentiDellaClasse;
 			docentiDellaClasse = FiltroClasse.docentiDellaClasse(tuttiIDocenti, oraDaSostituire.classe, true);
 			ArrayList<Docente> docentiLiberiClasse = FiltroLibero.docentiLiberi(docentiDellaClasse, oraDaSostituire);
@@ -682,10 +688,10 @@ public class FinestraPrincipale extends Application {
 						testoData);
 				s.setNomeDocenteDaSostituire(nomeDocenteDaSostituire);
 				s.setMotivazione(Motivo.libero_della_classe);
-				listaSostituzioniPossibili.getItems().add(s);
+				candidati.add(s);
 				tuttiIDocenti.remove(sostituto);
 			}
-			// alla fine tutti quelli liberi che si dividono in stesso gruppo e altro gruppo
+			// - alla fine tutti quelli liberi che si dividono in stesso gruppo e altro gruppo --
 			ArrayList<Docente> docentiLiberi = FiltroLibero.docentiLiberi(tuttiIDocenti, oraDaSostituire);
 			ArrayList<Sostituzione> docentiLiberiAltroGruppo = new ArrayList<>();
 			for (int i = 0; i < docentiLiberi.size(); i++) {
@@ -702,11 +708,80 @@ public class FinestraPrincipale extends Application {
 					docentiLiberiAltroGruppo.add(s);
 					continue;
 				}
-				listaSostituzioniPossibili.getItems().add(s);
+				candidati.add(s);
 			}
 			for (Sostituzione sostituzione : docentiLiberiAltroGruppo) {
-				listaSostituzioniPossibili.getItems().add(sostituzione);
+				candidati.add(sostituzione);
 			}
+			
+			// Creo una funzione che serve per confrontare due Sostituzioni (x, y) ritorna:
+		    //  0: se (x==y)
+		    // -1: if (x < y)
+		    //  1: se (x > y)
+			Comparator<Sostituzione> confrontatoreDiSostituzioni = (Sostituzione o1, Sostituzione o2) -> {
+                Docente bersaglio1 = Ambiente.cercaDocentePerNome(o1.getNomeSostituto());
+                Docente bersaglio2 = Ambiente.cercaDocentePerNome(o2.getNomeSostituto());
+                int residue1 = bersaglio1.oreDaRecuperare - bersaglio1.oreRecuperate;
+                int residue2 = bersaglio2.oreDaRecuperare - bersaglio2.oreRecuperate;
+                
+                if(residue1<=0 && residue2>0) {
+                    return 1;
+                }
+                if(residue2<=0 && residue1>0) {
+                    return -1;
+                }
+                return o1.getMotivazione().ordinal() - o2.getMotivazione().ordinal();
+            };
+            // ordino gli elementi da inserire nella lista
+	        Collections.sort( candidati, confrontatoreDiSostituzioni);
+	        
+			listaSostituzioniPossibili.getItems().addAll(candidati);
 		}
 	}
+	
+	// ----- INIZIO ---- gestione dello storico ---------------------------------------------------------------------
+	// il problema sono gli eventi che vengono generati molto più spesso di quel che farebbe comodo in questo contesto
+	
+	private ArrayList<String> storicoElencoNomi = new ArrayList<String>();
+    private int storicoIndiceVisualizzato = -1; 
+	private String ultimaSelezione = ""; // probabilmente se ne può fare a meno
+	
+	private void selezionatoInsegnantePerStorico(String nome) {
+	    // interessa soltanto se la nuova selezione non è uguale alla precedente
+	    // serve per evitare gli eventi multipli che vengono generati in selezione
+	    if( nome!=null && !nome.equals(ultimaSelezione) ) {
+	        if(storicoIndiceVisualizzato!=-1 && storicoElencoNomi.get(storicoIndiceVisualizzato).equals(nome)) {
+	            System.out.println("stic");
+	            return;
+	        }
+	        ultimaSelezione=nome;
+	        
+	        storicoIndiceVisualizzato++;
+	        for(int i=storicoElencoNomi.size()-1; i>=storicoIndiceVisualizzato; i--) {
+	            storicoElencoNomi.remove(i);
+	        }
+	        storicoElencoNomi.add(nome);
+	        
+	        bProfessorePrecedente.setDisable(storicoIndiceVisualizzato==0);
+	        bProfessoreSuccessivo.setDisable(storicoIndiceVisualizzato==storicoElencoNomi.size()-1);
+	    }
+	}
+	
+	@FXML
+	void azioneStoricoInsegnantePrecedente() {
+	    storicoIndiceVisualizzato--;
+	    nomeProf.getSelectionModel().select( storicoElencoNomi.get(storicoIndiceVisualizzato) );
+	    bProfessorePrecedente.setDisable(storicoIndiceVisualizzato==0);
+        bProfessoreSuccessivo.setDisable(storicoIndiceVisualizzato==storicoElencoNomi.size()-1);
+	}
+	
+	@FXML
+    void azioneStoricoInsegnanteSuccessivo() {
+        storicoIndiceVisualizzato++;
+        nomeProf.getSelectionModel().select( storicoElencoNomi.get(storicoIndiceVisualizzato) );
+        bProfessorePrecedente.setDisable(storicoIndiceVisualizzato==0);
+        bProfessoreSuccessivo.setDisable(storicoIndiceVisualizzato==storicoElencoNomi.size()-1);
+    }
+	
+	// ----- FINE ------ gestione dello storico ---------------------------------------------------------------------
 }

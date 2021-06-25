@@ -7,11 +7,12 @@
 	-fx-background-color: #3B3B3B;
 }
 
-.label{
+.etichettaInput{
 	-fx-text-fill: #3b3b3b; 
 	-fx-font-family:"Times New Roman";
 	-fx-font-weight: bold;
 	-fx-font-size: 12pt;
+	-fx-padding: 20px 0px 0px 0px
 }
 
 .date-picker{
