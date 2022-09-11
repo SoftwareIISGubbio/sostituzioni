@@ -2,3 +2,7 @@
 /target/
 .classpath
 /.settings/
+
+
+# VSCode
+.vscode/

@@ -6,15 +6,15 @@
 	<!-- informazioni generali sul programma -->
 	<groupId>it.edu.iisgubbio</groupId>
 	<artifactId>sostituzioni</artifactId>
-	<version>2.7.0</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 	<name>sostituzioni</name>
 	<url>http://www.iisgubbio.edu.it</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>15</maven.compiler.release>
-		<progetto.jars>${project.build.directory}/jars</progetto.jars>
+		<maven.compiler.release>17</maven.compiler.release>
+		<progetto.jars>${project.build.directory}/lib</progetto.jars>
 		<!-- https://rterp.wordpress.com/2012/03/16/stamping-version-number-and-build-time-in-properties-file-with-maven/ -->
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>dd-MM-yyyy HH:mm</maven.build.timestamp.format>
@@ -25,23 +25,8 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>5.0.0</version>
+			<version>4.1.2</version> <!-- da provare con versione 5 -->
 		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>16</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-fxml</artifactId>
-			<version>16</version>
-		</dependency>
-		<dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>16</version>
-        </dependency>
         <dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -54,7 +39,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
 				</configuration>
@@ -63,7 +48,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.1.1</version>
+				<version>3.3.0</version>
 				<configuration>
 					<outputDirectory>${progetto.jars}</outputDirectory>
 					<overWriteReleases>false</overWriteReleases>
