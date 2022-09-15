@@ -258,16 +258,13 @@ public class Ambiente {
                 //   [\\[(]? → una parentesi quadra o tonda aperta se c'è
                 //   [1-5] → un numero da 1 a 5
                 //   [a-z] → una lettera
-                //   [\\-1-5a-z]* → una sequenza di uno o più lettere numeri e "-" 
+                //   [\\-1-9a-z]* → una sequenza di uno o più lettere numeri e "-" 
                 //   [\\])]? → una parentesi quadra o tonda chiusa se c'è
-                // uno o più delle cose sopra eventualmente separate da "-"
-                if( nomeClasse.matches("([\\[(]?[1-5][A-Z][\\-1-5A-Z]*[\\])]?-?)+") || nomeClasse.equals("gatt")){
+                //   uno o più delle cose sopra eventualmente separate da "-"
+                if( nomeClasse.matches("([\\[(]?[1-5][A-Z][\\-1-9A-Z]*[\\])]?-?)+") || nomeClasse.equals("gatt")){
                     insiemeNomiDiClassi.add(nomeClasse);
                 } else {
-                    // FIXME: cosa è questa sigla "VP" ?
-                	if(!nomeClasse.equals("VP") ) {
-                		problemi += "classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
-                	}
+                    problemi += "strano nome di classe \""+nomeClasse+"\" di "+docente.nome+"("+ol+")\n";
                 }
             }
         }
