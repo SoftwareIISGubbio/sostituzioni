@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -99,7 +99,7 @@
                   <String fx:value="checkbox" />
                   <String fx:value="etichettaInput" />
                </styleClass></CheckBox>
-            <SplitPane dividerPositions="0.7" orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="8">
+            <SplitPane dividerPositions="0.6" orientation="VERTICAL" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="8">
                <items>
                   <BorderPane>
                      <center>
@@ -108,7 +108,7 @@
                   </BorderPane>
                   <BorderPane>
                      <center>
-                        <WebView fx:id="ww" minHeight="-1.0" minWidth="-1.0" prefHeight="150.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+                        <WebView fx:id="ww" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </items>

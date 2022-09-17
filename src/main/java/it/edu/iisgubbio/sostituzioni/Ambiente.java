@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 /****************************************************************************
  * 
  * Mantiene tutti i dati necessari all'applicazione per funzionare,
- * carica tutte le informazioni in faase di avvio:
+ * carica tutte le informazioni in fase di avvio:
  * - posizione dei file di input e giornale
  * - elenco dei docenti con relativo orario
  * - elenco delle classi
@@ -32,8 +32,7 @@ import javafx.stage.Stage;
  * @author classe4i_2019-20
  ***************************************************************************/
 public class Ambiente {
-    /** docenti con relative informazioni, letti dal foglio Excel e da un file 
-     * XML prodotto da FET */
+    /** docenti con relative informazioni, letti dal foglio Excel */
     private static ArrayList<Docente> docenti = new ArrayList<>();
     /** vettore contenente nomi di tutte le classe */
     private static String[]nomiClassi;
@@ -100,8 +99,22 @@ public class Ambiente {
     public static void setFileOrarioExcel(File fileOrarioExcel) {
         proprieta.put("fileOrarioExcel", fileOrarioExcel.toString());
     }
-
     
+    /************************************************************************
+     * @return la cartella in cui salvare i biglietti da inviare ai docenti
+     ***********************************************************************/
+    public static File getCartellaBiglietto() {
+        return new File(proprieta.getProperty("cartellaBiglietto"));
+    }
+
+    /************************************************************************
+     * @param cartellaBiglietto la cartella in cui salvare i biglietti 
+     *   da inviare ai docenti
+     ***********************************************************************/
+    public static void setCartellaBiglietto(File cartellaBiglietto) {
+        proprieta.put("cartellaBiglietto", cartellaBiglietto.toString());
+    }
+
     /************************************************************************
      * @return l'elenco dei nomi delle classi
      ***********************************************************************/

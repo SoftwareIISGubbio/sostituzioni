@@ -1,5 +1,6 @@
 package it.edu.iisgubbio.sostituzioni;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
+
+import javax.imageio.ImageIO;
 
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroADisposizione;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroAPagamento;
@@ -28,6 +31,7 @@ import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione.Motivo;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -44,6 +48,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -254,6 +259,14 @@ public class FinestraPrincipale extends Application {
 		if (risposta.isPresent() && risposta.get() == ButtonType.OK) {
 			s.setRecupero(cbOraRecupero.isSelected());
 			Giornale.scriviRecord(s);
+	        
+			WritableImage biglietto = ww.snapshot(null, null);
+			String nomeFile = Ambiente.getCartellaBiglietto().toString()+File.separatorChar+"bigliettoSostituzioni.png";
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File(nomeFile));
+            } catch (IOException eccezione) {
+                eccezione.printStackTrace();
+            }
 		}
 	}
 

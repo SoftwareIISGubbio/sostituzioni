@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class TestFX extends Application{
+public class ProvaManualeFX extends Application{
 
     Button btn = new Button("Saluta!");
 

@@ -27,11 +27,6 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>4.1.2</version> <!-- da provare con versione 5 -->
 		</dependency>
-        <dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.6</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -74,6 +69,32 @@
 					<outputDirectory>${progetto.jars}</outputDirectory>
 				</configuration>
 			</plugin>
+			<!-- per produrre un file jar (sempre nel target "package") con tutte le librerie
+			e l'indicazione della classe principale -->
+			<plugin><!-- fat jar -->
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-assembly-plugin</artifactId>
+	            <version>3.4.2</version>
+	            <configuration>
+	                <descriptorRefs>
+	                    <descriptorRef>jar-with-dependencies</descriptorRef>
+	                </descriptorRefs>
+	                <archive>
+	    				<manifest>
+							<mainClass>it.edu.iisgubbio.sostituzioni.FinestraPrincipale</mainClass>
+	    				</manifest>
+	  				</archive>
+	            </configuration>
+	            <executions>
+	                <execution>
+	                    <id>assemble-all</id>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>single</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
 		</plugins>
         <resources>
             <resource>

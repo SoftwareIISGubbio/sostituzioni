@@ -15,6 +15,14 @@
 	-fx-padding: 20px 0px 0px 0px
 }
 
+.etichettaPreferenza{
+	-fx-text-fill: #3b3b3b; 
+	-fx-font-family:"Times New Roman";
+	-fx-font-weight: bold;
+	-fx-font-size: 12pt;
+	-fx-padding: 0px 0px 0px 20px;
+}
+
 .date-picker{
 	-fx-background-color: #e6e6e6;
 	-fx-text-fill: #3b3b3b; 

@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class TestCasellaSostituzione extends Application{
+public class ProvaManualeCasellaSostituzione extends Application{
 
     ListView<Sostituzione> listaSostituzioniPossibili = new ListView<Sostituzione>();
 

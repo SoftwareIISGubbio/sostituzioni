@@ -127,6 +127,10 @@ public class NuovoLettoreFile {
 	/** la uso per fare trim dappertutto quando leggo */
 	private static final String leggiCella(Sheet foglio, int riga, int colonna) {
 	    try {
+	        // righe vuote danno sempre "" come risultato
+	        if(foglio.getRow(riga)==null) {
+	            return "";
+	        }
     	    Cell cella = foglio.getRow(riga).getCell(colonna);
     	    if(cella!=null) {
     	        return cella.getStringCellValue().trim();
@@ -134,6 +138,7 @@ public class NuovoLettoreFile {
     	        return "";
     	    }
 	    }catch(Exception ex) {
+	        ex.printStackTrace();
 	        throw new RuntimeException("Non riesco a leggere al cella del foglio \""+
 	                foglio.getSheetName()+
 	                "\" alla cella "+nomiColonne[colonna]+(riga+1) );
