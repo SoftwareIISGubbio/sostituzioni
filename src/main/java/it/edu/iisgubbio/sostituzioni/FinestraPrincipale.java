@@ -263,9 +263,11 @@ public class FinestraPrincipale extends Application {
 			WritableImage biglietto = ww.snapshot(null, null);
 			String nomeFile = Ambiente.getCartellaBiglietto().toString()+File.separatorChar+"bigliettoSostituzioni.png";
             try {
-                ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File(nomeFile));
-            } catch (IOException eccezione) {
-                eccezione.printStackTrace();
+                // ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File(nomeFile));
+                ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File("/root/mavaffanculo"));
+            } catch (Exception eccezione) {
+                FinestraEccezione fe = new FinestraEccezione(eccezione);
+                fe.showAndWait();
             }
 		}
 	}
