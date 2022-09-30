@@ -43,11 +43,18 @@ mvn -q package -DskipTests
 # https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
 # windows meglio lasciarlo in else
 if [[ "$OSTYPE" == "darwin"*  ]]; then
-    # ============================= file firmato per macOS ===================
-    echo "please insert command for macOS"
+    # ============================= file firmato per macOS ======================================
+    jpackage --name sostituzioni --app-version $VERSIONE --icon icona/icona.icns --type dmg \
+    --input target/lib --dest target \
+    --add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,javafx.swing,jdk.charsets \
+    --main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar sostituzioni-$VERSIONE.jar \
+    --mac-package-name Sostituzioni \
+    --mac-sign --mac-signing-key-user-name "Developer ID Application: IIS Cassata Gattapone (NMMRHK5G25)" \
+    --mac-package-identifier it.edu.iisgubbio.sostituzioni
 elif [[ "$OSTYPE" == "linux"* ]]; then
     echo "please insert command for Linux"
 else
+    # ============================= zip per Windows =============================================
     jpackage --name sostituzioni --app-version $VERSIONE --icon icona/icona.ico --type app-image \
     --input target/lib --dest target/compilato \
     --add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,javafx.swing,jdk.charsets \
