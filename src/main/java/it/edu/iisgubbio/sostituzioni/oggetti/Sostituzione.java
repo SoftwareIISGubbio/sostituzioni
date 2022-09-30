@@ -63,7 +63,11 @@ public class Sostituzione extends OraLezione {
 		this.recupero = recupero;
 	}
 
-	/**
+	public String getData() {
+        return data;
+    }
+
+    /**
 	 * @param giorno      giorno della settimana, lunedì=1
 	 * @param orario      ora del giorno, prima ora = 1
 	 * @param aula        nome dell'aula

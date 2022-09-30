@@ -261,7 +261,12 @@ public class FinestraPrincipale extends Application {
 			Giornale.scriviRecord(s);
 	        
 			WritableImage biglietto = ww.snapshot(null, null);
-			String nomeFile = Ambiente.getCartellaBiglietto().toString()+File.separatorChar+"bigliettoSostituzioni.png";
+			String nomeFile = Ambiente.getCartellaBiglietto().toString()+File.separatorChar+
+			        "sostituzione-%s-%s-%s-%s.png".formatted(
+			                s.getData(),
+			                s.getNomeDocenteDaSostituire(),
+			                s.getNomeSostituto(),
+			                s.classe);
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File(nomeFile));
             } catch (Throwable eccezione) {
