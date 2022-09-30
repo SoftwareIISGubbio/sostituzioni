@@ -10,10 +10,10 @@ import javafx.scene.layout.BorderPane;
 
 // https://code.makery.ch/blog/javafx-dialogs-official/
 public class FinestraEccezione extends Alert{
-    public FinestraEccezione(Exception ex) {
+    public FinestraEccezione(Throwable ex) {
         super(AlertType.ERROR);
         this.setTitle("Qualcosa è andato male");
-        this.setHeaderText( ex.getLocalizedMessage() );
+        this.setHeaderText( ex.getClass().getCanonicalName()+": "+ex.getLocalizedMessage() );
 
         // Create expandable Exception.
         StringWriter sw = new StringWriter();

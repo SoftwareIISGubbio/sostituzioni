@@ -264,7 +264,7 @@ public class FinestraPrincipale extends Application {
 			String nomeFile = Ambiente.getCartellaBiglietto().toString()+File.separatorChar+"bigliettoSostituzioni.png";
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(biglietto, null),"png", new File(nomeFile));
-            } catch (Exception eccezione) {
+            } catch (Throwable eccezione) {
                 FinestraEccezione fe = new FinestraEccezione(eccezione);
                 fe.showAndWait();
             }
