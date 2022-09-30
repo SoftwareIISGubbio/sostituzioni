@@ -71,7 +71,7 @@
 			</plugin>
 			<!-- per produrre un file jar (sempre nel target "package") con tutte le librerie
 			e l'indicazione della classe principale -->
-			<plugin><!-- fat jar -->
+			<!-- <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-assembly-plugin</artifactId>
 	            <version>3.4.2</version>
@@ -94,7 +94,7 @@
 	                    </goals>
 	                </execution>
 	            </executions>
-	        </plugin>
+	        </plugin>  -->
 		</plugins>
         <resources>
             <resource>
