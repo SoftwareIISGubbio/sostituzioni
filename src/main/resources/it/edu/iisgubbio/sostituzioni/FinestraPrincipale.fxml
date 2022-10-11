@@ -32,13 +32,9 @@
                 <MenuItem mnemonicParsing="false" onAction="#finestraInfoSoftware" text="Informazioni" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Problemi">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#mostraProblemi" text="mostra" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Strumenti">
               <items>
+              <MenuItem mnemonicParsing="false" onAction="#mostraProblemi" text="Mostra problemi" />
                 <MenuItem mnemonicParsing="false" onAction="#gestioneStatistiche" text="Statistiche" />
               </items>
             </Menu>
