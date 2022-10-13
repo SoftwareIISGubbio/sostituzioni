@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="499.0" styleClass="pannelloPrincipale" stylesheets="/it/edu/iisgubbio/sostituzioni/stile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraEsportaGiornata">
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#esportaGiornata" prefWidth="156.0" text="Esporta giornata" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin></Button>
+   </bottom>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <center>
+      <DatePicker fx:id="dataPicker" prefHeight="28.0" prefWidth="331.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

@@ -207,6 +207,20 @@ public class FinestraPrincipale extends Application {
 			x.printStackTrace();
 		}
 	}
+	@FXML
+	private void esportaGiornata(Event e) {
+		Stage s = new Stage();
+		Scene scena;
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			scena = new Scene(fxmlLoader.load(getClass().getResource("FinestraEsportaGiornata.fxml").openStream()));
+			s.setScene(scena);
+			s.setTitle("Esporta giornata");
+			s.show();
+		} catch (IOException x) {
+			x.printStackTrace();
+		}
+	}
 
 	@FXML
 	/********************************************************************************************

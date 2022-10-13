@@ -36,6 +36,7 @@
               <items>
               <MenuItem mnemonicParsing="false" onAction="#mostraProblemi" text="Mostra problemi" />
                 <MenuItem mnemonicParsing="false" onAction="#gestioneStatistiche" text="Statistiche" />
+                  <MenuItem mnemonicParsing="false" onAction="#esportaGiornata" text="Esporta giornata" />
               </items>
             </Menu>
         </menus>
