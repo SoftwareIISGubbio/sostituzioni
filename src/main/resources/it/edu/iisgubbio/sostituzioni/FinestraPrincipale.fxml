@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
+<BorderPane stylesheets="@stile.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.edu.iisgubbio.sostituzioni.FinestraPrincipale">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -37,6 +37,7 @@
               <MenuItem mnemonicParsing="false" onAction="#mostraProblemi" text="Mostra problemi" />
                 <MenuItem mnemonicParsing="false" onAction="#gestioneStatistiche" text="Statistiche" />
                   <MenuItem mnemonicParsing="false" onAction="#esportaGiornata" text="Esporta giornata" />
+                  <MenuItem mnemonicParsing="false" onAction="#mostraInterfacciaSql" text="Interfaccia SQL" />
               </items>
             </Menu>
         </menus>

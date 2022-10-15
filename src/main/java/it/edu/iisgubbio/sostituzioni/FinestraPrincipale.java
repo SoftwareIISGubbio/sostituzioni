@@ -221,6 +221,20 @@ public class FinestraPrincipale extends Application {
 			x.printStackTrace();
 		}
 	}
+    @FXML
+    private void mostraInterfacciaSql(Event e) {
+        Stage s = new Stage();
+        Scene scena;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            scena = new Scene(fxmlLoader.load(getClass().getResource("FinestraSql.fxml").openStream()));
+            s.setScene(scena);
+            s.setTitle("Interfaccia SQL ai dati");
+            s.show();
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
+    }
 
 	@FXML
 	/********************************************************************************************
