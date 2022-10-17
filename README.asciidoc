@@ -6,14 +6,13 @@ I dati vengono recuperati un file xlsx editato manualmente da chi gestisce l'ora
 
 La ricerca avviene tramite filtri che scorrono i docenti in cerca di diverse proprietà.
 
+Le sostituzioni vengono salvate in un giornale in formato csv e eventualmente in un file 
+xlsx giornaliero.
+
 == Eseguire il programma
 
-In Eclipse nelle configurazioni di avvio vanno specificati dei parametri per la Virtual Machine (ovviamente inserendo il path giusto per l'SDK di JavaFX
+Va configurato in Eclipse un JRE che include JavaFX come quello di Liberica
 
-- Run configurations...
-- (x)= Arguments
-- VM Arguments
-- `--add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web --module-path  /opt/javafx-sdk-14/lib/`
 
 == Nuovo meccanismo di build
 
@@ -24,29 +23,5 @@ Comandi di base per compilazione e simili
 - `mvn exec:java -e -Dexec.mainClass="it.edu.iisgubbio.sostituzioni.FinestraPrincipale"`
 - `mvn package`
 
-=== Creazione dell'applicazione su windows
------
-jpackage --name sostituzioni --app-version 3.0.0 --icon icona\icona.ico --type app-image ^
---input target\lib --dest target\compilato ^
---add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,javafx.swing,jdk.charsets ^
---main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar sostituzioni-3.0.0.jar
------  
-
-=== Oppure su macOS (non firmata)
------
-jpackage --name sostituzioni --app-version 3.0.0 --icon icona/icona.icns --type app-image \
---input target/lib --dest target \
---add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,javafx.swing,jdk.charsets \
---main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar sostituzioni-3.0.0.jar \
---mac-package-name Sostituzioni --mac-package-identifier it.edu.iisgubbio.sostituzioni 
------
-
-=== Applicazione firmata su macOS
------
-jpackage --name sostituzioni --app-version 3.0.0 --icon icona/icona.icns --type dmg \
---input target/lib --dest target \
---add-modules javafx.controls,javafx.media,javafx.fxml,javafx.web,javafx.swing,jdk.charsets \
---main-class it.edu.iisgubbio.sostituzioni.FinestraPrincipale --main-jar sostituzioni-3.0.0.jar \
---mac-package-name Sostituzioni --mac-package-identifier it.edu.iisgubbio.sostituzioni \
---mac-sign --mac-signing-key-user-name "3rd Party Mac Developer Application: IIS Cassata Gattapone (NMMRHK5G25)"   
------
+=== Creazione dell'applicazione 
+Il progetto include uno script "creazionePacchetto.sh" che serve a questo scopo.

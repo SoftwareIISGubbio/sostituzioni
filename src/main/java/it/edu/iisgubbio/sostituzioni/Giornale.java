@@ -2,56 +2,75 @@ package it.edu.iisgubbio.sostituzioni;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
-/**
- * Questo programma serve a gestire le letture o scritture delle sostituzioni in un file.
- * @author Loris
- */
+/****************************************************************************
+ * Questa classe serve a gestire le letture o scritture delle sostituzioni 
+ * in un file come giornale e siccome viene usata per leggere il giornale
+ * frequentemente ne mantiene una copia in una specie di cache.
+ *
+ * @author Loris e altri
+ ***************************************************************************/
 
 public class Giornale {    
-    /** 
-     * @param x è la sostituzione con le vari informazioni(giorno,ora,aula,classe,compresenza e nome docente)
-     */
+    
+    private static ArrayList<Sostituzione> giornale = null;
+    
+    /************************************************************************
+     * Scrivere una sostituzione nel file del giornale
+     * 
+     * @param x è la sostituzione da registrare su disco
+     ************************************************************************/
 	public static void scriviRecord(Sostituzione x) {
-		//serve per scrivere la sostituzione in un file
 		BufferedWriter out = null;
-		try
-		{
+		try {
+		    leggiGiornale();  // il giornale deve essere letto da disco
 			out = new BufferedWriter(new FileWriter(Ambiente.getFileGiornale(), true));
 			out.write(x+"\n"); // qui scriviamo la sostituzione x e con "\n" si manda a capo
 			out.close();
+			giornale.add(x);
 		} catch (Exception e) {
-		    // FIXME: se si stampa su console non lo vede nessuno
-			e.printStackTrace();
-			// in caso dà errori, il programma deve stampare gli errori in console
+		    FinestraEccezione fe = new FinestraEccezione(e);
+		    fe.showAndWait();
 		}
 		Ambiente.aggiornaOreSvolteDocenti(); // Esistono altri modi molto più eleganti di farlo
 	}
 	
+	/************************************************************************
+	 * Legge il giornale da disco o usa quello presente in memoria
+	 * @return il giornale delle sostituzioni
+	 * @throws IOException
+	 ***********************************************************************/
 	public static ArrayList<Sostituzione> leggiGiornale() throws IOException {
-		//serve per leggere da un file
-		BufferedReader reader = new BufferedReader(new FileReader(Ambiente.getFileGiornale()));
-		//prendiamo il file che vogliamo leggere
-		ArrayList<Sostituzione> risposta=new ArrayList<>();
-		String line;
-		while((line=reader.readLine())!=null) {
-		    // evitiamo problemi con le linee vuote
-		    if(line.trim().length()>0) {
-		        Sostituzione x = new Sostituzione(line);
-		        //dentro l'ArrayList risposta aggiungiamo la variabile creata precedente x
-		        risposta.add(x);
-		    }
-		}
-		
-		reader.close();
-		//chiudiamo il file
-		return risposta;
-		//ritorna tutte le righe che abbiamo letto
+	    if(giornale==null) {
+	        File fileGiornale = Ambiente.getFileGiornale();
+	        if(!fileGiornale.exists()) {
+	            // se il file non esiste lo creo vuoto
+	            // https://stackoverflow.com/questions/1406473/simulate-touch-command-with-java
+	            FileOutputStream fos = new FileOutputStream(fileGiornale);
+	            fos.close();
+	        }
+	        // visto che non l'ho ancora letto leggo il giornale
+    		BufferedReader reader = new BufferedReader(new FileReader(fileGiornale));
+            giornale = new ArrayList<Sostituzione>();
+    		String line;
+    		while((line=reader.readLine())!=null) {
+    		    // evitiamo problemi con le linee vuote
+    		    if(line.trim().length()>0) {
+    		        Sostituzione x = new Sostituzione(line);
+    		        giornale.add(x);
+    		    }
+    		}
+    		reader.close();
+	    }
+	    // TODO valutare se è il caso di ritornare una copia e non il giornale stesso
+		return giornale;
 	}
 }
 

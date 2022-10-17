@@ -1,5 +1,8 @@
 package it.edu.iisgubbio.sostituzioni.oggetti;
 
+/****************************************************************************
+ * Serve a rappresentare un docente nella finestra delle statistichge
+ ***************************************************************************/
 public class ResocontoDocente implements Comparable<ResocontoDocente>{
     public String getNome() {
         return nome;
@@ -45,6 +48,11 @@ public class ResocontoDocente implements Comparable<ResocontoDocente>{
     public int compareTo(ResocontoDocente o) {
         int mioPunteggio = oreDaFare-oreFatte;
         int altroPunteggio = o.oreDaFare-o.oreFatte;
-        return altroPunteggio-mioPunteggio;
+        int confronto = altroPunteggio-mioPunteggio;
+        if(confronto!=0) {
+            return confronto; 
+        } else {
+            return nome.compareTo(o.nome);
+        }
     }
 }
