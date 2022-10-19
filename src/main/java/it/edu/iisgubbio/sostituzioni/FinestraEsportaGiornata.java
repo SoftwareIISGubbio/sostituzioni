@@ -21,13 +21,26 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 
 /************************************************************************************************
 * crea la finestra per esportare in un foglio .xlsx tutte le supplenze della giornata
 ***********************************************************************************************/
 public class FinestraEsportaGiornata {
-    @FXML
+	@FXML
+    //In questo metodo si impostano i valori della textField presente nella finestra
+	void initialize() {
+        try {
+            tfCartellaFile.setText(Ambiente.getCartellaBiglietto().toString() );
+        }catch(Exception x) {
+            ; // non faccio nulla vuol dire che la proprietà non c'è e deve inserirla
+        }
+    }
+	
+	@FXML
     private void esportaGiornata(ActionEvent e) throws IOException {
         System.out.println("bu");
     	//prende la data dal dataPicker e la trasforma in una variabile string
@@ -173,7 +186,7 @@ public class FinestraEsportaGiornata {
         }
         
         //imposta come file location la cartella dove vengono salvati i biglietti
-        String fileLocation = Ambiente.getCartellaBiglietto()+File.separator+
+        String fileLocation = tfCartellaFile.getText()+File.separator+
         		d.format(DateTimeFormatter.ofPattern("EEEE-yyyy-MMMM-dd"))+".xlsx";
         
         //scrive il file e lo chiude
@@ -183,5 +196,21 @@ public class FinestraEsportaGiornata {
         System.out.println("done "+fileLocation);
     }
     @FXML
+    private void gestioneSelezioneCartellaFile (ActionEvent e) {
+        // creare FileChooser
+        DirectoryChooser selettoreCartella = new DirectoryChooser();
+        // indicare cartella di partenza
+        String cartellaPartenza = System.getProperties().getProperty("user.home");
+        selettoreCartella.setInitialDirectory(new File(cartellaPartenza));
+        // aprire la finestra e recuperare file selezionato
+        File fileSelezionato = selettoreCartella.showDialog( null );
+        // metto il nome sulla casella
+        tfCartellaFile.setText( fileSelezionato.toString() );
+    }
+    @FXML
 	DatePicker dataPicker;
+    @FXML
+    TextField tfCartellaFile;
+    @FXML
+	Button selezionaCartellaFile;
 }
