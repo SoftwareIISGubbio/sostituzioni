@@ -53,11 +53,13 @@ public class FinestraEsportaGiornata {
         //array list contenente la lista di tutti i professori (non duplicati) che sono stati sostituiti quel giorno 
         ArrayList<String> professoriDaSostituire = new ArrayList<String>();
         
+        
+        
         //crea il foglio sostituzioni
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Sostituzioni");
-        sheet.setColumnWidth(0, 6000);
-        sheet.setColumnWidth(1, 4000);
+        Sheet sheetSostituzioni = workbook.createSheet("Sostituzioni");
+        sheetSostituzioni.setColumnWidth(0, 6000);
+        sheetSostituzioni.setColumnWidth(1, 4000);
         
         //crea gli stili delle celle (grassetto; testoPiccolo; testoNormale)
         CellStyle styleGrassetto = workbook.createCellStyle(); 
@@ -80,9 +82,9 @@ public class FinestraEsportaGiornata {
         testoNormale.setFontHeightInPoints((short)10); 
         styleTestoNormale.setFont(testoNormale);
         
-        //le prime due righe del foglio
-        Row header1 = sheet.createRow(0);
-        Row header2 = sheet.createRow(1);
+        //le prime due righe del foglio sostituzioni
+        Row header1Sost = sheetSostituzioni.createRow(0);
+        Row header2Sost = sheetSostituzioni.createRow(1);
         
         //crea il colore giallo rgb(238,205,0)
         XSSFCellStyle styleColorato=(XSSFCellStyle) workbook.createCellStyle(); 
@@ -97,36 +99,36 @@ public class FinestraEsportaGiornata {
         styleColorato.setFillPattern(FillPatternType.SOLID_FOREGROUND); 
         //imposta il font grassetto
         styleColorato.setFont(grassetto);
-        header1.setRowStyle(styleColorato);
+        header1Sost.setRowStyle(styleColorato);
         
-        Cell scrittaDocente = header1.createCell(0);
+        Cell scrittaDocente = header1Sost.createCell(0);
         scrittaDocente.setCellValue("SOSTITUZIONI");
         scrittaDocente.setCellStyle(styleGrassetto);
         scrittaDocente.setCellStyle(styleColorato);
         
-        Cell scrittaDocenteAssente = header2.createCell(0);
+        Cell scrittaDocenteAssente = header2Sost.createCell(0);
         scrittaDocenteAssente.setCellValue("DOCENTE ASSENTE");
         scrittaDocenteAssente.setCellStyle(styleGrassetto);
         
         //array list che contiene tutte le righe tranne le prime 2 (header1; header2)
-        ArrayList<Row> righeProf = new ArrayList<Row>();
+        ArrayList<Row> righeProfDaSost = new ArrayList<Row>();
         
     	// Scrive l'intestazione del foglio, scrivendo le ORE nella prima riga (header1)
     	//  e CLASSE SUPPLENTE MOTIVO nella seconda riga (header2)
         for(int j=0; j<8; j++) {
-			Cell ora = header1.createCell(j*3+1);
+			Cell ora = header1Sost.createCell(j*3+1);
 			ora.setCellValue(j+1+"° ORA");
 			ora.setCellStyle(styleColorato);
 			
-			Cell scrittaClasse = header2.createCell(j*3+1);
+			Cell scrittaClasse = header2Sost.createCell(j*3+1);
 			scrittaClasse.setCellValue("Classe");
 			scrittaClasse.setCellStyle(styleGrassetto);
 			
-			Cell supplente = header2.createCell(j*3+2);
+			Cell supplente = header2Sost.createCell(j*3+2);
 			supplente.setCellValue("Supplente");
 			supplente.setCellStyle(styleGrassetto);
 			
-			Cell motivo = header2.createCell(j*3+3);
+			Cell motivo = header2Sost.createCell(j*3+3);
 			motivo.setCellValue("Motivo");
 			motivo.setCellStyle(styleGrassetto);
 		}
@@ -140,8 +142,8 @@ public class FinestraEsportaGiornata {
         		if(!professoriDaSostituire.contains(tutteSostituzioni.get(i).getNomeDocenteDaSostituire())) {
 					
         			professoriDaSostituire.add(tutteSostituzioni.get(i).getNomeDocenteDaSostituire());
-					Row riga= sheet.createRow(count++);
-					righeProf.add(riga);
+					Row riga= sheetSostituzioni.createRow(count++);
+					righeProfDaSost.add(riga);
 				}
         	}
         }
@@ -151,7 +153,7 @@ public class FinestraEsportaGiornata {
         	if(data.equals(tutteSostituzioni.get(i).getData())) {
         		for(int j=0;j<professoriDaSostituire.size();j++) {
         			
-        			Cell prof = righeProf.get(j).createCell(0);
+        			Cell prof = righeProfDaSost.get(j).createCell(0);
         			prof.setCellValue(professoriDaSostituire.get(j));
         			prof.setCellStyle(styleTestoNormale);
         		}	
@@ -165,15 +167,15 @@ public class FinestraEsportaGiornata {
         		for(int j=0;j<professoriDaSostituire.size();j++) {
         			if(professoriDaSostituire.get(j).equals(tutteSostituzioni.get(i).getNomeDocenteDaSostituire())) {
         				//scrive la CLASSE
-        				Cell classe = righeProf.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+1);
+        				Cell classe = righeProfDaSost.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+1);
             			classe.setCellValue(tutteSostituzioni.get(i).classe);
             			classe.setCellStyle(styleTestoNormale);
             			//scrive il SUPPLENTE
-            			Cell supplente = righeProf.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+2);
+            			Cell supplente = righeProfDaSost.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+2);
             			supplente.setCellValue(tutteSostituzioni.get(i).getNomeSostituto());
             			supplente.setCellStyle(styleTestoNormale);
             			//scrive il MOTIVO
-            			Cell motivo = righeProf.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+3);
+            			Cell motivo = righeProfDaSost.get(j).createCell((tutteSostituzioni.get(i).orario-1)*3+3);
             			motivo.setCellValue(tutteSostituzioni.get(i).getMotivazione()+"");
             			motivo.setCellStyle(styleTestoPiccolo);
             		}
@@ -182,9 +184,78 @@ public class FinestraEsportaGiornata {
         	}
         }
         for(int i=0;i<25; i++) { 
-        	sheet.autoSizeColumn(i);
+        	sheetSostituzioni.autoSizeColumn(i);
         }
         
+        ArrayList<String> professoriSupplenti = new ArrayList<String>();
+        
+        Sheet sheetBiglietti = workbook.createSheet("Biglietti");
+        sheetBiglietti.setColumnWidth(0, 6000);
+        sheetBiglietti.setColumnWidth(1, 4000);
+        
+        count=0;
+        for(int i=0; i<tutteSostituzioni.size(); i++) {
+        	if(data.equals(tutteSostituzioni.get(i).getData())) {
+        		if(!professoriSupplenti.contains(tutteSostituzioni.get(i).getNomeSostituto())) {
+					
+        			professoriSupplenti.add(tutteSostituzioni.get(i).getNomeSostituto());
+				}
+        	}
+        }
+        int spazioRiga=0;
+        for(int i=0;i<professoriSupplenti.size();i++) {
+        	Row header1Biglietti = sheetBiglietti.createRow(i*6+spazioRiga);
+        	Cell scrittaSupplente = header1Biglietti.createCell(0);
+            scrittaSupplente.setCellValue("Sostituzioni per "+professoriSupplenti.get(i));
+            
+            Row header2Biglietti = sheetBiglietti.createRow(i*6+1+spazioRiga);
+            for(int j=0; j<8; j++) {
+    			Cell ora = header2Biglietti.createCell(j);
+    			ora.setCellValue(j+1+"° ORA");
+    			ora.setCellStyle(styleColorato);
+    			
+            }
+            Row header3Biglietti = sheetBiglietti.createRow(i*6+2+spazioRiga);
+            Cell orario = header3Biglietti.createCell(0);
+            orario.setCellValue("8:00");
+            Cell orario1 = header3Biglietti.createCell(1);
+            orario1.setCellValue("8:55");
+            Cell orario2 = header3Biglietti.createCell(2);
+            orario2.setCellValue("10:00");
+            Cell orario3 = header3Biglietti.createCell(3);
+            orario3.setCellValue("10:55");
+            Cell orario4 = header3Biglietti.createCell(4);
+            orario4.setCellValue("11:55");
+            Cell orario5 = header3Biglietti.createCell(5);
+            orario5.setCellValue("12:45");
+            Cell orario6 = header3Biglietti.createCell(6);
+            orario6.setCellValue("14:30");
+            Cell orario7 = header3Biglietti.createCell(7);
+            orario7.setCellValue("15:30");
+            
+            Row rigaClasse = sheetBiglietti.createRow(i*6+3+spazioRiga);
+            Row rigaAula = sheetBiglietti.createRow(i*6+4+spazioRiga);
+            Row rigaMotivo = sheetBiglietti.createRow(i*6+5+spazioRiga);
+            
+            for(int j=0;j<tutteSostituzioni.size();j++) {
+    			if(professoriSupplenti.get(i).equals(tutteSostituzioni.get(j).getNomeSostituto())) {
+    				//scrive la CLASSE
+    				Cell classe = rigaClasse.createCell((tutteSostituzioni.get(j).orario-1));
+        			classe.setCellValue(tutteSostituzioni.get(j).classe);
+        			classe.setCellStyle(styleTestoNormale);
+        			//scrive il SUPPLENTE
+        			Cell supplente = rigaAula.createCell((tutteSostituzioni.get(j).orario-1));
+        			supplente.setCellValue(tutteSostituzioni.get(j).getNomeSostituto());
+        			supplente.setCellStyle(styleTestoNormale);
+        			//scrive il MOTIVO
+        			Cell motivo = rigaMotivo.createCell((tutteSostituzioni.get(j).orario-1));
+        			motivo.setCellValue(tutteSostituzioni.get(j).getMotivazione()+"");
+        			motivo.setCellStyle(styleTestoPiccolo);
+        		}
+    		}
+            spazioRiga++;
+        }
+
         //imposta come file location la cartella dove vengono salvati i biglietti
         String fileLocation = tfCartellaFile.getText()+File.separator+
         		d.format(DateTimeFormatter.ofPattern("EEEE-yyyy-MMMM-dd"))+".xlsx";
