@@ -257,8 +257,8 @@ public class FinestraEsportaGiornata {
         }
 
         //imposta come file location la cartella dove vengono salvati i biglietti
-        String fileLocation = tfCartellaFile.getText()+File.separator+
-        		d.format(DateTimeFormatter.ofPattern("EEEE-yyyy-MMMM-dd"))+".xlsx";
+        String fileLocation = tfCartellaFile.getText()+File.separator+"Giornata-"+
+        		d.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+".xlsx";
         
         //scrive il file e lo chiude
         FileOutputStream outputStream = new FileOutputStream(fileLocation);
