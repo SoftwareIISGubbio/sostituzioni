@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -44,6 +45,11 @@
       </Label>
       <Label text="La cartella in cui salvare il file xlsx (giornata-anno-mese-gg.xlsx)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <DatePicker fx:id="dataPicker" prefHeight="25.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+         <center>
+            <Label fx:id="scrittaNomeFile" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
    <opaqueInsets>
       <Insets />
