@@ -7,12 +7,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -54,8 +57,6 @@ public class FinestraEsportaGiornata {
         //array list contenente la lista di tutti i professori (non duplicati) che sono stati sostituiti quel giorno 
         ArrayList<String> professoriDaSostituire = new ArrayList<String>();
         
-        
-        
         //crea il foglio sostituzioni
         Workbook workbook = new XSSFWorkbook();
         Sheet sheetSostituzioni = workbook.createSheet("Sostituzioni");
@@ -89,17 +90,30 @@ public class FinestraEsportaGiornata {
         
         //crea il colore giallo rgb(238,205,0)
         XSSFCellStyle styleColorato=(XSSFCellStyle) workbook.createCellStyle(); 
+        XSSFCellStyle styleColoratoConBordi=(XSSFCellStyle) workbook.createCellStyle(); 
         byte[] rgb = new byte[3];
         rgb[0] = (byte) 238; // rosso
         rgb[1] = (byte) 205; // verde
         rgb[2] = (byte) 0; // blu
         XSSFColor giallo = new XSSFColor(rgb); 
         
+        //bordi
+        styleColoratoConBordi.setBorderTop(BorderStyle.MEDIUM);
+        styleColoratoConBordi.setBorderBottom(BorderStyle.MEDIUM);
+        styleColoratoConBordi.setBorderLeft(BorderStyle.MEDIUM);
+        styleColoratoConBordi.setBorderRight(BorderStyle.MEDIUM);
+        
         //colora la riga header1 di giallo
         styleColorato.setFillForegroundColor(giallo); 
         styleColorato.setFillPattern(FillPatternType.SOLID_FOREGROUND); 
         //imposta il font grassetto
         styleColorato.setFont(grassetto);
+        
+        styleColoratoConBordi.setFillForegroundColor(giallo); 
+        styleColoratoConBordi.setFillPattern(FillPatternType.SOLID_FOREGROUND); 
+        //imposta il font grassetto
+        styleColoratoConBordi.setFont(grassetto);
+        
         header1Sost.setRowStyle(styleColorato);
         
         Cell scrittaDocente = header1Sost.createCell(0);
@@ -184,16 +198,19 @@ public class FinestraEsportaGiornata {
         		
         	}
         }
+        //ridimenziona tutte le colonne
         for(int i=0;i<25; i++) { 
         	sheetSostituzioni.autoSizeColumn(i);
         }
-        
+        //contiene tutti i supplenti
         ArrayList<String> professoriSupplenti = new ArrayList<String>();
         
+        //nuovo foglio per i biglietti
         Sheet sheetBiglietti = workbook.createSheet("Biglietti");
         sheetBiglietti.setColumnWidth(0, 6000);
         sheetBiglietti.setColumnWidth(1, 4000);
         
+        //inserisce tutti i supplenti dentro l'arrayList professoriSupplenti
         count=0;
         for(int i=0; i<tutteSostituzioni.size(); i++) {
         	if(data.equals(tutteSostituzioni.get(i).getData())) {
@@ -203,51 +220,77 @@ public class FinestraEsportaGiornata {
 				}
         	}
         }
+        
+        //for che crea tutti i biglietti
         int spazioRiga=0;
         for(int i=0;i<professoriSupplenti.size();i++) {
+        	sheetBiglietti.addMergedRegion(new CellRangeAddress(i*6+spazioRiga,i*6+spazioRiga,0,7));
+        	
+        	CellRangeAddress celleBiglietto = new CellRangeAddress(i*6+spazioRiga, i*6+spazioRiga+5, 0, 7);
+        	
         	Row header1Biglietti = sheetBiglietti.createRow(i*6+spazioRiga);
         	Cell scrittaSupplente = header1Biglietti.createCell(0);
-            scrittaSupplente.setCellValue("Sostituzioni per "+professoriSupplenti.get(i));
+            scrittaSupplente.setCellValue("Sostituzioni per "+d.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))
+            									+" per "+professoriSupplenti.get(i));
             
+            //le righe che compongono il foglio
             Row header2Biglietti = sheetBiglietti.createRow(i*6+1+spazioRiga);
-            for(int j=0; j<8; j++) {
-    			Cell ora = header2Biglietti.createCell(j);
-    			ora.setCellValue(j+1+"° ORA");
-    			ora.setCellStyle(styleColorato);
-    			
-            }
-            Row header3Biglietti = sheetBiglietti.createRow(i*6+2+spazioRiga);
-            Cell orario = header3Biglietti.createCell(0);
-            orario.setCellValue("8:00");
-            Cell orario1 = header3Biglietti.createCell(1);
-            orario1.setCellValue("8:55");
-            Cell orario2 = header3Biglietti.createCell(2);
-            orario2.setCellValue("10:00");
-            Cell orario3 = header3Biglietti.createCell(3);
-            orario3.setCellValue("10:55");
-            Cell orario4 = header3Biglietti.createCell(4);
-            orario4.setCellValue("11:55");
-            Cell orario5 = header3Biglietti.createCell(5);
-            orario5.setCellValue("12:45");
-            Cell orario6 = header3Biglietti.createCell(6);
-            orario6.setCellValue("14:30");
-            Cell orario7 = header3Biglietti.createCell(7);
-            orario7.setCellValue("15:30");
-            
             Row rigaClasse = sheetBiglietti.createRow(i*6+3+spazioRiga);
             Row rigaAula = sheetBiglietti.createRow(i*6+4+spazioRiga);
             Row rigaMotivo = sheetBiglietti.createRow(i*6+5+spazioRiga);
+            //aggiunge le scritte ore
+            for(int j=0; j<8; j++) {
+    			Cell ora = header2Biglietti.createCell(j);
+    			ora.setCellValue(j+1+"° ORA");
+    			ora.setCellStyle(styleColoratoConBordi);
+
+            }
+            //scive gli orari delle ore
+            Row header3Biglietti = sheetBiglietti.createRow(i*6+2+spazioRiga);
+            //1° ora
+            Cell orario = header3Biglietti.createCell(0);
+            orario.setCellValue("8:00");
+            orario.setCellStyle(styleColoratoConBordi);
+            //2° ora
+            Cell orario1 = header3Biglietti.createCell(1);
+            orario1.setCellValue("8:55");
+            orario1.setCellStyle(styleColoratoConBordi);
+            //3° ora
+            Cell orario2 = header3Biglietti.createCell(2);
+            orario2.setCellValue("10:00");
+            orario2.setCellStyle(styleColoratoConBordi);
+            //4° ora
+            Cell orario3 = header3Biglietti.createCell(3);
+            orario3.setCellValue("10:55");
+            orario3.setCellStyle(styleColoratoConBordi);
+            //5° ora
+            Cell orario4 = header3Biglietti.createCell(4);
+            orario4.setCellValue("11:55");
+            orario4.setCellStyle(styleColoratoConBordi);
+            //6° ora
+            Cell orario5 = header3Biglietti.createCell(5);
+            orario5.setCellValue("12:45");
+            orario5.setCellStyle(styleColoratoConBordi);
+            //7° ora
+            Cell orario6 = header3Biglietti.createCell(6);
+            orario6.setCellValue("14:30");
+            orario6.setCellStyle(styleColoratoConBordi);
+            //8° ora
+            Cell orario7 = header3Biglietti.createCell(7);
+            orario7.setCellValue("15:30");
+            orario7.setCellStyle(styleColoratoConBordi);
             
+            //scrive le sostituzioni che ha fatto il supplente in quella giornata 
             for(int j=0;j<tutteSostituzioni.size();j++) {
     			if(professoriSupplenti.get(i).equals(tutteSostituzioni.get(j).getNomeSostituto())) {
     				//scrive la CLASSE
     				Cell classe = rigaClasse.createCell((tutteSostituzioni.get(j).orario-1));
         			classe.setCellValue(tutteSostituzioni.get(j).classe);
         			classe.setCellStyle(styleTestoNormale);
-        			//scrive il SUPPLENTE
-        			Cell supplente = rigaAula.createCell((tutteSostituzioni.get(j).orario-1));
-        			supplente.setCellValue(tutteSostituzioni.get(j).getNomeSostituto());
-        			supplente.setCellStyle(styleTestoNormale);
+        			//scrive l'AULA
+        			Cell aula = rigaAula.createCell((tutteSostituzioni.get(j).orario-1));
+        			aula.setCellValue(tutteSostituzioni.get(j).aula);
+        			aula.setCellStyle(styleTestoNormale);
         			//scrive il MOTIVO
         			Cell motivo = rigaMotivo.createCell((tutteSostituzioni.get(j).orario-1));
         			motivo.setCellValue(tutteSostituzioni.get(j).getMotivazione()+"");
@@ -255,6 +298,17 @@ public class FinestraEsportaGiornata {
         		}
     		}
             spazioRiga++;
+            
+            //disegna i bordi del biglietto
+            RegionUtil.setBorderTop(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderBottom(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderLeft(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderRight(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
+            
+        }
+        //ridimenziona tutte le colonne 
+        for(int i=0;i<25; i++) { 
+        	sheetBiglietti.autoSizeColumn(i);
         }
 
         //imposta come file location la cartella dove vengono salvati i biglietti
