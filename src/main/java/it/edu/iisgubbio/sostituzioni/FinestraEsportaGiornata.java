@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
@@ -265,6 +266,9 @@ public class FinestraEsportaGiornata {
         workbook.write(outputStream);
         workbook.close();
         System.out.println("done "+fileLocation);
+        
+        scrittaNomeFile.setText("Salvata nel file: Giornata-"+
+        		d.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+".xlsx");
     }
     @FXML
     private void gestioneSelezioneCartellaFile (ActionEvent e) {
@@ -284,4 +288,6 @@ public class FinestraEsportaGiornata {
     TextField tfCartellaFile;
     @FXML
 	Button selezionaCartellaFile;
+    @FXML
+    Label scrittaNomeFile;
 }
