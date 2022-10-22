@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
@@ -21,6 +24,8 @@ import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import it.edu.iisgubbio.sostituzioni.oggetti.Docente;
+import it.edu.iisgubbio.sostituzioni.oggetti.OraLezione;
 import it.edu.iisgubbio.sostituzioni.oggetti.Sostituzione;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,6 +73,12 @@ public class FinestraEsportaGiornata {
         CellStyle styleTestoPiccolo = workbook.createCellStyle(); 
         CellStyle styleTestoNormale = workbook.createCellStyle(); 
         
+        //stile delle celle con allineamento sia verticale che orizzontale
+        CellStyle styleVerticale = workbook.createCellStyle();
+        styleVerticale = workbook.createCellStyle();
+        styleVerticale.setVerticalAlignment(VerticalAlignment.CENTER);
+        styleVerticale.setAlignment(HorizontalAlignment.CENTER);
+        
         //imposta il font in grassetto con dimenzione caratteri 10
         XSSFFont grassetto= (XSSFFont) workbook.createFont(); 
         grassetto.setFontHeightInPoints((short)10); 
@@ -78,11 +89,13 @@ public class FinestraEsportaGiornata {
         XSSFFont testoPiccolo= (XSSFFont) workbook.createFont(); 
         testoPiccolo.setFontHeightInPoints((short)8); 
         styleTestoPiccolo.setFont(testoPiccolo);
+        styleTestoPiccolo.setAlignment(HorizontalAlignment.CENTER);
         
         //imposta il font con una dimenzione 10
         XSSFFont testoNormale= (XSSFFont) workbook.createFont(); 
         testoNormale.setFontHeightInPoints((short)10); 
         styleTestoNormale.setFont(testoNormale);
+        styleTestoNormale.setAlignment(HorizontalAlignment.CENTER);
         
         //le prime due righe del foglio sostituzioni
         Row header1Sost = sheetSostituzioni.createRow(0);
@@ -226,8 +239,8 @@ public class FinestraEsportaGiornata {
         for(int i=0;i<professoriSupplenti.size();i++) {
         	sheetBiglietti.addMergedRegion(new CellRangeAddress(i*6+spazioRiga,i*6+spazioRiga,0,7));
         	
+        	//scrive il titolo del biglietto 
         	CellRangeAddress celleBiglietto = new CellRangeAddress(i*6+spazioRiga, i*6+spazioRiga+5, 0, 7);
-        	
         	Row header1Biglietti = sheetBiglietti.createRow(i*6+spazioRiga);
         	Cell scrittaSupplente = header1Biglietti.createCell(0);
             scrittaSupplente.setCellValue("Sostituzioni per "+d.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))
@@ -280,21 +293,61 @@ public class FinestraEsportaGiornata {
             orario7.setCellValue("15:30");
             orario7.setCellStyle(styleColoratoConBordi);
             
+            //aggiunge un meno a tutte le ore del biglietto
+            for(int j=0;j<8;j++) {
+            	Cell classe = rigaClasse.createCell(j);
+    			classe.setCellValue("-");
+    			classe.setCellStyle(styleVerticale);
+            }
+            
+            //la parte che aggiunge sul foglio il nome della classe dove in quel
+            //ora sta insegnando
+            ArrayList<Docente> tuttiDocenti = Ambiente.getDocenti();
+            for(int j=0;j<tuttiDocenti.size();j++) {
+            	if(tuttiDocenti.get(j).nome.equals(professoriSupplenti.get(i))) {
+            		ArrayList<OraLezione> tutteOre = tuttiDocenti.get(j).oreLezione;
+            		for(int k=0;k<tutteOre.size();k++) {
+            			if((tutteOre.get(k).giorno+"").equals(d.getDayOfWeek().getValue()+"")) {
+            				Cell classe = rigaClasse.createCell(tutteOre.get(k).orario-1);
+                			classe.setCellValue(tutteOre.get(k).classe);
+                			classe.setCellStyle(styleVerticale);
+            			}
+            			
+            		}
+            		
+            	}
+            }
+            
             //scrive le sostituzioni che ha fatto il supplente in quella giornata 
             for(int j=0;j<tutteSostituzioni.size();j++) {
     			if(professoriSupplenti.get(i).equals(tutteSostituzioni.get(j).getNomeSostituto())) {
+    				//aggiunge il colore rosso
+    		        byte[] rgbRosso = new byte[3];
+    		        rgbRosso[0] = (byte) 255; // rosso
+    		        rgbRosso[1] = (byte) 51; // verde
+    		        rgbRosso[2] = (byte) 0; // blu
+    		        XSSFColor rosso = new XSSFColor(rgbRosso); 
+    				
+    		        //lo stile della sostituzione nel biglietto
+    				CellStyle colore = workbook.createCellStyle(); 
+    				colore.setFillForegroundColor(rosso); 
+    		        colore.setFillPattern(FillPatternType.SOLID_FOREGROUND); 
+    		        colore.setFont(testoNormale);
+    		        colore.setAlignment(HorizontalAlignment.CENTER);
+    		        colore.setFont(grassetto);
+    				
     				//scrive la CLASSE
     				Cell classe = rigaClasse.createCell((tutteSostituzioni.get(j).orario-1));
         			classe.setCellValue(tutteSostituzioni.get(j).classe);
-        			classe.setCellStyle(styleTestoNormale);
+        			classe.setCellStyle(colore);
         			//scrive l'AULA
         			Cell aula = rigaAula.createCell((tutteSostituzioni.get(j).orario-1));
         			aula.setCellValue(tutteSostituzioni.get(j).aula);
-        			aula.setCellStyle(styleTestoNormale);
+        			aula.setCellStyle(colore);
         			//scrive il MOTIVO
         			Cell motivo = rigaMotivo.createCell((tutteSostituzioni.get(j).orario-1));
         			motivo.setCellValue(tutteSostituzioni.get(j).getMotivazione()+"");
-        			motivo.setCellStyle(styleTestoPiccolo);
+        			motivo.setCellStyle(colore);
         		}
     		}
             spazioRiga++;
@@ -304,7 +357,16 @@ public class FinestraEsportaGiornata {
             RegionUtil.setBorderBottom(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
             RegionUtil.setBorderLeft(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
             RegionUtil.setBorderRight(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
-            
+
+            //controlla se le celle sono vuote e se si le unisce
+            for(int j=0;j<8;j++) {
+            	Cell c=rigaMotivo.getCell(j);
+            	if(c == null || c.getCellType() == CellType.BLANK) {
+            		sheetBiglietti.addMergedRegion(new CellRangeAddress(i*6+spazioRiga+2, i*6+spazioRiga+4, j, j));
+            		
+            	}
+            }
+  
         }
         //ridimenziona tutte le colonne 
         for(int i=0;i<25; i++) { 
@@ -321,6 +383,7 @@ public class FinestraEsportaGiornata {
         workbook.close();
         System.out.println("done "+fileLocation);
         
+        //scrive sulla label "scrittaNomeFile" il nome del file xlsx che è stato salvato
         scrittaNomeFile.setText("Salvata nel file: Giornata-"+
         		d.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+".xlsx");
     }
