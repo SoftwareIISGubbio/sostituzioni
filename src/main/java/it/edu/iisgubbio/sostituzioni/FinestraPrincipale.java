@@ -17,6 +17,7 @@ import it.edu.iisgubbio.sostituzioni.filtri.FiltroAPagamento;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroClasse;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroCoPresenza;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroGruppo;
+import it.edu.iisgubbio.sostituzioni.filtri.FiltroImpegantoPerSostituzione;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroLibero;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreAdiacenti;
 import it.edu.iisgubbio.sostituzioni.filtri.FiltroOreBuche;
@@ -378,9 +379,6 @@ public class FinestraPrincipale extends Application {
 				}
 				descrizione += String.format("<td>%s</td>", contenuto);
 			}
-			// System.out
-			// .println(Arrays.toString(orarioGiornalieroModificato) + "\n" +
-			// Arrays.toString(orarioGiornaliero));
 			descrizione += """
 						</tr>
 					</table>
@@ -441,9 +439,11 @@ public class FinestraPrincipale extends Application {
 			// rimuovo vecchia ricerca
 			puliziaRisultati();
 			ArrayList<Docente> tuttiIDocenti = Ambiente.getDocenti();
+			// elimino subito chi fa già altra sostituzione
+			tuttiIDocenti = FiltroImpegantoPerSostituzione.docentiSenzaSostituzioni(tuttiIDocenti, d, oraDaSostituire);
+			
 			// man mano che inserisco insegnanti nella ListView a schermo li tolgo da da
-			// questo ArrayList
-			// in modo da non ripeter due volte lo stesso insegnante
+			// questo ArrayList in modo da non ripeter due volte lo stesso insegnante
 			tuttiIDocenti = RimozioneDocente.docentiRimozione(tuttiIDocenti, docenteAssente);
 			
 			// inserisco le sostituzioni in un ArrayList per poi poterli ordinare

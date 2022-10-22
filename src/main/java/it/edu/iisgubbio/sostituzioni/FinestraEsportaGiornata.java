@@ -43,7 +43,6 @@ public class FinestraEsportaGiornata {
 	
 	@FXML
     private void esportaGiornata(ActionEvent e) throws IOException {
-        System.out.println("bu");
     	//prende la data dal dataPicker e la trasforma in una variabile string
         LocalDate d = dataPicker.getValue();
         String data=d+"";
@@ -258,7 +257,7 @@ public class FinestraEsportaGiornata {
         }
 
         //imposta come file location la cartella dove vengono salvati i biglietti
-        String fileLocation = tfCartellaFile.getText()+File.separator+"Giornata-"+
+        String fileLocation = tfCartellaFile.getText()+File.separator+"giornata-"+
         		d.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+".xlsx";
         
         //scrive il file e lo chiude

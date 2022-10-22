@@ -12,7 +12,7 @@ public class InfoProgramma{
 	private String[] sviluppatori = {"Edoardo Panfili","Claudio Giammarioli","Angeloni Pietro","Battistoni Giulia","Bejdo Loris","Biagiotti Luca",
 			"Casagrande Nicola","Cenni Gabriele","Costea Bianca Ioana","Ermirandi Jennifer","Kakcuku Sokol","Mancini Giada",
 			"Morelli Cristian","Natalini Sofia","Pierotti Giorgio","Rinaldoni Matteo","Vantaggi Leonardo","Vantaggi Michele",
-			"Luzi Davide","Andrei Riginel Ungureanu","Flavio Merli","Omar Mohamed Nasr"};
+			"Luzi Davide","Andrei Riginel Ungureanu","Flavio Merli","Omar Mohamed Nasr","Diego Mariucci"};
 	@FXML
 	Label lController;
 	@FXML
