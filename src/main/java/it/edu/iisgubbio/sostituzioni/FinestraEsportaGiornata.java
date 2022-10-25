@@ -7,11 +7,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -110,10 +112,10 @@ public class FinestraEsportaGiornata {
         XSSFColor giallo = new XSSFColor(rgb); 
         
         //bordi
-        styleColoratoConBordi.setBorderTop(BorderStyle.MEDIUM);
-        styleColoratoConBordi.setBorderBottom(BorderStyle.MEDIUM);
-        styleColoratoConBordi.setBorderLeft(BorderStyle.MEDIUM);
-        styleColoratoConBordi.setBorderRight(BorderStyle.MEDIUM);
+        styleColoratoConBordi.setBorderTop(BorderStyle.THIN);
+        styleColoratoConBordi.setBorderBottom(BorderStyle.THIN);
+        styleColoratoConBordi.setBorderLeft(BorderStyle.THIN);
+        styleColoratoConBordi.setBorderRight(BorderStyle.THIN);
         
         //colora la riga header1 di giallo
         styleColorato.setFillForegroundColor(giallo); 
@@ -297,6 +299,8 @@ public class FinestraEsportaGiornata {
             	Cell classe = rigaClasse.createCell(j);
     			classe.setCellValue("-");
     			classe.setCellStyle(styleVerticale);
+    			sheetBiglietti.setColumnWidth(j, 4000);
+    			
             }
             
             //la parte che aggiunge sul foglio il nome della classe dove in quel
@@ -317,6 +321,7 @@ public class FinestraEsportaGiornata {
             	}
             }
             
+            
             //scrive le sostituzioni che ha fatto il supplente in quella giornata 
             for(int j=0;j<tutteSostituzioni.size();j++) {
     			if(professoriSupplenti.get(i).equals(tutteSostituzioni.get(j).getNomeSostituto())) {
@@ -326,6 +331,11 @@ public class FinestraEsportaGiornata {
     		        rgbRosso[1] = (byte) 51; // verde
     		        rgbRosso[2] = (byte) 0; // blu
     		        XSSFColor rosso = new XSSFColor(rgbRosso); 
+    		        
+    		        Font font = workbook.createFont();
+    	            font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
+    	            font.setFontHeightInPoints((short)10); 
+    	            font.setBold(true); 
     				
     		        //lo stile della sostituzione nel biglietto
     				CellStyle colore = workbook.createCellStyle(); 
@@ -333,7 +343,9 @@ public class FinestraEsportaGiornata {
     		        colore.setFillPattern(FillPatternType.SOLID_FOREGROUND); 
     		        colore.setFont(testoNormale);
     		        colore.setAlignment(HorizontalAlignment.CENTER);
-    		        colore.setFont(grassetto);
+    		        colore.setVerticalAlignment(VerticalAlignment.CENTER);
+    		        colore.setWrapText(true);
+    		        colore.setFont(font);
     				
     				//scrive la CLASSE
     				Cell classe = rigaClasse.createCell((tutteSostituzioni.get(j).orario-1));
@@ -345,17 +357,17 @@ public class FinestraEsportaGiornata {
         			aula.setCellStyle(colore);
         			//scrive il MOTIVO
         			Cell motivo = rigaMotivo.createCell((tutteSostituzioni.get(j).orario-1));
-        			motivo.setCellValue(tutteSostituzioni.get(j).getMotivazione()+"");
+        			motivo.setCellValue((tutteSostituzioni.get(j).getMotivazione()+"").replace("_", " "));
         			motivo.setCellStyle(colore);
         		}
     		}
             spazioRiga++;
             
             //disegna i bordi del biglietto
-            RegionUtil.setBorderTop(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
-            RegionUtil.setBorderBottom(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
-            RegionUtil.setBorderLeft(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
-            RegionUtil.setBorderRight(BorderStyle.MEDIUM, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderTop(BorderStyle.THIN, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderBottom(BorderStyle.THIN, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderLeft(BorderStyle.THIN, celleBiglietto, sheetBiglietti);
+            RegionUtil.setBorderRight(BorderStyle.THIN, celleBiglietto, sheetBiglietti);
 
             //controlla se le celle sono vuote e se si le unisce
             for(int j=0;j<8;j++) {
@@ -366,10 +378,6 @@ public class FinestraEsportaGiornata {
             	}
             }
   
-        }
-        //ridimenziona tutte le colonne 
-        for(int i=0;i<25; i++) { 
-        	sheetBiglietti.autoSizeColumn(i);
         }
 
         //imposta come file location la cartella dove vengono salvati i biglietti
