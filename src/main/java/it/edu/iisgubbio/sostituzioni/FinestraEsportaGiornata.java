@@ -252,6 +252,9 @@ public class FinestraEsportaGiornata {
             Row rigaClasse = sheetBiglietti.createRow(i*6+3+spazioRiga);
             Row rigaAula = sheetBiglietti.createRow(i*6+4+spazioRiga);
             Row rigaMotivo = sheetBiglietti.createRow(i*6+5+spazioRiga);
+            // https://stackoverflow.com/questions/19145628/auto-size-height-for-rows-in-apache-poi
+            // funziona con excel ma non con LibreOffice
+            rigaMotivo.setHeight((short)-1);
             //aggiunge le scritte ore
             for(int j=0; j<8; j++) {
     			Cell ora = header2Biglietti.createCell(j);
